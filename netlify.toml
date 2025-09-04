@@ -1,0 +1,274 @@
+[build]
+  publish = "."
+  command = "echo 'Stack Tower Neon build complete'"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Cache-Control = "public, max-age=86400"
+    
+[[headers]]
+  for = "*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    
+[[headers]]
+  for = "*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    
+[[headers]]
+  for = "*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+    
+[[headers]]
+  for = "/manifest.json"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+    Content-Type = "application/manifest+json"
+
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+# SPA routing - redirect all requests to index.html
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  conditions = {Role = ["admin"], Country = ["US"]}
+
+# Force HTTPS
+[[redirects]]
+  from = "http://stack-tower-neon.netlify.app/*"
+  to = "https://stack-tower-neon.netlify.app/:splat"
+  status = 301
+  force = true
+
+# Custom domain redirect (when you get a custom domain)
+[[redirects]]
+  from = "http://stacktowerneon.com/*"
+  to = "https://stacktowerneon.com/:splat"
+  status = 301
+  force = true
+
+# API endpoints for future monetization features
+[[redirects]]
+  from = "/api/stats"
+  to = "/.netlify/functions/stats"
+  status = 200
+
+[[redirects]]
+  from = "/api/leaderboard"
+  to = "/.netlify/functions/leaderboard"
+  status = 200
+
+[[redirects]]
+  from = "/api/analytics"
+  to = "/.netlify/functions/analytics"
+  status = 200
+
+# Game-specific routes
+[[redirects]]
+  from = "/play"
+  to = "/index.html?action=play"
+  status = 200
+
+[[redirects]]
+  from = "/scores"
+  to = "/index.html?action=scores"
+  status = 200
+
+[[redirects]]
+  from = "/share/:score"
+  to = "/index.html?action=share&score=:score"
+  status = 200
+
+# SEO-friendly URLs
+[[redirects]]
+  from = "/juego"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/jugar"
+  to = "/index.html?action=play"
+  status = 200
+
+[[redirects]]
+  from = "/puntuaciones"
+  to = "/index.html?action=scores"
+  status = 200
+
+# Error pages
+[[redirects]]
+  from = "/404"
+  to = "/index.html"
+  status = 404
+
+# Progressive Web App settings
+[build.environment]
+  NODE_VERSION = "18"
+  NPM_VERSION = "8"
+
+# Performance optimizations
+[build.processing]
+  skip_processing = false
+
+[build.processing.css]
+  bundle = true
+  minify = true
+
+[build.processing.js]
+  bundle = false
+  minify = true
+
+[build.processing.html]
+  pretty_urls = true
+
+# Analytics and monitoring
+[[plugins]]
+  package = "@netlify/plugin-lighthouse"
+  
+  [plugins.inputs]
+    performance = 0.9
+    accessibility = 0.9
+    best-practices = 0.9
+    seo = 0.9
+    pwa = 0.9
+
+# Form handling for contact/feedback
+[build.processing.forms]
+  enabled = true
+
+# Security headers for game monetization
+[[headers]]
+  for = "/ads/*"
+  [headers.values]
+    X-Frame-Options = "ALLOWALL"
+    
+[[headers]]
+  for = "/analytics/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "https://www.google-analytics.com"
+    Access-Control-Allow-Methods = "GET, POST"
+
+# Compression
+[[headers]]
+  for = "*.js"
+  [headers.values]
+    Content-Encoding = "gzip"
+    
+[[headers]]
+  for = "*.css"
+  [headers.values]
+    Content-Encoding = "gzip"
+
+# Service Worker caching strategy
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Service-Worker-Allowed = "/"
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+# Monetization-specific headers
+[[headers]]
+  for = "/monetization/*"
+  [headers.values]
+    X-Frame-Options = "ALLOWALL"
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, POST, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type, Authorization"
+
+# Game assets optimization
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Access-Control-Allow-Origin = "*"
+
+# Favicon and icons
+[[headers]]
+  for = "/favicon.ico"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+    
+[[headers]]
+  for = "*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    
+[[headers]]
+  for = "*.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Content-Type = "image/svg+xml"
+
+# JSON files
+[[headers]]
+  for = "*.json"
+  [headers.values]
+    Content-Type = "application/json"
+    Cache-Control = "public, max-age=86400"
+
+# Development preview settings
+[context.deploy-preview]
+  command = "echo 'Deploy preview build'"
+  
+[context.deploy-preview.environment]
+  NODE_ENV = "development"
+
+# Branch-specific builds
+[context.develop]
+  command = "echo 'Development build'"
+  
+[context.develop.environment]
+  NODE_ENV = "development"
+
+# Production optimizations
+[context.production]
+  command = "echo 'Production build optimized'"
+  
+[context.production.environment]
+  NODE_ENV = "production"
+
+# Split testing for monetization optimization
+[[edge_handlers]]
+  function = "split-test"
+  path = "/game/*"
+
+# Rate limiting for API endpoints
+[[edge_handlers]]
+  function = "rate-limit"
+  path = "/api/*"
+
+# Geo-targeting for ads
+[[redirects]]
+  from = "/ads/regional"
+  to = "/ads/us"
+  status = 302
+  conditions = {Country = ["US", "CA"]}
+
+[[redirects]]
+  from = "/ads/regional"
+  to = "/ads/eu"
+  status = 302
+  conditions = {Country = ["DE", "FR", "ES", "IT", "NL"]}
+
+[[redirects]]
+  from = "/ads/regional"
+  to = "/ads/global"
+  status = 302
+
+# A/B testing for game monetization
+[[redirects]]
+  from = "/version/*"
+  to = "/index.html?version=:splat"
+  status = 200

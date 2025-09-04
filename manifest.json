@@ -1,0 +1,96 @@
+{
+  "name": "Stack Tower Neon - Juego Adictivo",
+  "short_name": "Stack Neon",
+  "description": "El juego de apilar más satisfactorio con efectos neon cyberpunk. ¿Puedes construir la torre perfecta?",
+  "start_url": "/",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "theme_color": "#FF0080",
+  "background_color": "#0a0a0a",
+  "scope": "/",
+  "lang": "es",
+  "categories": ["games", "entertainment"],
+  "icons": [
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiBmaWxsPSIjMGEwYTBhIi8+CjxyZWN0IHg9IjMwIiB5PSIxNjAiIHdpZHRoPSIxMzIiIGhlaWdodD0iMjAiIGZpbGw9IiNGRjAwODAiLz4KPHJlY3QgeD0iNDAiIHk9IjE0MCIgd2lkdGg9IjExMiIgaGVpZ2h0PSIyMCIgZmlsbD0iIzAwRkZGRiIvPgo8cmVjdCB4PSI1MCIgeT0iMTIwIiB3aWR0aD0iOTIiIGhlaWdodD0iMjAiIGZpbGw9IiM4QTJCRTIiLz4KPHJlY3QgeD0iNjAiIHk9IjEwMCIgd2lkdGg9IjcyIiBoZWlnaHQ9IjIwIiBmaWxsPSIjMzlGRjE0Ii8+CjxyZWN0IHg9IjcwIiB5PSI4MCIgd2lkdGg9IjUyIiBoZWlnaHQ9IjIwIiBmaWxsPSIjRkZGRjAwIi8+CjxyZWN0IHg9IjgwIiB5PSI2MCIgd2lkdGg9IjMyIiBoZWlnaHQ9IjIwIiBmaWxsPSIjRkY0NTAwIi8+CjxyZWN0IHg9IjkwIiB5PSI0MCIgd2lkdGg9IjEyIiBoZWlnaHQ9IjIwIiBmaWxsPSIjMDA4MEZGIi8+Cjx0ZXh0IHg9Ijk2IiB5PSIzNSIgZmlsbD0iI0ZGMDA4MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE4IiBmb250LXdlaWdodD0iYm9sZCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+U1Q8L3RleHQ+CjwvU3ZnPgo=",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiBmaWxsPSIjMGEwYTBhIi8+CjxyZWN0IHg9IjgwIiB5PSI0MzAiIHdpZHRoPSIzNTIiIGhlaWdodD0iNTQiIGZpbGw9IiNGRjAwODAiLz4KPHJlY3QgeD0iMTA2IiB5PSIzNzYiIHdpZHRoPSIzMDAiIGhlaWdodD0iNTQiIGZpbGw9IiMwMEZGRkYiLz4KPHJlY3QgeD0iMTMyIiB5PSIzMjIiIHdpZHRoPSIyNDgiIGhlaWdodD0iNTQiIGZpbGw9IiM4QTJCRTIiLz4KPHJlY3QgeD0iMTU4IiB5PSIyNjgiIHdpZHRoPSIxOTYiIGhlaWdodD0iNTQiIGZpbGw9IiMzOUZGMTQiLz4KPHJlY3QgeD0iMTg0IiB5PSIyMTQiIHdpZHRoPSIxNDQiIGhlaWdodD0iNTQiIGZpbGw9IiNGRkZGMDAiLz4KPHJlY3QgeD0iMjEwIiB5PSIxNjAiIHdpZHRoPSI5MiIgaGVpZ2h0PSI1NCIgZmlsbD0iI0ZGNDQ0NCIvPgo8cmVjdCB4PSIyMzYiIHk9IjEwNiIgd2lkdGg9IjQwIiBoZWlnaHQ9IjU0IiBmaWxsPSIjMDA4MEZGIi8+Cjx0ZXh0IHg9IjI1NiIgeT0iOTAiIGZpbGw9IiNGRjAwODAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSI0OCIgZm9udC13ZWlnaHQ9ImJvbGQiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlNUPC90ZXh0Pgo8L3N2Zz4K",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzIiIGhlaWdodD0iNzIiIHZpZXdCb3g9IjAgMCA3MiA3MiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjcyIiBoZWlnaHQ9IjcyIiBmaWxsPSIjMGEwYTBhIi8+CjxyZWN0IHg9IjEwIiB5PSI2MCIgd2lkdGg9IjUyIiBoZWlnaHQ9IjgiIGZpbGw9IiNGRjAwODAiLz4KPHJlY3QgeD0iMTQiIHk9IjUyIiB3aWR0aD0iNDQiIGhlaWdodD0iOCIgZmlsbD0iIzAwRkZGRiIvPgo8cmVjdCB4PSIxOCIgeT0iNDQiIHdpZHRoPSIzNiIgaGVpZ2h0PSI4IiBmaWxsPSIjOEEyQkUyIi8+CjxyZWN0IHg9IjIyIiB5PSIzNiIgd2lkdGg9IjI4IiBoZWlnaHQ9IjgiIGZpbGw9IiMzOUZGMTQiLz4KPHJlY3QgeD0iMjYiIHk9IjI4IiB3aWR0aD0iMjAiIGhlaWdodD0iOCIgZmlsbD0iI0ZGRkYwMCIvPgo8cmVjdCB4PSIzMCIgeT0iMjAiIHdpZHRoPSIxMiIgaGVpZ2h0PSI4IiBmaWxsPSIjRkY0NTAwIi8+CjxyZWN0IHg9IjM0IiB5PSIxMiIgd2lkdGg9IjQiIGhlaWdodD0iOCIgZmlsbD0iIzAwODBGRiIvPgo8dGV4dCB4PSIzNiIgeT0iMTAiIGZpbGw9IiNGRjAwODAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSI4IiBmb250LXdlaWdodD0iYm9sZCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+U1Q8L3RleHQ+Cjwvc3ZnPgo=",
+      "sizes": "72x72",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTYiIGhlaWdodD0iOTYiIHZpZXdCb3g9IjAgMCA5NiA5NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijk2IiBoZWlnaHQ9Ijk2IiBmaWxsPSIjMGEwYTBhIi8+CjxyZWN0IHg9IjE0IiB5PSI4MCIgd2lkdGg9IjY4IiBoZWlnaHQ9IjEwIiBmaWxsPSIjRkYwMDgwIi8+CjxyZWN0IHg9IjE4IiB5PSI3MCIgd2lkdGg9IjYwIiBoZWlnaHQ9IjEwIiBmaWxsPSIjMDBGRkZGIi8+CjxyZWN0IHg9IjIyIiB5PSI2MCIgd2lkdGg9IjUyIiBoZWlnaHQ9IjEwIiBmaWxsPSIjOEEyQkUyIi8+CjxyZWN0IHg9IjI2IiB5PSI1MCIgd2lkdGg9IjQ0IiBoZWlnaHQ9IjEwIiBmaWxsPSIjMzlGRjE0Ii8+CjxyZWN0IHg9IjMwIiB5PSI0MCIgd2lkdGg9IjM2IiBoZWlnaHQ9IjEwIiBmaWxsPSIjRkZGRjAwIi8+CjxyZWN0IHg9IjM0IiB5PSIzMCIgd2lkdGg9IjI4IiBoZWlnaHQ9IjEwIiBmaWxsPSIjRkY0NTAwIi8+CjxyZWN0IHg9IjM4IiB5PSIyMCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjEwIiBmaWxsPSIjMDA4MEZGIi8+CjxyZWN0IHg9IjQyIiB5PSIxMCIgd2lkdGg9IjEyIiBoZWlnaHQ9IjEwIiBmaWxsPSIjRkY0NEZGIi8+Cjx0ZXh0IHg9IjQ4IiB5PSI4IiBmaWxsPSIjRkYwMDgwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTAiIGZvbnQtd2VpZ2h0PSJib2xkIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5TVDwvdGV4dD4KPC9zdmc+Cg==",
+      "sizes": "96x96",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQ0IiBoZWlnaHQ9IjE0NCIgdmlld0JveD0iMCAwIDE0NCAxNDQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxNDQiIGhlaWdodD0iMTQ0IiBmaWxsPSIjMGEwYTBhIi8+CjxyZWN0IHg9IjIwIiB5PSIxMjAiIHdpZHRoPSIxMDQiIGhlaWdodD0iMTUiIGZpbGw9IiNGRjAwODAiLz4KPHJlY3QgeD0iMjgiIHk9IjEwNSIgd2lkdGg9Ijg4IiBoZWlnaHQ9IjE1IiBmaWxsPSIjMDBGRkZGIi8+CjxyZWN0IHg9IjM2IiB5PSI5MCIgd2lkdGg9IjcyIiBoZWlnaHQ9IjE1IiBmaWxsPSIjOEEyQkUyIi8+CjxyZWN0IHg9IjQ0IiB5PSI3NSIgd2lkdGg9IjU2IiBoZWlnaHQ9IjE1IiBmaWxsPSIjMzlGRjE0Ii8+CjxyZWN0IHg9IjUyIiB5PSI2MCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjE1IiBmaWxsPSIjRkZGRjAwIi8+CjxyZWN0IHg9IjYwIiB5PSI0NSIgd2lkdGg9IjI0IiBoZWlnaHQ9IjE1IiBmaWxsPSIjRkY0NTAwIi8+CjxyZWN0IHg9IjY4IiB5PSIzMCIgd2lkdGg9IjgiIGhlaWdodD0iMTUiIGZpbGw9IiMwMDgwRkYiLz4KPHR5dCB4PSI3MiIgeT0iMjUiIGZpbGw9IiNGRjAwODAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9ImJvbGQiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlNUPC90ZXh0Pgo8L3N2Zz4K",
+      "sizes": "144x144",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Jugar",
+      "short_name": "Jugar",
+      "description": "Iniciar nuevo juego",
+      "url": "/?action=play",
+      "icons": [
+        {
+          "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTYiIGhlaWdodD0iOTYiIHZpZXdCb3g9IjAgMCA5NiA5NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijk2IiBoZWlnaHQ9Ijk2IiBmaWxsPSIjMGEwYTBhIi8+Cjxwb2x5Z29uIHBvaW50cz0iMzAsODAgNzAsNDggMzAsMTYiIGZpbGw9IiNGRjAwODAiLz4KPC9zdmc+Cg==",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Puntuaciones",
+      "short_name": "Records",
+      "description": "Ver mejores puntuaciones",
+      "url": "/?action=scores",
+      "icons": [
+        {
+          "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTYiIGhlaWdodD0iOTYiIHZpZXdCb3g9IjAgMCA5NiA5NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijk2IiBoZWlnaHQ9Ijk2IiBmaWxsPSIjMGEwYTBhIi8+Cjx0ZXh0IHg9IjQ4IiB5PSI1NSIgZmlsbD0iI0ZGRkYwMCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjQwIiBmb250LXdlaWdodD0iYm9sZCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+8J+PhzwvdGV4dD4KPC9zdmc+Cg==",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "protocol_handlers": [
+    {
+      "protocol": "web+stacktower",
+      "url": "/?action=play&score=%s"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTQwIiBoZWlnaHQ9Ijk2MCIgdmlld0JveD0iMCAwIDU0MCA5NjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI1NDAiIGhlaWdodD0iOTYwIiBmaWxsPSIjMGEwYTBhIi8+CjxyZWN0IHg9IjUwIiB5PSI4MDAiIHdpZHRoPSI0NDAiIGhlaWdodD0iNjAiIGZpbGw9IiNGRjAwODAiLz4KPHJlY3QgeD0iODAiIHk9Ijc0MCIgd2lkdGg9IjM4MCIgaGVpZ2h0PSI2MCIgZmlsbD0iIzAwRkZGRiIvPgo8cmVjdCB4PSIxMTAiIHk9IjY4MCIgd2lkdGg9IjMyMCIgaGVpZ2h0PSI2MCIgZmlsbD0iIzhBMkJFMiIvPgo8cmVjdCB4PSIxNDAiIHk9IjYyMCIgd2lkdGg9IjI2MCIgaGVpZ2h0PSI2MCIgZmlsbD0iIzM5RkYxNCIvPgo8cmVjdCB4PSIxNzAiIHk9IjU2MCIgd2lkdGg9IjIwMCIgaGVpZ2h0PSI2MCIgZmlsbD0iI0ZGRkYwMCIvPgo8cmVjdCB4PSIyMDAiIHk9IjUwMCIgd2lkdGg9IjE0MCIgaGVpZ2h0PSI2MCIgZmlsbD0iI0ZGNDQ0NCIvPgo8cmVjdCB4PSIyMzAiIHk9IjQ0MCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjMDA4MEZGIi8+Cjx0ZXh0IHg9IjI3MCIgeT0iMzAwIiBmaWxsPSIjRkYwMDgwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iNjAiIGZvbnQtd2VpZ2h0PSJib2xkIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5TVEFDS1NVQVJFVE9XRVI8L3RleHQ+Cjx0ZXh0IHg9IjI3MCIgeT0iMjAwIiBmaWxsPSIjMDBGRkZGIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iNDAiIGZvbnQtd2VpZ2h0PSJib2xkIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5ORU9OPC90ZXh0Pgo8L3N2Zz4K",
+      "sizes": "540x960",
+      "type": "image/svg+xml",
+      "form_factor": "narrow",
+      "label": "Gameplay screenshot showing stacked neon blocks"
+    }
+  ],
+  "file_handlers": [
+    {
+      "action": "/?action=load",
+      "accept": {
+        "application/json": [".stacksave"]
+      }
+    }
+  ]
+}

@@ -1,0 +1,147 @@
+# Netlify Redirects for Stack Tower Neon
+# SPA routing and SEO optimization
+
+# Primary SPA routing - catch all and serve index.html
+/*    /index.html   200
+
+# Force HTTPS redirects
+http://stack-tower-neon.netlify.app/*  https://stack-tower-neon.netlify.app/:splat  301!
+
+# Custom domain redirects (when you get a custom domain)
+http://stacktowerneon.com/*  https://stacktowerneon.com/:splat  301!
+http://www.stacktowerneon.com/*  https://stacktowerneon.com/:splat  301!
+
+# Game action routes for better UX
+/play               /index.html?action=play     200
+/jugar              /index.html?action=play     200
+/scores             /index.html?action=scores   200
+/puntuaciones       /index.html?action=scores   200
+/leaderboard        /index.html?action=scores   200
+
+# Social sharing routes
+/share/:score       /index.html?action=share&score=:score    200
+/compartir/:score   /index.html?action=share&score=:score    200
+
+# Game state routes
+/game/:level        /index.html?level=:level    200
+/nivel/:level       /index.html?level=:level    200
+
+# PWA routes
+/offline            /index.html?offline=true    200
+/install            /index.html?install=true    200
+
+# API routes for future monetization features
+/api/stats          /.netlify/functions/stats         200
+/api/analytics      /.netlify/functions/analytics     200
+/api/leaderboard    /.netlify/functions/leaderboard   200
+/api/revenue        /.netlify/functions/revenue       200
+/api/ads           /.netlify/functions/ads           200
+
+# Monetization routes
+/ads/config         /.netlify/functions/ad-config     200
+/ads/track          /.netlify/functions/ad-tracking   200
+/revenue/report     /.netlify/functions/revenue       200
+
+# SEO-friendly game routes
+/juego              /index.html                       200
+/torre              /index.html                       200
+/neon               /index.html                       200
+/cyberpunk          /index.html                       200
+/stack-tower        /index.html                       200
+
+# Language routes
+/es/*               /index.html?lang=es               200
+/en/*               /index.html?lang=en               200
+
+# Mobile app deep linking
+/mobile/play        /index.html?source=mobile&action=play    200
+/app/play           /index.html?source=app&action=play       200
+
+# Social media campaign routes
+/facebook           /index.html?source=facebook              200
+/twitter            /index.html?source=twitter               200
+/instagram          /index.html?source=instagram             200
+/tiktok            /index.html?source=tiktok                200
+/youtube           /index.html?source=youtube               200
+
+# Referral and affiliate routes
+/ref/:code          /index.html?ref=:code                    200
+/referido/:code     /index.html?ref=:code                    200
+
+# Gaming platform routes
+/kongregate         /index.html?platform=kongregate          200
+/itch               /index.html?platform=itch                200
+/gamejolt          /index.html?platform=gamejolt            200
+
+# A/B testing routes for monetization
+/version/a          /index.html?version=a                    200
+/version/b          /index.html?version=b                    200
+/test/:variant      /index.html?test=:variant                200
+
+# Geo-specific monetization routes
+/us/*               /index.html?geo=us                       200
+/eu/*               /index.html?geo=eu                       200
+/latam/*            /index.html?geo=latam                    200
+
+# Error handling
+/404                /index.html                              404
+/error              /index.html?error=true                   200
+
+# Legacy URL support (if migrating from another domain)
+/old-game/*         /index.html?legacy=:splat                301
+/previous/*         /index.html?legacy=:splat                301
+
+# Development and testing routes
+/dev/*              /index.html?dev=true                     200  Role=admin
+/admin/*            /.netlify/functions/admin                200  Role=admin
+/test/*             /index.html?test=true                    200  Role=admin
+
+# Webhook routes for monetization partners
+/webhooks/ads       /.netlify/functions/webhook-ads          200
+/webhooks/revenue   /.netlify/functions/webhook-revenue      200
+
+# Bot and crawler specific routes
+/robots.txt         /robots.txt                              200
+/sitemap.xml        /.netlify/functions/sitemap             200
+
+# PWA installation routes
+/install/android    /index.html?install=android              200
+/install/ios        /index.html?install=ios                  200
+/install/desktop    /index.html?install=desktop              200
+
+# Game analytics routes
+/analytics/event    /.netlify/functions/analytics-event      200
+/analytics/session  /.netlify/functions/analytics-session    200
+
+# Performance monitoring
+/health             /.netlify/functions/health               200
+/status             /.netlify/functions/status               200
+
+# Asset optimization redirects
+/assets/images/*    /assets/:splat                           200
+/img/*              /assets/:splat                           301
+
+# Legacy file redirects
+/game.js            /js/game.js                              301
+/style.css          /css/style.css                           301
+/app.manifest       /manifest.json                           301
+
+# Special campaign routes for viral marketing
+/viral/:campaign    /index.html?viral=:campaign              200
+/challenge/:id      /index.html?challenge=:id                200
+/tournament/:id     /index.html?tournament=:id               200
+
+# QR code routes for mobile marketing
+/qr/:code          /index.html?qr=:code                     200
+/scan/:code        /index.html?scan=:code                   200
+
+# Influencer and creator routes
+/creator/:name     /index.html?creator=:name                200
+/streamer/:name    /index.html?streamer=:name               200
+
+# Rate limiting for API endpoints (handled by Edge Functions)
+/api/*             /.netlify/edge-functions/rate-limit      200
+
+# Cache busting for assets
+/v1/*              /:splat                                  301
+/v2/*              /:splat                                  301
