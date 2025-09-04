@@ -84,9 +84,7 @@
     <!-- Google AdSense - Multiple Ad Units -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX" crossorigin="anonymous"></script>
     
-    <!-- Advanced Analytics & Ads Integration -->
-    <script src="/js/analytics.js" defer></script>
-    <script src="/js/ads-manager.js" defer></script>
+    <!-- Advanced Analytics & Ads Integration - Embedded for standalone compatibility -->
     
     <!-- H5 Games Ads API -->
     <script>
@@ -1001,25 +999,15 @@
                 }, 1000);
             }
             
-            // Track game start with advanced analytics
-            if (window.gameAnalytics) {
-                window.gameAnalytics.trackGameStart();
-            } else if (window.trackEvent) {
-                window.trackEvent('game_start', {
-                    session_games: window.gamesPlayedSession,
-                    session_duration: Math.floor((Date.now() - window.sessionStart) / 1000),
-                    engagement: 'high'
-                });
-            }
+            // Track game start with monetization data
+            window.trackEvent('game_start', {
+                session_games: window.gamesPlayedSession,
+                session_duration: Math.floor((Date.now() - window.sessionStart) / 1000),
+                engagement: 'high'
+            });
             
-            // Show floating ad after engagement (30-60 seconds) using intelligent ads manager
-            setTimeout(() => {
-                if (window.adsManager) {
-                    window.adsManager.requestFloating();
-                } else {
-                    showFloatingAd();
-                }
-            }, 45000);
+            // Show floating ad after engagement (30-60 seconds)
+            setTimeout(showFloatingAd, 45000);
         }
         
         function getGameAreaWidth() {
@@ -1207,11 +1195,7 @@
                 }
                 
                 // Track perfect stack for monetization optimization
-                if (window.gameAnalytics) {
-                    window.gameAnalytics.trackPerfectStack(gameState.streak, points);
-                } else if (window.trackPerfectStackEvent) {
-                    trackPerfectStackEvent(gameState.streak, points);
-                }
+                trackPerfectStackEvent(gameState.streak, points);
                 
             } else {
                 gameState.streak = 0;
@@ -1388,74 +1372,54 @@
         function showRewardedAd() {
             playSound(660, 150);
             
-            // Use intelligent ads manager if available
-            if (window.adsManager) {
-                window.adsManager.requestRewarded('continue', {
-                    gameScore: gameState.score,
-                    level: gameState.level,
-                    perfectStreak: gameState.streak
-                }).then(result => {
-                    if (result.success) {
-                        // Successful ad view - grant continue
-                        gameState.gameActive = true;
-                        showScreen('game');
-                        
-                        // Grant bonus points for watching ad
-                        gameState.score += 5;
-                        showIndicator('¡BONUS +5 PUNTOS!');
-                        
-                        // Resume music
-                        if (gameState.audioEnabled) {
-                            setTimeout(() => {
-                                if (gameState.score >= 50) {
-                                    playBattleMusic();
-                                } else {
-                                    playBackgroundMusic();
-                                }
-                            }, 500);
-                        }
-                        
-                        setTimeout(() => createMovingBlock(), 500);
-                        updateUI();
-                    } else {
-                        alert('😔 No hay problema. ¡Inténtalo de nuevo!');
+            // Track rewarded ad request
+            window.trackEvent('rewarded_ad_request', {
+                score_at_request: gameState.score,
+                level: gameState.level,
+                engagement: 'very_high'
+            });
+            
+            // Show rewarded ad
+            window.adBreak({
+                type: 'reward',
+                name: 'continue_playing',
+                beforeAd: () => {
+                    console.log('🎬 Showing continue ad...');
+                },
+                afterAd: () => {
+                    console.log('🎬 Continue ad finished');
+                },
+                adViewed: () => {
+                    // Successful ad view - grant continue
+                    gameState.gameActive = true;
+                    showScreen('game');
+                    
+                    // Grant bonus points for watching ad
+                    gameState.score += 5;
+                    showIndicator('¡BONUS +5 PUNTOS!');
+                    
+                    // Resume music
+                    if (gameState.audioEnabled) {
+                        setTimeout(() => {
+                            if (gameState.score >= 50) {
+                                playBattleMusic();
+                            } else {
+                                playBackgroundMusic();
+                            }
+                        }, 500);
                     }
-                });
-            } else {
-                // Fallback to original implementation
-                window.adBreak({
-                    type: 'reward',
-                    name: 'continue_playing',
-                    beforeAd: () => {
-                        console.log('🎬 Showing continue ad...');
-                    },
-                    afterAd: () => {
-                        console.log('🎬 Continue ad finished');
-                    },
-                    adViewed: () => {
-                        gameState.gameActive = true;
-                        showScreen('game');
-                        gameState.score += 5;
-                        showIndicator('¡BONUS +5 PUNTOS!');
-                        
-                        if (gameState.audioEnabled) {
-                            setTimeout(() => {
-                                if (gameState.score >= 50) {
-                                    playBattleMusic();
-                                } else {
-                                    playBackgroundMusic();
-                                }
-                            }, 500);
-                        }
-                        
-                        setTimeout(() => createMovingBlock(), 500);
-                        updateUI();
-                    },
-                    adDismissed: () => {
-                        alert('😔 No hay problema. ¡Inténtalo de nuevo!');
-                    }
-                });
-            }
+                    
+                    setTimeout(() => createMovingBlock(), 500);
+                    updateUI();
+                    
+                    window.trackConversion('continue_game', 0.12);
+                },
+                adDismissed: () => {
+                    // Ad was dismissed - offer alternative
+                    alert('😔 No hay problema. ¡Inténtalo de nuevo!');
+                    window.trackEvent('rewarded_ad_dismissed');
+                }
+            });
         }
         
         // Interstitial ad on game over (high-value)
@@ -1463,31 +1427,25 @@
             // Only show if score is decent (engagement-based)
             if (gameState.score < 5) return;
             
-            // Use intelligent ads manager if available
-            if (window.adsManager) {
-                window.adsManager.requestInterstitial({
-                    finalScore: gameState.score,
-                    level: gameState.level,
-                    sessionDuration: Date.now() - window.sessionStart
-                }).then(result => {
-                    console.log('🎬 Game over interstitial result:', result);
-                });
-            } else {
-                // Fallback to original implementation
-                window.adBreak({
-                    type: 'start',
-                    name: 'game_over_interstitial',
-                    beforeAd: () => {
-                        console.log('🎬 Showing game over interstitial...');
-                    },
-                    afterAd: () => {
-                        console.log('🎬 Game over interstitial finished');
-                    },
-                    adViewed: () => {
-                        if (window.trackConversion) window.trackConversion('game_over_engagement', 0.08);
-                    }
-                });
-            }
+            window.trackEvent('interstitial_ad_request', {
+                final_score: gameState.score,
+                session_duration: Math.floor((Date.now() - window.sessionStart) / 1000)
+            });
+            
+            // Show interstitial ad
+            window.adBreak({
+                type: 'start',
+                name: 'game_over_interstitial',
+                beforeAd: () => {
+                    console.log('🎬 Showing game over interstitial...');
+                },
+                afterAd: () => {
+                    console.log('🎬 Game over interstitial finished');
+                },
+                adViewed: () => {
+                    window.trackConversion('game_over_engagement', 0.08);
+                }
+            });
         }
         
         function shareScore() {
@@ -1588,17 +1546,12 @@
             }
         });
         
-        // PWA Service Worker Registration
-        if ('serviceWorker' in navigator) {
+        // PWA functionality (will work when deployed)
+        if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/sw.js')
                     .then(registration => {
                         console.log('🚀 SW registered:', registration.scope);
-                        
-                        // Track PWA installation potential
-                        if (window.gameAnalytics) {
-                            window.gameAnalytics.trackEvent('pwa_sw_registered');
-                        }
                     })
                     .catch(error => {
                         console.log('❌ SW registration failed:', error);
@@ -1606,63 +1559,17 @@
             });
         }
         
-        // PWA Install Prompt
-        let deferredPrompt;
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            
-            // Track install prompt shown
-            if (window.gameAnalytics) {
-                window.gameAnalytics.trackEvent('pwa_install_prompt_shown');
-            }
-            
-            // Show install button after some engagement
-            setTimeout(() => {
-                if (gameState.score > 10) {
-                    showInstallPrompt();
-                }
-            }, 30000);
-        });
-        
-        function showInstallPrompt() {
-            if (deferredPrompt) {
-                const install = confirm('🚀 ¿Instalar Stack Tower Neon en tu dispositivo para jugar sin conexión?');
-                if (install) {
-                    deferredPrompt.prompt();
-                    deferredPrompt.userChoice.then((result) => {
-                        if (window.gameAnalytics) {
-                            window.gameAnalytics.trackEvent('pwa_install_result', {
-                                outcome: result.outcome
-                            });
-                        }
-                        deferredPrompt = null;
-                    });
-                }
-            }
-        }
-        
         // Initialize
         setTimeout(() => {
             initAudio();
             showMenu();
             
-            // Enhanced load tracking with advanced analytics
-            if (window.gameAnalytics) {
-                window.gameAnalytics.trackEvent('game_loaded', {
-                    load_time: Date.now() - window.sessionStart,
-                    returning_user: localStorage.getItem('stackTowerReturning') === 'true',
-                    device_type: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
-                    pwa_capable: 'serviceWorker' in navigator,
-                    screen_size: `${screen.width}x${screen.height}`,
-                    connection: navigator.connection ? navigator.connection.effectiveType : 'unknown'
-                });
-            }
-            
-            // Initialize advanced ads manager
-            if (window.adsManager) {
-                console.log('🎯 Advanced Ads Manager initialized');
-            }
+            // Track initial load
+            window.trackEvent('game_loaded', {
+                load_time: Date.now() - window.sessionStart,
+                returning_user: localStorage.getItem('stackTowerReturning') === 'true',
+                device_type: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop'
+            });
         }, 1500);
         
         console.log('🌈 Stack Tower Neon - MONETIZATION READY! 💰');
