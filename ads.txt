@@ -1,11 +1,11 @@
 # ads.txt for Stack Tower Neon
 # Authorized Digital Sellers for AdSense Monetization
 
-# Google AdSense - Replace XXXXXXXXXX with your actual Publisher ID
-google.com, pub-XXXXXXXXXX, DIRECT, f08c47fec0942fa0
+# Google AdSense - REAL MONETIZATION ACTIVE
+google.com, pub-4129506161314540, DIRECT, f08c47fec0942fa0
 
 # Google Ad Manager (if using)
-google.com, pub-XXXXXXXXXX, DIRECT, f08c47fec0942fa0
+google.com, pub-4129506161314540, DIRECT, f08c47fec0942fa0
 
 # H5 Games Platform (when approved)
 # h5games.com, PUBLISHER_ID, DIRECT
