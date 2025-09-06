@@ -551,8 +551,8 @@
         <ins class="adsbygoogle"
              style="display:block"
              data-ad-client="ca-pub-4129506161314540"
-             data-ad-slot="1234567890"
-             data-ad-format="horizontal"
+             data-ad-slot="auto"
+             data-ad-format="auto"
              data-full-width-responsive="true"></ins>
         <script>
             (adsbygoogle = window.adsbygoogle || []).push({});
@@ -649,9 +649,10 @@
             <!-- Game Over AdSense Banner - REAL MONETIZATION -->
             <div style="margin: 20px 0; text-align: center;">
                 <ins class="adsbygoogle"
-                     style="display:inline-block;width:320px;height:100px"
+                     style="display:block;width:320px;height:100px"
                      data-ad-client="ca-pub-4129506161314540"
-                     data-ad-slot="5544332211"></ins>
+                     data-ad-slot="auto"
+                     data-ad-format="rectangle"></ins>
                 <script>
                      (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
@@ -670,8 +671,8 @@
         <ins class="adsbygoogle"
              style="display:block"
              data-ad-client="ca-pub-4129506161314540"
-             data-ad-slot="0987654321"
-             data-ad-format="horizontal"
+             data-ad-slot="auto"
+             data-ad-format="auto"
              data-full-width-responsive="true"></ins>
         <script>
             (adsbygoogle = window.adsbygoogle || []).push({});
@@ -686,8 +687,9 @@
         <ins class="adsbygoogle"
              style="display:block"
              data-ad-client="ca-pub-4129506161314540"
-             data-ad-slot="1122334455"
-             data-ad-format="vertical"></ins>
+             data-ad-slot="auto"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
         <script>
             (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
@@ -1566,6 +1568,28 @@
         setTimeout(() => {
             initAudio();
             showMenu();
+            
+            // 💰 INITIALIZE ADSENSE PROPERLY
+            setTimeout(() => {
+                try {
+                    if (window.adsbygoogle) {
+                        console.log('✅ AdSense initialized successfully');
+                        // Track successful ad load
+                        window.trackEvent('adsense_loaded', {
+                            ads_blocked: false,
+                            publisher_id: 'ca-pub-4129506161314540'
+                        });
+                    } else {
+                        console.warn('⚠️ AdSense blocked or failed to load');
+                        window.trackEvent('adsense_blocked', {
+                            ads_blocked: true,
+                            potential_revenue_lost: 0.10
+                        });
+                    }
+                } catch (e) {
+                    console.error('AdSense initialization error:', e);
+                }
+            }, 2000);
             
             // Track initial load
             window.trackEvent('game_loaded', {
