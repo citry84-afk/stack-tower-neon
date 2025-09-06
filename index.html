@@ -408,22 +408,23 @@
             }
         }
         
-        /* Ad banners - fixed positioning */
+        /* Ad banners - MOBILE-FIRST NON-INTRUSIVE */
         .ad-banner {
-            background: #333;
-            color: white;
+            background: rgba(0, 0, 0, 0.85);
+            color: #888;
             padding: 5px;
             text-align: center;
             position: fixed;
             width: 100%;
             z-index: 1000;
-            font-size: 0.7rem;
-            border: 1px solid #666;
+            font-size: 0.6rem;
+            border: 1px solid #333;
+            transition: opacity 0.3s ease;
         }
         
         .ad-top { 
             top: 0; 
-            height: 90px;
+            height: 60px; /* Más pequeño para móviles */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -431,7 +432,7 @@
         
         .ad-bottom { 
             bottom: 0; 
-            height: 90px;
+            height: 60px; /* Más pequeño para móviles */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -545,7 +546,7 @@
     </style>
 </head>
 <body>
-    <!-- Ad Banners - Optimized for Revenue -->
+    <!-- Ad Banners - HIGHLY VISIBLE -->
     <div class="ad-banner ad-top" id="top-ad-banner">
         <!-- Google AdSense Top Banner - REAL MONETIZATION -->
         <ins class="adsbygoogle"
