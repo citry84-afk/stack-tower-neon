@@ -1397,12 +1397,10 @@ ${isNewRecord ? '🏆 ¡NUEVO RÉCORD PERSONAL!' : ''}
                         <div style="margin-bottom: 20px; color: #FFFF00; font-weight: bold; font-size: 1.1rem;">
                             ¡COMPARTE TU TORRE! 🔥
                         </div>
-                        <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 20px;">
-                            <button onclick="shareStackToTikTok()" style="background: #000; color: white; border: 2px solid #FF0050; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.9rem;">📱 TikTok</button>
-                            <button onclick="shareStackToWhatsApp()" style="background: #25D366; color: white; border: none; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.9rem;">💬 WhatsApp</button>
-                            <button onclick="shareStackToTwitter()" style="background: #1DA1F2; color: white; border: none; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.9rem;">🐦 Twitter</button>
-                            <button onclick="shareStackToInstagram()" style="background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); color: white; border: none; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.9rem;">📸 Instagram</button>
-                            <button onclick="copyStackShareLink()" style="background: #333; color: white; border: 2px solid #00FFFF; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.9rem;">📋 Copiar</button>
+                        <div style="display: flex; flex-direction: column; gap: 15px; justify-content: center; margin-bottom: 20px;">
+                            <button onclick="shareStackNative()" style="background: linear-gradient(45deg, #FF0080, #00FFFF); color: white; border: none; padding: 15px 25px; border-radius: 12px; cursor: pointer; font-size: 1.1rem; font-weight: bold; box-shadow: 0 0 20px rgba(255,0,128,0.5);">🏗️ COMPARTIR TORRE (Elige tu app)</button>
+                            <button onclick="copyStackViralMessage()" style="background: linear-gradient(45deg, #00FFFF, #FFFF00); color: #000; border: none; padding: 12px 20px; border-radius: 10px; cursor: pointer; font-size: 1rem; font-weight: bold;">📋 COPIAR MENSAJE VIRAL</button>
+                            <button onclick="generateStackImage()" style="background: linear-gradient(45deg, #FF0080, #FF8C00); color: white; border: none; padding: 12px 20px; border-radius: 10px; cursor: pointer; font-size: 1rem; font-weight: bold;">📸 GENERAR IMAGEN TORRE</button>
                         </div>
                         <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
                             <button onclick="closeViralShareModal(); startGame();" style="background: #FF0080; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 1rem;">🔄 CONSTRUIR DE NUEVO</button>
@@ -1429,44 +1427,146 @@ ${isNewRecord ? '🏆 ¡NUEVO RÉCORD PERSONAL!' : ''}
             if (modal) modal.remove();
         }
         
-        // STACK TOWER SHARING FUNCTIONS
-        function shareStackToTikTok() {
-            const text = `🏗️ ¡Acabo de conseguir ${gameState.score} puntos en Stack Tower Neon! 🎯 Nivel ${gameState.level} 📦 ${gameState.blocks.length} bloques 🎮 ¿Puedes construir más alto?`;
-            const tikTokText = encodeURIComponent(text + ' https://stack-tower-neon2.netlify.app');
-            window.open(`https://www.tiktok.com/upload?caption=${tikTokText}`, '_blank');
-            window.trackEvent('viral_share_attempt', { platform: 'tiktok', score: gameState.score, game: 'stack_tower' });
+        // 🏗️ STACK TOWER REVOLUTIONARY SHARING FUNCTIONS
+        function shareStackNative() {
+            const score = gameState.score;
+            const level = gameState.level;
+            const blocks = gameState.blocks.length;
+            const isRecord = score === gameState.highScore && score > 0;
+            
+            const shareData = {
+                title: '🏗️ Stack Tower Neon - ¡Mira mi torre épica!',
+                text: `🏗️ ¡Acabo de construir una torre de ${score} puntos en Stack Tower Neon! 🎯 Nivel ${level} 📦 ${blocks} bloques ${isRecord ? '🏆 ¡NUEVO RÉCORD!' : ''} 🎮 ¿Puedes construir más alto?`,
+                url: 'https://stack-tower-neon2.netlify.app'
+            };
+
+            if (navigator.share) {
+                // WEB SHARE API NATIVO - FUNCIONA CON TODAS LAS APPS
+                navigator.share(shareData).then(() => {
+                    window.trackEvent('stack_native_share_success', { 
+                        score: score, 
+                        level: level,
+                        is_record: isRecord,
+                        method: 'web_share_api' 
+                    });
+                    alert('🎉 ¡Torre compartida exitosamente! Gracias por ayudar a que el juego se vuelva viral 🔥');
+                }).catch((error) => {
+                    console.log('Share cancelled', error);
+                    copyStackViralMessage(); // Fallback
+                });
+            } else {
+                // FALLBACK: Copy to clipboard
+                copyStackViralMessage();
+            }
         }
         
-        function shareStackToWhatsApp() {
-            const text = `🏗️ ¡Acabo de conseguir ${gameState.score} puntos en Stack Tower Neon! 🎯 Nivel ${gameState.level} 📦 ${gameState.blocks.length} bloques 🎮 ¿Puedes construir más alto?`;
-            const whatsappText = encodeURIComponent(text + '\n\n🏗️ ¡Construye tu torre aquí: https://stack-tower-neon2.netlify.app');
-            window.open(`https://wa.me/?text=${whatsappText}`, '_blank');
-            window.trackEvent('viral_share_attempt', { platform: 'whatsapp', score: gameState.score, game: 'stack_tower' });
-        }
-        
-        function shareStackToTwitter() {
-            const text = `🏗️ ¡Acabo de conseguir ${gameState.score} puntos en Stack Tower Neon! 🎯 Nivel ${gameState.level} 📦 ${gameState.blocks.length} bloques 🎮 ¿Puedes construir más alto?`;
-            const twitterText = encodeURIComponent(text);
-            const twitterUrl = encodeURIComponent('https://stack-tower-neon2.netlify.app');
-            window.open(`https://twitter.com/intent/tweet?text=${twitterText}&url=${twitterUrl}&hashtags=StackTower,Gaming,Challenge,Neon`, '_blank');
-            window.trackEvent('viral_share_attempt', { platform: 'twitter', score: gameState.score, game: 'stack_tower' });
-        }
-        
-        function shareStackToInstagram() {
-            const text = `🏗️ ¡Acabo de conseguir ${gameState.score} puntos en Stack Tower Neon! 🎯 Nivel ${gameState.level} 📦 ${gameState.blocks.length} bloques 🎮 ¿Puedes construir más alto?`;
-            navigator.clipboard.writeText(text + '\n\n🏗️ Stack Tower Neon - ¡El juego más adictivo!').then(() => {
-                alert('📋 Texto copiado! Pégalo en tu Instagram Story 📸');
+        function copyStackViralMessage() {
+            const score = gameState.score;
+            const level = gameState.level;
+            const blocks = gameState.blocks.length;
+            const isRecord = score === gameState.highScore && score > 0;
+            
+            const viralMessage = `🏗️ ¡TORRE ÉPICA EN STACK TOWER NEON! 🏗️
+
+🎯 Mi puntuación: ${score} puntos
+📊 Nivel alcanzado: ${level}
+📦 Bloques apilados: ${blocks}
+${isRecord ? '🏆 ¡NUEVO RÉCORD PERSONAL!' : ''}
+
+🎮 ¿PUEDES CONSTRUIR MÁS ALTO?
+¡Construye tu torre GRATIS aquí! 👇
+https://stack-tower-neon2.netlify.app
+
+#StackTower #Gaming #Challenge #Adictivo #Constructor`;
+
+            navigator.clipboard.writeText(viralMessage).then(() => {
+                alert('📋 ¡MENSAJE VIRAL COPIADO! 🔥\n\nAhora pégalo en WhatsApp, Instagram, TikTok o donde quieras.\n\n¡Vamos a hacer que todos construyan torres! 🏗️');
+                window.trackEvent('stack_viral_message_copied', { 
+                    score: score,
+                    level: level,
+                    is_record: isRecord,
+                    method: 'clipboard_copy'
+                });
+            }).catch(() => {
+                // Show the message in a prompt as fallback
+                prompt('📋 Copia este mensaje viral:', viralMessage);
             });
-            window.trackEvent('viral_share_attempt', { platform: 'instagram', score: gameState.score, game: 'stack_tower' });
         }
         
-        function copyStackShareLink() {
-            const text = `🏗️ ¡Acabo de conseguir ${gameState.score} puntos en Stack Tower Neon! 🎯 Nivel ${gameState.level} 📦 ${gameState.blocks.length} bloques 🎮 ¿Puedes construir más alto?`;
-            const fullText = text + '\n\n🏗️ ¡Construye tu torre aquí: https://stack-tower-neon2.netlify.app';
-            navigator.clipboard.writeText(fullText).then(() => {
-                alert('📋 ¡Link copiado! Compártelo donde quieras 🚀');
+        function generateStackImage() {
+            // Create a canvas with the tower score
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = 400;
+            canvas.height = 600;
+            
+            // Background gradient (tower theme)
+            const gradient = ctx.createLinearGradient(0, 0, 0, 600);
+            gradient.addColorStop(0, '#1a1a2e');
+            gradient.addColorStop(0.5, '#16213e');
+            gradient.addColorStop(1, '#0f172a');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, 400, 600);
+            
+            // Add neon border
+            ctx.strokeStyle = '#00FFFF';
+            ctx.lineWidth = 4;
+            ctx.strokeRect(10, 10, 380, 580);
+            
+            // Title
+            ctx.fillStyle = '#FF0080';
+            ctx.font = 'bold 28px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('🏗️ STACK TOWER NEON', 200, 70);
+            
+            // Score (big and prominent)
+            ctx.fillStyle = '#00FFFF';
+            ctx.font = 'bold 56px Arial';
+            ctx.fillText(`${gameState.score}`, 200, 160);
+            ctx.fillStyle = '#FFFFFF';
+            ctx.font = 'bold 20px Arial';
+            ctx.fillText('PUNTOS', 200, 190);
+            
+            // Stats
+            ctx.fillStyle = '#FFFF00';
+            ctx.font = 'bold 24px Arial';
+            ctx.fillText(`Nivel: ${gameState.level}`, 200, 250);
+            ctx.fillText(`Bloques: ${gameState.blocks.length}`, 200, 290);
+            
+            // Record indicator if applicable
+            if (gameState.score === gameState.highScore && gameState.score > 0) {
+                ctx.fillStyle = '#FFD700';
+                ctx.font = 'bold 20px Arial';
+                ctx.fillText('🏆 NUEVO RÉCORD 🏆', 200, 330);
+            }
+            
+            // Challenge text
+            ctx.fillStyle = '#FF0080';
+            ctx.font = 'bold 24px Arial';
+            ctx.fillText('¿PUEDES CONSTRUIR', 200, 400);
+            ctx.fillText('MÁS ALTO?', 200, 430);
+            
+            // URL
+            ctx.fillStyle = '#00FFFF';
+            ctx.font = '16px Arial';
+            ctx.fillText('stack-tower-neon2.netlify.app', 200, 480);
+            
+            // Convert to image and trigger download
+            canvas.toBlob((blob) => {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `stack-tower-${gameState.score}pts-nivel${gameState.level}.png`;
+                a.click();
+                URL.revokeObjectURL(url);
+                
+                alert('📸 ¡Imagen de tu torre generada! Se ha descargado a tu móvil. ¡Compártela en Instagram Stories! 🔥');
+                window.trackEvent('stack_share_image_generated', { 
+                    score: gameState.score,
+                    level: gameState.level,
+                    method: 'canvas_download'
+                });
             });
-            window.trackEvent('viral_share_attempt', { platform: 'copy_link', score: gameState.score, game: 'stack_tower' });
         }
         
         function showFloatingAd() {
