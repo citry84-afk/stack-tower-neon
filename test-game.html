@@ -125,7 +125,33 @@
         }
         
         .btn {
-            background: transparent;
+
+/* Botón de compartir viral */
+.viral-share-btn {
+    background: linear-gradient(45deg, #FF0080, #00FFFF, #8000FF);
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    box-shadow: 0 8px 25px rgba(255, 0, 128, 0.3);
+}
+
+.viral-share-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(255, 0, 128, 0.5);
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: translateY(-3px) scale(1); }
+    50% { transform: translateY(-3px) scale(1.05); }
+    100% { transform: translateY(-3px) scale(1); }
+}            background: transparent;
             border: 2px solid #00FFFF;
             color: #00FFFF;
             padding: 15px 25px;
@@ -235,12 +261,40 @@
             }
             
             .btn {
-                padding: 12px 20px;
+
+/* Botón de compartir viral */
+.viral-share-btn {
+    background: linear-gradient(45deg, #FF0080, #00FFFF, #8000FF);
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    box-shadow: 0 8px 25px rgba(255, 0, 128, 0.3);
+}
+
+.viral-share-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(255, 0, 128, 0.5);
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: translateY(-3px) scale(1); }
+    50% { transform: translateY(-3px) scale(1.05); }
+    100% { transform: translateY(-3px) scale(1); }
+}                padding: 12px 20px;
                 font-size: 0.9rem;
                 min-width: 100px;
             }
         }
     </style>
+    <!-- SHARING VIRAL STACK TOWER v2.2 -->
+    <script src="stack-tower-viral-sharing.js"></script>
 </head>
 <body>
     <div class="container">
@@ -293,7 +347,7 @@
             </div>
             <div class="controls">
                 <button class="btn primary" onclick="startGame()">🔄 JUGAR OTRA VEZ</button>
-                <button class="btn" onclick="shareScore()">📤 COMPARTIR</button>
+                <button class="btn viral-share-btn" onclick="shareScore()">🎉 COMPARTIR VIRAL</button>
                 <button class="btn" onclick="showMenu()">🏠 MENU</button>
             </div>
         </div>
@@ -811,6 +865,17 @@
                 
                 if (gameState.score === gameState.highScore && gameState.score > 0) {
                     document.getElementById('new-record').classList.remove('hidden');
+                    
+                    // Mostrar botón de compartir automático para récords
+                    setTimeout(() => {
+                        const shareBtn = document.createElement("button");
+                        shareBtn.className = "btn viral-share-btn";
+                        shareBtn.innerHTML = "🏆 ¡COMPARTIR RÉCORD!";
+                        shareBtn.onclick = () => shareScore();
+                        shareBtn.style.margin = "1rem";
+                        shareBtn.style.animation = "pulse 1s infinite";
+                        document.getElementById("gameover-screen").appendChild(shareBtn);
+                    }, 2000);
                 } else {
                     document.getElementById('new-record').classList.add('hidden');
                 }
@@ -853,7 +918,7 @@
             return colors[Math.floor(Math.random() * colors.length)];
         }
         
-        function shareScore() {
+        function shareScoreOriginal() {
             const text = `🌈 ¡Conseguí ${gameState.score} puntos en Stack Tower Neon! ¿Puedes superarme?`;
             
             if (navigator.share) {
