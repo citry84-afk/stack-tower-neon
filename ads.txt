@@ -1,60 +1,8 @@
-# ads.txt for Stack Tower Neon
-# Authorized Digital Sellers for AdSense Monetization
-
-# Google AdSense - REAL MONETIZATION ACTIVE
+# Google AdSense
 google.com, pub-4129506161314540, DIRECT, f08c47fec0942fa0
 
-# Google Ad Manager (if using)
-google.com, pub-4129506161314540, DIRECT, f08c47fec0942fa0
+# Google AdX
+google.com, 4129506161314540, DIRECT, f08c47fec0942fa0
 
-# H5 Games Platform (when approved)
-# h5games.com, PUBLISHER_ID, DIRECT
-
-# OpenX (for additional revenue streams)
-# openx.com, 540031703, RESELLER, 6a698e2ec38604c6
-
-# Sovrn (additional ad network)
-# lijit.com, 260380, RESELLER, fafdf38b16bf6b2b
-
-# Index Exchange
-# indexexchange.com, 184913, RESELLER, 50b1c356f2c5c8fc
-
-# PubMatic (premium gaming ads)
-# pubmatic.com, 158355, RESELLER, 5d62403b186f2ace
-
-# Rubicon Project
-# rubiconproject.com, 17262, RESELLER, 0bfd66d529a55807
-
-# AppNexus/Xandr
-# appnexus.com, 7353, RESELLER, f5ab79cb980f11d1
-
-# Amazon TAM (if applicable)
-# amazon.com, 3411, RESELLER
-
-# Criteo
-# criteo.com, B-060253, RESELLER, 9fac4a4a87c2a44f
-
-# Smart AdServer
-# smartadserver.com, 2289, RESELLER
-
-# Instructions for setup:
-# 1. Replace 'XXXXXXXXXX' with your actual Google AdSense Publisher ID
-# 2. Uncomment additional networks as you get approved
-# 3. Always use DIRECT for your own accounts
-# 4. Use RESELLER for third-party networks
-# 5. Verify seller IDs with each ad network
-
-# Gaming-specific ad networks (add when approved):
-# unity.com, UNITY_GAME_ID, DIRECT
-# admob.com, ADMOB_APP_ID, DIRECT
-# ironsrc.com, IRONSOURCE_APP_KEY, DIRECT
-
-# For maximum revenue, consider these premium gaming networks:
-# - Unity Ads (for mobile games)
-# - IronSource (mediation platform)
-# - AdMob (Google's mobile ad platform)
-# - Chartboost (gaming-focused)
-# - Vungle (video ads for games)
-
-# Note: Keep this file updated as you add new monetization partners
-# Last updated: 2024-12-04
+# Additional ad networks can be added here
+# Format: domain, publisher_id, relationship, certification_authority_id

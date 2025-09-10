@@ -1,119 +1,26 @@
-# Robots.txt for Stack Tower Neon Game
-# Optimized for search engine indexing and monetization
-
 User-agent: *
 Allow: /
-Allow: /index.html
-Allow: /css/
-Allow: /js/
-Allow: /assets/
-Allow: /manifest.json
-Allow: /favicon.ico
-
-# Game-specific pages
-Allow: /juego
-Allow: /jugar
-Allow: /puntuaciones
-Allow: /play
-Allow: /scores
-
-# PWA and mobile app discovery
-Allow: /manifest.json
-Allow: /*.png
-Allow: /*.svg
-Allow: /*.ico
-
-# Block admin and development files
+Disallow: /dashboard/
 Disallow: /admin/
-Disallow: /.netlify/
-Disallow: /dev/
-Disallow: /test/
-Disallow: /.git/
-Disallow: /*.log
-Disallow: /node_modules/
-Disallow: /package.json
-Disallow: /package-lock.json
-Disallow: /.env
 
-# Block API endpoints from indexing (keep private for monetization)
-Disallow: /api/analytics
-Disallow: /api/stats
-Disallow: /api/revenue
+# SEO optimizations
+Sitemap: https://reservaspro.netlify.app/sitemap.xml
 
-# Allow monetization assets
-Allow: /ads/
-Allow: /monetization/
+# Security
+User-agent: *
+Disallow: /api/
+Disallow: *.json$
+Disallow: /*?*
 
-# Crawl delay for better server performance
+# Performance
 Crawl-delay: 1
 
-# Sitemap location
-Sitemap: https://stack-tower-neon.netlify.app/sitemap.xml
-
-# Google specific directives
-User-agent: Googlebot
-Allow: /
-Crawl-delay: 0
-
-# Bing specific directives  
-User-agent: Bingbot
-Allow: /
-Crawl-delay: 1
-
-# Mobile-specific crawlers
-User-agent: Googlebot-Mobile
-Allow: /
-Allow: /manifest.json
-
-# Image crawlers for game screenshots
-User-agent: Googlebot-Image
-Allow: /assets/
-Allow: /*.png
-Allow: /*.jpg
-Allow: /*.svg
-Allow: /*.webp
-
-# Social media crawlers for sharing
+# Social media bots
 User-agent: facebookexternalhit
 Allow: /
-Allow: /share/
 
 User-agent: Twitterbot
 Allow: /
-Allow: /share/
 
 User-agent: LinkedInBot
 Allow: /
-Allow: /share/
-
-# Block AI training crawlers (protect game mechanics)
-User-agent: GPTBot
-Disallow: /js/
-Disallow: /api/
-
-User-agent: ChatGPT-User
-Disallow: /js/
-Disallow: /api/
-
-User-agent: AI2Bot
-Disallow: /js/
-Disallow: /api/
-
-User-agent: Claude-Web
-Disallow: /js/
-Disallow: /api/
-
-# Gaming-specific crawlers
-User-agent: GameBot
-Allow: /
-Allow: /scores
-Allow: /leaderboard
-
-# SEO optimization comments
-# This robots.txt is optimized for:
-# - Maximum search engine visibility
-# - Game discovery and indexing
-# - Mobile and PWA optimization
-# - Social media sharing
-# - Monetization asset accessibility
-# - Security and privacy protection

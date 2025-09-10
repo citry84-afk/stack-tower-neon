@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notificaciones - ReservasPro</title>
+    
+    <!-- Notification System -->
+    <script src="../js/notifications.js"></script>
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: system-ui; background: #f8fafc; }
+        .header { 
+            background: white; 
+            padding: 1rem; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        .header h1 { color: #1e40af; }
+        .header a { 
+            color: #6b7280; 
+            text-decoration: none; 
+            margin-left: 1rem;
+        }
+        .header a:hover { color: #1e40af; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 1rem; }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .card h3 {
+            margin-bottom: 1.5rem;
+            color: #374151;
+            font-size: 1.5rem;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #374151;
+            font-weight: 500;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #1e40af;
+        }
+        .btn {
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            margin-right: 1rem;
+            margin-bottom: 1rem;
+        }
+        .btn:hover { background: #059669; }
+        .btn-test {
+            background: #d97706;
+        }
+        .btn-test:hover { background: #b45309; }
+        .notification-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .notification-status {
+            background: #ecfdf5;
+            border: 2px solid #10b981;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        .notification-status.disabled {
+            background: #fef2f2;
+            border-color: #ef4444;
+        }
+        .template-section {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .variables-help {
+            background: #eff6ff;
+            border-radius: 6px;
+            padding: 1rem;
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
+            color: #1e40af;
+        }
+        .test-results {
+            background: #1f2937;
+            color: #f9fafb;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-family: monospace;
+            font-size: 0.875rem;
+            max-height: 300px;
+            overflow-y: auto;
+            display: none;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1>🔔 Notificaciones</h1>
+            <a href="index.html">← Dashboard</a>
+            <a href="calendar.html">📅 Calendario</a>
+            <a href="settings.html">⚙️ Settings</a>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="hero">
+            <h1>🔔 Sistema de Notificaciones</h1>
+            <p>Configura recordatorios automáticos, confirmaciones y mensajes personalizados</p>
+        </div>
+        
+        <!-- Estado de Notificaciones -->
+        <div class="card">
+            <div id="notificationStatus" class="notification-status">
+                <h3>✅ Notificaciones Activadas</h3>
+                <p>El sistema enviará automáticamente recordatorios y confirmaciones</p>
+            </div>
+            
+            <div class="form-group">
+                <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 1.1rem;">
+                    <input type="checkbox" id="enableNotifications" checked>
+                    <span>Activar sistema de notificaciones automáticas</span>
+                </label>
+            </div>
+        </div>
+        
+        <!-- Configuración de Recordatorios -->
+        <div class="card">
+            <h3>📱 Recordatorios Automáticos</h3>
+            
+            <div class="notification-grid">
+                <div>
+                    <div class="form-group">
+                        <label for="reminder24h">🕐 Recordatorio 24 horas antes</label>
+                        <select id="reminder24h">
+                            <option value="off">❌ Desactivado</option>
+                            <option value="email">📧 Solo Email</option>
+                            <option value="sms">💬 Solo SMS</option>
+                            <option value="whatsapp">📱 Solo WhatsApp</option>
+                            <option value="all" selected>🚀 Email + SMS + WhatsApp</option>
+                        </select>
+                        <small style="color: #6b7280;">Se envía automáticamente 24 horas antes de la cita</small>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="form-group">
+                        <label for="reminder2h">⏰ Recordatorio 2 horas antes</label>
+                        <select id="reminder2h">
+                            <option value="off">❌ Desactivado</option>
+                            <option value="email">📧 Solo Email</option>
+                            <option value="sms">💬 Solo SMS</option>
+                            <option value="whatsapp" selected>📱 Solo WhatsApp</option>
+                            <option value="all">🚀 Email + SMS + WhatsApp</option>
+                        </select>
+                        <small style="color: #6b7280;">Recordatorio final antes de la cita</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Configuración de Confirmaciones -->
+        <div class="card">
+            <h3>✅ Confirmaciones Automáticas</h3>
+            
+            <div class="notification-grid">
+                <div>
+                    <div class="form-group">
+                        <label for="bookingConfirmation">📋 Al crear nueva cita</label>
+                        <select id="bookingConfirmation">
+                            <option value="email" selected>📧 Solo Email</option>
+                            <option value="sms">💬 Solo SMS</option>
+                            <option value="whatsapp">📱 Solo WhatsApp</option>
+                            <option value="all">🚀 Todos los canales</option>
+                        </select>
+                        <small style="color: #6b7280;">Se envía inmediatamente al confirmar cita</small>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="form-group">
+                        <label for="cancellationNotice">❌ Al cancelar cita</label>
+                        <select id="cancellationNotice">
+                            <option value="email">📧 Solo Email</option>
+                            <option value="whatsapp" selected>📱 Solo WhatsApp</option>
+                            <option value="all">🚀 Email + SMS + WhatsApp</option>
+                        </select>
+                        <small style="color: #6b7280;">Notifica al cliente sobre la cancelación</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Templates de Mensajes -->
+        <div class="card">
+            <h3>📝 Plantillas de Mensajes</h3>
+            <p style="margin-bottom: 1.5rem; color: #6b7280;">Personaliza los mensajes que se envían automáticamente. Usa las variables para información dinámica.</p>
+            
+            <div class="template-section">
+                <div class="form-group">
+                    <label for="template24h">📅 Mensaje recordatorio 24 horas</label>
+                    <textarea id="template24h" rows="3">Hola {cliente}, te recordamos tu cita mañana a las {hora} para {servicio}. ¡Te esperamos en {negocio}!</textarea>
+                    <div class="variables-help">
+                        <strong>Variables disponibles:</strong> {cliente}, {hora}, {servicio}, {negocio}, {fecha}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="template-section">
+                <div class="form-group">
+                    <label for="template2h">⏰ Mensaje recordatorio 2 horas</label>
+                    <textarea id="template2h" rows="3">🕐 Tu cita es en 2 horas ({hora}). ¡No olvides confirmar tu asistencia en {negocio}!</textarea>
+                    <div class="variables-help">
+                        <strong>Tip:</strong> Mensajes cortos funcionan mejor para WhatsApp y SMS
+                    </div>
+                </div>
+            </div>
+            
+            <div class="template-section">
+                <div class="form-group">
+                    <label for="templateConfirmation">✅ Mensaje de confirmación</label>
+                    <textarea id="templateConfirmation" rows="3">✅ Cita confirmada para {fecha} a las {hora}. Servicio: {servicio}. ¡Gracias por elegirnos!</textarea>
+                    <div class="variables-help">
+                        <strong>Uso:</strong> Se envía inmediatamente al crear una cita
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Botones de Acción -->
+        <div class="card">
+            <h3>🚀 Acciones</h3>
+            
+            <button class="btn" onclick="saveNotifications()">
+                💾 Guardar Configuración
+            </button>
+            
+            <button class="btn btn-test" onclick="testNotifications()">
+                🧪 Probar Notificaciones
+            </button>
+            
+            <button class="btn" onclick="showTestResults()" style="background: #6366f1;">
+                📊 Ver Resultados de Prueba
+            </button>
+            
+            <div id="testResults" class="test-results">
+                <h4>🧪 Resultados de Pruebas de Notificaciones</h4>
+                <div id="testLog"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Cargar configuración guardada
+        function loadNotifications() {
+            const notifications = JSON.parse(localStorage.getItem('businessNotifications') || '{}');
+            
+            // Configurar valores por defecto
+            const defaults = {
+                enabled: true,
+                reminder24h: 'all',
+                reminder2h: 'whatsapp',
+                bookingConfirmation: 'email',
+                cancellationNotice: 'whatsapp',
+                templates: {
+                    reminder24h: 'Hola {cliente}, te recordamos tu cita mañana a las {hora} para {servicio}. ¡Te esperamos en {negocio}!',
+                    reminder2h: '🕐 Tu cita es en 2 horas ({hora}). ¡No olvides confirmar tu asistencia en {negocio}!',
+                    confirmation: '✅ Cita confirmada para {fecha} a las {hora}. Servicio: {servicio}. ¡Gracias por elegirnos!'
+                }
+            };
+            
+            const config = { ...defaults, ...notifications };
+            
+            // Aplicar configuración a la UI
+            document.getElementById('enableNotifications').checked = config.enabled;
+            document.getElementById('reminder24h').value = config.reminder24h;
+            document.getElementById('reminder2h').value = config.reminder2h;
+            document.getElementById('bookingConfirmation').value = config.bookingConfirmation;
+            document.getElementById('cancellationNotice').value = config.cancellationNotice;
+            
+            if (config.templates) {
+                document.getElementById('template24h').value = config.templates.reminder24h;
+                document.getElementById('template2h').value = config.templates.reminder2h;
+                document.getElementById('templateConfirmation').value = config.templates.confirmation;
+            }
+            
+            updateNotificationStatus();
+        }
+        
+        function updateNotificationStatus() {
+            const enabled = document.getElementById('enableNotifications').checked;
+            const statusDiv = document.getElementById('notificationStatus');
+            
+            if (enabled) {
+                statusDiv.className = 'notification-status';
+                statusDiv.innerHTML = `
+                    <h3>✅ Notificaciones Activadas</h3>
+                    <p>El sistema enviará automáticamente recordatorios y confirmaciones</p>
+                `;
+            } else {
+                statusDiv.className = 'notification-status disabled';
+                statusDiv.innerHTML = `
+                    <h3>❌ Notificaciones Desactivadas</h3>
+                    <p>No se enviarán notificaciones automáticas</p>
+                `;
+            }
+        }
+        
+        function saveNotifications() {
+            const notifications = {
+                enabled: document.getElementById('enableNotifications').checked,
+                reminder24h: document.getElementById('reminder24h').value,
+                reminder2h: document.getElementById('reminder2h').value,
+                bookingConfirmation: document.getElementById('bookingConfirmation').value,
+                cancellationNotice: document.getElementById('cancellationNotice').value,
+                templates: {
+                    reminder24h: document.getElementById('template24h').value,
+                    reminder2h: document.getElementById('template2h').value,
+                    confirmation: document.getElementById('templateConfirmation').value
+                }
+            };
+            
+            localStorage.setItem('businessNotifications', JSON.stringify(notifications));
+            
+            // Actualizar NotificationManager si está disponible
+            if (window.notificationManager) {
+                window.notificationManager.updateSettings(notifications);
+            }
+            
+            updateNotificationStatus();
+            showNotification('✅ Configuración guardada correctamente');
+            
+            console.log('📢 Notificaciones configuradas:', notifications);
+        }
+        
+        function testNotifications() {
+            if (!window.notificationManager) {
+                showNotification('⚠️ Cargando sistema de notificaciones...', 'warning');
+                const script = document.createElement('script');
+                script.src = '../js/notifications.js';
+                script.onload = () => {
+                    setTimeout(runNotificationTests, 1000);
+                };
+                document.head.appendChild(script);
+            } else {
+                runNotificationTests();
+            }
+        }
+        
+        function runNotificationTests() {
+            // Guardar configuración antes de probar
+            saveNotifications();
+            
+            const testLog = document.getElementById('testLog');
+            testLog.innerHTML = '<p>🧪 Iniciando pruebas de notificaciones...</p>';
+            
+            setTimeout(() => {
+                // Test 1: Confirmación por email
+                testLog.innerHTML += '<p>📧 Probando confirmación por email...</p>';
+                window.notificationManager.testNotification('confirmation', 'email');
+                
+                setTimeout(() => {
+                    // Test 2: Recordatorio 24h por WhatsApp
+                    testLog.innerHTML += '<p>📱 Probando recordatorio 24h por WhatsApp...</p>';
+                    window.notificationManager.testNotification('reminder24h', 'whatsapp');
+                    
+                    setTimeout(() => {
+                        // Test 3: Recordatorio 2h por SMS
+                        testLog.innerHTML += '<p>💬 Probando recordatorio 2h por SMS...</p>';
+                        window.notificationManager.testNotification('reminder2h', 'sms');
+                        
+                        setTimeout(() => {
+                            testLog.innerHTML += '<p style="color: #10b981;">✅ ¡Pruebas completadas exitosamente!</p>';
+                            testLog.innerHTML += '<p>📊 Revisa la consola del navegador (F12) para más detalles</p>';
+                            testLog.innerHTML += '<p>💻 En producción se integrarían servicios reales (Twilio, SendGrid, WhatsApp API)</p>';
+                            
+                            showNotification('🧪 Pruebas de notificaciones completadas');
+                        }, 2000);
+                    }, 1500);
+                }, 1000);
+            }, 500);
+        }
+        
+        function showTestResults() {
+            const resultsDiv = document.getElementById('testResults');
+            resultsDiv.style.display = resultsDiv.style.display === 'none' ? 'block' : 'none';
+        }
+        
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#10b981' : type === 'warning' ? '#d97706' : '#ef4444'};
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 8px;
+                z-index: 1000;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                animation: slideIn 0.3s ease;
+            `;
+            
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 4000);
+        }
+        
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            loadNotifications();
+            
+            document.getElementById('enableNotifications').addEventListener('change', updateNotificationStatus);
+        });
+        
+        // CSS para animaciones
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

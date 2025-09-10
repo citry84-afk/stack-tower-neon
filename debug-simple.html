@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DEBUG - Neon Beat Stage</title>
+    <style>
+        body { background: #0a0a0a; color: #00FFFF; font-family: Arial; }
+        .debug { padding: 10px; border: 1px solid #FF0080; margin: 5px; }
+        .game-area { width: 100%; height: 400px; border: 2px solid #FFFF00; position: relative; }
+        .lane { width: 25%; height: 100%; border: 1px solid #00FFFF; float: left; position: relative; }
+        .note { width: 20%; height: 40px; background: #FF0080; position: absolute; left: 2.5%; top: 0; }
+    </style>
+</head>
+<body>
+    <div class="debug">
+        <h1>🎮 NEON BEAT DEBUG</h1>
+        <div id="status">STATUS: Loading...</div>
+        <div id="logs"></div>
+        <button onclick="forceSpawnTest()">🎵 FORCE SPAWN TEST</button>
+        <button onclick="startSimpleGame()">🎮 START SIMPLE GAME</button>
+    </div>
+
+    <div class="game-area" id="gameArea">
+        <div class="lane"></div>
+        <div class="lane"></div>
+        <div class="lane"></div>
+        <div class="lane"></div>
+    </div>
+
+    <script>
+        let gameState = {
+            gameActive: false,
+            notes: [],
+            frameCount: 0
+        };
+
+        function log(message) {
+            const logs = document.getElementById('logs');
+            logs.innerHTML += `<div>${new Date().toLocaleTimeString()}: ${message}</div>`;
+            console.log(message);
+        }
+
+        function updateStatus(status) {
+            document.getElementById('status').textContent = `STATUS: ${status}`;
+            log(`STATUS CHANGED: ${status}`);
+        }
+
+        function spawnNote() {
+            const lane = Math.floor(Math.random() * 4);
+            const gameArea = document.getElementById('gameArea');
+            
+            const note = document.createElement('div');
+            note.className = 'note';
+            note.style.left = (lane * 25 + 2.5) + '%';
+            note.style.top = '0px';
+            
+            gameArea.appendChild(note);
+            gameState.notes.push({ element: note, lane: lane });
+            
+            log(`NOTE SPAWNED in lane ${lane}. Total notes: ${gameState.notes.length}`);
+        }
+
+        function gameLoop() {
+            if (!gameState.gameActive) {
+                updateStatus('Game NOT active');
+                return;
+            }
+
+            gameState.frameCount++;
+            
+            if (gameState.frameCount >= 60) { // 1 segundo
+                log(`FRAME ${gameState.frameCount} - SPAWNING NOTE!`);
+                spawnNote();
+                gameState.frameCount = 0;
+            }
+
+            requestAnimationFrame(gameLoop);
+        }
+
+        function startSimpleGame() {
+            log('🎮 STARTING SIMPLE GAME');
+            gameState.gameActive = true;
+            gameState.frameCount = 0;
+            updateStatus('Game ACTIVE');
+            gameLoop();
+        }
+
+        function forceSpawnTest() {
+            log('🎵 FORCE SPAWN TEST');
+            spawnNote();
+        }
+
+        // Auto start
+        document.addEventListener('DOMContentLoaded', () => {
+            log('🚀 DOM LOADED');
+            updateStatus('Ready');
+            
+            // Auto start after 2 seconds
+            setTimeout(() => {
+                log('⏰ AUTO STARTING GAME');
+                startSimpleGame();
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

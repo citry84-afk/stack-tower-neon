@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html><head><title>TEST</title></head><body style="background:#000;color:#0f0;">
+<h1>🎮 ULTRA SIMPLE TEST</h1>
+<div id="log" style="border:1px solid #0f0;padding:10px;margin:10px;"></div>
+<div id="game" style="width:400px;height:300px;border:2px solid #f0f;position:relative;">
+    <div style="width:25%;height:100%;border:1px solid #0ff;float:left;"></div>
+    <div style="width:25%;height:100%;border:1px solid #0ff;float:left;"></div>
+    <div style="width:25%;height:100%;border:1px solid #0ff;float:left;"></div>
+    <div style="width:25%;height:100%;border:1px solid #0ff;float:left;"></div>
+</div>
+<button onclick="test()" style="font-size:20px;padding:10px;">🎵 SPAWN NOTE NOW!</button>
+<script>
+let noteCount = 0;
+function log(msg) {
+    document.getElementById('log').innerHTML += msg + '<br>';
+    console.log(msg);
+}
+function test() {
+    noteCount++;
+    log('🎵 TEST ' + noteCount + ' - Creating note...');
+    
+    const game = document.getElementById('game');
+    const note = document.createElement('div');
+    note.style.cssText = 'width:50px;height:30px;background:#f08;position:absolute;left:10px;top:10px;';
+    note.textContent = noteCount;
+    
+    game.appendChild(note);
+    log('✅ Note ' + noteCount + ' created and added to DOM');
+    
+    // Move note down
+    let pos = 10;
+    const moveNote = setInterval(() => {
+        pos += 5;
+        note.style.top = pos + 'px';
+        if (pos > 250) {
+            clearInterval(moveNote);
+            note.remove();
+            log('🗑️ Note ' + noteCount + ' removed');
+        }
+    }, 50);
+}
+
+log('🚀 Page loaded - Click button to test');
+</script>
+</body></html>

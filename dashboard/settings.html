@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración - ReservasPro</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: system-ui; background: #f8fafc; }
+        .header { 
+            background: white; 
+            padding: 1rem; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        .header h1 { color: #1e40af; }
+        .header a { 
+            color: #6b7280; 
+            text-decoration: none; 
+            margin-left: 1rem;
+        }
+        .header a:hover { color: #1e40af; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .card h3 {
+            margin-bottom: 1.5rem;
+            color: #374151;
+            font-size: 1.25rem;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #374151;
+            font-weight: 500;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #1e40af;
+        }
+        .btn {
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        .btn:hover { background: #059669; }
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            color: #374151;
+        }
+        .schedule-header {
+            padding: 0.5rem;
+            background: #f3f4f6;
+            border-radius: 6px;
+            text-align: center;
+        }
+        .schedule-day {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+            align-items: center;
+        }
+        .schedule-day label {
+            margin: 0;
+            color: #374151;
+        }
+        .schedule-day input[type="time"] {
+            padding: 0.5rem;
+        }
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 24px;
+            background: #e2e8f0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .toggle-switch.active {
+            background: #10b981;
+        }
+        .toggle-switch .slider {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+        .toggle-switch.active .slider {
+            transform: translateX(26px);
+        }
+        .service-item {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr auto;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            align-items: center;
+        }
+        .remove-service {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 0.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.875rem;
+        }
+        .remove-service:hover {
+            background: #dc2626;
+        }
+        .save-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #10b981;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transform: translateX(100%);
+            transition: transform 0.3s;
+            z-index: 1000;
+        }
+        .save-notification.show {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1>⚙️ Configuración</h1>
+            <a href="index.html">← Volver al Dashboard</a>
+            <a href="calendar.html">📅 Calendario</a>
+        </div>
+    </div>
+    
+    <div class="container">
+        <h1 style="margin-bottom: 2rem;">⚙️ Configuración</h1>
+        
+        <!-- Horarios de Trabajo -->
+        <div class="card">
+            <h3>📅 Horarios de Trabajo</h3>
+            
+            <div class="schedule-grid">
+                <div class="schedule-header">Día</div>
+                <div class="schedule-header">Apertura</div>
+                <div class="schedule-header">Cierre</div>
+                <div class="schedule-header">Activo</div>
+            </div>
+            
+            <div id="scheduleContainer">
+                <!-- Generated by JavaScript -->
+            </div>
+            
+            <button class="btn" onclick="saveSchedule()" style="margin-top: 1rem;">
+                💾 Guardar Horarios
+            </button>
+        </div>
+        
+        <!-- Configuración de Servicios -->
+        <div class="card">
+            <h3>💼 Configuración de Servicios</h3>
+            
+            <div id="servicesContainer">
+                <!-- Generated by JavaScript -->
+            </div>
+            
+            <button class="btn" onclick="addService()" style="background: #1e40af;">
+                ➕ Agregar Servicio
+            </button>
+            
+            <button class="btn" onclick="saveServices()" style="margin-left: 1rem;">
+                💾 Guardar Servicios
+            </button>
+        </div>
+        
+        <!-- 🔔 NOTIFICACIONES AUTOMÁTICAS -->
+        <div class="card">
+            <h3>🔔 Notificaciones Automáticas</h3>
+            
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" id="enableNotifications" checked style="margin-right: 0.5rem;">
+                    Activar notificaciones automáticas
+                </label>
+            </div>
+            
+            <div id="notificationSettings">
+                <h4 style="margin: 1.5rem 0 1rem 0; color: #374151;">📱 Recordatorios</h4>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                    <div class="form-group">
+                        <label for="reminder24h">Recordatorio 24h antes</label>
+                        <select id="reminder24h">
+                            <option value="off">Desactivado</option>
+                            <option value="email">Solo Email</option>
+                            <option value="sms">Solo SMS</option>
+                            <option value="whatsapp">Solo WhatsApp</option>
+                            <option value="all" selected>Email + SMS + WhatsApp</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="reminder2h">Recordatorio 2h antes</label>
+                        <select id="reminder2h">
+                            <option value="off">Desactivado</option>
+                            <option value="email">Solo Email</option>
+                            <option value="sms">Solo SMS</option>
+                            <option value="whatsapp" selected>Solo WhatsApp</option>
+                            <option value="all">Email + SMS + WhatsApp</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <h4 style="margin: 1.5rem 0 1rem 0; color: #374151;">✅ Confirmaciones</h4>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                    <div class="form-group">
+                        <label for="bookingConfirmation">Al crear cita</label>
+                        <select id="bookingConfirmation">
+                            <option value="email" selected>Solo Email</option>
+                            <option value="sms">Solo SMS</option>
+                            <option value="whatsapp">Solo WhatsApp</option>
+                            <option value="all">Email + SMS + WhatsApp</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="cancellationNotice">Al cancelar cita</label>
+                        <select id="cancellationNotice">
+                            <option value="email">Solo Email</option>
+                            <option value="whatsapp" selected>Solo WhatsApp</option>
+                            <option value="all">Email + SMS + WhatsApp</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <h4 style="margin: 1.5rem 0 1rem 0; color: #374151;">📝 Templates de Mensajes</h4>
+                <div id="messageTemplates">
+                    <div class="form-group">
+                        <label for="template24h">Mensaje recordatorio 24h</label>
+                        <textarea id="template24h" rows="2" style="width: 100%; padding: 0.75rem; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 1rem; resize: vertical;">Hola {cliente}, te recordamos tu cita mañana a las {hora} para {servicio}. ¡Te esperamos en {negocio}!</textarea>
+                        <small style="color: #64748b;">Variables: {cliente}, {hora}, {servicio}, {negocio}, {fecha}</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="template2h">Mensaje recordatorio 2h</label>
+                        <textarea id="template2h" rows="2" style="width: 100%; padding: 0.75rem; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 1rem; resize: vertical;">🕐 Tu cita es en 2 horas ({hora}). ¡No olvides confirmar tu asistencia!</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="templateConfirmation">Mensaje confirmación</label>
+                        <textarea id="templateConfirmation" rows="2" style="width: 100%; padding: 0.75rem; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 1rem; resize: vertical;">✅ Cita confirmada para {fecha} a las {hora}. Servicio: {servicio}. ¡Gracias por elegirnos!</textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <button class="btn" onclick="saveNotifications()">💾 Guardar Notificaciones</button>
+                <button class="btn" onclick="testNotifications()" style="background: #d97706;">🧪 Probar Notificaciones</button>
+            </div>
+        </div>
+        
+        <!-- Configuración General -->
+        <div class="card">
+            <h3>🏢 Información del Negocio</h3>
+            
+            <div class="form-group">
+                <label for="businessName">Nombre del Negocio</label>
+                <input type="text" id="businessName" value="Peluquería María">
+            </div>
+            
+            <div class="form-group">
+                <label for="slotDuration">Duración de Slots (minutos)</label>
+                <select id="slotDuration">
+                    <option value="15">15 minutos</option>
+                    <option value="30" selected>30 minutos</option>
+                    <option value="60">60 minutos</option>
+                </select>
+            </div>
+            
+            <button class="btn" onclick="saveGeneral()">💾 Guardar</button>
+        </div>
+    </div>
+
+    <div id="saveNotification" class="save-notification">
+        ✅ Configuración guardada
+    </div>
+
+    <script>
+        const days = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+        let schedule = JSON.parse(localStorage.getItem('businessSchedule') || JSON.stringify(
+            days.reduce((acc, day) => {
+                acc[day] = {
+                    active: day !== 'Domingo',
+                    openTime: '09:00',
+                    closeTime: day === 'Sábado' ? '15:00' : '18:00'
+                };
+                return acc;
+            }, {})
+        ));
+
+        let services = JSON.parse(localStorage.getItem('businessServices') || JSON.stringify([
+            { name: 'Corte', duration: 30, price: 15 },
+            { name: 'Tinte', duration: 90, price: 45 },
+            { name: 'Mechas', duration: 120, price: 65 },
+            { name: 'Lavado + Peinado', duration: 45, price: 20 },
+            { name: 'Tratamiento', duration: 60, price: 35 }
+        ]));
+
+        function generateSchedule() {
+            const container = document.getElementById('scheduleContainer');
+            container.innerHTML = '';
+
+            days.forEach(day => {
+                const dayDiv = document.createElement('div');
+                dayDiv.className = 'schedule-day';
+                
+                const dayConfig = schedule[day];
+                
+                dayDiv.innerHTML = `
+                    <label>${day}</label>
+                    <input type="time" id="${day}-open" value="${dayConfig.openTime}" ${!dayConfig.active ? 'disabled' : ''}>
+                    <input type="time" id="${day}-close" value="${dayConfig.closeTime}" ${!dayConfig.active ? 'disabled' : ''}>
+                    <div class="toggle-switch ${dayConfig.active ? 'active' : ''}" onclick="toggleDay('${day}')">
+                        <div class="slider"></div>
+                    </div>
+                `;
+                
+                container.appendChild(dayDiv);
+            });
+        }
+
+        function toggleDay(day) {
+            schedule[day].active = !schedule[day].active;
+            generateSchedule();
+        }
+
+        function saveSchedule() {
+            days.forEach(day => {
+                if (schedule[day].active) {
+                    schedule[day].openTime = document.getElementById(`${day}-open`).value;
+                    schedule[day].closeTime = document.getElementById(`${day}-close`).value;
+                }
+            });
+            localStorage.setItem('businessSchedule', JSON.stringify(schedule));
+            showNotification();
+        }
+
+        function generateServices() {
+            const container = document.getElementById('servicesContainer');
+            container.innerHTML = '';
+
+            services.forEach((service, index) => {
+                const serviceDiv = document.createElement('div');
+                serviceDiv.className = 'service-item';
+                
+                serviceDiv.innerHTML = `
+                    <input type="text" value="${service.name}" onchange="updateService(${index}, 'name', this.value)">
+                    <input type="number" value="${service.duration}" min="15" step="15" onchange="updateService(${index}, 'duration', this.value)">
+                    <input type="number" value="${service.price}" min="0" step="0.5" onchange="updateService(${index}, 'price', this.value)">
+                    <button class="remove-service" onclick="removeService(${index})">🗑️</button>
+                `;
+                
+                container.appendChild(serviceDiv);
+            });
+        }
+
+        function updateService(index, field, value) {
+            services[index][field] = field === 'name' ? value : parseFloat(value);
+        }
+
+        function addService() {
+            services.push({ name: 'Nuevo Servicio', duration: 30, price: 20 });
+            generateServices();
+        }
+
+        function removeService(index) {
+            services.splice(index, 1);
+            generateServices();
+        }
+
+        function saveServices() {
+            localStorage.setItem('businessServices', JSON.stringify(services));
+            showNotification();
+        }
+        
+        function saveGeneral() {
+            const general = {
+                businessName: document.getElementById('businessName').value,
+                slotDuration: parseInt(document.getElementById('slotDuration').value)
+            };
+            localStorage.setItem('businessGeneral', JSON.stringify(general));
+            showNotification();
+        }
+        
+        function saveNotifications() {
+            const notifications = {
+                enabled: document.getElementById('enableNotifications').checked,
+                reminder24h: document.getElementById('reminder24h').value,
+                reminder2h: document.getElementById('reminder2h').value,
+                bookingConfirmation: document.getElementById('bookingConfirmation').value,
+                cancellationNotice: document.getElementById('cancellationNotice').value,
+                templates: {
+                    reminder24h: document.getElementById('template24h').value,
+                    reminder2h: document.getElementById('template2h').value,
+                    confirmation: document.getElementById('templateConfirmation').value
+                }
+            };
+            localStorage.setItem('businessNotifications', JSON.stringify(notifications));
+            showNotification();
+            
+            console.log('📢 Notificaciones configuradas:', notifications);
+        }
+        
+        function toggleNotificationSettings() {
+            const enabled = document.getElementById('enableNotifications').checked;
+            const settings = document.getElementById('notificationSettings');
+            settings.style.opacity = enabled ? '1' : '0.5';
+            settings.style.pointerEvents = enabled ? 'auto' : 'none';
+        }
+
+        function showNotification() {
+            const notification = document.getElementById('saveNotification');
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        function loadGeneral() {
+            const general = JSON.parse(localStorage.getItem('businessGeneral') || '{}');
+            if (general.businessName) {
+                document.getElementById('businessName').value = general.businessName;
+            }
+            if (general.slotDuration) {
+                document.getElementById('slotDuration').value = general.slotDuration;
+            }
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            generateSchedule();
+            generateServices();
+            loadGeneral();
+            loadNotifications();
+            
+            // Add event listener for notification toggle
+            document.getElementById('enableNotifications').addEventListener('change', toggleNotificationSettings);
+        });
+        
+        function loadNotifications() {
+            const notifications = JSON.parse(localStorage.getItem('businessNotifications') || '{}');
+            if (notifications.enabled !== undefined) {
+                document.getElementById('enableNotifications').checked = notifications.enabled;
+            }
+            if (notifications.reminder24h) {
+                document.getElementById('reminder24h').value = notifications.reminder24h;
+            }
+            if (notifications.reminder2h) {
+                document.getElementById('reminder2h').value = notifications.reminder2h;
+            }
+            if (notifications.bookingConfirmation) {
+                document.getElementById('bookingConfirmation').value = notifications.bookingConfirmation;
+            }
+            if (notifications.cancellationNotice) {
+                document.getElementById('cancellationNotice').value = notifications.cancellationNotice;
+            }
+            if (notifications.templates) {
+                if (notifications.templates.reminder24h) {
+                    document.getElementById('template24h').value = notifications.templates.reminder24h;
+                }
+                if (notifications.templates.reminder2h) {
+                    document.getElementById('template2h').value = notifications.templates.reminder2h;
+                }
+                if (notifications.templates.confirmation) {
+                    document.getElementById('templateConfirmation').value = notifications.templates.confirmation;
+                }
+            }
+            
+            // Apply initial toggle state
+            toggleNotificationSettings();
+        }
+        
+        function testNotifications() {
+            if (!window.notificationManager) {
+                // Cargar el sistema de notificaciones si no está disponible
+                const script = document.createElement('script');
+                script.src = '../js/notifications.js';
+                script.onload = () => {
+                    setTimeout(runNotificationTests, 1000);
+                };
+                document.head.appendChild(script);
+            } else {
+                runNotificationTests();
+            }
+        }
+        
+        function runNotificationTests() {
+            // Actualizar configuración antes de probar
+            saveNotifications();
+            
+            // Esperar un poco para que se guarde la configuración
+            setTimeout(() => {
+                window.notificationManager.updateSettings(JSON.parse(localStorage.getItem('businessNotifications')));
+                
+                // Probar diferentes tipos de notificaciones
+                console.log('🧪 Iniciando pruebas de notificaciones...');
+                
+                // Test confirmación
+                window.notificationManager.testNotification('confirmation', 'email');
+                
+                setTimeout(() => {
+                    window.notificationManager.testNotification('reminder24h', 'whatsapp');
+                }, 1000);
+                
+                setTimeout(() => {
+                    window.notificationManager.testNotification('reminder2h', 'sms');
+                }, 2000);
+                
+                // Mostrar modal con información
+                setTimeout(() => {
+                    alert('🧪 Pruebas de notificaciones completadas!\n\n✅ Se enviaron notificaciones de prueba\n📧 Revisa la consola del navegador (F12) para ver los detalles\n💻 En producción se integrarían con servicios reales (Twilio, SendGrid, WhatsApp API)');
+                }, 3000);
+                
+            }, 500);
+        }
+    </script>
+</body>
+</html>

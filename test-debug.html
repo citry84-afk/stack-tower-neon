@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEBUG - Neon Lab Physics</title>
+    <style>
+        body { margin: 0; background: #000; color: #00FFFF; font-family: monospace; }
+        #debug { position: fixed; top: 10px; left: 10px; background: rgba(0,0,0,0.8); padding: 10px; z-index: 1000; }
+        canvas { border: 2px solid #FF0080; display: block; margin: 20px auto; }
+        .controls { text-align: center; padding: 20px; }
+        button { background: #FF0080; color: white; border: none; padding: 10px 20px; margin: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div id="debug">
+        <div>DEBUG PANEL</div>
+        <div id="status">Loading...</div>
+        <div id="objects">Objects: 0</div>
+        <div id="gameloop">GameLoop: Not started</div>
+    </div>
+
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
+    
+    <div class="controls">
+        <button onclick="testRender()">TEST RENDER</button>
+        <button onclick="addTestObject()">ADD OBJECT</button>
+        <button onclick="clearCanvas()">CLEAR</button>
+    </div>
+
+    <script>
+        console.log("=== DEBUG SCRIPT STARTED ===");
+        
+        // Variables globales
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        let objects = [];
+        let debugInfo = {
+            status: "Initializing",
+            objectCount: 0,
+            gameLoopRunning: false
+        };
+
+        function updateDebug() {
+            document.getElementById('status').textContent = debugInfo.status;
+            document.getElementById('objects').textContent = `Objects: ${debugInfo.objectCount}`;
+            document.getElementById('gameloop').textContent = `GameLoop: ${debugInfo.gameLoopRunning ? 'Running' : 'Stopped'}`;
+        }
+
+        function clearCanvas() {
+            console.log("Clearing canvas...");
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            debugInfo.status = "Canvas cleared";
+            updateDebug();
+        }
+
+        function testRender() {
+            console.log("Testing basic render...");
+            clearCanvas();
+            
+            // Test basic shapes
+            ctx.fillStyle = '#FF0080';
+            ctx.fillRect(50, 50, 100, 100);
+            
+            ctx.fillStyle = '#00FFFF';
+            ctx.fillRect(200, 200, 80, 80);
+            
+            ctx.fillStyle = '#FFFF00';
+            ctx.beginPath();
+            ctx.arc(400, 100, 30, 0, Math.PI * 2);
+            ctx.fill();
+            
+            ctx.fillStyle = '#39FF14';
+            ctx.fillRect(600, 400, 60, 60);
+            
+            debugInfo.status = "Basic shapes rendered";
+            updateDebug();
+            console.log("Basic render complete");
+        }
+
+        function addTestObject() {
+            console.log("Adding test object...");
+            
+            const obj = {
+                x: Math.random() * 600 + 50,
+                y: Math.random() * 400 + 50,
+                width: 80,
+                height: 60,
+                color: '#FF0080',
+                type: 'test'
+            };
+            
+            objects.push(obj);
+            debugInfo.objectCount = objects.length;
+            debugInfo.status = `Added object at (${Math.floor(obj.x)}, ${Math.floor(obj.y)})`;
+            
+            renderObjects();
+            updateDebug();
+        }
+
+        function renderObjects() {
+            clearCanvas();
+            
+            objects.forEach((obj, index) => {
+                ctx.fillStyle = obj.color;
+                ctx.fillRect(obj.x, obj.y, obj.width, obj.height);
+                
+                // Draw object info
+                ctx.fillStyle = '#FFFFFF';
+                ctx.font = '12px monospace';
+                ctx.fillText(`Obj ${index}`, obj.x, obj.y - 5);
+            });
+            
+            console.log(`Rendered ${objects.length} objects`);
+        }
+
+        function startGameLoop() {
+            console.log("Starting game loop...");
+            debugInfo.gameLoopRunning = true;
+            
+            function loop() {
+                renderObjects();
+                updateDebug();
+                requestAnimationFrame(loop);
+            }
+            
+            requestAnimationFrame(loop);
+        }
+
+        // Initialize
+        window.addEventListener('load', () => {
+            console.log("Window loaded, initializing...");
+            debugInfo.status = "Initialized";
+            updateDebug();
+            testRender();
+            
+            setTimeout(() => {
+                startGameLoop();
+            }, 1000);
+        });
+
+        console.log("=== DEBUG SCRIPT LOADED ===");
+    </script>
+</body>
+</html>

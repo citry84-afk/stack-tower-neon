@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario - ReservasPro</title>
+    
+    <!-- Notification System -->
+    <script src="../js/notifications.js"></script>
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: system-ui; background: #f8fafc; }
+        .header { 
+            background: white; 
+            padding: 1rem; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+        .logo { font-size: 1.25rem; font-weight: bold; color: #1e40af; text-decoration: none; }
+        .container { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; }
+        .btn { 
+            padding: 0.75rem 1.5rem; 
+            border: none; 
+            border-radius: 8px; 
+            background: #059669; 
+            color: white; 
+            cursor: pointer; 
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .btn:hover { background: #047857; }
+        .btn-secondary { background: #64748b; }
+        .calendar-header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 2rem; 
+            padding: 1rem; 
+            background: white; 
+            border-radius: 8px; 
+        }
+        .calendar-nav { display: flex; align-items: center; gap: 1rem; }
+        .calendar-nav button { 
+            background: none; 
+            border: none; 
+            font-size: 1.5rem; 
+            cursor: pointer; 
+            color: #1e40af; 
+            padding: 0.5rem; 
+        }
+        .calendar-grid { 
+            display: grid; 
+            grid-template-columns: 100px repeat(7, 1fr); 
+            gap: 1px; 
+            background: #e2e8f0; 
+            border-radius: 8px; 
+            overflow: hidden; 
+        }
+        .calendar-cell, .day-header, .time-slot { 
+            background: white; 
+            padding: 0.5rem; 
+            min-height: 60px; 
+            position: relative; 
+        }
+        .day-header { 
+            background: #f8fafc; 
+            font-weight: bold; 
+            text-align: center; 
+            min-height: 40px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+        }
+        .time-slot { 
+            background: #f8fafc; 
+            font-size: 0.875rem; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+        }
+        .calendar-cell { cursor: pointer; transition: background 0.2s; }
+        .calendar-cell:hover { background: #eff6ff; }
+        .calendar-cell.blocked { background: #fef2f2; cursor: not-allowed; }
+        .appointment { 
+            background: #1e40af; 
+            color: white; 
+            padding: 0.25rem 0.5rem; 
+            border-radius: 4px; 
+            font-size: 0.75rem; 
+            margin: 1px 0; 
+            cursor: pointer; 
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .appointment.pending { background: #d97706; }
+        .appointment.confirmed { background: #059669; }
+        .appointment.cancelled { background: #dc2626; opacity: 0.7; }
+        .modal { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: rgba(0, 0, 0, 0.5); 
+            display: none; 
+            justify-content: center; 
+            align-items: center; 
+            z-index: 1000; 
+        }
+        .modal.active { display: flex; }
+        .modal-content { 
+            background: white; 
+            padding: 2rem; 
+            border-radius: 12px; 
+            width: 90%; 
+            max-width: 500px; 
+        }
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        .form-group { margin-bottom: 1rem; }
+        .form-group label { 
+            display: block; 
+            margin-bottom: 0.5rem; 
+            font-weight: 600; 
+        }
+        .form-group input, 
+        .form-group select, 
+        .form-group textarea { 
+            width: 100%; 
+            padding: 0.75rem; 
+            border: 2px solid #e2e8f0; 
+            border-radius: 8px; 
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #1e40af;
+        }
+        .duration-info {
+            font-size: 0.875rem;
+            color: #64748b;
+            margin-top: 0.25rem;
+        }
+        @media (max-width: 768px) {
+            .calendar-grid { font-size: 0.75rem; }
+            .calendar-nav { flex-direction: column; gap: 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="../" class="logo">📅 ReservasPro</a>
+        <div style="display: flex; gap: 1rem; align-items: center;">
+            <a href="settings.html" class="btn btn-secondary">⚙️ Configuración</a>
+            <a href="index.html" style="color: #64748b; text-decoration: none;">← Dashboard</a>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="calendar-header">
+            <div class="calendar-nav">
+                <button onclick="changeWeek(-1)">‹</button>
+                <div id="currentWeek" style="font-weight: bold; min-width: 200px; text-align: center;">Semana Actual</div>
+                <button onclick="changeWeek(1)">›</button>
+            </div>
+            <div style="display: flex; gap: 1rem;">
+                <button class="btn btn-secondary" onclick="goToToday()">📅 Hoy</button>
+                <button class="btn" onclick="openModal()">➕ Nueva Cita</button>
+            </div>
+        </div>
+        
+        <div class="calendar-grid" id="calendarGrid">
+            <!-- Generated by JavaScript -->
+        </div>
+    </div>
+    
+    <!-- New Appointment Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <h2>Nueva Cita</h2>
+            <form id="appointmentForm">
+                <div class="form-group">
+                    <label>Cliente</label>
+                    <input type="text" id="clientName" required placeholder="Nombre del cliente">
+                </div>
+                <div class="form-group">
+                    <label>Teléfono</label>
+                    <input type="tel" id="clientPhone" placeholder="+34 666 777 888">
+                </div>
+                <div class="form-group">
+                    <label>Servicio</label>
+                    <select id="service" required>
+                        <option value="">Selecciona servicio</option>
+                        <!-- Populated by JavaScript -->
+                    </select>
+                    <div class="duration-info" id="durationInfo"></div>
+                </div>
+                <div class="form-group">
+                    <label>Fecha</label>
+                    <input type="date" id="date" required>
+                </div>
+                <div class="form-group">
+                    <label>Hora</label>
+                    <select id="time" required>
+                        <option value="">Selecciona hora</option>
+                        <!-- Populated by JavaScript -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Notas (opcional)</label>
+                    <textarea id="notes" rows="3" placeholder="Notas adicionales..."></textarea>
+                </div>
+                <div style="display: flex; gap: 1rem;">
+                    <button type="submit" class="btn" style="flex: 1;">Crear Cita</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        let currentWeekStart = new Date();
+        let appointments = JSON.parse(localStorage.getItem('appointments') || '[]');
+        let services = JSON.parse(localStorage.getItem('businessServices') || '[]');
+        let schedule = JSON.parse(localStorage.getItem('businessSchedule') || '{}');
+        let general = JSON.parse(localStorage.getItem('businessGeneral') || '{}');
+        
+        // Default services if none configured
+        if (services.length === 0) {
+            services = [
+                { name: 'Corte', duration: 30, price: 15 },
+                { name: 'Tinte', duration: 90, price: 45 },
+                { name: 'Mechas', duration: 120, price: 65 },
+                { name: 'Lavado + Peinado', duration: 45, price: 20 },
+                { name: 'Tratamiento', duration: 60, price: 35 }
+            ];
+        }
+        
+        // Default schedule if none configured
+        if (Object.keys(schedule).length === 0) {
+            schedule = {
+                'lunes': { open: '09:00', close: '18:00', active: true },
+                'martes': { open: '09:00', close: '18:00', active: true },
+                'miércoles': { open: '09:00', close: '18:00', active: true },
+                'jueves': { open: '09:00', close: '18:00', active: true },
+                'viernes': { open: '09:00', close: '18:00', active: true },
+                'sábado': { open: '09:00', close: '15:00', active: true },
+                'domingo': { open: '10:00', close: '14:00', active: false }
+            };
+        }
+        
+        // Sample appointments if none exist
+        if (appointments.length === 0) {
+            appointments = [
+                { 
+                    id: 1, 
+                    client: 'Ana García', 
+                    phone: '+34 666 111 222',
+                    service: 'Corte', 
+                    duration: 30,
+                    price: 15,
+                    date: new Date().toISOString().split('T')[0], 
+                    time: '10:00', 
+                    status: 'confirmed',
+                    notes: 'Cliente habitual'
+                },
+                { 
+                    id: 2, 
+                    client: 'María José',
+                    phone: '+34 666 333 444', 
+                    service: 'Tinte',
+                    duration: 90,
+                    price: 45,
+                    date: new Date().toISOString().split('T')[0], 
+                    time: '15:00', 
+                    status: 'pending',
+                    notes: 'Primera vez'
+                }
+            ];
+            localStorage.setItem('appointments', JSON.stringify(appointments));
+        }
+        
+        function populateServices() {
+            const serviceSelect = document.getElementById('service');
+            serviceSelect.innerHTML = '<option value="">Selecciona servicio</option>';
+            
+            services.forEach((service, index) => {
+                const option = document.createElement('option');
+                option.value = index;
+                option.textContent = `${service.name} - ${service.duration}min - €${service.price}`;
+                serviceSelect.appendChild(option);
+            });
+        }
+        
+        function populateTimeSlots() {
+            const timeSelect = document.getElementById('time');
+            timeSelect.innerHTML = '<option value="">Selecciona hora</option>';
+            
+            const slotDuration = general.slotDuration || 30;
+            
+            // Generate slots from 9:00 to 18:00 based on slot duration
+            for (let hour = 9; hour <= 17; hour++) {
+                for (let minute = 0; minute < 60; minute += slotDuration) {
+                    const timeStr = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+                    const option = document.createElement('option');
+                    option.value = timeStr;
+                    option.textContent = timeStr;
+                    timeSelect.appendChild(option);
+                }
+            }
+        }
+        
+        function generateCalendar() {
+            const grid = document.getElementById('calendarGrid');
+            grid.innerHTML = '';
+            
+            // Update week display
+            const weekEnd = new Date(currentWeekStart);
+            weekEnd.setDate(currentWeekStart.getDate() + 6);
+            document.getElementById('currentWeek').textContent = 
+                `${currentWeekStart.toLocaleDateString()} - ${weekEnd.toLocaleDateString()}`;
+            
+            // Headers
+            grid.appendChild(createCell('', 'day-header'));
+            const days = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
+            const dayNames = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo'];
+            
+            days.forEach((day, index) => {
+                const date = new Date(currentWeekStart);
+                date.setDate(currentWeekStart.getDate() + index);
+                const dateStr = date.getDate();
+                const isActive = schedule[dayNames[index]]?.active;
+                const cellContent = isActive ? `${day}<br><small>${dateStr}</small>` : `${day}<br><small>Cerrado</small>`;
+                const cell = createCell(cellContent, 'day-header');
+                if (!isActive) cell.style.opacity = '0.5';
+                grid.appendChild(cell);
+            });
+            
+            // Time slots based on configuration
+            const slotDuration = general.slotDuration || 30;
+            
+            for (let hour = 9; hour <= 17; hour++) {
+                for (let minute = 0; minute < 60; minute += slotDuration) {
+                    const timeStr = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+                    grid.appendChild(createCell(timeStr, 'time-slot'));
+                    
+                    // Create cells for each day
+                    for (let day = 0; day < 7; day++) {
+                        const date = new Date(currentWeekStart);
+                        date.setDate(currentWeekStart.getDate() + day);
+                        const dateStr = date.toISOString().split('T')[0];
+                        const dayName = dayNames[day];
+                        
+                        const cell = createCell('', 'calendar-cell');
+                        cell.dataset.date = dateStr;
+                        cell.dataset.time = timeStr;
+                        
+                        // Check if day is active
+                        const daySchedule = schedule[dayName];
+                        if (!daySchedule?.active || timeStr < daySchedule.open || timeStr >= daySchedule.close) {
+                            cell.classList.add('blocked');
+                            cell.innerHTML = '<small style="color: #dc2626;">No disponible</small>';
+                        } else {
+                            // Check for appointments
+                            const apt = appointments.find(a => a.date === dateStr && a.time === timeStr);
+                            if (apt) {
+                                const aptDiv = document.createElement('div');
+                                aptDiv.className = `appointment ${apt.status}`;
+                                aptDiv.textContent = `${apt.service} - ${apt.client}`;
+                                aptDiv.onclick = () => showAppointmentDetails(apt);
+                                cell.appendChild(aptDiv);
+                            } else {
+                                cell.onclick = () => quickAdd(dateStr, timeStr);
+                            }
+                        }
+                        
+                        grid.appendChild(cell);
+                    }
+                }
+            }
+        }
+        
+        function createCell(content, className) {
+            const cell = document.createElement('div');
+            cell.className = className;
+            cell.innerHTML = content;
+            return cell;
+        }
+        
+        function setCurrentWeek() {
+            const now = new Date();
+            const dayOfWeek = now.getDay();
+            const mondayOffset = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
+            currentWeekStart = new Date(now);
+            currentWeekStart.setDate(now.getDate() + mondayOffset);
+        }
+        
+        function changeWeek(direction) {
+            currentWeekStart.setDate(currentWeekStart.getDate() + (direction * 7));
+            generateCalendar();
+        }
+        
+        function goToToday() {
+            setCurrentWeek();
+            generateCalendar();
+        }
+        
+        function quickAdd(date, time) {
+            document.getElementById('date').value = date;
+            document.getElementById('time').value = time;
+            openModal();
+        }
+        
+        function openModal() {
+            document.getElementById('modal').classList.add('active');
+        }
+        
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+            document.getElementById('appointmentForm').reset();
+            document.getElementById('durationInfo').textContent = '';
+        }
+        
+        function showAppointmentDetails(apt) {
+            alert(`Cliente: ${apt.client}\nServicio: ${apt.service}\nDuración: ${apt.duration}min\nPrecio: €${apt.price}\nEstado: ${apt.status}\nNotas: ${apt.notes || 'Sin notas'}`);
+        }
+        
+        // Handle service selection to show duration
+        document.getElementById('service').addEventListener('change', function() {
+            const serviceIndex = this.value;
+            const durationInfo = document.getElementById('durationInfo');
+            
+            if (serviceIndex !== '') {
+                const service = services[serviceIndex];
+                durationInfo.textContent = `Duración: ${service.duration} minutos - Precio: €${service.price}`;
+            } else {
+                durationInfo.textContent = '';
+            }
+        });
+        
+        document.getElementById('appointmentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const serviceIndex = document.getElementById('service').value;
+            const service = services[serviceIndex];
+            
+            const appointment = {
+                id: Date.now(),
+                client: document.getElementById('clientName').value,
+                phone: document.getElementById('clientPhone').value,
+                service: service.name,
+                duration: service.duration,
+                price: service.price,
+                date: document.getElementById('date').value,
+                time: document.getElementById('time').value,
+                status: 'confirmed',
+                notes: document.getElementById('notes').value
+            };
+            
+            appointments.push(appointment);
+            localStorage.setItem('appointments', JSON.stringify(appointments));
+            
+            generateCalendar();
+            closeModal();
+            
+            // Enviar notificación de confirmación
+            if (window.notificationManager) {
+                window.notificationManager.sendBookingConfirmation(appointment);
+            }
+            
+            alert(`¡Cita creada exitosamente! 🎉\n\nCliente: ${appointment.client}\nServicio: ${appointment.service} (${appointment.duration}min)\nFecha: ${appointment.date} a las ${appointment.time}\nPrecio: €${appointment.price}\n\n📧 Notificación de confirmación enviada`);
+        });
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            setCurrentWeek();
+            populateServices();
+            populateTimeSlots();
+            generateCalendar();
+        });
+        
+        // Close modal when clicking outside
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+    </script>
+</body>
+</html>
