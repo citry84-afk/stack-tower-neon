@@ -241,3 +241,673 @@
             }
         }
     </style>
+    <!-- FIXES CRÍTICOS STACK TOWER v2.1 -->
+    <script src="stack-tower-fixes.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Loading Screen -->
+        <div id="loading-screen" class="screen active">
+            <div class="title">STACK TOWER</div>
+            <div class="subtitle">NEON</div>
+            <div class="loading-text">⚡ CARGANDO GAME...</div>
+        </div>
+        
+        <!-- Menu Screen -->
+        <div id="menu-screen" class="screen">
+            <div class="title">STACK TOWER</div>
+            <div class="subtitle">NEON</div>
+            <div class="instructions">
+                🎮 Apila bloques perfectamente<br>
+                🎯 Consigue puntos de PERFECTO<br>
+                🔥 ¡Haz combos épicos!
+            </div>
+            <div class="controls">
+                <button class="btn primary" onclick="startGame()">🚀 JUGAR</button>
+                <button class="btn" onclick="toggleAudio()">🔊 AUDIO</button>
+            </div>
+        </div>
+        
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen">
+            <div class="ui">
+                <div class="score" id="score">0</div>
+                <div style="color: #FF0080;">NIVEL <span id="level">1</span></div>
+            </div>
+            
+            <div class="game-area" id="game-area"></div>
+            
+            <div class="controls">
+                <button class="btn" onclick="stackBlock()">📦 APILAR</button>
+                <button class="btn" onclick="pauseGame()" id="pause-btn">⏸️ PAUSA</button>
+                <button class="btn" onclick="showMenu()">🏠 MENU</button>
+            </div>
+        </div>
+        
+        <!-- Game Over Screen -->
+        <div id="gameover-screen" class="screen">
+            <div class="title">GAME OVER</div>
+            <div style="font-size: 2rem; color: #39FF14; margin: 20px 0;">
+                PUNTOS: <span id="final-score">0</span>
+            </div>
+            <div id="new-record" class="hidden" style="color: #FF0080; font-size: 1.2rem; margin: 10px 0;">
+                🏆 ¡NUEVO RÉCORD!
+            </div>
+            <div class="controls">
+                <button class="btn primary" onclick="startGame()">🔄 JUGAR OTRA VEZ</button>
+                <button class="btn" onclick="shareScore()">📤 COMPARTIR</button>
+                <button class="btn" onclick="showMenu()">🏠 MENU</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Simplified Game State
+        let gameState = {
+            score: 0,
+            level: 1,
+            blocks: [],
+            currentBlock: null,
+            gameActive: false,
+            audioEnabled: true,
+            streak: 0,
+            highScore: parseInt(localStorage.getItem('stackTowerHighScore') || '0')
+        };
+        
+        let gamePaused = false;
+        let audioContext = null;
+        let backgroundMusicInterval = null;
+        
+        // Audio System
+        function initAudio() {
+            try {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                console.log('🔊 Audio initialized');
+            } catch (e) {
+                console.log('Audio not supported');
+            }
+        }
+        
+        function playSound(frequency, duration, type = 'sine', volume = 0.1) {
+            if (!audioContext || !gameState.audioEnabled) return;
+            
+            try {
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.value = frequency;
+                oscillator.type = type;
+                
+                gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+                gainNode.gain.linearRampToValueAtTime(volume, audioContext.currentTime + 0.01);
+                gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + duration/1000);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + duration/1000);
+            } catch (e) {
+                console.log('Sound error:', e);
+            }
+        }
+        
+        function playPerfectSound() {
+            playSound(880, 200, 'square', 0.15);
+            setTimeout(() => playSound(1100, 150, 'square', 0.1), 100);
+        }
+        
+        // Background Music System
+        function playBackgroundMusic() {
+            if (!audioContext || !gameState.audioEnabled) return;
+            
+            stopBackgroundMusic(); // Stop any existing music
+            
+            const melody = [
+                // Main melody - catchy and addictive like Mario Bros
+                {note: 659, duration: 200}, // E5
+                {note: 659, duration: 200}, // E5
+                {note: 0, duration: 100},   // Rest
+                {note: 659, duration: 200}, // E5
+                {note: 0, duration: 100},   // Rest
+                {note: 523, duration: 200}, // C5
+                {note: 659, duration: 200}, // E5
+                {note: 0, duration: 100},   // Rest
+                {note: 784, duration: 300}, // G5
+                {note: 0, duration: 300},   // Rest
+                {note: 392, duration: 300}, // G4
+                {note: 0, duration: 300},   // Rest
+                
+                {note: 523, duration: 200}, // C5
+                {note: 0, duration: 200},   // Rest
+                {note: 392, duration: 200}, // G4
+                {note: 0, duration: 200},   // Rest
+                {note: 330, duration: 200}, // E4
+                {note: 0, duration: 100},   // Rest
+                {note: 440, duration: 200}, // A4
+                {note: 0, duration: 100},   // Rest
+                {note: 494, duration: 200}, // B4
+                {note: 0, duration: 100},   // Rest
+                {note: 466, duration: 200}, // Bb4
+                {note: 440, duration: 200}, // A4
+                
+                {note: 392, duration: 266}, // G4
+                {note: 659, duration: 266}, // E5
+                {note: 784, duration: 266}, // G5
+                {note: 880, duration: 200}, // A5
+                {note: 0, duration: 100},   // Rest
+                {note: 698, duration: 200}, // F5
+                {note: 784, duration: 200}, // G5
+                {note: 0, duration: 200},   // Rest
+                {note: 659, duration: 200}, // E5
+                {note: 0, duration: 100},   // Rest
+                {note: 523, duration: 200}, // C5
+                {note: 587, duration: 200}, // D5
+                {note: 494, duration: 200}  // B4
+            ];
+            
+            let noteIndex = 0;
+            
+            function playNextNote() {
+                if (!gameState.audioEnabled || !gameState.gameActive) return;
+                
+                const note = melody[noteIndex % melody.length];
+                
+                if (note.note > 0) {
+                    playMusicNote(note.note, note.duration, 0.03);
+                }
+                
+                noteIndex++;
+                backgroundMusicInterval = setTimeout(playNextNote, note.duration);
+            }
+            
+            playNextNote();
+        }
+        
+        function playMusicNote(frequency, duration, volume) {
+            if (!audioContext) return;
+            try {
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                const filter = audioContext.createBiquadFilter();
+                
+                oscillator.connect(filter);
+                filter.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.value = frequency;
+                oscillator.type = 'square'; // Retro chiptune sound
+                
+                filter.type = 'lowpass';
+                filter.frequency.value = frequency * 2;
+                filter.Q.value = 1;
+                
+                gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+                gainNode.gain.linearRampToValueAtTime(volume, audioContext.currentTime + 0.01);
+                gainNode.gain.linearRampToValueAtTime(volume * 0.3, audioContext.currentTime + duration/1000 * 0.9);
+                gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + duration/1000);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + duration/1000);
+            } catch (e) {
+                console.log('Music note error:', e);
+            }
+        }
+        
+        function stopBackgroundMusic() {
+            if (backgroundMusicInterval) {
+                clearTimeout(backgroundMusicInterval);
+                backgroundMusicInterval = null;
+            }
+        }
+        
+        function playBattleMusic() {
+            if (!audioContext || !gameState.audioEnabled) return;
+            
+            stopBackgroundMusic(); // Stop normal music
+            
+            const battleMelody = [
+                // Faster, more intense melody for high scores
+                {note: 784, duration: 150}, // G5
+                {note: 880, duration: 150}, // A5
+                {note: 988, duration: 150}, // B5
+                {note: 1047, duration: 150}, // C6
+                {note: 1175, duration: 150}, // D6
+                {note: 1319, duration: 150}, // E6
+                {note: 1397, duration: 150}, // F6
+                {note: 1568, duration: 300}, // G6
+                {note: 0, duration: 100},    // Rest
+                
+                {note: 1568, duration: 100}, // G6
+                {note: 1397, duration: 100}, // F6
+                {note: 1319, duration: 100}, // E6
+                {note: 1175, duration: 100}, // D6
+                {note: 1047, duration: 100}, // C6
+                {note: 988, duration: 100},  // B5
+                {note: 880, duration: 100},  // A5
+                {note: 784, duration: 200},  // G5
+                {note: 0, duration: 200}     // Rest
+            ];
+            
+            let noteIndex = 0;
+            
+            function playNextBattleNote() {
+                if (!gameState.audioEnabled || !gameState.gameActive) return;
+                
+                const note = battleMelody[noteIndex % battleMelody.length];
+                
+                if (note.note > 0) {
+                    playMusicNote(note.note, note.duration, 0.04);
+                }
+                
+                noteIndex++;
+                backgroundMusicInterval = setTimeout(playNextBattleNote, note.duration);
+            }
+            
+            playNextBattleNote();
+        }
+        
+        function toggleAudio() {
+            gameState.audioEnabled = !gameState.audioEnabled;
+            const btn = event.target;
+            btn.textContent = gameState.audioEnabled ? '🔊 AUDIO' : '🔇 AUDIO';
+            
+            if (gameState.audioEnabled && audioContext) {
+                audioContext.resume();
+            }
+        }
+        
+        // Game Logic
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            document.getElementById(screenId + '-screen').classList.add('active');
+        }
+        
+        function showMenu() {
+            gameState.gameActive = false;
+            stopBackgroundMusic(); // Stop music when returning to menu
+            showScreen('menu');
+        }
+        
+        function startGame() {
+            // Mostrar interstitial ad ocasionalmente
+            showInterstitialAdFixed();            gameState.score = 0;
+            gameState.level = 1;
+            gameState.blocks = [];
+            gameState.currentBlock = null;
+            gameState.gameActive = true;
+            gameState.streak = 0;
+            gamePaused = false;
+            
+            showScreen('game');
+            
+            // Clear game area
+            const gameArea = document.getElementById('game-area');
+            gameArea.innerHTML = '';
+            
+            // Create base block at bottom
+            createBlock(getGameAreaWidth()/2 - 50, 30, 100, '#39FF14', true);
+            
+            // Create first moving block
+            setTimeout(() => createMovingBlock(), 500);
+            
+            updateUI();
+            
+            // Start background music
+            if (audioContext) {
+                audioContext.resume();
+                setTimeout(() => {
+                    if (gameState.audioEnabled && gameState.gameActive) {
+                        playBackgroundMusic();
+                    }
+                }, 1000);
+            }
+        }
+        
+        function getGameAreaWidth() {
+            return document.getElementById('game-area').offsetWidth;
+        }
+        
+        function createBlock(x, y, width, color, isBase = false) {
+            const block = document.createElement('div');
+            block.className = 'block';
+            
+            // Ensure block stays within game area bounds
+            const safeY = Math.max(0, Math.min(350, y)); // Keep within 0-350 range
+            const topPosition = Math.max(20, Math.min(370, 400 - safeY - 30));
+            
+            block.style.left = x + 'px';
+            block.style.top = topPosition + 'px';
+            block.style.width = width + 'px';
+            block.style.height = '30px';
+            block.style.backgroundColor = color;
+            
+            document.getElementById('game-area').appendChild(block);
+            
+            const blockData = { element: block, x, y: safeY, width, isBase, moving: false };
+            gameState.blocks.push(blockData);
+            
+            return blockData;
+        }
+        
+        function createMovingBlock() {
+            if (!gameState.gameActive || gamePaused) return;
+            
+            const lastBlock = gameState.blocks[gameState.blocks.length - 1];
+            const gameAreaWidth = getGameAreaWidth();
+            const blockWidth = Math.max(50, 100 - gameState.level * 2);
+            
+            // Check if tower is getting too high (near top of game area)
+            const nextBlockY = lastBlock.y + 35;
+            if (nextBlockY > 320 || gameState.blocks.length > 8) { // 320 leaves room for the new block
+                scrollCameraSmooth();
+                // After scroll, position new block relative to reorganized tower
+                const topBlock = gameState.blocks[gameState.blocks.length - 1];
+                var newY = topBlock.y + 35;
+            } else {
+                // Stack blocks upwards - each new block goes higher
+                var newY = nextBlockY;
+            }
+            
+            gameState.currentBlock = createBlock(0, newY, blockWidth, getBlockColor(), false);
+            gameState.currentBlock.moving = true;
+            gameState.currentBlock.element.classList.add('moving-block');
+            
+            // Add moving animation data
+            gameState.currentBlock.direction = 1;
+            gameState.currentBlock.speed = 2 + gameState.level * 0.5;
+            
+            animateBlock(gameState.currentBlock);
+        }
+        
+        function scrollCameraSmooth() {
+            // Keep only the last 1 block (the most recent one) - more challenging!
+            const blocksToKeep = 1;
+            const blocksToRemove = gameState.blocks.length - blocksToKeep;
+            
+            if (blocksToRemove <= 0) return;
+            
+            // Remove old blocks from DOM and array
+            for (let i = 0; i < blocksToRemove; i++) {
+                const blockToRemove = gameState.blocks[i];
+                if (blockToRemove.element && blockToRemove.element.parentNode) {
+                    blockToRemove.element.parentNode.removeChild(blockToRemove.element);
+                }
+            }
+            
+            // Remove from array
+            gameState.blocks = gameState.blocks.slice(-blocksToKeep);
+            
+            // Reposition the remaining block at the bottom
+            gameState.blocks.forEach((block, index) => {
+                const newY = 30; // Reset to bottom position
+                block.y = newY;
+                block.element.style.top = (400 - newY - 30) + 'px';
+            });
+            
+            // Visual and audio feedback - positioned at top to not cover blocks
+            showTopIndicator('¡TORRE REORGANIZADA!');
+            playSound(880, 200, 'sine', 0.1);
+            
+            console.log(`📏 Camera scrolled - Blocks remaining: ${gameState.blocks.length}`);
+        }
+        
+        function animateBlock(block) {
+            if (!block || !block.moving || !gameState.gameActive || gamePaused) return;
+            
+            const gameAreaWidth = getGameAreaWidth();
+            const newX = block.x + (block.direction * block.speed);
+            
+            // Bounce off walls
+            if (newX <= 0 || newX + block.width >= gameAreaWidth) {
+                block.direction *= -1;
+                playSound(440, 100, 'square', 0.05);
+            }
+            
+            block.x = Math.max(0, Math.min(gameAreaWidth - block.width, newX));
+            block.element.style.left = block.x + 'px';
+            
+            requestAnimationFrame(() => animateBlock(block));
+        }
+        
+        function stackBlock() {
+            if (!gameState.currentBlock || !gameState.currentBlock.moving || !gameState.gameActive || gamePaused) return;
+            
+            const current = gameState.currentBlock;
+            current.moving = false;
+            current.element.classList.remove('moving-block');
+            
+            const previous = gameState.blocks[gameState.blocks.length - 2];
+            
+            // Calculate overlap
+            const leftOverlap = Math.max(0, previous.x - current.x);
+            const rightOverlap = Math.max(0, (current.x + current.width) - (previous.x + previous.width));
+            const totalOverlap = leftOverlap + rightOverlap;
+            
+            if (totalOverlap >= current.width) {
+                // Game over
+                gameOver();
+                return;
+            }
+            
+            // Trim block
+            const newWidth = current.width - totalOverlap;
+            const newX = current.x + leftOverlap;
+            
+            current.x = newX;
+            current.width = newWidth;
+            current.element.style.left = newX + 'px';
+            current.element.style.width = newWidth + 'px';
+            current.element.style.top = (400 - current.y - 30) + 'px'; // Update position after trim
+            
+            // Check for perfect stack
+            const perfectThreshold = 5;
+            if (totalOverlap <= perfectThreshold) {
+                gameState.streak++;
+                const points = 10 + gameState.streak;
+                gameState.score += points;
+                // Mostrar combo visual
+                showComboFixed(points);
+                // Actualizar velocidad
+                updateSpeedFixed();                
+                // Perfect effects
+                current.element.classList.add('perfect');
+                playPerfectSound();
+                
+                showIndicator('PERFECTO! +' + (points - 1));
+                
+                if (gameState.streak >= 5) {
+                    showComboIndicator(`${gameState.streak}x COMBO!`);
+                }
+            } else {
+                gameState.streak = 0;
+                gameState.score += 1;
+                playSound(523, 150, 'sine', 0.08);
+            }
+            
+            updateUI();
+            
+            // Level progression
+            if (gameState.score > 0 && gameState.score % 20 === 0) {
+                gameState.level++;
+                showIndicator(`¡NIVEL ${gameState.level}!`);
+            }
+            
+            // Create next block
+            setTimeout(() => createMovingBlock(), 1000);
+        }
+        
+        function showIndicator(text) {
+            const indicator = document.createElement('div');
+            indicator.className = 'indicator';
+            indicator.textContent = text;
+            document.getElementById('game-area').appendChild(indicator);
+            
+            setTimeout(() => {
+                if (indicator.parentNode) {
+                    indicator.parentNode.removeChild(indicator);
+                }
+            }, 1500);
+        }
+        
+        function showComboIndicator(text) {
+            const indicator = document.createElement('div');
+            indicator.className = 'indicator';
+            indicator.style.color = '#FF0080';
+            indicator.style.textShadow = '0 0 20px #FF0080';
+            indicator.textContent = text;
+            document.getElementById('game-area').appendChild(indicator);
+            
+            setTimeout(() => {
+                if (indicator.parentNode) {
+                    indicator.parentNode.removeChild(indicator);
+                }
+            }, 2000);
+        }
+        
+        function showTopIndicator(text) {
+            const indicator = document.createElement('div');
+            indicator.style.position = 'absolute';
+            indicator.style.top = '10px'; // Near the top edge
+            indicator.style.left = '50%';
+            indicator.style.transform = 'translateX(-50%)';
+            indicator.style.fontSize = '1.2rem';
+            indicator.style.fontWeight = '900';
+            indicator.style.color = '#FFD700';
+            indicator.style.textShadow = '0 0 15px #FFD700';
+            indicator.style.zIndex = '1000';
+            indicator.style.pointerEvents = 'none';
+            indicator.style.animation = 'topIndicatorSlide 2s ease-out forwards';
+            indicator.textContent = text;
+            document.getElementById('game-area').appendChild(indicator);
+            
+            setTimeout(() => {
+                if (indicator.parentNode) {
+                    indicator.parentNode.removeChild(indicator);
+                }
+            }, 2000);
+        }
+        
+        function updateUI() {
+            document.getElementById('score').textContent = gameState.score;
+            document.getElementById('level').textContent = gameState.level;
+            
+            // Update high score
+            if (gameState.score > gameState.highScore) {
+                gameState.highScore = gameState.score;
+                localStorage.setItem('stackTowerHighScore', gameState.highScore.toString());
+            }
+            
+            // Switch to battle music at 50 points
+            if (gameState.score === 50 && gameState.audioEnabled && backgroundMusicInterval) {
+                playBattleMusic();
+                showIndicator('¡MODO BATALLA!');
+            }
+        }
+        
+        function gameOver() {
+    showRewardAdOnDeath();
+    return;
+}
+
+function gameOverOriginal() {
+            gameState.gameActive = false;
+            stopBackgroundMusic(); // Stop music on game over
+            playSound(220, 300, 'sawtooth', 0.15);
+            
+            setTimeout(() => {
+                document.getElementById('final-score').textContent = gameState.score;
+                
+                if (gameState.score === gameState.highScore && gameState.score > 0) {
+                    document.getElementById('new-record').classList.remove('hidden');
+                } else {
+                    document.getElementById('new-record').classList.add('hidden');
+                }
+                
+                showScreen('gameover');
+            }, 1000);
+        }
+        
+        function pauseGame() {
+            if (!gameState.gameActive) return;
+            
+            gamePaused = !gamePaused;
+            
+            if (gamePaused) {
+                document.getElementById('pause-btn').textContent = '▶️ REANUDAR';
+                stopBackgroundMusic(); // Pause music
+            } else {
+                document.getElementById('pause-btn').textContent = '⏸️ PAUSA';
+                
+                // Resume animation if there's a moving block
+                if (gameState.currentBlock && gameState.currentBlock.moving) {
+                    animateBlock(gameState.currentBlock);
+                }
+                
+                // Resume music when unpausing
+                if (gameState.audioEnabled) {
+                    setTimeout(() => {
+                        if (gameState.score >= 50) {
+                            playBattleMusic();
+                        } else {
+                            playBackgroundMusic();
+                        }
+                    }, 500);
+                }
+            }
+        }
+        
+        function getBlockColor() {
+            const colors = ['#FF0080', '#00FFFF', '#39FF14', '#FFD700', '#FF4500', '#8A2BE2'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+        
+        function shareScore() {
+    shareScoreFixed();
+    return;
+}
+
+function shareScoreOriginal() {
+            const text = `🌈 ¡Conseguí ${gameState.score} puntos en Stack Tower Neon! ¿Puedes superarme?`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Stack Tower Neon',
+                    text: text,
+                    url: window.location.href
+                });
+            } else {
+                // Fallback
+                const url = encodeURIComponent(window.location.href);
+                const shareText = encodeURIComponent(text);
+                const shareUrl = `https://twitter.com/intent/tweet?text=${shareText}&url=${url}`;
+                window.open(shareUrl, '_blank');
+            }
+        }
+        
+        // Event Listeners
+        document.getElementById('game-area').addEventListener('click', stackBlock);
+        document.getElementById('game-area').addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            stackBlock();
+        });
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                stackBlock();
+            }
+        });
+        
+        // Initialize
+        setTimeout(() => {
+            initAudio();
+            showMenu();
+        }, 1500);
+        
+        console.log('🎮 Stack Tower Neon - TEST VERSION LOADED!');
+    </script>
+</body>
+</html>
