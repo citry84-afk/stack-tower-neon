@@ -304,6 +304,42 @@
             
             <button class="btn" onclick="saveGeneral()">💾 Guardar</button>
         </div>
+        
+        <!-- Configuración de Agenda -->
+        <div class="card">
+            <h3>📅 Configuración de Agenda</h3>
+            
+            <div class="form-group">
+                <label for="agendaMonths">Meses de Anticipación</label>
+                <select id="agendaMonths">
+                    <option value="1">1 mes</option>
+                    <option value="2">2 meses</option>
+                    <option value="3" selected>3 meses</option>
+                    <option value="6">6 meses</option>
+                    <option value="12">12 meses</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="weekStart">Inicio de Semana</label>
+                <select id="weekStart">
+                    <option value="1" selected>Lunes</option>
+                    <option value="0">Domingo</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="theme">Tema Visual</label>
+                <select id="theme">
+                    <option value="glass">Cristal Líquido</option>
+                    <option value="modern">Moderno</option>
+                    <option value="minimal">Minimalista</option>
+                    <option value="default" selected>Por Defecto</option>
+                </select>
+            </div>
+            
+            <button class="btn" onclick="saveAgendaSettings()">💾 Guardar Configuración</button>
+        </div>
     </div>
 
     <div id="saveNotification" class="save-notification">
@@ -417,6 +453,93 @@
             showNotification();
         }
         
+        function saveAgendaSettings() {
+            const agendaSettings = {
+                months: parseInt(document.getElementById('agendaMonths').value),
+                weekStart: parseInt(document.getElementById('weekStart').value),
+                theme: document.getElementById('theme').value
+            };
+            localStorage.setItem('agendaSettings', JSON.stringify(agendaSettings));
+            showNotification();
+            
+            // Aplicar tema visual
+            applyTheme(agendaSettings.theme);
+            
+            console.log('📅 Configuración de agenda guardada:', agendaSettings);
+        }
+        
+        function applyTheme(theme) {
+            // Remover temas anteriores
+            document.body.classList.remove('theme-glass', 'theme-modern', 'theme-minimal');
+            
+            if (theme !== 'default') {
+                document.body.classList.add(`theme-${theme}`);
+            }
+            
+            // Aplicar estilos específicos del tema
+            if (theme === 'glass') {
+                applyGlassTheme();
+            } else if (theme === 'modern') {
+                applyModernTheme();
+            } else if (theme === 'minimal') {
+                applyMinimalTheme();
+            }
+        }
+        
+        function applyGlassTheme() {
+            const style = document.createElement('style');
+            style.textContent = `
+                .theme-glass .card {
+                    background: rgba(255, 255, 255, 0.1);
+                    backdrop-filter: blur(20px);
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                }
+                .theme-glass .form-group input,
+                .theme-glass .form-group select,
+                .theme-glass .form-group textarea {
+                    background: rgba(255, 255, 255, 0.1);
+                    backdrop-filter: blur(10px);
+                    border: 1px solid rgba(255, 255, 255, 0.3);
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        function applyModernTheme() {
+            const style = document.createElement('style');
+            style.textContent = `
+                .theme-modern .card {
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    color: white;
+                }
+                .theme-modern .form-group input,
+                .theme-modern .form-group select,
+                .theme-modern .form-group textarea {
+                    background: rgba(255, 255, 255, 0.9);
+                    border: none;
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        function applyMinimalTheme() {
+            const style = document.createElement('style');
+            style.textContent = `
+                .theme-minimal .card {
+                    background: white;
+                    border: 1px solid #e2e8f0;
+                    box-shadow: none;
+                }
+                .theme-minimal .form-group input,
+                .theme-minimal .form-group select,
+                .theme-minimal .form-group textarea {
+                    border: 1px solid #d1d5db;
+                    background: #f9fafb;
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
         function saveNotifications() {
             const notifications = {
                 enabled: document.getElementById('enableNotifications').checked,
@@ -461,12 +584,27 @@
             }
         }
         
+        function loadAgendaSettings() {
+            const agendaSettings = JSON.parse(localStorage.getItem('agendaSettings') || '{}');
+            if (agendaSettings.months) {
+                document.getElementById('agendaMonths').value = agendaSettings.months;
+            }
+            if (agendaSettings.weekStart !== undefined) {
+                document.getElementById('weekStart').value = agendaSettings.weekStart;
+            }
+            if (agendaSettings.theme) {
+                document.getElementById('theme').value = agendaSettings.theme;
+                applyTheme(agendaSettings.theme);
+            }
+        }
+        
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
             generateSchedule();
             generateServices();
             loadGeneral();
             loadNotifications();
+            loadAgendaSettings();
             
             // Add event listener for notification toggle
             document.getElementById('enableNotifications').addEventListener('change', toggleNotificationSettings);

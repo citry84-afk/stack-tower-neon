@@ -19,10 +19,10 @@ class NotificationManager {
         if (!this.settings.enabled) {
             this.settings = {
                 enabled: true,
-                reminder24h: 'all',
-                reminder2h: 'whatsapp',
-                bookingConfirmation: 'email',
-                cancellationNotice: 'whatsapp',
+                reminder24h: 'email', // Solo email (gratuito)
+                reminder2h: 'push',   // Solo push (gratuito)
+                bookingConfirmation: 'email', // Solo email (gratuito)
+                cancellationNotice: 'email',  // Solo email (gratuito)
                 templates: {
                     reminder24h: 'Hola {cliente}, te recordamos tu cita mañana a las {hora} para {servicio}. ¡Te esperamos en {negocio}!',
                     reminder2h: '🕐 Tu cita es en 2 horas ({hora}). ¡No olvides confirmar tu asistencia!',
@@ -45,16 +45,16 @@ class NotificationManager {
         console.log('Mensaje:', message);
         console.groupEnd();
 
-        // Simular envío según el método
+        // Envío según el método (solo métodos gratuitos)
         switch(method) {
             case 'email':
                 this.simulateEmail(appointment, message);
                 break;
-            case 'sms':
-                this.simulateSMS(appointment, message);
+            case 'push':
+                this.sendPushNotification(message, appointment);
                 break;
-            case 'whatsapp':
-                this.simulateWhatsApp(appointment, message);
+            case 'inapp':
+                this.sendInAppNotification(message, appointment);
                 break;
         }
 

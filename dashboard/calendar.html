@@ -20,7 +20,7 @@
             align-items: center; 
         }
         .logo { font-size: 1.25rem; font-weight: bold; color: #1e40af; text-decoration: none; }
-        .container { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; }
+        .container { max-width: 1200px; margin: 1rem auto; padding: 0 1rem; }
         .btn { 
             padding: 0.75rem 1.5rem; 
             border: none; 
@@ -38,8 +38,8 @@
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
-            margin-bottom: 2rem; 
-            padding: 1rem; 
+            margin-bottom: 1rem; 
+            padding: 0.5rem; 
             background: white; 
             border-radius: 8px; 
         }
@@ -62,22 +62,22 @@
         }
         .calendar-cell, .day-header, .time-slot { 
             background: white; 
-            padding: 0.5rem; 
-            min-height: 60px; 
+            padding: 0.3rem; 
+            min-height: 40px; 
             position: relative; 
         }
         .day-header { 
             background: #f8fafc; 
             font-weight: bold; 
             text-align: center; 
-            min-height: 40px; 
+            min-height: 30px; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
         }
         .time-slot { 
             background: #f8fafc; 
-            font-size: 0.875rem; 
+            font-size: 0.75rem; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
@@ -195,11 +195,11 @@
             <form id="appointmentForm">
                 <div class="form-group">
                     <label>Cliente</label>
-                    <input type="text" id="clientName" required placeholder="Nombre del cliente">
+                    <input type="text" id="client" required placeholder="Nombre del cliente">
                 </div>
                 <div class="form-group">
                     <label>Teléfono</label>
-                    <input type="tel" id="clientPhone" placeholder="+34 666 777 888">
+                    <input type="tel" id="phone" placeholder="+34 666 777 888">
                 </div>
                 <div class="form-group">
                     <label>Servicio</label>
@@ -218,6 +218,18 @@
                     <select id="time" required>
                         <option value="">Selecciona hora</option>
                         <!-- Populated by JavaScript -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Duración (minutos)</label>
+                    <input type="number" id="duration" min="15" max="240" step="15" value="30" required>
+                </div>
+                <div class="form-group">
+                    <label>Estado</label>
+                    <select id="status" required>
+                        <option value="confirmed">Confirmada</option>
+                        <option value="pending">Pendiente</option>
+                        <option value="cancelled">Cancelada</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -420,9 +432,23 @@
         }
         
         function quickAdd(date, time) {
+            // Pre-llenar campos con la fecha y hora seleccionada
             document.getElementById('date').value = date;
             document.getElementById('time').value = time;
+            
+            // Limpiar otros campos para nueva reserva
+            document.getElementById('client').value = '';
+            document.getElementById('phone').value = '';
+            document.getElementById('service').value = '';
+            document.getElementById('duration').value = '30';
+            document.getElementById('status').value = 'confirmed';
+            document.getElementById('notes').value = '';
+            
+            // Mostrar modal con enfoque en el primer campo
             openModal();
+            setTimeout(() => {
+                document.getElementById('client').focus();
+            }, 100);
         }
         
         function openModal() {
@@ -460,14 +486,14 @@
             
             const appointment = {
                 id: Date.now(),
-                client: document.getElementById('clientName').value,
-                phone: document.getElementById('clientPhone').value,
+                client: document.getElementById('client').value,
+                phone: document.getElementById('phone').value,
                 service: service.name,
-                duration: service.duration,
+                duration: parseInt(document.getElementById('duration').value),
                 price: service.price,
                 date: document.getElementById('date').value,
                 time: document.getElementById('time').value,
-                status: 'confirmed',
+                status: document.getElementById('status').value,
                 notes: document.getElementById('notes').value
             };
             

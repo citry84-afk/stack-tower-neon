@@ -5,6 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stack Tower Neon - MONETIZATION LIVE</title>
     
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-633RQLC6T0"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-633RQLC6T0');
+        
+        window.trackEvent = function(eventName, parameters = {}) {
+            gtag('event', eventName, {
+                event_category: 'game_interaction',
+                ...parameters
+            });
+        };
+    </script>
+    
     <!-- Google AdSense - REAL MONETIZATION ACTIVE -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4129506161314540" crossorigin="anonymous"></script>
     <style>
