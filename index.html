@@ -289,8 +289,8 @@
             <div class="ui">
                 <div class="score" id="score">0</div>
                 <div style="color: #FF0080;">NIVEL <span id="level">1</span></div>
-            </div>
-            
+    </div>
+    
             <div class="game-area" id="game-area"></div>
             
             <div class="controls">
@@ -305,7 +305,7 @@
             <div class="title">GAME OVER</div>
             <div style="font-size: 2rem; color: #39FF14; margin: 20px 0;">
                 PUNTOS: <span id="final-score">0</span>
-            </div>
+                </div>
             <div id="new-record" class="hidden" style="color: #FF0080; font-size: 1.2rem; margin: 10px 0;">
                 🏆 ¡NUEVO RÉCORD!
             </div>
@@ -317,13 +317,13 @@
         </div>
     </div>
     
-    <!-- BANNERS SIMPLES - SOLO HTML -->
-    <div style="position:fixed;top:0;left:0;width:100%;height:50px;background:rgba(0,0,0,0.8);z-index:9999;display:flex;align-items:center;justify-content:center;">
-        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4129506161314540" data-ad-slot="6673201053"></ins>
-    </div>
-    
-    <div style="position:fixed;bottom:0;left:0;width:100%;height:50px;background:rgba(0,0,0,0.8);z-index:9999;display:flex;align-items:center;justify-content:center;">
-        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4129506161314540" data-ad-slot="6673201053"></ins>
+        <!-- BANNERS MÓVIL FIRST - RESPONSIVE -->
+        <div id="top-banner" style="position:fixed;top:0;left:0;width:100%;height:60px;background:rgba(0,0,0,0.9);z-index:9999;display:flex;align-items:center;justify-content:center;border-bottom:2px solid #00FFFF;">
+            <ins class="adsbygoogle" style="display:block;width:320px;height:50px;" data-ad-client="ca-pub-4129506161314540" data-ad-slot="6673201053"></ins>
+        </div>
+        
+        <div id="bottom-banner" style="position:fixed;bottom:0;left:0;width:100%;height:60px;background:rgba(0,0,0,0.9);z-index:9999;display:flex;align-items:center;justify-content:center;border-top:2px solid #00FFFF;">
+            <ins class="adsbygoogle" style="display:block;width:320px;height:50px;" data-ad-client="ca-pub-4129506161314540" data-ad-slot="6673201053"></ins>
     </div>
     
     <script>
@@ -904,9 +904,157 @@ function gameOverOriginal() {
         }
         
         function shareScore() {
-    shareScoreFixed();
-    return;
-}
+            // Texto viral súper atractivo
+            const score = gameState.score;
+            const level = gameState.level;
+            
+            let viralText = '';
+            let title = '';
+            
+            if (score >= 100) {
+                viralText = `🔥 ¡SÚPER RÉCORD! Acabo de construir una torre de ${score} bloques en Stack Tower Neon! 🏗️\n\n💎 Nivel alcanzado: ${level}\n🎯 ¿Eres capaz de superar mi récord?\n\n🚀 Juega GRATIS aquí: ${window.location.href}\n\n#StackTowerNeon #GamingChallenge #ViralGame #NeonGaming`;
+                title = '🔥 SÚPER RÉCORD - Stack Tower Neon';
+            } else if (score >= 50) {
+                viralText = `⚡ ¡INCREÍBLE! Construí una torre de ${score} bloques en Stack Tower Neon! 🏗️\n\n🎮 Nivel: ${level}\n💪 ¿Puedes hacerlo mejor?\n\n🎯 Juega GRATIS: ${window.location.href}\n\n#StackTowerNeon #Gaming #Challenge #NeonGaming`;
+                title = '⚡ RÉCORD INCREÍBLE - Stack Tower Neon';
+            } else {
+                viralText = `🎮 ¡Acabo de jugar Stack Tower Neon! 🏗️\n\n📊 Mi puntuación: ${score} bloques\n🎯 Nivel: ${level}\n\n🚀 ¡Es súper adictivo! ¿Quieres probarlo?\n\n💎 Juega GRATIS: ${window.location.href}\n\n#StackTowerNeon #Gaming #Adictivo #NeonGaming`;
+                title = '🎮 Stack Tower Neon - ¡Súper Adictivo!';
+            }
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: title,
+                    text: viralText,
+                    url: window.location.href
+                });
+            } else {
+                // Mostrar modal de compartir con opciones
+                showShareModal(viralText, title);
+            }
+        }
+        
+        function showShareModal(text, title) {
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(0,0,0,0.9); display: flex; justify-content: center;
+                align-items: center; z-index: 10000; font-family: 'Orbitron', monospace;
+            `;
+            
+            modal.innerHTML = `
+                <div style="background: linear-gradient(145deg, #1a1a2e, #16213e); padding: 30px;
+                           border-radius: 20px; text-align: center; border: 3px solid #00FFFF;
+                           box-shadow: 0 0 30px #FF0080; max-width: 90%;">
+                    <h2 style="color: #FF0080; margin: 20px 0;">🎮 ¡COMPARTE TU RÉCORD!</h2>
+                    <div style="margin: 20px 0; color: white;">
+                        <p>🏗️ Score: ${gameState.score}</p>
+                        <p>📈 Level: ${gameState.level}</p>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
+                        <button onclick="shareToTwitter()" style="background: #1DA1F2; color: white; border: none;
+                                padding: 10px 20px; border-radius: 8px; cursor: pointer;">🐦 Twitter</button>
+                        <button onclick="shareToFacebook()" style="background: #4267B2; color: white; border: none;
+                                padding: 10px 20px; border-radius: 8px; cursor: pointer;">📘 Facebook</button>
+                        <button onclick="shareToWhatsApp()" style="background: #25D366; color: white; border: none;
+                                padding: 10px 20px; border-radius: 8px; cursor: pointer;">💬 WhatsApp</button>
+                        <button onclick="copyToClipboard()" style="background: #FF0080; color: white; border: none;
+                                padding: 10px 20px; border-radius: 8px; cursor: pointer;">📋 Copiar</button>
+                        <button onclick="closeShareModal()" style="background: #666; color: white; border: none;
+                                padding: 10px 20px; border-radius: 8px; cursor: pointer;">❌ Cerrar</button>
+                    </div>
+    </div>
+            `;
+            
+            document.body.appendChild(modal);
+        }
+        
+        function shareToTwitter() {
+            const score = gameState.score;
+            const level = gameState.level;
+            let text = '';
+            
+            if (score >= 100) {
+                text = `🔥 ¡SÚPER RÉCORD! Acabo de construir una torre de ${score} bloques en Stack Tower Neon! 🏗️\n\n💎 Nivel: ${level}\n🎯 ¿Eres capaz de superar mi récord?\n\n🚀 Juega GRATIS: ${window.location.href}\n\n#StackTowerNeon #GamingChallenge #ViralGame`;
+            } else if (score >= 50) {
+                text = `⚡ ¡INCREÍBLE! Construí una torre de ${score} bloques en Stack Tower Neon! 🏗️\n\n🎮 Nivel: ${level}\n💪 ¿Puedes hacerlo mejor?\n\n🎯 Juega GRATIS: ${window.location.href}\n\n#StackTowerNeon #Gaming #Challenge`;
+            } else {
+                text = `🎮 ¡Acabo de jugar Stack Tower Neon! 🏗️\n\n📊 Mi puntuación: ${score} bloques\n🎯 Nivel: ${level}\n\n🚀 ¡Es súper adictivo! ¿Quieres probarlo?\n\n💎 Juega GRATIS: ${window.location.href}\n\n#StackTowerNeon #Gaming #Adictivo`;
+            }
+            
+            const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
+            window.open(url, '_blank');
+            closeShareModal();
+        }
+        
+        function shareToFacebook() {
+            const score = gameState.score;
+            const level = gameState.level;
+            let text = '';
+            
+            if (score >= 100) {
+                text = `🔥 ¡SÚPER RÉCORD! Acabo de construir una torre de ${score} bloques en Stack Tower Neon! 🏗️\n\n💎 Nivel: ${level}\n🎯 ¿Eres capaz de superar mi récord?\n\n🚀 Juega GRATIS: ${window.location.href}`;
+            } else if (score >= 50) {
+                text = `⚡ ¡INCREÍBLE! Construí una torre de ${score} bloques en Stack Tower Neon! 🏗️\n\n🎮 Nivel: ${level}\n💪 ¿Puedes hacerlo mejor?\n\n🎯 Juega GRATIS: ${window.location.href}`;
+            } else {
+                text = `🎮 ¡Acabo de jugar Stack Tower Neon! 🏗️\n\n📊 Mi puntuación: ${score} bloques\n🎯 Nivel: ${level}\n\n🚀 ¡Es súper adictivo! ¿Quieres probarlo?\n\n💎 Juega GRATIS: ${window.location.href}`;
+            }
+            
+            const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}&quote=${encodeURIComponent(text)}`;
+            window.open(url, '_blank');
+            closeShareModal();
+        }
+        
+        function shareToWhatsApp() {
+            const score = gameState.score;
+            const level = gameState.level;
+            let text = '';
+            
+            if (score >= 100) {
+                text = `🔥 ¡SÚPER RÉCORD! Acabo de construir una torre de ${score} bloques en Stack Tower Neon! 🏗️\n\n💎 Nivel: ${level}\n🎯 ¿Eres capaz de superar mi récord?\n\n🚀 Juega GRATIS: ${window.location.href}`;
+            } else if (score >= 50) {
+                text = `⚡ ¡INCREÍBLE! Construí una torre de ${score} bloques en Stack Tower Neon! 🏗️\n\n🎮 Nivel: ${level}\n💪 ¿Puedes hacerlo mejor?\n\n🎯 Juega GRATIS: ${window.location.href}`;
+            } else {
+                text = `🎮 ¡Acabo de jugar Stack Tower Neon! 🏗️\n\n📊 Mi puntuación: ${score} bloques\n🎯 Nivel: ${level}\n\n🚀 ¡Es súper adictivo! ¿Quieres probarlo?\n\n💎 Juega GRATIS: ${window.location.href}`;
+            }
+            
+            const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+            window.open(url, '_blank');
+            closeShareModal();
+        }
+        
+        function copyToClipboard() {
+            const score = gameState.score;
+            const level = gameState.level;
+            let text = '';
+            
+            if (score >= 100) {
+                text = `🔥 ¡SÚPER RÉCORD! Acabo de construir una torre de ${score} bloques en Stack Tower Neon! 🏗️\n\n💎 Nivel: ${level}\n🎯 ¿Eres capaz de superar mi récord?\n\n🚀 Juega GRATIS: ${window.location.href}\n\n#StackTowerNeon #GamingChallenge #ViralGame #NeonGaming`;
+            } else if (score >= 50) {
+                text = `⚡ ¡INCREÍBLE! Construí una torre de ${score} bloques en Stack Tower Neon! 🏗️\n\n🎮 Nivel: ${level}\n💪 ¿Puedes hacerlo mejor?\n\n🎯 Juega GRATIS: ${window.location.href}\n\n#StackTowerNeon #Gaming #Challenge #NeonGaming`;
+            } else {
+                text = `🎮 ¡Acabo de jugar Stack Tower Neon! 🏗️\n\n📊 Mi puntuación: ${score} bloques\n🎯 Nivel: ${level}\n\n🚀 ¡Es súper adictivo! ¿Quieres probarlo?\n\n💎 Juega GRATIS: ${window.location.href}\n\n#StackTowerNeon #Gaming #Adictivo #NeonGaming`;
+            }
+            
+            navigator.clipboard.writeText(text).then(() => {
+                alert('📋 ¡Texto copiado al portapapeles!');
+            }).catch(() => {
+                // Fallback para navegadores antiguos
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                alert('📋 ¡Texto copiado al portapapeles!');
+            });
+            closeShareModal();
+        }
+        
+        function closeShareModal() {
+            const modal = document.querySelector('[style*="position: fixed"]');
+            if (modal) modal.remove();
+        }
 
 function shareScoreOriginal() {
             const text = `🌈 ¡Conseguí ${gameState.score} puntos en Stack Tower Neon! ¿Puedes superarme?`;
