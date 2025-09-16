@@ -833,9 +833,23 @@
         }
         
         function gameOver() {
-    showRewardAdOnDeath();
-    return;
-}
+            gameState.gameActive = false;
+            stopBackgroundMusic(); // Stop music on game over
+            playSound(220, 300, 'sawtooth', 0.15);
+            
+            setTimeout(() => {
+                document.getElementById('final-score').textContent = gameState.score;
+                
+                if (gameState.score === gameState.highScore && gameState.score > 0) {
+                    document.getElementById('new-record').classList.remove('hidden');
+                } else {
+                    document.getElementById('new-record').classList.add('hidden');
+                }
+                
+                document.getElementById('game-screen').style.display = 'none';
+                document.getElementById('game-over-screen').style.display = 'block';
+            }, 500);
+        }
 
 function gameOverOriginal() {
             gameState.gameActive = false;
