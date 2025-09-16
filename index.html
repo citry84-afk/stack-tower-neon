@@ -333,6 +333,11 @@
                     '<meta name="mobile-optimized" content="true">' +
                     '<style>body{overflow:auto!important;touch-action:manipulation!important;}</style>'
                 );
+                
+                // Add security indicator for mobile users
+                document.body.insertAdjacentHTML('afterbegin', 
+                    '<div style="position:fixed;top:5px;right:5px;background:rgba(0,255,0,0.8);color:#000;padding:2px 6px;font-size:10px;border-radius:3px;z-index:10000;">🛡️ MOBILE OPTIMIZED</div>'
+                );
             }
         }
         
