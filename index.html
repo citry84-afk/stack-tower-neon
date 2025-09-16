@@ -38,6 +38,43 @@
             color: #00FFFF;
             overflow: hidden;
             height: 100vh;
+            padding-top: 60px;
+            padding-bottom: 60px;
+        }
+        
+        /* BANNERS DE PUBLICIDAD NO INVASIVOS */
+        .ad-container-top, .ad-container-bottom {
+            position: fixed;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            z-index: 9999;
+            pointer-events: none;
+            background: rgba(0,0,0,0.8);
+            padding: 5px 0;
+        }
+        .ad-container-top { top: 0; }
+        .ad-container-bottom { bottom: 0; }
+        .ad-container-top ins, .ad-container-bottom ins {
+            pointer-events: auto;
+            max-width: 100%;
+            height: auto;
+        }
+        .ad-fallback {
+            color: #666;
+            font-size: 12px;
+            padding: 5px;
+            display: none;
+        }
+        
+        /* OCULTAR BANNERS DURANTE EL JUEGO */
+        body.in-game .ad-container-top,
+        body.in-game .ad-container-bottom {
+            display: none !important;
+        }
+        body.in-game {
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
         }
         
         .container {
@@ -317,6 +354,29 @@
         </div>
     </div>
     
+    <!-- BANNERS DE PUBLICIDAD NO INVASIVOS -->
+    <div class="ad-container-top">
+        <ins class="adsbygoogle"
+             style="display:block; text-align:center;"
+             data-ad-layout="in-article"
+             data-ad-format="fluid"
+             data-ad-client="ca-pub-4129506161314540"
+             data-ad-slot="6673201053"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        <div class="ad-fallback">Advertisement</div>
+    </div>
+    
+    <div class="ad-container-bottom">
+        <ins class="adsbygoogle"
+             style="display:block; text-align:center;"
+             data-ad-layout="in-article"
+             data-ad-format="fluid"
+             data-ad-client="ca-pub-4129506161314540"
+             data-ad-slot="6673201053"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        <div class="ad-fallback">Advertisement</div>
+    </div>
+    
     <script>
         // MOBILE DETECTION & REDIRECTION
         function isMobile() {
@@ -562,6 +622,13 @@
                 screen.classList.remove('active');
             });
             document.getElementById(screenId + '-screen').classList.add('active');
+            
+            // Gestionar visibilidad de banners
+            if (screenId === 'game') {
+                document.body.classList.add('in-game');
+            } else {
+                document.body.classList.remove('in-game');
+            }
         }
         
         function showMenu() {
@@ -904,9 +971,124 @@ function gameOverOriginal() {
         }
         
         function shareScore() {
-    shareScoreFixed();
-    return;
-}
+            if (typeof shareScoreFixed === 'function') {
+                shareScoreFixed();
+            } else {
+                shareScoreOriginal();
+            }
+        }
+        
+        // Sistema de compartir robusto con captura de pantalla
+        function shareScoreFixed() {
+            // Capturar pantalla del juego
+            captureGameScreen();
+            
+            // Mostrar modal de compartir
+            showShareModal();
+        }
+        
+        function captureGameScreen() {
+            // Crear canvas temporal para capturar el estado del juego
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            // Dibujar fondo
+            ctx.fillStyle = '#000014';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Dibujar información del juego
+            ctx.fillStyle = '#00FFFF';
+            ctx.font = 'bold 48px Orbitron';
+            ctx.textAlign = 'center';
+            ctx.fillText('STACK TOWER NEON', canvas.width/2, canvas.height/2 - 100);
+            
+            ctx.font = 'bold 32px Orbitron';
+            ctx.fillText(`SCORE: ${gameState.score}`, canvas.width/2, canvas.height/2 - 50);
+            ctx.fillText(`LEVEL: ${gameState.level}`, canvas.width/2, canvas.height/2);
+            ctx.fillText('¿PUEDES SUPERARME?', canvas.width/2, canvas.height/2 + 50);
+            
+            // Convertir a imagen y descargar
+            canvas.toBlob(function(blob) {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `stack-tower-${gameState.score}.png`;
+                a.click();
+                URL.revokeObjectURL(url);
+            });
+        }
+        
+        function showShareModal() {
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(0,0,0,0.9); display: flex; justify-content: center;
+                align-items: center; z-index: 10000; font-family: Orbitron;
+            `;
+            
+            modal.innerHTML = `
+                <div style="background: linear-gradient(145deg, #1a1a2e, #16213e); padding: 30px;
+                           border-radius: 20px; text-align: center; border: 3px solid #00FFFF;
+                           box-shadow: 0 0 30px #FF0080; max-width: 90%;">
+                    <h2 style="color: #FF0080; margin: 20px 0;">🎮 ¡COMPARTE TU RÉCORD!</h2>
+                    <div style="margin: 20px 0; color: white;">
+                        <p>🏗️ Score: ${gameState.score}</p>
+                        <p>📈 Level: ${gameState.level}</p>
+                        <p>📷 Imagen descargada automáticamente</p>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
+                        <button onclick="shareToTwitter()" style="background: #1DA1F2; color: white; border: none;
+                                padding: 10px 20px; border-radius: 8px; cursor: pointer;">🐦 Twitter</button>
+                        <button onclick="shareToFacebook()" style="background: #4267B2; color: white; border: none;
+                                padding: 10px 20px; border-radius: 8px; cursor: pointer;">📘 Facebook</button>
+                        <button onclick="shareToWhatsApp()" style="background: #25D366; color: white; border: none;
+                                padding: 10px 20px; border-radius: 8px; cursor: pointer;">💬 WhatsApp</button>
+                        <button onclick="copyToClipboard()" style="background: #FF0080; color: white; border: none;
+                                padding: 10px 20px; border-radius: 8px; cursor: pointer;">📋 Copiar</button>
+                        <button onclick="closeShareModal()" style="background: #666; color: white; border: none;
+                                padding: 10px 20px; border-radius: 8px; cursor: pointer;">❌ Cerrar</button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+        }
+        
+        function shareToTwitter() {
+            const text = `🏗️ ¡Acabo de construir una torre de ${gameState.score} bloques en el nivel ${gameState.level}! ¿Puedes superarme? Juega aquí: ${window.location.href} #StackTowerNeon #Gaming #Challenge`;
+            const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
+            window.open(url, '_blank');
+            closeShareModal();
+        }
+        
+        function shareToFacebook() {
+            const text = `🏗️ ¡Acabo de construir una torre de ${gameState.score} bloques en Stack Tower Neon! ¿Puedes superarme?`;
+            const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}&quote=${encodeURIComponent(text)}`;
+            window.open(url, '_blank');
+            closeShareModal();
+        }
+        
+        function shareToWhatsApp() {
+            const text = `🏗️ ¡Acabo de construir una torre de ${gameState.score} bloques en el nivel ${gameState.level}! ¿Puedes superarme? Juega aquí: ${window.location.href}`;
+            const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+            window.open(url, '_blank');
+            closeShareModal();
+        }
+        
+        function copyToClipboard() {
+            const text = `🏗️ ¡Acabo de construir una torre de ${gameState.score} bloques en el nivel ${gameState.level}! ¿Puedes superarme? Juega aquí: ${window.location.href} #StackTowerNeon #Gaming #Challenge`;
+            navigator.clipboard.writeText(text).then(() => {
+                alert('📋 ¡Texto copiado al portapapeles!');
+            });
+            closeShareModal();
+        }
+        
+        function closeShareModal() {
+            const modal = document.querySelector('[style*="position: fixed"]');
+            if (modal) modal.remove();
+        }
 
 function shareScoreOriginal() {
             const text = `🌈 ¡Conseguí ${gameState.score} puntos en Stack Tower Neon! ¿Puedes superarme?`;
