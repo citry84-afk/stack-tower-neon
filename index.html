@@ -586,7 +586,7 @@
             const go = document.getElementById('gameover-screen');
             if (go) go.style.display = 'none';
             const gs = document.getElementById('game-screen');
-            if (gs) gs.style.display = 'block';
+            if (gs) gs.style.display = 'flex';
             hideAds();
             gameState.score = 0;
             gameState.level = 1;
@@ -877,7 +877,7 @@
                 }
                 
                 document.getElementById('game-screen').style.display = 'none';
-                document.getElementById('gameover-screen').style.display = 'block';
+                document.getElementById('gameover-screen').style.display = 'flex';
                 showAds();
             }, 500);
         }
