@@ -557,8 +557,18 @@
         }
         
         function startGame() {
-            // Mostrar interstitial ad ocasionalmente
-            showInterstitialAdFixed();
+            // Mostrar interstitial ad ocasionalmente (protegido)
+            try {
+                if (typeof showInterstitialAdFixed === 'function') {
+                    showInterstitialAdFixed();
+                }
+            } catch(e) { /* no-op */ }
+
+            // Asegurar que la pantalla de game over esté oculta
+            const go = document.getElementById('gameover-screen');
+            if (go) go.style.display = 'none';
+            const gs = document.getElementById('game-screen');
+            if (gs) gs.style.display = 'block';
             gameState.score = 0;
             gameState.level = 1;
             gameState.blocks = [];
