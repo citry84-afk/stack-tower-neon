@@ -343,6 +343,24 @@
         let audioContext = null;
         let backgroundMusicInterval = null;
         
+        // Ads helpers (no invasivos)
+        function showAds() {
+            const top = document.getElementById('top-banner');
+            const bottom = document.getElementById('bottom-banner');
+            if (top) top.style.display = 'flex';
+            if (bottom) bottom.style.display = 'flex';
+            try {
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            } catch(e) {}
+        }
+        function hideAds() {
+            const top = document.getElementById('top-banner');
+            const bottom = document.getElementById('bottom-banner');
+            if (top) top.style.display = 'none';
+            if (bottom) bottom.style.display = 'none';
+        }
+        
         // Audio System
         function initAudio() {
             try {
@@ -569,6 +587,7 @@
             if (go) go.style.display = 'none';
             const gs = document.getElementById('game-screen');
             if (gs) gs.style.display = 'block';
+            hideAds();
             gameState.score = 0;
             gameState.level = 1;
             gameState.blocks = [];
@@ -859,6 +878,7 @@
                 
                 document.getElementById('game-screen').style.display = 'none';
                 document.getElementById('gameover-screen').style.display = 'block';
+                showAds();
             }, 500);
         }
 
@@ -1102,6 +1122,11 @@ function shareScoreOriginal() {
         // Initialize
         setTimeout(() => {
             initAudio();
+            try {
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            } catch(e) {}
+            hideAds();
             showMenu();
         }, 1500);
         
