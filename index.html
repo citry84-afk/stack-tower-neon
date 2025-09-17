@@ -1112,6 +1112,25 @@ function shareScoreOriginal() {
             stackBlock();
         });
         
+        // Global tap/click: permitir apilar tocando en cualquier parte durante el juego
+        function isGameActiveScreen() {
+            const gs = document.getElementById('game-screen');
+            return gs && (gs.classList.contains('active') || gs.style.display === 'flex');
+        }
+        
+        document.addEventListener('touchstart', (e) => {
+            if (!isGameActiveScreen() || !gameState.gameActive || gamePaused) return;
+            if (e.target.closest('.controls')) return; // no interceptar botones
+            try { e.preventDefault(); } catch(_) {}
+            stackBlock();
+        }, { passive: false });
+        
+        document.addEventListener('click', (e) => {
+            if (!isGameActiveScreen() || !gameState.gameActive || gamePaused) return;
+            if (e.target.closest('.controls')) return;
+            stackBlock();
+        });
+        
         document.addEventListener('keydown', (e) => {
             if (e.code === 'Space') {
                 e.preventDefault();
