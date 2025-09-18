@@ -309,8 +309,16 @@
             <div id="new-record" class="hidden" style="color: #FF0080; font-size: 1.2rem; margin: 10px 0;">
                 🏆 ¡NUEVO RÉCORD!
             </div>
+            <!-- Interstitial Ad on Game Over -->
+            <div id="gameOverAd" style="display:none; text-align:center; margin:20px 0; background:#000014; padding:10px;">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-4129506161314540"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
             <div class="controls">
-                <button class="btn primary" onclick="startGame()">🔄 JUGAR OTRA VEZ</button>
+                <button class="btn primary" onclick="restartGame()">🔄 JUGAR OTRA VEZ</button>
                 <button class="btn" onclick="shareScore()">📤 COMPARTIR</button>
                 <button class="btn" onclick="showMenu()">🏠 MENU</button>
             </div>
@@ -619,6 +627,7 @@
                     }
                 }, 1000);
             }
+            try { trackEvent('game_start', { game_name: 'stack_tower_neon' }); } catch(e){}
         }
         
         function getGameAreaWidth() {
@@ -879,6 +888,10 @@
                 document.getElementById('game-screen').style.display = 'none';
                 document.getElementById('gameover-screen').style.display = 'flex';
                 showAds();
+                // Show interstitial and track
+                const ad = document.getElementById('gameOverAd'); if (ad) ad.style.display='block';
+                try { (adsbygoogle = window.adsbygoogle || []).push({}); trackEvent('ad_impression', { game_name:'stack_tower_neon', ad_type:'interstitial' }); } catch(e){}
+                try { trackEvent('game_over', { game_name:'stack_tower_neon', score: gameState.score }); } catch(e){}
             }, 500);
         }
 
@@ -1147,7 +1160,14 @@ function shareScoreOriginal() {
             } catch(e) {}
             hideAds();
             showMenu();
+            try { trackEvent('page_view', { game_name:'stack_tower_neon' }); } catch(e){}
         }, 1500);
+
+        function restartGame(){
+            const ad = document.getElementById('gameOverAd'); if (ad) ad.style.display='none';
+            try { trackEvent('game_restart', { game_name:'stack_tower_neon' }); } catch(e){}
+            startGame();
+        }
         
         console.log('🎮 Stack Tower Neon - TEST VERSION LOADED!');
     </script>
