@@ -277,8 +277,8 @@
                 🎮 Apila bloques perfectamente<br>
                 🎯 Consigue puntos de PERFECTO<br>
                 🔥 ¡Haz combos épicos!
-            </div>
-            
+        </div>
+        
             <!-- Banner en menú principal -->
             <div id="menu-banner" style="margin: 20px 0; padding: 10px; background: rgba(0,0,0,0.8); border: 1px solid #00FFFF; border-radius: 8px;">
                 <ins class="adsbygoogle" 
@@ -349,7 +349,7 @@
                  style="display:block;width:120px;height:600px;" 
                  data-ad-client="ca-pub-4129506161314540" 
                  data-ad-slot="6673201053"></ins>
-        </div>
+    </div>
     
     <script>
         // Simplified Game State
@@ -379,12 +379,6 @@
             if (bottom) bottom.style.display = 'flex';
             if (side) side.style.display = 'block';
             if (menu) menu.style.display = 'block';
-            try {
-                (adsbygoogle = window.adsbygoogle || []).push({});
-                (adsbygoogle = window.adsbygoogle || []).push({});
-                (adsbygoogle = window.adsbygoogle || []).push({});
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            } catch(e) {}
         }
         function hideAds() {
             const top = document.getElementById('top-banner');
@@ -948,7 +942,7 @@
                 showAds();
                 // Show interstitial and track
                 const ad = document.getElementById('gameOverAd'); if (ad) ad.style.display='block';
-                try { (adsbygoogle = window.adsbygoogle || []).push({}); trackEvent('ad_impression', { game_name:'stack_tower_neon', ad_type:'interstitial' }); } catch(e){}
+                try { trackEvent('ad_impression', { game_name:'stack_tower_neon', ad_type:'interstitial' }); } catch(e){}
                 try { trackEvent('game_over', { game_name:'stack_tower_neon', score: gameState.score }); } catch(e){}
             }, 500);
         }
@@ -1212,10 +1206,6 @@ function shareScoreOriginal() {
         // Initialize
         setTimeout(() => {
             initAudio();
-            try {
-                (adsbygoogle = window.adsbygoogle || []).push({});
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            } catch(e) {}
             hideAds();
             showMenu();
             try { trackEvent('page_view', { game_name:'stack_tower_neon' }); } catch(e){}
