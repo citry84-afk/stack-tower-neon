@@ -278,6 +278,15 @@
                 🎯 Consigue puntos de PERFECTO<br>
                 🔥 ¡Haz combos épicos!
             </div>
+            
+            <!-- Banner en menú principal -->
+            <div id="menu-banner" style="margin: 20px 0; padding: 10px; background: rgba(0,0,0,0.8); border: 1px solid #00FFFF; border-radius: 8px;">
+                <ins class="adsbygoogle" 
+                     style="display:block;width:320px;height:50px;" 
+                     data-ad-client="ca-pub-4129506161314540" 
+                     data-ad-slot="6673201053"></ins>
+            </div>
+            
             <div class="controls">
                 <button class="btn primary" onclick="startGame()">🚀 JUGAR</button>
                 <button class="btn" onclick="toggleAudio()">🔊 AUDIO</button>
@@ -332,7 +341,15 @@
         
         <div id="bottom-banner" style="position:fixed;bottom:0;left:0;width:100%;height:60px;background:rgba(0,0,0,0.9);z-index:9999;display:flex;align-items:center;justify-content:center;border-top:2px solid #00FFFF;">
             <ins class="adsbygoogle" style="display:block;width:320px;height:50px;" data-ad-client="ca-pub-4129506161314540" data-ad-slot="6673201053"></ins>
-    </div>
+        </div>
+        
+        <!-- Banner lateral para móviles (más agresivo) -->
+        <div id="side-banner" style="position:fixed; right:10px; top:50%; transform:translateY(-50%); width:120px; height:600px; background:rgba(0,0,0,0.8); border:1px solid #00FFFF; border-radius:8px; display:none; z-index:1000;">
+            <ins class="adsbygoogle" 
+                 style="display:block;width:120px;height:600px;" 
+                 data-ad-client="ca-pub-4129506161314540" 
+                 data-ad-slot="6673201053"></ins>
+        </div>
     
     <script>
         // Simplified Game State
@@ -352,12 +369,19 @@
         let backgroundMusicInterval = null;
         
         // Ads helpers (no invasivos)
+        // Ads helpers - ESTRATEGIA AGRESIVA PERO INTELIGENTE
         function showAds() {
             const top = document.getElementById('top-banner');
             const bottom = document.getElementById('bottom-banner');
+            const side = document.getElementById('side-banner');
+            const menu = document.getElementById('menu-banner');
             if (top) top.style.display = 'flex';
             if (bottom) bottom.style.display = 'flex';
+            if (side) side.style.display = 'block';
+            if (menu) menu.style.display = 'block';
             try {
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                (adsbygoogle = window.adsbygoogle || []).push({});
                 (adsbygoogle = window.adsbygoogle || []).push({});
                 (adsbygoogle = window.adsbygoogle || []).push({});
             } catch(e) {}
@@ -365,8 +389,35 @@
         function hideAds() {
             const top = document.getElementById('top-banner');
             const bottom = document.getElementById('bottom-banner');
+            const side = document.getElementById('side-banner');
+            const menu = document.getElementById('menu-banner');
             if (top) top.style.display = 'none';
             if (bottom) bottom.style.display = 'none';
+            if (side) side.style.display = 'none';
+            if (menu) menu.style.display = 'none';
+        }
+        
+        // NUEVA ESTRATEGIA: Mostrar banners después de 30 segundos de juego
+        let gameStartTime = 0;
+        let bannerShown = false;
+        
+        function checkBannerDisplay() {
+            if (!gameState.playing || bannerShown) return;
+            
+            const gameTime = Date.now() - gameStartTime;
+            if (gameTime > 30000) { // 30 segundos
+                showAds();
+                bannerShown = true;
+                console.log('💰 Banners mostrados después de 30s de juego');
+            }
+        }
+        
+        // Mostrar banners en pausa (oportunidad de monetización)
+        function showPauseAds() {
+            if (gameState.paused) {
+                showAds();
+                console.log('💰 Banners mostrados durante pausa');
+            }
         }
         
         // Audio System
@@ -598,6 +649,10 @@
             hideAds();
             gameState.score = 0;
             gameState.level = 1;
+            
+            // Reset banner strategy
+            bannerShown = false;
+            gameStartTime = Date.now();
             gameState.blocks = [];
             gameState.currentBlock = null;
             gameState.gameActive = true;
@@ -857,6 +912,9 @@
         function updateUI() {
             document.getElementById('score').textContent = gameState.score;
             document.getElementById('level').textContent = gameState.level;
+            
+            // Verificar si mostrar banners después de 30s
+            checkBannerDisplay();
             
             // Update high score
             if (gameState.score > gameState.highScore) {
