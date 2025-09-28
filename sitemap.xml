@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<url>
-<loc>https://reservaspro.netlify.app/</loc>
-<lastmod>2024-09-08T16:45:00+00:00</lastmod>
-<priority>1.00</priority>
-<changefreq>daily</changefreq>
-</url>
-<url>
-<loc>https://reservaspro.netlify.app/dashboard/</loc>
-<lastmod>2024-09-08T16:45:00+00:00</lastmod>
-<priority>0.80</priority>
-<changefreq>weekly</changefreq>
-</url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://stack-tower-neon2.netlify.app/</loc>
+    <lastmod>2024-09-25T12:00:00+00:00</lastmod>
+    <priority>1.00</priority>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://stack-tower-neon2.netlify.app/privacy.html</loc>
+    <lastmod>2024-09-25T12:00:00+00:00</lastmod>
+    <priority>0.30</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://stack-tower-neon2.netlify.app/terms.html</loc>
+    <lastmod>2024-09-25T12:00:00+00:00</lastmod>
+    <priority>0.30</priority>
+    <changefreq>monthly</changefreq>
+  </url>
 </urlset>

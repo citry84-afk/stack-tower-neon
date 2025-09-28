@@ -3,7 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stack Tower Neon - MONETIZATION LIVE</title>
+    <title>Stack Tower Neon - Juego de Apilado Gratis | LIPA Studios</title>
+    <meta name="description" content="Juega Stack Tower Neon, el juego de apilado más adictivo. Apila bloques perfectamente y alcanza la máxima puntuación. ¡Gratis y sin descargas!">
+    <meta name="keywords" content="juego apilado, stack tower, juego gratis, neon, arcade, puzzle, bloques">
+    <meta name="author" content="LIPA Studios">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="Spanish">
+    <meta name="revisit-after" content="7 days">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://stack-tower-neon.netlify.app/">
+    <meta property="og:title" content="Stack Tower Neon - Juego de Apilado Gratis">
+    <meta property="og:description" content="Juega Stack Tower Neon, el juego de apilado más adictivo. Apila bloques perfectamente y alcanza la máxima puntuación.">
+    <meta property="og:image" content="https://stack-tower-neon.netlify.app/og-image.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://stack-tower-neon.netlify.app/">
+    <meta property="twitter:title" content="Stack Tower Neon - Juego de Apilado Gratis">
+    <meta property="twitter:description" content="Juega Stack Tower Neon, el juego de apilado más adictivo. Apila bloques perfectamente y alcanza la máxima puntuación.">
+    <meta property="twitter:image" content="https://stack-tower-neon.netlify.app/og-image.jpg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://stack-tower-neon.netlify.app/">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "VideoGame",
+      "name": "Stack Tower Neon",
+      "description": "Juego de apilado adictivo con efectos neon espectaculares. Apila bloques perfectamente y alcanza la máxima puntuación.",
+      "url": "https://stack-tower-neon2.netlify.app/",
+      "image": "https://stack-tower-neon2.netlify.app/og-image.jpg",
+      "genre": "Puzzle",
+      "gamePlatform": "Web Browser",
+      "operatingSystem": "Any",
+      "applicationCategory": "Game",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "LIPA Studios",
+        "url": "https://lipastudios.com"
+      },
+      "inLanguage": "es",
+      "isAccessibleForFree": true,
+      "datePublished": "2024-09-01",
+      "dateModified": "2024-09-25"
+    }
+    </script>
     
     <!-- Google Analytics 4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-633RQLC6T0"></script>
@@ -13,16 +69,27 @@
         gtag('js', new Date());
         gtag('config', 'G-633RQLC6T0');
         
-        window.trackEvent = function(eventName, parameters = {}) {
-            gtag('event', eventName, {
-                event_category: 'game_interaction',
-                ...parameters
-            });
-        };
+            window.trackEvent = function(eventName, parameters = {}) {
+                gtag('event', eventName, {
+                    event_category: 'game_interaction',
+                    ...parameters
+                });
+            };
+            
+            window.trackDonationClick = function(amount = 'custom') {
+                gtag('event', 'donation_click', {
+                    source: 'stack_tower_neon',
+                    amount: amount,
+                    value: parseFloat(amount) || 1
+                });
+            };
     </script>
     
     <!-- Google AdSense - REAL MONETIZATION ACTIVE -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4837743291717475" crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4837743291717475"
+         crossorigin="anonymous"></script>
+    <!-- Consent Mode v2 + Banner -->
+    <script defer src="/consent.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
         
@@ -171,6 +238,20 @@
             box-shadow: 0 0 15px rgba(255, 0, 128, 0.5);
         }
         
+        .btn.donate-btn {
+            border-color: #ff6600;
+            color: #ff6600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn.donate-btn:hover {
+            background: rgba(255, 102, 0, 0.1);
+            box-shadow: 0 0 15px rgba(255, 102, 0, 0.5);
+        }
+        
         .indicator {
             position: absolute;
             top: 50%;
@@ -290,6 +371,14 @@
             <div class="controls">
                 <button class="btn primary" onclick="startGame()">🚀 JUGAR</button>
                 <button class="btn" onclick="toggleAudio()">🔊 AUDIO</button>
+                <div class="donation-section">
+                    <h3 style="color: #FFFF00; margin-bottom: 15px;">💖 ¡Apoya el desarrollo!</h3>
+                    <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                        <a href="https://paypal.me/lipastudios/0.50" target="_blank" onclick="trackDonationClick('0.50')" style="padding: 12px 20px; background: linear-gradient(45deg, #4CAF50, #8BC34A); color: white; font-weight: bold; border-radius: 8px; text-decoration: none; font-size: 14px;">☕ 0,50€</a>
+                        <a href="https://paypal.me/lipastudios/2.00" target="_blank" onclick="trackDonationClick('2.00')" style="padding: 12px 20px; background: linear-gradient(45deg, #FF9800, #FFC107); color: white; font-weight: bold; border-radius: 8px; text-decoration: none; font-size: 14px;">🍕 2€</a>
+                        <a href="https://paypal.me/lipastudios/5.00" target="_blank" onclick="trackDonationClick('5.00')" style="padding: 12px 20px; background: linear-gradient(45deg, #E91E63, #F06292); color: white; font-weight: bold; border-radius: 8px; text-decoration: none; font-size: 14px;">🎮 5€</a>
+                    </div>
+                </div>
             </div>
         </div>
         
@@ -329,6 +418,14 @@
             <div class="controls">
                 <button class="btn primary" onclick="restartGame()">🔄 JUGAR OTRA VEZ</button>
                 <button class="btn" onclick="shareScore()">📤 COMPARTIR</button>
+                <div class="donation-section">
+                    <h3 style="color: #FFFF00; margin-bottom: 15px;">💖 ¡Apoya el desarrollo!</h3>
+                    <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                        <a href="https://paypal.me/lipastudios/0.50" target="_blank" onclick="trackDonationClick('0.50')" style="padding: 12px 20px; background: linear-gradient(45deg, #4CAF50, #8BC34A); color: white; font-weight: bold; border-radius: 8px; text-decoration: none; font-size: 14px;">☕ 0,50€</a>
+                        <a href="https://paypal.me/lipastudios/2.00" target="_blank" onclick="trackDonationClick('2.00')" style="padding: 12px 20px; background: linear-gradient(45deg, #FF9800, #FFC107); color: white; font-weight: bold; border-radius: 8px; text-decoration: none; font-size: 14px;">🍕 2€</a>
+                        <a href="https://paypal.me/lipastudios/5.00" target="_blank" onclick="trackDonationClick('5.00')" style="padding: 12px 20px; background: linear-gradient(45deg, #E91E63, #F06292); color: white; font-weight: bold; border-radius: 8px; text-decoration: none; font-size: 14px;">🎮 5€</a>
+                    </div>
+                </div>
                 <button class="btn" onclick="showMenu()">🏠 MENU</button>
             </div>
         </div>
@@ -352,6 +449,21 @@
     </div>
     
     <script>
+        // DETECCIÓN DE DISPOSITIVO DE GAMA BAJA (SAMSUNG/ANDROID)
+        function detectLowEndDevice() {
+            const userAgent = navigator.userAgent.toLowerCase();
+            const isAndroid = /android/.test(userAgent);
+            const isSamsung = /samsung/.test(userAgent) || /sm-/.test(userAgent);
+            const isLowRAM = navigator.deviceMemory && navigator.deviceMemory < 4;
+            const isSlowCPU = navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4;
+            const lowEndSamsung = /sm-a|sm-j|sm-g3|sm-g5|sm-g7|sm-g9|sm-t2|sm-t3|sm-t5|sm-t7|sm-p/.test(userAgent);
+            
+            return (isAndroid && (isSamsung || lowEndSamsung)) || isLowRAM || isSlowCPU;
+        }
+        
+        const isLowEndDevice = detectLowEndDevice();
+        console.log('🔧 Stack Tower - Dispositivo de gama baja detectado:', isLowEndDevice);
+        
         // Simplified Game State
         let gameState = {
             score: 0,
@@ -361,7 +473,8 @@
             gameActive: false,
             audioEnabled: true,
             streak: 0,
-            highScore: parseInt(localStorage.getItem('stackTowerHighScore') || '0')
+            highScore: parseInt(localStorage.getItem('stackTowerHighScore') || '0'),
+            isLowEndDevice: isLowEndDevice
         };
         
         let gamePaused = false;
@@ -396,22 +509,15 @@
         let bannerShown = false;
         
         function checkBannerDisplay() {
-            if (!gameState.playing || bannerShown) return;
-            
-            const gameTime = Date.now() - gameStartTime;
-            if (gameTime > 30000) { // 30 segundos
-                showAds();
-                bannerShown = true;
-                console.log('💰 Banners mostrados después de 30s de juego');
-            }
+            // ESTRATEGIA INTELIGENTE - NO MOSTRAR BANNERS DURANTE EL JUEGO
+            // Los banners solo se muestran en menú y game over
+            return;
         }
         
-        // Mostrar banners en pausa (oportunidad de monetización)
+        // ESTRATEGIA INTELIGENTE - NO MOSTRAR BANNERS EN PAUSA
         function showPauseAds() {
-            if (gameState.paused) {
-                showAds();
-                console.log('💰 Banners mostrados durante pausa');
-            }
+            // Los banners solo se muestran en menú y game over
+            return;
         }
         
         // Audio System
@@ -426,6 +532,9 @@
         
         function playSound(frequency, duration, type = 'sine', volume = 0.1) {
             if (!audioContext || !gameState.audioEnabled) return;
+            
+            // OPTIMIZACIÓN PARA SAMSUNG - DESHABILITAR AUDIO EN DISPOSITIVOS DE GAMA BAJA
+            if (gameState.isLowEndDevice) return;
             
             try {
                 const oscillator = audioContext.createOscillator();
@@ -456,6 +565,9 @@
         // Background Music System
         function playBackgroundMusic() {
             if (!audioContext || !gameState.audioEnabled) return;
+            
+            // OPTIMIZACIÓN PARA SAMSUNG - DESHABILITAR MÚSICA EN DISPOSITIVOS DE GAMA BAJA
+            if (gameState.isLowEndDevice) return;
             
             stopBackgroundMusic(); // Stop any existing music
             
@@ -782,7 +894,13 @@
             block.x = Math.max(0, Math.min(gameAreaWidth - block.width, newX));
             block.element.style.left = block.x + 'px';
             
-            requestAnimationFrame(() => animateBlock(block));
+            // OPTIMIZACIÓN PARA SAMSUNG - MENOS FRECUENCIA DE ANIMACIÓN
+            if (gameState.isLowEndDevice) {
+                // En dispositivos de gama baja, usar setTimeout en lugar de requestAnimationFrame
+                setTimeout(() => animateBlock(block), 16); // ~60fps
+            } else {
+                requestAnimationFrame(() => animateBlock(block));
+            }
         }
         
         function stackBlock() {
@@ -923,10 +1041,17 @@
             }
         }
         
+        // CONTADOR DE PARTIDAS PARA ESTRATEGIA INTELIGENTE
+        let gamesPlayed = 0;
+        let lastInterstitialTime = 0;
+        
         function gameOver() {
             gameState.gameActive = false;
             stopBackgroundMusic(); // Stop music on game over
             playSound(220, 300, 'sawtooth', 0.15);
+            
+            gamesPlayed++;
+            const currentTime = Date.now();
             
             setTimeout(() => {
                 document.getElementById('final-score').textContent = gameState.score;
@@ -939,10 +1064,22 @@
                 
                 document.getElementById('game-screen').style.display = 'none';
                 document.getElementById('gameover-screen').style.display = 'flex';
+                
+                // ESTRATEGIA INTELIGENTE DE MONETIZACIÓN
+                // 1. Siempre mostrar banners en game over (no invasivo)
                 showAds();
-                // Show interstitial and track
-                const ad = document.getElementById('gameOverAd'); if (ad) ad.style.display='block';
-                try { trackEvent('ad_impression', { game_name:'stack_tower_neon', ad_type:'interstitial' }); } catch(e){}
+                
+                // 2. Interstitial solo cada 3 partidas perdidas Y cada 5 minutos mínimo
+                const timeSinceLastInterstitial = currentTime - lastInterstitialTime;
+                const shouldShowInterstitial = (gamesPlayed % 3 === 0) && (timeSinceLastInterstitial > 300000); // 5 minutos
+                
+                if (shouldShowInterstitial) {
+                    const ad = document.getElementById('gameOverAd'); 
+                    if (ad) ad.style.display='block';
+                    lastInterstitialTime = currentTime;
+                    try { trackEvent('ad_impression', { game_name:'stack_tower_neon', ad_type:'interstitial' }); } catch(e){}
+                }
+                
                 try { trackEvent('game_over', { game_name:'stack_tower_neon', score: gameState.score }); } catch(e){}
             }, 500);
         }
@@ -1219,5 +1356,15 @@ function shareScoreOriginal() {
         
         console.log('🎮 Stack Tower Neon - TEST VERSION LOADED!');
     </script>
+    
+    <!-- Footer Navigation for SEO -->
+    <div style="position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.8); padding: 10px; text-align: center; font-size: 12px; z-index: 1000; display: none;" id="footerNav">
+        <a href="/privacy.html" style="color: #00ffff; margin: 0 10px;">Privacidad</a>
+        <a href="/terms.html" style="color: #00ffff; margin: 0 10px;">Términos</a>
+        <a href="/contact.html" style="color: #00ffff; margin: 0 10px;">Contacto</a>
+        <a href="/about.html" style="color: #00ffff; margin: 0 10px;">Sobre Nosotros</a>
+        <a href="/help.html" style="color: #00ffff; margin: 0 10px;">Ayuda</a>
+        <a href="/news.html" style="color: #00ffff; margin: 0 10px;">Noticias</a>
+    </div>
 </body>
 </html>

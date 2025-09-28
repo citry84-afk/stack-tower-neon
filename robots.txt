@@ -1,26 +1,15 @@
 User-agent: *
 Allow: /
-Disallow: /dashboard/
-Disallow: /admin/
 
-# SEO optimizations
-Sitemap: https://reservaspro.netlify.app/sitemap.xml
+# Sitemap
+Sitemap: https://stack-tower-neon2.netlify.app/sitemap.xml
 
-# Security
-User-agent: *
-Disallow: /api/
-Disallow: *.json$
-Disallow: /*?*
+# Important pages for Google
+Allow: /privacy.html
+Allow: /terms.html
+Allow: /ads.txt
 
-# Performance
-Crawl-delay: 1
-
-# Social media bots
-User-agent: facebookexternalhit
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: LinkedInBot
-Allow: /
+# Block unnecessary files
+Disallow: /consent.js
+Disallow: /*.json$
+Disallow: /netlify.toml

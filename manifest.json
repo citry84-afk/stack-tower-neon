@@ -1,21 +1,25 @@
 {
-  "name": "ReservasPro - Sistema de Reservas",
-  "short_name": "ReservasPro", 
-  "description": "Sistema completo de reservas para peluquerías, centros de estética, psicólogos y profesionales de servicios",
+  "name": "Stack Tower Neon - LIPA Studios",
+  "short_name": "Stack Tower Neon",
+  "description": "Juego de apilado adictivo con efectos neon espectaculares",
   "start_url": "/",
   "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#00ffff",
   "orientation": "portrait",
-  "theme_color": "#1e40af",
-  "background_color": "#f8fafc",
-  "scope": "/",
-  "lang": "es",
-  "categories": ["business", "productivity", "lifestyle"],
   "icons": [
     {
-      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiByeD0iNDAiIGZpbGw9IiMxZTQwYWYiLz4KPHJlY3QgeD0iNDAiIHk9IjQwIiB3aWR0aD0iMTEyIiBoZWlnaHQ9IjI0IiBmaWxsPSIjZmZmZmZmIi8+CjxyZWN0IHg9IjQwIiB5PSI3NiIgd2lkdGg9Ijg0IiBoZWlnaHQ9IjEyIiBmaWxsPSIjZmZmZmZmIi8+CjxyZWN0IHg9IjQwIiB5PSIxMDAiIHdpZHRoPSI3MiIgaGVpZ2h0PSIxMiIgZmlsbD0iI2ZmZmZmZiIvPgo8cmVjdCB4PSI0MCIgeT0iMTI0IiB3aWR0aD0iNjAiIGhlaWdodD0iMTIiIGZpbGw9IiNmZmZmZmYiLz4KPGNpcmNsZSBjeD0iMTUyIiBjeT0iODAiIHI9IjE2IiBmaWxsPSIjMDU5NjY5Ii8+Cjwvc3ZnPgo=",
+      "src": "/favicon-192.png",
       "sizes": "192x192",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
     }
-  ]
+  ],
+  "categories": ["games", "entertainment"],
+  "lang": "es",
+  "scope": "/"
 }
