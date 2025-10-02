@@ -90,6 +90,8 @@
          crossorigin="anonymous"></script>
     <!-- Consent Mode v2 + Banner -->
     <script defer src="/consent.js"></script>
+    <!-- Global Leaderboard System -->
+    <script src="/leaderboard-global.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
         
@@ -370,6 +372,7 @@
             
             <div class="controls">
                 <button class="btn primary" onclick="startGame()">🚀 JUGAR</button>
+                <button class="btn" onclick="showLeaderboardFromMenu()">🏆 RANKING</button>
                 <button class="btn" onclick="toggleAudio()">🔊 AUDIO</button>
                 <div class="donation-section">
                     <h3 style="color: #FFFF00; margin-bottom: 15px;">💖 ¡Apoya el desarrollo!</h3>
@@ -476,6 +479,9 @@
             highScore: parseInt(localStorage.getItem('stackTowerHighScore') || '0'),
             isLowEndDevice: isLowEndDevice
         };
+
+        // Daily Leaderboard
+        let leaderboard = null;
         
         let gamePaused = false;
         let audioContext = null;
@@ -1080,6 +1086,18 @@
                     try { trackEvent('ad_impression', { game_name:'stack_tower_neon', ad_type:'interstitial' }); } catch(e){}
                 }
                 
+                // 🏆 INTEGRACIÓN DEL LEADERBOARD - MOSTRAR RANKING DESPUÉS DE GAME OVER
+                setTimeout(() => {
+                    if (leaderboard) {
+                        // Enviar puntuación al leaderboard (esto mostrará el prompt de nombre si es necesario)
+                        leaderboard.submitScore(gameState.score, gameState.level, gameState.streak);
+                    } else {
+                        // Si no hay leaderboard, crear uno nuevo
+                        leaderboard = new GlobalLeaderboard('stack-tower-neon');
+                        leaderboard.submitScore(gameState.score, gameState.level, gameState.streak);
+                    }
+                }, 1000); // Esperar 1 segundo para que se vea la pantalla de game over
+                
                 try { trackEvent('game_over', { game_name:'stack_tower_neon', score: gameState.score }); } catch(e){}
             }, 500);
         }
@@ -1340,16 +1358,52 @@ function shareScoreOriginal() {
             }
         });
         
+        // 🏆 FUNCIÓN PARA MOSTRAR RANKING DESDE EL MENÚ
+        function showLeaderboardFromMenu() {
+            if (!leaderboard) {
+                leaderboard = new GlobalLeaderboard('stack-tower-neon');
+            }
+            
+            // Si no hay usuario, pedir nombre primero
+            if (!leaderboard.currentUser) {
+                leaderboard.showNamePrompt(false);
+                // Después de que el usuario ingrese su nombre, mostrar el ranking
+                setTimeout(() => {
+                    if (leaderboard.currentUser) {
+                        leaderboard.showRanking({ 
+                            name: leaderboard.currentUser.name, 
+                            score: leaderboard.currentUser.bestScore || 0 
+                        });
+                    }
+                }, 100);
+            } else {
+                // Mostrar ranking directamente
+                leaderboard.showRanking({ 
+                    name: leaderboard.currentUser.name, 
+                    score: leaderboard.currentUser.bestScore || 0 
+                });
+            }
+        }
+
         // Initialize
         setTimeout(() => {
             initAudio();
             hideAds();
             showMenu();
+            
+            // Initialize leaderboard
+            leaderboard = new GlobalLeaderboard('stack-tower-neon');
+            
             try { trackEvent('page_view', { game_name:'stack_tower_neon' }); } catch(e){}
         }, 1500);
 
         function restartGame(){
-            const ad = document.getElementById('gameOverAd'); if (ad) ad.style.display='none';
+            const ad = document.getElementById('gameOverAd'); 
+            if (ad) ad.style.display='none';
+            
+            // Ocultar pantalla de game over
+            document.getElementById('gameover-screen').style.display = 'none';
+            
             try { trackEvent('game_restart', { game_name:'stack_tower_neon' }); } catch(e){}
             startGame();
         }

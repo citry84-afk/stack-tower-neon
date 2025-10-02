@@ -27,6 +27,17 @@
     '</div>';
   document.addEventListener('DOMContentLoaded', function(){ document.body.appendChild(bar); });
 
+  // Mini footer contacto (aparece en todos los sitios)
+  document.addEventListener('DOMContentLoaded', function(){
+    try {
+      var mini = document.createElement('div');
+      mini.className = 'site-mini-footer';
+      mini.style.cssText = 'position:fixed;bottom:6px;right:8px;background:rgba(0,0,0,0.6);border:1px solid #00ffff;border-radius:8px;padding:6px 10px;font:12px/1.2 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;z-index:10000';
+      mini.innerHTML = '<span style="color:#00ffff">Contacto:</span> <a href="mailto:lipastudios4@gmail.com" style="color:#ffff00;text-decoration:none">lipastudios4@gmail.com</a>';
+      document.body.appendChild(mini);
+    } catch(e) {}
+  });
+
   function store(status){ try { localStorage.setItem(CHOICE_KEY, JSON.stringify({ status, ts: Date.now() })); } catch(e){} }
 
   function apply(status){

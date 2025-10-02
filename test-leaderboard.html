@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Leaderboard - Stack Tower Neon</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #050505 0%, #0a0a0a 50%, #1a0a1a 100%);
+            color: #00FFFF;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .btn {
+            background: transparent;
+            border: 2px solid #00FFFF;
+            color: #00FFFF;
+            padding: 15px 25px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 8px;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            background: rgba(0, 255, 255, 0.1);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+        }
+        .test-results {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            border: 1px solid #00FFFF;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏆 Test del Sistema de Leaderboard</h1>
+        <p>Prueba las funcionalidades del ranking diario</p>
+        
+        <button class="btn" onclick="testSubmitScore()">📊 Enviar Puntuación de Prueba</button>
+        <button class="btn" onclick="testShowRanking()">🏆 Ver Ranking</button>
+        <button class="btn" onclick="testClearData()">🗑️ Limpiar Datos</button>
+        <button class="btn" onclick="testBadges()">🏅 Ver Badges</button>
+        
+        <div id="test-results" class="test-results" style="display: none;">
+            <h3>Resultados de la Prueba:</h3>
+            <div id="test-output"></div>
+        </div>
+    </div>
+
+    <!-- Incluir el sistema de leaderboard -->
+    <script src="leaderboard.js"></script>
+    
+    <script>
+        let leaderboard = null;
+        
+        function initTest() {
+            leaderboard = new LipaLeaderboard('stack-tower-neon');
+            console.log('✅ Leaderboard inicializado para testing');
+        }
+        
+        function testSubmitScore() {
+            if (!leaderboard) initTest();
+            
+            const testScore = Math.floor(Math.random() * 1000) + 100;
+            const testLevel = Math.floor(Math.random() * 10) + 1;
+            const testCombo = Math.floor(Math.random() * 20) + 1;
+            
+            console.log(`🎮 Enviando puntuación de prueba: ${testScore} puntos, nivel ${testLevel}, combo ${testCombo}`);
+            
+            const result = leaderboard.submitScore(testScore, testLevel, testCombo);
+            
+            showTestResult(`✅ Puntuación enviada: ${testScore} puntos<br>
+                           📊 Nivel: ${testLevel}<br>
+                           ⚡ Combo: ${testCombo}<br>
+                           🏆 Resultado: ${result ? 'Éxito' : 'Pendiente de nombre'}`);
+        }
+        
+        function testShowRanking() {
+            if (!leaderboard) initTest();
+            
+            const ranking = leaderboard.getRanking();
+            const userRank = leaderboard.getUserRank();
+            
+            console.log('🏆 Mostrando ranking:', ranking);
+            console.log('👤 Posición del usuario:', userRank);
+            
+            let rankingHTML = '<h4>Ranking Actual:</h4>';
+            if (ranking.length === 0) {
+                rankingHTML += '<p>No hay puntuaciones aún. ¡Sé el primero!</p>';
+            } else {
+                ranking.forEach((entry, index) => {
+                    const medal = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : '🏅';
+                    rankingHTML += `<p>${medal} #${index + 1} - ${entry.name}: ${entry.score.toLocaleString()} puntos</p>`;
+                });
+            }
+            
+            rankingHTML += `<p><strong>Tu posición: #${userRank || 'No clasificado'}</strong></p>`;
+            
+            showTestResult(rankingHTML);
+            
+            // También mostrar el ranking visual
+            leaderboard.showRanking({ name: leaderboard.currentUser?.name || 'Anónimo', score: 0 });
+        }
+        
+        function testClearData() {
+            if (!leaderboard) initTest();
+            
+            // Limpiar datos del leaderboard
+            localStorage.removeItem('lipa_leaderboard_stack-tower-neon');
+            localStorage.removeItem('lipa_user_stack-tower-neon');
+            localStorage.removeItem('lipa_badges_stack-tower-neon');
+            
+            // Reinicializar
+            leaderboard = new LipaLeaderboard('stack-tower-neon');
+            
+            showTestResult('🗑️ Datos del leaderboard limpiados correctamente');
+            console.log('🗑️ Datos limpiados');
+        }
+        
+        function testBadges() {
+            if (!leaderboard) initTest();
+            
+            const badges = leaderboard.badges;
+            const recentBadges = leaderboard.getRecentBadges(5);
+            
+            let badgesHTML = `<h4>Badges del Usuario (${badges.length} total):</h4>`;
+            
+            if (badges.length === 0) {
+                badgesHTML += '<p>No tienes badges aún. ¡Sigue jugando para desbloquearlos!</p>';
+            } else {
+                recentBadges.forEach(badge => {
+                    badgesHTML += `<p>${badge.emoji} ${badge.name} - ${badge.description}</p>`;
+                });
+            }
+            
+            showTestResult(badgesHTML);
+            
+            // También mostrar la ventana de badges
+            leaderboard.showBadges();
+        }
+        
+        function showTestResult(html) {
+            const resultsDiv = document.getElementById('test-results');
+            const outputDiv = document.getElementById('test-output');
+            
+            outputDiv.innerHTML = html;
+            resultsDiv.style.display = 'block';
+        }
+        
+        // Inicializar al cargar
+        window.addEventListener('load', initTest);
+    </script>
+</body>
+</html>
