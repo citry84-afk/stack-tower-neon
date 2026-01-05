@@ -18,7 +18,15 @@ class UnifiedGlobalLeaderboard {
 
     loadCurrentUser() {
         try {
-            return JSON.parse(localStorage.getItem(`lipa_user_${this.gameName}`) || 'null');
+            // Intentar cargar usuario específico del juego
+            let user = JSON.parse(localStorage.getItem(`lipa_user_${this.gameName}`) || 'null');
+            
+            // Si no hay usuario específico, intentar cargar usuario global
+            if (!user) {
+                user = JSON.parse(localStorage.getItem('lipa_user_global') || 'null');
+            }
+            
+            return user;
         } catch (e) {
             return null;
         }
@@ -26,7 +34,10 @@ class UnifiedGlobalLeaderboard {
 
     saveCurrentUser() {
         try {
+            // Guardar usuario específico del juego
             localStorage.setItem(`lipa_user_${this.gameName}`, JSON.stringify(this.currentUser));
+            // También guardar como usuario global para sincronización
+            localStorage.setItem('lipa_user_global', JSON.stringify(this.currentUser));
         } catch (e) {
             console.error('Error saving user:', e);
         }
@@ -57,6 +68,8 @@ class UnifiedGlobalLeaderboard {
         if (this.isLoading) return;
         
         this.isLoading = true;
+        console.log('🔄 Cargando leaderboard para:', this.gameName, 'fecha:', this.today);
+        
         try {
             const response = await fetch(`${this.apiUrl}/latest`, {
                 headers: {
@@ -67,8 +80,11 @@ class UnifiedGlobalLeaderboard {
             
             if (response.ok) {
                 const data = await response.json();
+                console.log('📊 Datos recibidos de JSONBin:', data);
+                
                 const allScores = data.record || {};
                 const todayScores = allScores[this.today] || [];
+                console.log('📅 Puntuaciones de hoy:', todayScores);
                 
                 // Filtrar solo las puntuaciones de este juego
                 this.leaderboard = todayScores
@@ -76,9 +92,10 @@ class UnifiedGlobalLeaderboard {
                     .sort((a, b) => b.score - a.score)
                     .slice(0, 50);
                 
-                console.log('✅ Leaderboard cargado desde la nube:', this.leaderboard.length, 'puntuaciones');
+                console.log('✅ Leaderboard cargado desde la nube:', this.leaderboard.length, 'puntuaciones para', this.gameName);
+                console.log('🏆 Puntuaciones encontradas:', this.leaderboard);
             } else {
-                console.error('❌ Error cargando leaderboard:', response.status);
+                console.error('❌ Error cargando leaderboard:', response.status, response.statusText);
                 this.leaderboard = [];
             }
         } catch (error) {
@@ -125,7 +142,10 @@ class UnifiedGlobalLeaderboard {
     }
 
     async submitScore(score, level = 1, combo = 0) {
+        console.log('🎯 Enviando puntuación:', { score, level, combo, game: this.gameName, user: this.currentUser });
+        
         if (!this.currentUser) {
+            console.log('⚠️ No hay usuario, mostrando prompt de nombre');
             this._pendingSubmission = { score, level, combo };
             this.showNamePrompt(true);
             return false;
@@ -141,6 +161,8 @@ class UnifiedGlobalLeaderboard {
             device_id: this.getDeviceId(),
             timestamp: new Date().toISOString()
         };
+        
+        console.log('📤 Datos de puntuación a enviar:', scoreData);
 
         try {
             // Primero obtener los datos actuales
@@ -335,7 +357,11 @@ class UnifiedGlobalLeaderboard {
             'neon-runner-wow': '🏃‍♂️',
             'stack-tower-neon': '📚',
             'neon-beat-stage': '🎵',
-            'neon-lab-physics-wow': '🧪'
+            'neon-lab-physics-wow': '🧪',
+            'stack-tower-wow': '📚',
+            'neon-beat-wow': '🎵',
+            'neon-runner': '🏃‍♂️',
+            'neon-lab-physics': '🧪'
         };
         return icons[gameName] || '🎮';
     }

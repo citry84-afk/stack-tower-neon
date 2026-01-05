@@ -3,19 +3,26 @@
  * PWA Optimization & Offline Functionality
  */
 
-const CACHE_NAME = 'stack-tower-neon-v1.2.0';
-const CACHE_VERSION = '1.2.0';
+const CACHE_NAME = 'stack-tower-neon-v1.3.0';
+const CACHE_VERSION = '1.3.0';
 
 // Essential files to cache for offline play
 const STATIC_CACHE_URLS = [
     '/',
     '/index.html',
+    '/about.html',
+    '/help.html',
+    '/news.html',
+    '/contact.html',
+    '/blog.html',
+    '/juegos-de-reflejos.html',
+    '/moviles-gaming-baratos.html',
+    '/entrenador-reflejos.html',
     '/css/style.css',
     '/js/analytics.js',
     '/js/ads-manager.js',
     '/manifest.json',
-    'https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap',
-    'https://cdnjs.cloudflare.com/ajax/libs/phaser/3.88.2/phaser.min.js'
+    'https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap'
 ];
 
 // Dynamic cache for analytics and ads (shorter TTL)

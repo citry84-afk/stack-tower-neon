@@ -29,6 +29,20 @@
     <!-- Canonical URL -->
     <link rel="canonical" href="https://lipastudios.com/">
     
+    <!-- Performance: Preload critical resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" as="style">
+    
+    <!-- PWA and Mobile -->
+    <meta name="theme-color" content="#00ffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Stack Tower Neon">
+    <meta name="mobile-web-app-capable" content="yes">
+    
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4837743291717475" crossorigin="anonymous"></script>
     
@@ -405,16 +419,16 @@
 </head>
 <body>
     <!-- Navigation Menu -->
-    <nav style="background: rgba(0, 0, 0, 0.9); padding: 15px 20px; border-bottom: 2px solid #00FFFF; position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px);">
+    <nav role="navigation" aria-label="Navegación principal" style="background: rgba(0, 0, 0, 0.9); padding: 15px 20px; border-bottom: 2px solid #00FFFF; position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px);">
         <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
-            <a href="/" style="color: #00FFFF; font-size: 1.3rem; font-weight: bold; text-decoration: none; font-family: 'Orbitron', monospace;">🎮 LIPA Studios</a>
-            <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-                <a href="/" style="color: #e8f6ff; text-decoration: none; padding: 8px 15px; border-radius: 5px; transition: all 0.3s;">Inicio</a>
-                <a href="/juegos-de-reflejos.html" style="color: #e8f6ff; text-decoration: none; padding: 8px 15px; border-radius: 5px; transition: all 0.3s;">Juegos</a>
-                <a href="/moviles-gaming-baratos.html" style="color: #e8f6ff; text-decoration: none; padding: 8px 15px; border-radius: 5px; transition: all 0.3s;">Guías</a>
-                <a href="/entrenador-reflejos.html" style="color: #e8f6ff; text-decoration: none; padding: 8px 15px; border-radius: 5px; transition: all 0.3s;">Entrenador</a>
-                <a href="/help.html" style="color: #e8f6ff; text-decoration: none; padding: 8px 15px; border-radius: 5px; transition: all 0.3s;">Ayuda</a>
-                <a href="/about.html" style="color: #e8f6ff; text-decoration: none; padding: 8px 15px; border-radius: 5px; transition: all 0.3s;">Sobre Nosotros</a>
+            <a href="/" aria-label="LIPA Studios - Inicio" style="color: #00FFFF; font-size: 1.3rem; font-weight: bold; text-decoration: none; font-family: 'Orbitron', monospace;">🎮 LIPA Studios</a>
+            <div role="menubar" style="display: flex; gap: 20px; flex-wrap: wrap;">
+                <a href="/" role="menuitem" aria-label="Página de inicio" style="color: #e8f6ff; text-decoration: none; padding: 8px 15px; border-radius: 5px; transition: all 0.3s;">Inicio</a>
+                <a href="/juegos-de-reflejos.html" role="menuitem" aria-label="Juegos de reflejos" style="color: #e8f6ff; text-decoration: none; padding: 8px 15px; border-radius: 5px; transition: all 0.3s;">Juegos</a>
+                <a href="/moviles-gaming-baratos.html" role="menuitem" aria-label="Guías de móviles gaming" style="color: #e8f6ff; text-decoration: none; padding: 8px 15px; border-radius: 5px; transition: all 0.3s;">Guías</a>
+                <a href="/entrenador-reflejos.html" role="menuitem" aria-label="Entrenador de reflejos" style="color: #e8f6ff; text-decoration: none; padding: 8px 15px; border-radius: 5px; transition: all 0.3s;">Entrenador</a>
+                <a href="/help.html" role="menuitem" aria-label="Ayuda y tutoriales" style="color: #e8f6ff; text-decoration: none; padding: 8px 15px; border-radius: 5px; transition: all 0.3s;">Ayuda</a>
+                <a href="/about.html" role="menuitem" aria-label="Sobre LIPA Studios" style="color: #e8f6ff; text-decoration: none; padding: 8px 15px; border-radius: 5px; transition: all 0.3s;">Sobre Nosotros</a>
             </div>
         </div>
     </nav>

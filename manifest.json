@@ -1,7 +1,7 @@
 {
-  "name": "Stack Tower Neon - LIPA Studios",
+  "name": "Stack Tower Neon - Juegos de Reflejos | LIPA Studios",
   "short_name": "Stack Tower Neon",
-  "description": "Juego de apilado adictivo con efectos neon espectaculares",
+  "description": "El mejor juego de reflejos y entrenador de reflejos gratis. Juegos neon adictivos optimizados para móviles gaming baratos. Mejora tu precisión y tiempo de reacción.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0a0a0a",
@@ -11,15 +11,47 @@
     {
       "src": "/favicon-192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "/favicon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ],
-  "categories": ["games", "entertainment"],
+  "categories": ["games", "entertainment", "education", "arcade"],
   "lang": "es",
-  "scope": "/"
+  "scope": "/",
+  "screenshots": [
+    {
+      "src": "/screenshot-wide.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "/screenshot-narrow.png",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Jugar",
+      "short_name": "Jugar",
+      "description": "Iniciar juego de reflejos",
+      "url": "/?action=play",
+      "icons": [{ "src": "/favicon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Juegos de Reflejos",
+      "short_name": "Reflejos",
+      "description": "Ver todos los juegos de reflejos",
+      "url": "/juegos-de-reflejos.html",
+      "icons": [{ "src": "/favicon-192.png", "sizes": "192x192" }]
+    }
+  ]
 }

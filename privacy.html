@@ -8,6 +8,16 @@
   <meta name="keywords" content="política de privacidad, privacidad lipa studios, protección de datos, GDPR, juegos de reflejos privacidad">
   <link rel="canonical" href="https://lipastudios.com/privacy.html">
   
+  <!-- Performance: Preload critical resources -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" as="style">
+  
+  <!-- PWA and Mobile -->
+  <meta name="theme-color" content="#00ffff">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://lipastudios.com/privacy.html">
@@ -19,6 +29,29 @@
   <meta property="twitter:url" content="https://lipastudios.com/privacy.html">
   <meta property="twitter:title" content="Política de Privacidad LIPA Studios">
   <meta property="twitter:description" content="Política de privacidad completa y transparente de LIPA Studios. GDPR compliant.">
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Inicio",
+        "item": "https://lipastudios.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Política de Privacidad",
+        "item": "https://lipastudios.com/privacy.html"
+      }
+    ]
+  }
+  </script>
+  
   <style>
     body {
       font-family: 'Orbitron', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
