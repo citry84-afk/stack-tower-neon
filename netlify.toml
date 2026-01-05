@@ -1,5 +1,5 @@
 [build]
-  command = "echo 'ReservasPro build complete'"
+  command = "echo 'Stack Tower Neon build complete'"
   publish = "."
 
 [build.environment]
@@ -13,6 +13,8 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    X-Robots-Tag = "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    Cache-Control = "public, max-age=3600, must-revalidate"
 
 [[headers]]
   for = "/sw.js"
@@ -39,7 +41,5 @@
   to = "/"
   status = 200
 
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+# NOTA: El catch-all está en _redirects pero después de todas las páginas HTML reales
+# para evitar redirecciones innecesarias que impiden la indexación

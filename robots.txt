@@ -2,14 +2,40 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://stack-tower-neon2.netlify.app/sitemap.xml
+Sitemap: https://lipastudios.com/sitemap.xml
 
-# Important pages for Google
+# Crawl-delay for better server performance
+Crawl-delay: 1
+
+# Important pages for Google - SEO optimized
 Allow: /privacy.html
 Allow: /terms.html
+Allow: /about.html
+Allow: /help.html
+Allow: /news.html
+Allow: /contact.html
+Allow: /blog.html
+Allow: /juegos-de-reflejos.html
+Allow: /moviles-gaming-baratos.html
+Allow: /moviles-gamers-baratos.html
+Allow: /entrenador-reflejos.html
 Allow: /ads.txt
 
-# Block unnecessary files
+# Block unnecessary files and test pages
 Disallow: /consent.js
 Disallow: /*.json$
 Disallow: /netlify.toml
+Disallow: /test*.html
+Disallow: /debug*.html
+Disallow: /index-backup.html
+Disallow: /index-wow.html
+Disallow: /stack-tower-fixed.html
+Disallow: /dashboard/
+
+# Allow Googlebot full access
+User-agent: Googlebot
+Allow: /
+
+# Allow Bingbot
+User-agent: Bingbot
+Allow: /

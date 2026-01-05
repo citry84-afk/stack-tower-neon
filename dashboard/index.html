@@ -58,6 +58,10 @@
             0%, 100% { opacity: 0; }
             50% { opacity: 1; }
         }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+        }
         .container { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; }
         .logo { font-size: 1.25rem; font-weight: bold; color: #1e40af; text-decoration: none; }
         .btn { 
@@ -90,7 +94,28 @@
             background: white; 
             padding: 1.5rem; 
             border-radius: 12px; 
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1); 
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #1e40af, #3b82f6);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+        .stat-card:hover::before {
+            transform: scaleX(1);
+        }
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
         .stat-title { color: #64748b; font-size: 0.875rem; margin-bottom: 0.5rem; }
         .stat-value { 
@@ -164,8 +189,17 @@
         @media (max-width: 768px) {
             .page-header { flex-direction: column; gap: 1rem; align-items: stretch; }
             .stats { grid-template-columns: 1fr; }
+            .stat-value { font-size: 1.5rem; }
+            h1 { font-size: 1.5rem; }
+            #seo-alert-badge { 
+                font-size: 0.75rem; 
+                padding: 0.4rem 0.8rem;
+                width: 100%;
+                text-align: center;
+            }
         }
     </style>
+  <script src="/consent.js"></script>
 </head>
 <body>
     <header class="header">
@@ -177,10 +211,15 @@
     <div class="container">
         <div class="page-header">
             <h1>Dashboard</h1>
-            <button id="privacyToggle" class="btn btn-secondary" onclick="togglePrivacy()">
-                <span id="privacyIcon">👁️</span>
-                <span id="privacyText">Ocultar datos</span>
-            </button>
+            <div style="display: flex; gap: 0.5rem; align-items: center;">
+                <a href="seo-analytics.html" id="seo-alert-badge" style="display: none; background: #ffaa00; color: #000; padding: 0.5rem 1rem; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.875rem; animation: pulse 2s infinite;">
+                    ⚠️ Alertas SEO
+                </a>
+                <button id="privacyToggle" class="btn btn-secondary" onclick="togglePrivacy()">
+                    <span id="privacyIcon">👁️</span>
+                    <span id="privacyText">Ocultar datos</span>
+                </button>
+            </div>
         </div>
         
         <div class="stats">
@@ -203,6 +242,33 @@
                 <div class="stat-title">Ocupación</div>
                 <div class="stat-value">78%</div>
                 <div class="stat-change" style="color: #dc2626;">-5% vs anterior</div>
+            </div>
+        </div>
+        
+        <div class="stats" style="margin-top: 1rem;">
+            <div class="stat-card" style="border-left: 4px solid #00ffff; cursor: pointer;" onclick="window.location.href='seo-analytics.html'">
+                <div class="stat-title">🔍 SEO - Clics (3 meses)</div>
+                <div class="stat-value" style="color: #00ffff;" id="seo-clicks">10</div>
+                <div class="stat-change" style="color: #059669;">+11.1% vs anterior</div>
+                <div style="margin-top: 0.5rem; font-size: 0.75rem; color: #64748b;">Click para ver detalles →</div>
+            </div>
+            <div class="stat-card" style="border-left: 4px solid #39FF14; cursor: pointer;" onclick="window.location.href='seo-analytics.html'">
+                <div class="stat-title">🔍 SEO - Impresiones (3 meses)</div>
+                <div class="stat-value" style="color: #39FF14;" id="seo-impressions">871</div>
+                <div class="stat-change" style="color: #059669;">+118.8% vs anterior 🚀</div>
+                <div style="margin-top: 0.5rem; font-size: 0.75rem; color: #64748b;">Click para ver detalles →</div>
+            </div>
+            <div class="stat-card" style="border-left: 4px solid #ffaa00; cursor: pointer;" onclick="window.location.href='seo-analytics.html'">
+                <div class="stat-title">🔍 SEO - CTR Medio</div>
+                <div class="stat-value" style="color: #ffaa00;" id="seo-ctr">1.1%</div>
+                <div class="stat-change" style="color: #dc2626;">-0.3% vs anterior</div>
+                <div style="margin-top: 0.5rem; font-size: 0.75rem; color: #64748b;">Click para ver detalles →</div>
+            </div>
+            <div class="stat-card" style="border-left: 4px solid #FF0080; cursor: pointer;" onclick="window.location.href='seo-analytics.html'">
+                <div class="stat-title">🔍 SEO - Posición Media</div>
+                <div class="stat-value" style="color: #FF0080;" id="seo-position">15.4</div>
+                <div class="stat-change" style="color: #059669;">+0.4 mejoras ⬆️</div>
+                <div style="margin-top: 0.5rem; font-size: 0.75rem; color: #64748b;">Click para ver detalles →</div>
             </div>
         </div>
         
@@ -240,6 +306,10 @@
                 <a href="analytics.html" class="action-btn">
                     <span style="font-size: 2rem;">📈</span>
                     <span>Analytics</span>
+                </a>
+                <a href="seo-analytics.html" class="action-btn">
+                    <span style="font-size: 2rem;">🔍</span>
+                    <span>SEO Analytics</span>
                 </a>
                 <a href="calendar-enhanced.html" class="action-btn">
                     <span style="font-size: 2rem;">📅</span>
@@ -289,8 +359,13 @@
         </div>
     </div>
     
+    <script src="/js/search-console-api.js"></script>
     <script>
         let privacyMode = false;
+        
+        function goBack() {
+            window.history.back();
+        }
         
         function togglePrivacy() {
             privacyMode = !privacyMode;
@@ -312,6 +387,35 @@
             localStorage.setItem('privacyMode', privacyMode);
         }
         
+        // Load SEO data
+        async function loadSEOData() {
+            if (window.searchConsoleAPI) {
+                try {
+                    const data = await window.searchConsoleAPI.fetchData('3m');
+                    document.getElementById('seo-clicks').textContent = data.clicks;
+                    document.getElementById('seo-impressions').textContent = data.impressions.toLocaleString('es-ES');
+                    document.getElementById('seo-ctr').textContent = data.ctr.toFixed(1) + '%';
+                    document.getElementById('seo-position').textContent = data.position.toFixed(1);
+                    
+                    // Check for alerts
+                    const queries = await window.searchConsoleAPI.fetchTopQueries(10);
+                    const hasAlerts = queries.some(q => {
+                        const ctr = q.impressions > 0 ? ((q.clicks / q.impressions) * 100) : 0;
+                        return (q.impressions >= 50 && q.clicks === 0) || 
+                               (q.impressions >= 30 && ctr < 1) ||
+                               data.ctr < 1.5 ||
+                               data.position > 15;
+                    });
+                    
+                    if (hasAlerts) {
+                        document.getElementById('seo-alert-badge').style.display = 'block';
+                    }
+                } catch (error) {
+                    console.error('Error loading SEO data:', error);
+                }
+            }
+        }
+        
         // Load privacy preference
         document.addEventListener('DOMContentLoaded', function() {
             const savedPrivacy = localStorage.getItem('privacyMode');
@@ -329,6 +433,9 @@
             // Calculate revenue (simplified)
             const revenue = todayAppts.length * 25; // Average service price
             document.getElementById('weeklyRevenue').textContent = `€${revenue * 7}`;
+            
+            // Load SEO data
+            loadSEOData();
         });
     </script>
 </body>

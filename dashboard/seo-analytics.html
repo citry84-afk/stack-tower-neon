@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO Analytics - Search Console Dashboard | LIPA Studios</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: system-ui, -apple-system, sans-serif; 
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a1a 100%);
+            color: #e8f6ff;
+            min-height: 100vh;
+        }
+        .header { 
+            background: rgba(0, 0, 0, 0.8); 
+            padding: 1rem; 
+            box-shadow: 0 2px 10px rgba(0, 255, 255, 0.2); 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            border-bottom: 2px solid #00ffff;
+        }
+        .back-btn {
+            background: #6b7280;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        .back-btn:hover {
+            background: #4b5563;
+            transform: translateX(-3px);
+        }
+        .container { max-width: 1400px; margin: 2rem auto; padding: 0 1rem; }
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        h1 { 
+            color: #00ffff; 
+            text-shadow: 0 0 15px #00ffff;
+            font-size: 2rem;
+        }
+        .date-selector {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .date-btn {
+            padding: 0.5rem 1rem;
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid #00ffff;
+            color: #00ffff;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .date-btn:hover, .date-btn.active {
+            background: #00ffff;
+            color: #000;
+        }
+        .stats-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+            gap: 1.5rem; 
+            margin-bottom: 2rem; 
+        }
+        .stat-card { 
+            background: rgba(0, 0, 0, 0.5); 
+            padding: 1.5rem; 
+            border-radius: 12px; 
+            border: 2px solid #00ffff;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+        }
+        .stat-card {
+            position: relative;
+        }
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+        }
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 250px;
+            background-color: rgba(0, 0, 0, 0.95);
+            color: #e8f6ff;
+            text-align: left;
+            border-radius: 8px;
+            padding: 0.75rem;
+            border: 1px solid #00ffff;
+            position: absolute;
+            z-index: 1000;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -125px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+        .sparkline {
+            height: 40px;
+            margin-top: 0.5rem;
+            display: flex;
+            align-items: flex-end;
+            gap: 2px;
+        }
+        .sparkline-bar {
+            flex: 1;
+            background: linear-gradient(to top, rgba(0, 255, 255, 0.3), rgba(57, 255, 20, 0.5));
+            border-radius: 2px 2px 0 0;
+            min-height: 2px;
+        }
+        .potential-clicks {
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            background: rgba(255, 170, 0, 0.1);
+            border-left: 3px solid #ffaa00;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            color: #ffaa00;
+        }
+        .filter-bar {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 1rem;
+            border-radius: 12px;
+            border: 2px solid #00ffff;
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .filter-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 0.5rem;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid #00ffff;
+            border-radius: 6px;
+            color: #e8f6ff;
+            font-size: 0.875rem;
+        }
+        .filter-input:focus {
+            outline: none;
+            border-color: #39FF14;
+            box-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
+        }
+        .filter-select {
+            padding: 0.5rem;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid #00ffff;
+            border-radius: 6px;
+            color: #e8f6ff;
+            cursor: pointer;
+        }
+        .stat-title { 
+            color: #888; 
+            font-size: 0.875rem; 
+            margin-bottom: 0.5rem; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .stat-value { 
+            font-size: 2.5rem; 
+            font-weight: bold; 
+            color: #39FF14; 
+            text-shadow: 0 0 10px #39FF14;
+            margin-bottom: 0.5rem;
+        }
+        .stat-change { 
+            font-size: 0.875rem; 
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .stat-change.positive { color: #39FF14; }
+        .stat-change.negative { color: #ff4444; }
+        .stat-change.neutral { color: #888; }
+        .chart-container {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 2px solid #00ffff;
+            margin-bottom: 2rem;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+        }
+        .chart-title {
+            color: #00ffff;
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .chart {
+            height: 300px;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            gap: 0.5rem;
+            padding: 1rem;
+        }
+        .chart-bar {
+            flex: 1;
+            background: linear-gradient(to top, #00ffff, #39FF14);
+            border-radius: 4px 4px 0 0;
+            min-height: 20px;
+            position: relative;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .chart-bar:hover {
+            opacity: 0.8;
+            transform: scaleY(1.05);
+        }
+        .chart-label {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.75rem;
+            color: #888;
+            white-space: nowrap;
+        }
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .insight-card {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 2px solid #FF0080;
+            box-shadow: 0 0 20px rgba(255, 0, 128, 0.1);
+        }
+        .insight-title {
+            color: #FF0080;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .insight-list {
+            list-style: none;
+        }
+        .insight-item {
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            background: rgba(255, 0, 128, 0.1);
+            border-left: 3px solid #FF0080;
+            border-radius: 4px;
+        }
+        .top-queries {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 2px solid #00ffff;
+            margin-bottom: 2rem;
+        }
+        .query-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            background: rgba(0, 255, 255, 0.05);
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        .query-item:hover {
+            background: rgba(0, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+        .query-text {
+            flex: 1;
+            color: #e8f6ff;
+        }
+        .query-metrics {
+            display: flex;
+            gap: 2rem;
+            color: #888;
+            font-size: 0.875rem;
+        }
+        .metric-value {
+            color: #39FF14;
+            font-weight: bold;
+        }
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: #888;
+        }
+        .refresh-btn {
+            background: #39FF14;
+            color: #000;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .refresh-btn:hover {
+            background: #2dd400;
+            transform: scale(1.05);
+        }
+        .export-btn {
+            background: #00ffff;
+            color: #000;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            margin-left: 0.5rem;
+        }
+        .export-btn:hover {
+            background: #00cccc;
+            transform: scale(1.05);
+        }
+        @media (max-width: 768px) {
+            .stats-grid { grid-template-columns: 1fr; }
+            .insights-grid { grid-template-columns: 1fr; }
+            .query-metrics { flex-direction: column; gap: 0.5rem; }
+            .filter-bar { flex-direction: column; }
+            .filter-input, .filter-select { width: 100%; }
+            .tooltip .tooltiptext {
+                width: 200px;
+                margin-left: -100px;
+                font-size: 0.75rem;
+            }
+            .sparkline { height: 30px; }
+            h1 { font-size: 1.5rem; }
+        }
+        @media (max-width: 480px) {
+            .stat-value { font-size: 2rem; }
+            .chart { height: 200px; }
+            .chart-label { font-size: 0.65rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="back-btn">← Volver al Dashboard</a>
+        <div style="color: #00ffff; font-weight: bold; font-size: 1.2rem;">📊 SEO Analytics</div>
+        <div style="color: #888; font-size: 0.9rem;">LIPA Studios</div>
+    </header>
+    
+    <div class="container">
+        <div class="page-header">
+            <h1>🔍 Google Search Console Analytics</h1>
+            <div>
+                <div class="date-selector">
+                    <button class="date-btn" onclick="loadData('24h')">24h</button>
+                    <button class="date-btn" onclick="loadData('7d')">7 días</button>
+                    <button class="date-btn" onclick="loadData('28d')">28 días</button>
+                    <button class="date-btn active" onclick="loadData('3m')">3 meses</button>
+                </div>
+                <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+                    <button class="refresh-btn" onclick="refreshData()" style="flex: 1;">
+                        🔄 Actualizar Datos
+                    </button>
+                    <button class="export-btn" onclick="exportData()">
+                        📥 Exportar
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="loading" class="loading" style="display: none;">
+            ⚡ Cargando datos de Search Console...
+        </div>
+        
+        <div id="dashboard-content">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-title">
+                        <span class="tooltip">Clics Totales
+                            <span class="tooltiptext">Número total de veces que los usuarios hicieron clic en tus resultados de búsqueda. Un aumento indica mayor visibilidad y relevancia.</span>
+                        </span>
+                    </div>
+                    <div class="stat-value" id="total-clicks">10</div>
+                    <div class="stat-change positive">
+                        <span>↗</span>
+                        <span>+1 vs anterior (+11.1%)</span>
+                    </div>
+                    <div class="sparkline" id="clicks-sparkline"></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">
+                        <span class="tooltip">Impresiones Totales
+                            <span class="tooltiptext">Número de veces que tus páginas aparecieron en los resultados de búsqueda. Más impresiones = mayor visibilidad orgánica.</span>
+                        </span>
+                    </div>
+                    <div class="stat-value" id="total-impressions">871</div>
+                    <div class="stat-change positive">
+                        <span>↗</span>
+                        <span>+473 vs anterior (+118.8%)</span>
+                    </div>
+                    <div class="sparkline" id="impressions-sparkline"></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">
+                        <span class="tooltip">CTR Medio
+                            <span class="tooltiptext">Click-Through Rate: Porcentaje de impresiones que resultaron en clics. CTR alto indica títulos y descripciones atractivos.</span>
+                        </span>
+                    </div>
+                    <div class="stat-value" id="avg-ctr">1.1%</div>
+                    <div class="stat-change negative">
+                        <span>↘</span>
+                        <span>-0.3% vs anterior</span>
+                    </div>
+                    <div class="potential-clicks" id="potential-clicks">
+                        Potencial: ~10 clics adicionales si CTR alcanza 2.5%
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">
+                        <span class="tooltip">Posición Media
+                            <span class="tooltiptext">Posición promedio en los resultados de búsqueda. Top 10 es el objetivo ideal para máximo tráfico orgánico.</span>
+                        </span>
+                    </div>
+                    <div class="stat-value" id="avg-position">15.4</div>
+                    <div class="stat-change positive">
+                        <span>↗</span>
+                        <span>+0.4 mejoras</span>
+                    </div>
+                    <div style="margin-top: 0.75rem;">
+                        <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: #888; margin-bottom: 0.25rem;">
+                            <span>Top 10</span>
+                            <span id="position-progress-text">60% del camino</span>
+                        </div>
+                        <div style="height: 8px; background: rgba(255, 255, 255, 0.1); border-radius: 4px; overflow: hidden;">
+                            <div id="position-progress-bar" style="height: 100%; background: linear-gradient(90deg, #FF0080, #00ffff); border-radius: 4px; transition: width 0.5s; width: 0%;"></div>
+                        </div>
+                        <div style="font-size: 0.75rem; color: #888; margin-top: 0.25rem;">
+                            Objetivo: Top 10 (actualmente -5.4) 🎯
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chart-container">
+                <div class="chart-title" id="chart-title">📈 Evolución de Impresiones (Últimos 28 días)</div>
+                <div style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 1rem; font-size: 0.875rem; color: #888;">
+                    <span>🔵 Impresiones</span>
+                    <span>🟢 Clics (indicadores verdes)</span>
+                </div>
+                <div class="chart" id="performance-chart">
+                    <!-- Chart bars will be generated by JavaScript -->
+                </div>
+            </div>
+            
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <div class="insight-title">💡 Oportunidades de Mejora</div>
+                    <ul class="insight-list">
+                        <li class="insight-item">
+                            <strong>Posición 15.4:</strong> ¡Excelente mejora! (+0.4 posiciones) Estás cerca del top 10, enfócate en mejorar contenido y backlinks
+                        </li>
+                        <li class="insight-item">
+                            <strong>CTR 1.1%:</strong> Por debajo del promedio (1.5%), pero con crecimiento masivo de impresiones (+147)
+                        </li>
+                        <li class="insight-item">
+                            <strong>871 impresiones:</strong> Crecimiento excepcional (+473, +118.8%), especialmente en "móviles gaming baratos" (136 impresiones, +39)
+                        </li>
+                        <li class="insight-item">
+                            <strong>Oportunidad crítica:</strong> "móviles gaming baratos" tiene 136 impresiones pero solo 1 clic (CTR 0.7%) - optimizar título y meta descripción URGENTE
+                        </li>
+                        <li class="insight-item">
+                            <strong>Oportunidad crítica:</strong> "móviles gamers baratos" tiene 110 impresiones pero 0 clics - crear contenido más atractivo
+                        </li>
+                    </ul>
+                </div>
+                <div class="insight-card">
+                    <div class="insight-title">🎯 Acciones Recomendadas</div>
+                    <ul class="insight-list">
+                        <li class="insight-item">
+                            Crear más contenido sobre "juegos de reflejos"
+                        </li>
+                        <li class="insight-item">
+                            Optimizar meta descripciones con CTAs
+                        </li>
+                        <li class="insight-item">
+                            Mejorar velocidad de carga (Core Web Vitals)
+                        </li>
+                        <li class="insight-item">
+                            Aumentar enlaces internos entre páginas
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="insight-card" style="margin-bottom: 2rem; border-color: #ffaa00;" id="alerts-container">
+                <div class="insight-title" style="color: #ffaa00;">
+                    ⚠️ Alertas de Optimización
+                </div>
+                <ul class="insight-list" id="alerts-list">
+                    <!-- Alerts will be generated dynamically -->
+                </ul>
+            </div>
+            
+            <div class="top-queries">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
+                    <h3 style="color: #00ffff; margin: 0;">🔎 Top Búsquedas (Últimos 3 meses)</h3>
+                    <div class="filter-bar" style="margin: 0; padding: 0.5rem; border: none; background: transparent;">
+                        <input type="text" class="filter-input" id="query-filter" placeholder="🔍 Buscar query..." onkeyup="filterQueries()">
+                        <select class="filter-select" id="sort-filter" onchange="sortQueries()">
+                            <option value="impressions">Ordenar por: Impresiones</option>
+                            <option value="clicks">Ordenar por: Clics</option>
+                            <option value="ctr">Ordenar por: CTR</option>
+                            <option value="name">Ordenar por: Nombre</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="top-queries-list">
+                    <div class="query-item">
+                        <div class="query-text">móviles gaming baratos</div>
+                        <div class="query-metrics">
+                            <span>Clics: <span class="metric-value">1</span></span>
+                            <span>Impresiones: <span class="metric-value">136</span></span>
+                            <span>CTR: <span class="metric-value">0.7%</span> ⚠️</span>
+                        </div>
+                    </div>
+                    <div class="query-item">
+                        <div class="query-text">lipa studios</div>
+                        <div class="query-metrics">
+                            <span>Clics: <span class="metric-value">1</span></span>
+                            <span>Impresiones: <span class="metric-value">68</span></span>
+                            <span>CTR: <span class="metric-value">1.5%</span></span>
+                        </div>
+                    </div>
+                    <div class="query-item">
+                        <div class="query-text">juegos de reflejos gratis</div>
+                        <div class="query-metrics">
+                            <span>Clics: <span class="metric-value">1</span></span>
+                            <span>Impresiones: <span class="metric-value">5</span></span>
+                            <span>CTR: <span class="metric-value">20%</span> ✅</span>
+                        </div>
+                    </div>
+                    <div class="query-item">
+                        <div class="query-text">móviles gamers baratos</div>
+                        <div class="query-metrics">
+                            <span>Clics: <span class="metric-value">0</span></span>
+                            <span>Impresiones: <span class="metric-value">110</span></span>
+                            <span>CTR: <span class="metric-value">0%</span> ⚠️</span>
+                        </div>
+                    </div>
+                    <div class="query-item">
+                        <div class="query-text">juegos de reflejos</div>
+                        <div class="query-metrics">
+                            <span>Clics: <span class="metric-value">0</span></span>
+                            <span>Impresiones: <span class="metric-value">10</span></span>
+                            <span>CTR: <span class="metric-value">0%</span></span>
+                        </div>
+                    </div>
+                    <div class="query-item">
+                        <div class="query-text">móviles gaming económicos</div>
+                        <div class="query-metrics">
+                            <span>Clics: <span class="metric-value">0</span></span>
+                            <span>Impresiones: <span class="metric-value">9</span></span>
+                            <span>CTR: <span class="metric-value">0%</span></span>
+                        </div>
+                    </div>
+                    <div class="query-item">
+                        <div class="query-text">juegos para mejorar los reflejos</div>
+                        <div class="query-metrics">
+                            <span>Clics: <span class="metric-value">0</span></span>
+                            <span>Impresiones: <span class="metric-value">9</span></span>
+                            <span>CTR: <span class="metric-value">0%</span></span>
+                        </div>
+                    </div>
+                    <div class="query-item">
+                        <div class="query-text">moviles gamer baratos</div>
+                        <div class="query-metrics">
+                            <span>Clics: <span class="metric-value">0</span></span>
+                            <span>Impresiones: <span class="metric-value">4</span></span>
+                            <span>CTR: <span class="metric-value">0%</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="/js/search-console-api.js"></script>
+    <script>
+        // Sample data from Search Console
+        const searchConsoleData = {
+            '24h': {
+                clicks: 0,
+                impressions: 12,
+                ctr: 0,
+                position: 16.2
+            },
+            '7d': {
+                clicks: 2,
+                impressions: 89,
+                ctr: 2.2,
+                position: 15.8
+            },
+            '28d': {
+                clicks: 7,
+                impressions: 320,
+                ctr: 2.2,
+                position: 15.4
+            },
+            '3m': {
+                clicks: 10,
+                impressions: 871,
+                ctr: 1.1,
+                position: 15.4
+            }
+        };
+        
+        let currentPeriod = '28d';
+        
+        async function loadData(period) {
+            currentPeriod = period;
+            document.querySelectorAll('.date-btn').forEach(btn => btn.classList.remove('active'));
+            if (event && event.target) {
+                event.target.classList.add('active');
+            }
+            
+            const data = searchConsoleData[period];
+            if (data) {
+                updateDashboard(data);
+                generateChart(period);
+                await loadTopQueries();
+                
+                // Update chart title
+                const periodNames = {
+                    '24h': 'Últimas 24 horas',
+                    '7d': 'Últimos 7 días',
+                    '28d': 'Últimos 28 días',
+                    '3m': 'Últimos 3 meses'
+                };
+                document.getElementById('chart-title').textContent = `📈 Evolución de Impresiones (${periodNames[period] || 'Últimos 28 días'})`;
+            }
+        }
+        
+        let allQueries = [];
+        
+        function updateDashboard(data) {
+            document.getElementById('total-clicks').textContent = data.clicks.toLocaleString('es-ES');
+            document.getElementById('total-impressions').textContent = data.impressions.toLocaleString('es-ES');
+            document.getElementById('avg-ctr').textContent = data.ctr.toFixed(1) + '%';
+            document.getElementById('avg-position').textContent = data.position.toFixed(1);
+            
+            // Update potential clicks
+            const targetCTR = 2.5;
+            const potentialClicks = Math.round((data.impressions * targetCTR / 100) - data.clicks);
+            if (potentialClicks > 0) {
+                document.getElementById('potential-clicks').textContent = 
+                    `Potencial: ~${potentialClicks} clics adicionales si CTR alcanza ${targetCTR}%`;
+            } else {
+                document.getElementById('potential-clicks').textContent = 
+                    `¡Excelente CTR! Objetivo alcanzado.`;
+                document.getElementById('potential-clicks').style.borderLeftColor = '#39FF14';
+                document.getElementById('potential-clicks').style.color = '#39FF14';
+            }
+            
+            // Update position progress bar
+            const targetPosition = 10;
+            const currentPosition = data.position;
+            // Calculate progress: 100% when position = 1, 0% when position = 20+
+            const maxPosition = 20;
+            const progress = Math.max(0, Math.min(100, ((maxPosition - currentPosition) / (maxPosition - targetPosition)) * 100));
+            const progressBar = document.getElementById('position-progress-bar');
+            const progressText = document.getElementById('position-progress-text');
+            
+            if (progressBar) {
+                progressBar.style.width = `${progress}%`;
+            }
+            if (progressText) {
+                if (currentPosition <= targetPosition) {
+                    progressText.textContent = '✅ Objetivo alcanzado';
+                    progressText.style.color = '#39FF14';
+                } else {
+                    const remaining = currentPosition - targetPosition;
+                    progressText.textContent = `${Math.round(progress)}% del camino (faltan ${remaining.toFixed(1)} posiciones)`;
+                }
+            }
+            
+            // Generate sparklines
+            generateSparklines();
+        }
+        
+        function generateSparklines() {
+            // Generate sparkline for clicks
+            const clicksSparkline = document.getElementById('clicks-sparkline');
+            clicksSparkline.innerHTML = '';
+            const clicksData = [0, 1, 0, 1, 2, 1, 2, 1, 2, 1, 2, 1, 1, 0, 1, 0, 1, 2, 1, 2];
+            const maxClicks = Math.max(...clicksData, 1);
+            clicksData.forEach(val => {
+                const bar = document.createElement('div');
+                bar.className = 'sparkline-bar';
+                bar.style.height = `${(val / maxClicks) * 100}%`;
+                clicksSparkline.appendChild(bar);
+            });
+            
+            // Generate sparkline for impressions
+            const impressionsSparkline = document.getElementById('impressions-sparkline');
+            impressionsSparkline.innerHTML = '';
+            const impressionsData = [12, 15, 18, 22, 25, 28, 30, 32, 35, 38, 40, 42, 45, 48, 50, 52, 55, 58, 60, 62];
+            const maxImpressions = Math.max(...impressionsData);
+            impressionsData.forEach(val => {
+                const bar = document.createElement('div');
+                bar.className = 'sparkline-bar';
+                bar.style.height = `${(val / maxImpressions) * 100}%`;
+                impressionsSparkline.appendChild(bar);
+            });
+        }
+        
+        function filterQueries() {
+            const filter = document.getElementById('query-filter').value.toLowerCase();
+            const items = document.querySelectorAll('.query-item');
+            items.forEach(item => {
+                const queryText = item.querySelector('.query-text').textContent.toLowerCase();
+                item.style.display = queryText.includes(filter) ? 'flex' : 'none';
+            });
+        }
+        
+        function sortQueries() {
+            const sortBy = document.getElementById('sort-filter').value;
+            const queriesList = document.getElementById('top-queries-list');
+            const items = Array.from(queriesList.querySelectorAll('.query-item'));
+            
+            items.sort((a, b) => {
+                const aText = a.querySelector('.query-text').textContent;
+                const aMetrics = a.querySelectorAll('.metric-value');
+                const bText = b.querySelector('.query-text').textContent;
+                const bMetrics = b.querySelectorAll('.metric-value');
+                
+                let aVal, bVal;
+                switch(sortBy) {
+                    case 'impressions':
+                        aVal = parseInt(aMetrics[1].textContent.replace(/[^\d]/g, '') || '0');
+                        bVal = parseInt(bMetrics[1].textContent.replace(/[^\d]/g, '') || '0');
+                        return bVal - aVal;
+                    case 'clicks':
+                        aVal = parseInt(aMetrics[0].textContent.replace(/[^\d]/g, '') || '0');
+                        bVal = parseInt(bMetrics[0].textContent.replace(/[^\d]/g, '') || '0');
+                        return bVal - aVal;
+                    case 'ctr':
+                        aVal = parseFloat(aMetrics[2].textContent.replace(/[^\d.]/g, '') || '0');
+                        bVal = parseFloat(bMetrics[2].textContent.replace(/[^\d.]/g, '') || '0');
+                        return bVal - aVal;
+                    case 'name':
+                        return aText.localeCompare(bText);
+                    default:
+                        return 0;
+                }
+            });
+            
+            items.forEach(item => queriesList.appendChild(item));
+        }
+        
+        function generateChart(period) {
+            const chart = document.getElementById('performance-chart');
+            chart.innerHTML = '';
+            
+            // Calculate days based on period
+            const daysMap = {
+                '24h': 1,
+                '7d': 7,
+                '28d': 28,
+                '3m': 90
+            };
+            const days = daysMap[period] || 28;
+            
+            // Get total data for the period
+            const periodData = searchConsoleData[period] || searchConsoleData['28d'];
+            const avgDailyImpressions = periodData.impressions / days;
+            const avgDailyClicks = periodData.clicks / days;
+            
+            // Calculate max value for scaling
+            const maxValue = Math.max(avgDailyImpressions * 1.5, 30);
+            
+            // Generate realistic data with trend
+            const baseDate = new Date();
+            baseDate.setDate(baseDate.getDate() - days);
+            
+            for (let i = 0; i < days; i++) {
+                const date = new Date(baseDate);
+                date.setDate(date.getDate() + i);
+                
+                // Add some realistic variation with slight upward trend
+                const trendFactor = 1 + (i / days) * 0.3; // 30% increase over period
+                const variation = 0.7 + Math.random() * 0.6; // ±30% variation
+                
+                const impressions = Math.max(1, Math.round(avgDailyImpressions * trendFactor * variation));
+                const clicks = Math.max(0, Math.round(avgDailyClicks * trendFactor * variation));
+                
+                const bar = document.createElement('div');
+                bar.className = 'chart-bar';
+                bar.style.height = `${Math.min(100, (impressions / maxValue) * 100)}%`;
+                bar.title = `${date.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit' })}: ${clicks} clics, ${impressions} impresiones`;
+                
+                // Add click indicator
+                if (clicks > 0) {
+                    const clickIndicator = document.createElement('div');
+                    clickIndicator.style.cssText = 'position: absolute; top: -8px; left: 50%; transform: translateX(-50%); width: 6px; height: 6px; background: #39FF14; border-radius: 50%; box-shadow: 0 0 5px #39FF14;';
+                    bar.appendChild(clickIndicator);
+                }
+                
+                const label = document.createElement('div');
+                label.className = 'chart-label';
+                // Show label only for certain intervals to avoid clutter
+                if (days <= 7 || i % Math.ceil(days / 14) === 0 || i === days - 1) {
+                    label.textContent = date.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit' });
+                }
+                
+                bar.appendChild(label);
+                chart.appendChild(bar);
+            }
+        }
+        
+        async function loadTopQueries() {
+            if (window.searchConsoleAPI) {
+                const queries = await window.searchConsoleAPI.fetchTopQueries(10);
+                allQueries = queries; // Store for filtering
+                const queriesList = document.getElementById('top-queries-list');
+                queriesList.innerHTML = '';
+                
+                // Generate alerts based on queries
+                generateAlerts(queries);
+                
+                queries.forEach(q => {
+                    const ctr = q.impressions > 0 ? ((q.clicks / q.impressions) * 100).toFixed(1) : 0;
+                    const ctrDisplay = q.impressions === 1 && q.clicks === 1 ? '100%' : `${ctr}%`;
+                    const warning = q.impressions >= 20 && q.clicks === 0 ? ' ⚠️' : '';
+                    
+                    const item = document.createElement('div');
+                    item.className = 'query-item';
+                    const ctrColor = q.impressions >= 20 && q.clicks === 0 ? '#ff4444' : 
+                                    parseFloat(ctr) >= 5 ? '#39FF14' : 
+                                    parseFloat(ctr) >= 2 ? '#ffaa00' : '#888';
+                    item.innerHTML = `
+                        <div class="query-text">${q.query}</div>
+                        <div class="query-metrics">
+                            <span>Clics: <span class="metric-value">${q.clicks.toLocaleString('es-ES')}</span></span>
+                            <span>Impresiones: <span class="metric-value">${q.impressions.toLocaleString('es-ES')}</span></span>
+                            <span>CTR: <span class="metric-value" style="color: ${ctrColor};">${ctrDisplay}${warning}</span></span>
+                        </div>
+                    `;
+                    queriesList.appendChild(item);
+                });
+            }
+        }
+        
+        function generateAlerts(queries) {
+            const alertsList = document.getElementById('alerts-list');
+            alertsList.innerHTML = '';
+            
+            const alerts = [];
+            
+            // High impressions, low clicks (opportunity)
+            queries.forEach(q => {
+                const ctr = q.impressions > 0 ? ((q.clicks / q.impressions) * 100) : 0;
+                
+                if (q.impressions >= 50 && q.clicks === 0) {
+                    alerts.push({
+                        type: 'critical',
+                        query: q.query,
+                        message: `${q.impressions} impresiones pero 0 clics`,
+                        action: 'Optimizar título y meta descripción, añadir enlaces de afiliados Amazon',
+                        color: '#ff4444'
+                    });
+                } else if (q.impressions >= 30 && ctr < 1) {
+                    alerts.push({
+                        type: 'warning',
+                        query: q.query,
+                        message: `${q.impressions} impresiones pero solo ${q.clicks} clic${q.clicks !== 1 ? 's' : ''} (CTR ${ctr.toFixed(1)}%)`,
+                        action: 'Mejorar visibilidad del contenido y optimizar meta descripción',
+                        color: '#ffaa00'
+                    });
+                } else if (q.impressions >= 3 && ctr >= 20) {
+                    alerts.push({
+                        type: 'success',
+                        query: q.query,
+                        message: `Excelente CTR del ${ctr.toFixed(0)}%`,
+                        action: 'Crear más contenido similar para capitalizar esta keyword',
+                        color: '#39FF14'
+                    });
+                }
+            });
+            
+            // Add general alerts
+            const currentData = searchConsoleData[currentPeriod] || searchConsoleData['3m'];
+            if (currentData.ctr < 1.5) {
+                alerts.push({
+                    type: 'warning',
+                    query: 'General',
+                    message: `CTR medio bajo (${currentData.ctr.toFixed(1)}%)`,
+                    action: 'Revisar y optimizar títulos y meta descripciones de todas las páginas',
+                    color: '#ffaa00'
+                });
+            }
+            
+            if (currentData.position > 15) {
+                alerts.push({
+                    type: 'warning',
+                    query: 'General',
+                    message: `Posición media ${currentData.position.toFixed(1)} (objetivo: top 10)`,
+                    action: 'Mejorar contenido, obtener backlinks y optimizar SEO técnico',
+                    color: '#ffaa00'
+                });
+            }
+            
+            // Display alerts
+            if (alerts.length === 0) {
+                alertsList.innerHTML = '<li class="insight-item" style="border-left-color: #39FF14;">✅ No hay alertas críticas. ¡Sigue así!</li>';
+            } else {
+                alerts.forEach(alert => {
+                    const item = document.createElement('li');
+                    item.className = 'insight-item';
+                    item.style.borderLeftColor = alert.color;
+                    item.innerHTML = `
+                        <strong>"${alert.query}":</strong> ${alert.message}. 
+                        <strong>Acción:</strong> ${alert.action}
+                    `;
+                    alertsList.appendChild(item);
+                });
+            }
+        }
+        
+        function refreshData() {
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('dashboard-content').style.opacity = '0.5';
+            
+            // Simulate API call
+            setTimeout(async () => {
+                if (window.searchConsoleAPI) {
+                    const data = await window.searchConsoleAPI.fetchData(currentPeriod);
+                    updateDashboard(data);
+                    generateChart(currentPeriod);
+                    await loadTopQueries();
+                }
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('dashboard-content').style.opacity = '1';
+            }, 1500);
+        }
+        
+        function exportData() {
+            const data = {
+                period: currentPeriod,
+                metrics: searchConsoleData[currentPeriod],
+                timestamp: new Date().toISOString(),
+                queries: []
+            };
+            
+            // Get queries data
+            const queryItems = document.querySelectorAll('.query-item');
+            queryItems.forEach(item => {
+                const queryText = item.querySelector('.query-text').textContent;
+                const metrics = item.querySelectorAll('.metric-value');
+                data.queries.push({
+                    query: queryText,
+                    clicks: parseInt(metrics[0].textContent.replace(/[^\d]/g, '') || '0'),
+                    impressions: parseInt(metrics[1].textContent.replace(/[^\d]/g, '') || '0'),
+                    ctr: metrics[2].textContent
+                });
+            });
+            
+            // Create and download JSON file
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `seo-analytics-${currentPeriod}-${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Set 3m as default active
+            document.querySelectorAll('.date-btn').forEach(btn => {
+                if (btn.textContent.includes('3 meses')) {
+                    btn.classList.add('active');
+                }
+            });
+            currentPeriod = '3m';
+            const data = searchConsoleData['3m'];
+            if (data) {
+                updateDashboard(data);
+            }
+            generateChart('3m');
+            await loadTopQueries();
+            
+            // Add keyboard shortcuts
+            document.addEventListener('keydown', (e) => {
+                if (e.ctrlKey || e.metaKey) {
+                    if (e.key === 'f') {
+                        e.preventDefault();
+                        document.getElementById('query-filter').focus();
+                    } else if (e.key === 'r') {
+                        e.preventDefault();
+                        refreshData();
+                    }
+                }
+            });
+            
+            console.log('📊 SEO Analytics Dashboard loaded');
+            console.log('💡 Tips: Ctrl+F para buscar, Ctrl+R para actualizar');
+        });
+    </script>
+</body>
+</html>
+
+
+

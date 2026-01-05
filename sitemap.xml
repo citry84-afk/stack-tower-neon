@@ -1,21 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://stack-tower-neon2.netlify.app/</loc>
-    <lastmod>2024-09-25T12:00:00+00:00</lastmod>
+    <loc>https://lipastudios.com/</loc>
+    <lastmod>2025-01-05T17:35:00+00:00</lastmod>
     <priority>1.00</priority>
     <changefreq>daily</changefreq>
+    <mobile:mobile/>
   </url>
   <url>
-    <loc>https://stack-tower-neon2.netlify.app/privacy.html</loc>
-    <lastmod>2024-09-25T12:00:00+00:00</lastmod>
-    <priority>0.30</priority>
+    <loc>https://lipastudios.com/juegos-de-reflejos.html</loc>
+    <lastmod>2025-01-05T17:35:00+00:00</lastmod>
+    <priority>0.95</priority>
+    <changefreq>weekly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://lipastudios.com/moviles-gaming-baratos.html</loc>
+    <lastmod>2025-01-05T17:35:00+00:00</lastmod>
+    <priority>0.90</priority>
+    <changefreq>monthly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://lipastudios.com/moviles-gamers-baratos.html</loc>
+    <lastmod>2025-01-05T17:35:00+00:00</lastmod>
+    <priority>0.90</priority>
+    <changefreq>monthly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://lipastudios.com/entrenador-reflejos.html</loc>
+    <lastmod>2025-01-05T17:35:00+00:00</lastmod>
+    <priority>0.90</priority>
+    <changefreq>monthly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://lipastudios.com/about.html</loc>
+    <lastmod>2025-01-05T17:35:00+00:00</lastmod>
+    <priority>0.90</priority>
+    <changefreq>weekly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://lipastudios.com/blog.html</loc>
+    <lastmod>2025-01-05T17:35:00+00:00</lastmod>
+    <priority>0.85</priority>
+    <changefreq>weekly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://lipastudios.com/help.html</loc>
+    <lastmod>2025-01-05T17:35:00+00:00</lastmod>
+    <priority>0.85</priority>
+    <changefreq>monthly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://lipastudios.com/news.html</loc>
+    <lastmod>2025-01-05T17:35:00+00:00</lastmod>
+    <priority>0.80</priority>
+    <changefreq>weekly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://lipastudios.com/contact.html</loc>
+    <lastmod>2025-01-05T17:35:00+00:00</lastmod>
+    <priority>0.70</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://stack-tower-neon2.netlify.app/terms.html</loc>
-    <lastmod>2024-09-25T12:00:00+00:00</lastmod>
-    <priority>0.30</priority>
+    <loc>https://lipastudios.com/privacy.html</loc>
+    <lastmod>2025-01-05T17:35:00+00:00</lastmod>
+    <priority>0.50</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://lipastudios.com/terms.html</loc>
+    <lastmod>2025-01-05T17:35:00+00:00</lastmod>
+    <priority>0.50</priority>
     <changefreq>monthly</changefreq>
   </url>
 </urlset>
