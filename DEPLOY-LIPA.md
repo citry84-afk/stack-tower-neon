@@ -19,15 +19,15 @@ Netlify **ya** despliega solo con push a `main` del **repo que tengas enlazado**
 
 ## Opción B — Solo si quieres seguir con Netlify enlazado a `lipastudios-landing`
 
-Útil si por política no puedes cambiar el repo en Netlify todavía: copiar **este** `main` al otro repo con GitHub Actions.
+Útil si no cambias el repo en Netlify: copiar **este** `main` al otro repo con GitHub Actions.
 
-1. Repo **stack-tower-neon** → **Settings** → **Secrets and variables** → **Actions**.
-2. Secret **`LIPA_MIRROR_TOKEN`**: [PAT](https://github.com/settings/tokens) con push a `citry84-afk/lipastudios-landing`.
-3. Cada push a `main` aquí ejecuta `.github/workflows/sync-to-lipastudios-landing.yml`.
+1. Repo **stack-tower-neon** → **Settings** → **Secrets and variables** → **Actions** → secret **`LIPA_MIRROR_TOKEN`** ([PAT](https://github.com/settings/tokens) con push a `lipastudios-landing`).
+2. En GitHub (web): **Actions** → **New workflow** → pegar el contenido de **`scripts/github-workflow-sync-lipa.template.yml`** como `.github/workflows/sync-to-lipastudios-landing.yml`.  
+   *(No lo incluimos en el repo por defecto: algunos clientes Git OAuth no pueden subir workflows sin permiso `workflow`; créalo desde la web o usa SSH + token con ese scope.)*
 
-Sin secret configurado el workflow **no falla** el CI (solo avisa): puedes usar solo la opción A.
+Sin secret el job solo avisa y termina OK.
 
-Si el mirror falla por historiales distintos, alinea `main` una vez entre repos o pasa a la opción A.
+Si el mirror falla por historiales distintos, alinea `main` entre repos o usa la opción A.
 
 ## Comprobar
 

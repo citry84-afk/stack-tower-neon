@@ -17,9 +17,7 @@
     gtag('config', 'G-5XL1W8RNTP');
   </script>
   
-  <!-- Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4837743291717475" crossorigin="anonymous"></script>
-  
+  <!-- AdSense: consent.js -->
   <script src="/consent.js"></script>
   
   <style>
@@ -30,43 +28,7 @@
       margin: 0;
       line-height: 1.8;
     }
-    nav {
-      background: rgba(0, 0, 0, 0.9);
-      padding: 15px 20px;
-      border-bottom: 2px solid #00FFFF;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      backdrop-filter: blur(10px);
-    }
-    nav .nav-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
-    nav a {
-      color: #e8f6ff;
-      text-decoration: none;
-      padding: 8px 15px;
-      border-radius: 5px;
-      transition: all 0.3s;
-    }
-    nav a:hover {
-      background: rgba(0, 255, 255, 0.1);
-      color: #00FFFF;
-    }
-    nav .logo {
-      color: #00FFFF;
-      font-size: 1.3rem;
-      font-weight: bold;
-      text-decoration: none;
-      font-family: 'Orbitron', monospace;
-    }
-    .wrap {
+.wrap {
       max-width: 900px;
       margin: 0 auto;
       padding: 32px 20px;
@@ -127,21 +89,34 @@
       margin-bottom: 10px;
     }
   </style>
+  <link rel="stylesheet" href="/css/site-nav.css">
 </head>
 <body>
-  <nav>
-    <div class="nav-content">
-      <a href="/" class="logo">🎮 LIPA Studios</a>
-      <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-        <a href="/">Inicio</a>
-        <a href="/juegos-de-reflejos.html">Juegos</a>
-        <a href="/moviles-gaming-baratos.html">Guías</a>
-        <a href="/blog.html">Blog</a>
-        <a href="/help.html">Ayuda</a>
-        <a href="/about.html">Sobre Nosotros</a>
-      </div>
-    </div>
-  </nav>
+      <nav class="site-nav" role="navigation" aria-label="Navegación principal">
+        <div class="site-nav__inner">
+            <div class="site-nav__top">
+                <a class="site-nav__brand" href="/" aria-label="LIPA Studios - Inicio">🎮 LIPA Studios</a>
+                <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Abrir menú de navegación">
+                    <span class="nav-toggle__icon" aria-hidden="true">
+                        <span></span><span></span><span></span>
+                    </span>
+                    Menú
+                </button>
+            </div>
+            <div id="primary-nav" class="nav-links">
+                <a href="/">Inicio</a>
+                <a href="/juegos-de-reflejos.html">Juegos</a>
+                <a href="/top-juegos-reflejos.html">Top Reflejos</a>
+                <a href="/moviles-gaming-baratos.html">Guías</a>
+                <a href="/blog.html">Blog</a>
+                <a href="/entrenador-reflejos.html">Entrenador</a>
+                <a href="/help.html">Ayuda</a>
+                <a href="/about.html">Sobre mí</a>
+            </div>
+        </div>
+        <div class="nav-backdrop" id="nav-backdrop" aria-hidden="true"></div>
+    </nav>
+    <script src="/js/site-nav.js" defer></script>
   
   <div class="wrap">
     <a href="/blog.html" class="back-btn">← Volver al Blog</a>
@@ -360,7 +335,9 @@
   <footer style="background: rgba(0, 0, 0, 0.5); padding: 30px 20px; margin-top: 40px; border-top: 2px solid #00ffff; text-align: center;">
     <div style="max-width: 1200px; margin: 0 auto;">
       <p style="color: #888; font-size: 0.9rem;">&copy; 2024 LIPA Studios. Todos los derechos reservados.</p>
-      <p style="margin-top: 10px;"><a href="/blog.html" style="color: #00ffee;">← Volver al Blog</a> | <a href="/" style="color: #00ffee;">Inicio</a></p>
+      <div class="legal-info" style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid rgba(0,255,255,0.3); font-size: 0.875rem; color: #888;">
+        <p>© 2026 LipaStudios | Responsable: Luis Alberto Moratalla | NIF: 50468195P | C/ Almansa 2, 28300 Aranjuez, Madrid | Email: <a href="mailto:lipastudios4@gmail.com" style="color: #00ffee;">lipastudios4@gmail.com</a></p>
+      </div>
     </div>
   </footer>
 </body>

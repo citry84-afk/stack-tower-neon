@@ -20,7 +20,7 @@
 ## 💰 Monetization Features
 
 ### Real Revenue Generation
-- **Google AdSense**: `ca-pub-4129506161314540`
+- **Google AdSense**: `ca-pub-4837743291717475`
 - **Google Analytics**: `G-633RQLC6T0`
 - **5 Ad Types**: Banner, Floating, Interstitial, Rewarded
 - **Revenue Tracking**: Real-time earnings monitoring

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stack Tower Neon 🎮 Juegos de Reflejos Gratis | Entrenador Online 100% Gratis</title>
     <meta name="description" content="🔥 Juega Stack Tower Neon GRATIS ahora. El mejor juego de reflejos y apilado. Entrenador de reflejos gratis para mejorar tu precisión. Juegos neon adictivos para móviles gaming baratos. Sin descargas, sin registro.">
-    <meta name="keywords" content="juegos de reflejos, entrenador de reflejos, juegos para mejorar los reflejos, móviles gaming baratos, lipa studios, stack tower, juego gratis, neon, arcade, puzzle, reflejos juegos, mejores regalos para gamers 2025">
+    <meta name="keywords" content="juegos de reflejos, entrenador de reflejos, juegos para mejorar los reflejos, móviles gaming baratos, lipa studios, stack tower, juego gratis, neon, arcade, puzzle, reflejos juegos, mejores regalos para gamers 2026">
     <meta name="author" content="LIPA Studios">
     <meta name="robots" content="index, follow">
     <meta name="language" content="Spanish">
@@ -35,6 +35,7 @@
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" as="style">
+    <link rel="stylesheet" href="/css/site-nav.css">
     
     <!-- PWA and Mobile -->
     <meta name="theme-color" content="#00ffff">
@@ -43,8 +44,7 @@
     <meta name="apple-mobile-web-app-title" content="Stack Tower Neon">
     <meta name="mobile-web-app-capable" content="yes">
     
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4837743291717475" crossorigin="anonymous"></script>
+    <!-- Google AdSense: se carga solo si el usuario acepta cookies (consent.js) -->
     
     <!-- Google Analytics 4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5XL1W8RNTP"></script>
@@ -89,14 +89,7 @@
         },
         "url": "https://lipastudios.com",
         "image": "https://lipastudios.com/og-image.jpg",
-        "keywords": "juegos de reflejos, entrenador de reflejos, juegos para mejorar los reflejos, móviles gaming baratos, lipa studios, reflejos juegos, mejores regalos para gamers 2025",
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.8",
-            "ratingCount": "1250",
-            "bestRating": "5",
-            "worstRating": "1"
-        },
+        "keywords": "juegos de reflejos, entrenador de reflejos, juegos para mejorar los reflejos, móviles gaming baratos, lipa studios, reflejos juegos, mejores regalos para gamers 2026",
         "gameItem": [
             {
                 "@type": "Thing",
@@ -171,19 +164,244 @@
             font-family: 'Orbitron', monospace;
             background: linear-gradient(135deg, #050505 0%, #0a0a0a 50%, #1a0a1a 100%);
             color: #00FFFF;
-            overflow: hidden;
-            height: 100vh;
+            min-height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        
+        /* Accesibilidad: teclado y anclas bajo barra fija */
+        .skip-link {
+            position: absolute;
+            left: 12px;
+            top: 12px;
+            z-index: 10001;
+            padding: 10px 16px;
+            background: #0a0a1a;
+            color: #39FF14;
+            border: 2px solid #39FF14;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            text-decoration: none;
+            transform: translateY(-200%);
+            transition: transform 0.2s ease;
+        }
+        .skip-link:focus {
+            transform: translateY(0);
+        }
+        #juego { scroll-margin-top: 72px; }
+        #guia-seo { scroll-margin-top: 88px; }
+        
+        /* Landing hero — valor claro en segundos + CTAs */
+        .landing-hero {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 24px 20px 8px;
+            text-align: center;
+        }
+        .landing-hero__eyebrow {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(0, 255, 255, 0.75);
+            margin-bottom: 10px;
+        }
+        .landing-hero__title {
+            font-size: clamp(1.75rem, 5vw, 2.75rem);
+            font-weight: 900;
+            color: #fff;
+            text-shadow: 0 0 24px rgba(0, 255, 255, 0.35);
+            margin-bottom: 12px;
+            line-height: 1.15;
+        }
+        .landing-hero__lead {
+            font-size: clamp(0.95rem, 2.5vw, 1.15rem);
+            color: #c8e8f0;
+            max-width: 38rem;
+            margin: 0 auto 18px;
+            line-height: 1.55;
+            font-weight: 400;
+        }
+        .hero-chips {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        .hero-chip {
+            font-size: 0.72rem;
+            letter-spacing: 0.06em;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid rgba(0, 255, 255, 0.35);
+            color: #e8f6ff;
+        }
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            align-items: center;
+        }
+        .btn-hero-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 28px;
+            font-size: 1rem;
+            font-weight: 800;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #ff0080, #ff5cb8);
+            color: #fff !important;
+            border: none;
+            text-decoration: none;
+            font-family: 'Orbitron', monospace;
+            box-shadow: 0 4px 28px rgba(255, 0, 128, 0.45);
+            cursor: pointer;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        .btn-hero-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(255, 0, 128, 0.55);
+        }
+        .btn-hero-secondary {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 20px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            border-radius: 12px;
+            border: 2px solid rgba(0, 255, 255, 0.65);
+            color: #00ffff !important;
+            background: rgba(0, 255, 255, 0.06);
+            text-decoration: none;
+            font-family: 'Orbitron', monospace;
+        }
+        .btn-hero-secondary:hover {
+            background: rgba(0, 255, 255, 0.14);
+        }
+        
+        /* Panel del juego — ya no “caja negra vacía” */
+        .game-panel {
+            max-width: 960px;
+            margin: 12px auto 28px;
+            padding: 20px 14px 28px;
+            border-radius: 20px;
+            background:
+                radial-gradient(ellipse 70% 55% at 50% 25%, rgba(0, 255, 255, 0.14), transparent 55%),
+                linear-gradient(165deg, rgba(25, 15, 45, 0.55) 0%, rgba(6, 8, 18, 0.98) 60%);
+            border: 1px solid rgba(0, 255, 255, 0.35);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5);
+        }
+        .game-panel__label {
+            text-align: center;
+            font-size: 0.7rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(0, 255, 255, 0.55);
+            margin-bottom: 14px;
+        }
+        .game-stage {
+            position: relative;
+            width: 100%;
+            min-height: 560px;
+            max-height: min(92vh, 920px);
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 16px;
+            border-radius: 14px;
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+        }
+        
+        /* Menú: texto largo plegable */
+        .menu-details {
+            max-width: 560px;
+            margin: 16px auto;
+            text-align: left;
+            border: 1px solid rgba(0, 255, 255, 0.35);
+            border-radius: 10px;
+            background: rgba(0, 255, 255, 0.06);
+            padding: 0;
+        }
+        .menu-details summary {
+            cursor: pointer;
+            padding: 12px 16px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #39ff14;
+            list-style: none;
+        }
+        .menu-details summary::-webkit-details-marker { display: none; }
+        .menu-details[open] summary {
+            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+        }
+        .menu-details__body {
+            padding: 14px 16px 16px;
+            font-size: 0.82rem;
+            line-height: 1.55;
+            color: #d0eef8;
+        }
+        .menu-details__body p { margin-bottom: 10px; }
+        
+        /* SEO article — lectura más cómoda */
+        .seo-article {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            background: rgba(8, 10, 22, 0.65);
+            padding: clamp(24px, 4vw, 40px);
+            border-radius: 16px;
+            border: 1px solid rgba(0, 255, 255, 0.28);
+            margin-bottom: 28px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+        }
+        .seo-article h1 {
+            font-family: 'Orbitron', monospace;
+            color: #00ffff;
+            font-size: clamp(1.5rem, 4vw, 2.25rem);
+            margin-bottom: 16px;
+            line-height: 1.2;
+            text-shadow: 0 0 14px rgba(0, 255, 255, 0.35);
+        }
+        .seo-article h2 {
+            font-family: 'Orbitron', monospace;
+            color: #39ff14;
+            font-size: clamp(1.15rem, 2.5vw, 1.5rem);
+            margin-top: 28px;
+            margin-bottom: 12px;
+        }
+        .seo-article .seo-lead {
+            font-size: 1.05rem;
+            color: #e8f6ff;
+            line-height: 1.75;
+            margin-bottom: 16px;
+        }
+        .seo-article p, .seo-article li {
+            color: #d4e8f0;
+            line-height: 1.75;
+            font-size: 1rem;
+        }
+        .seo-article ul, .seo-article ol {
+            margin-left: 1.25rem;
+            margin-bottom: 16px;
+        }
+        
+        a:focus-visible,
+        button:focus-visible,
+        .btn:focus-visible {
+            outline: 2px solid #39FF14;
+            outline-offset: 3px;
         }
         
         .container {
             width: 100%;
-            height: 100vh;
+            min-height: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             position: relative;
-            padding: 20px;
+            padding: 12px 8px 24px;
         }
         
         .title {
@@ -208,12 +426,34 @@
             display: none;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             width: 100%;
-            height: 100%;
+            min-height: 100%;
             position: absolute;
             top: 0;
             left: 0;
+            padding-bottom: 16px;
+        }
+        
+        #loading-screen {
+            justify-content: center;
+            background: radial-gradient(circle at 50% 40%, rgba(255, 0, 128, 0.08), transparent 45%);
+        }
+        #loading-screen::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                repeating-linear-gradient(0deg, transparent, transparent 48px, rgba(0, 255, 255, 0.04) 48px, rgba(0, 255, 255, 0.04) 49px),
+                repeating-linear-gradient(90deg, transparent, transparent 48px, rgba(255, 0, 128, 0.03) 48px, rgba(255, 0, 128, 0.03) 49px);
+            pointer-events: none;
+            opacity: 0.9;
+        }
+        #loading-screen .title,
+        #loading-screen .subtitle,
+        #loading-screen .loading-text {
+            position: relative;
+            z-index: 1;
         }
         
         .screen.active {
@@ -415,23 +655,42 @@
                 margin: 5px 0;
             }
         }
+        
+        @media (prefers-reduced-motion: reduce) {
+            .title, .subtitle, .loading-text, .score {
+                animation: none !important;
+            }
+        }
     </style>
 </head>
 <body>
+    <a class="skip-link" href="#juego">Saltar al contenido (juego)</a>
     <!-- Navigation Menu -->
-    <nav role="navigation" aria-label="Navegación principal" style="background: rgba(0, 0, 0, 0.9); padding: 15px 20px; border-bottom: 2px solid #00FFFF; position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px);">
-        <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
-            <a href="/" aria-label="LIPA Studios - Inicio" style="color: #00FFFF; font-size: 1.3rem; font-weight: bold; text-decoration: none; font-family: 'Orbitron', monospace;">🎮 LIPA Studios</a>
-            <div role="menubar" style="display: flex; gap: 20px; flex-wrap: wrap;">
-                <a href="/" role="menuitem" aria-label="Página de inicio" style="color: #e8f6ff; text-decoration: none; padding: 8px 15px; border-radius: 5px; transition: all 0.3s;">Inicio</a>
-                <a href="/juegos-de-reflejos.html" role="menuitem" aria-label="Juegos de reflejos" style="color: #e8f6ff; text-decoration: none; padding: 8px 15px; border-radius: 5px; transition: all 0.3s;">Juegos</a>
-                <a href="/moviles-gaming-baratos.html" role="menuitem" aria-label="Guías de móviles gaming" style="color: #e8f6ff; text-decoration: none; padding: 8px 15px; border-radius: 5px; transition: all 0.3s;">Guías</a>
-                <a href="/entrenador-reflejos.html" role="menuitem" aria-label="Entrenador de reflejos" style="color: #e8f6ff; text-decoration: none; padding: 8px 15px; border-radius: 5px; transition: all 0.3s;">Entrenador</a>
-                <a href="/help.html" role="menuitem" aria-label="Ayuda y tutoriales" style="color: #e8f6ff; text-decoration: none; padding: 8px 15px; border-radius: 5px; transition: all 0.3s;">Ayuda</a>
-                <a href="/about.html" role="menuitem" aria-label="Sobre LIPA Studios" style="color: #e8f6ff; text-decoration: none; padding: 8px 15px; border-radius: 5px; transition: all 0.3s;">Sobre Nosotros</a>
+    <nav class="site-nav" role="navigation" aria-label="Navegación principal">
+        <div class="site-nav__inner">
+            <div class="site-nav__top">
+                <a class="site-nav__brand" href="/" aria-label="LIPA Studios - Inicio">🎮 LIPA Studios</a>
+                <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Abrir menú de navegación">
+                    <span class="nav-toggle__icon" aria-hidden="true">
+                        <span></span><span></span><span></span>
+                    </span>
+                    Menú
+                </button>
+            </div>
+            <div id="primary-nav" class="nav-links">
+                <a href="/" aria-label="Página de inicio">Inicio</a>
+                <a href="/juegos-de-reflejos.html">Juegos</a>
+                <a href="/top-juegos-reflejos.html">Top Reflejos</a>
+                <a href="/moviles-gaming-baratos.html">Guías</a>
+                <a href="/blog.html">Blog</a>
+                <a href="/entrenador-reflejos.html">Entrenador</a>
+                <a href="/help.html">Ayuda</a>
+                <a href="/about.html">Sobre mí</a>
             </div>
         </div>
+        <div class="nav-backdrop" id="nav-backdrop" aria-hidden="true"></div>
     </nav>
+    <script src="/js/site-nav.js" defer></script>
     
     <!-- Top Banner Ad -->
     <div class="ad-banner">
@@ -443,13 +702,117 @@
              data-full-width-responsive="true"></ins>
     </div>
     
-    <!-- Editorial Content Section (CRITICAL FOR ADSENSE) -->
-    <div style="max-width: 1200px; margin: 30px auto; padding: 0 20px;">
-        <article style="background: rgba(0, 0, 0, 0.5); padding: 40px; border-radius: 15px; border: 2px solid #00FFFF; margin-bottom: 30px; box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);">
-            <h1 style="color: #00FFFF; font-size: 2.5rem; margin-bottom: 20px; text-shadow: 0 0 15px #00FFFF;">Stack Tower Neon: El Mejor Juego de Reflejos Gratis Online</h1>
+    <section class="landing-hero" aria-labelledby="hero-title">
+        <p class="landing-hero__eyebrow">LIPA Studios · reflejos · navegador</p>
+        <h1 id="hero-title" class="landing-hero__title">Stack Tower Neon</h1>
+        <p class="landing-hero__lead">
+            Entrena precisión y tiempo de reacción en segundos. Gratis en el navegador: sin descargas ni registro.
+        </p>
+        <div class="hero-chips" role="list">
+            <span class="hero-chip" role="listitem">Gratis</span>
+            <span class="hero-chip" role="listitem">Sin instalar</span>
+            <span class="hero-chip" role="listitem">Móvil y PC</span>
+        </div>
+        <div class="hero-actions">
+            <a href="#juego" class="btn-hero-primary">Jugar ahora</a>
+            <a href="/juegos-de-reflejos.html" class="btn-hero-secondary">Más juegos</a>
+            <a href="#guia-seo" class="btn-hero-secondary">Guía y consejos</a>
+        </div>
+    </section>
+    
+    <!-- Panel de juego (evita sensación de “caja vacía”: fondo y marco claros) -->
+    <section class="game-panel" id="juego" aria-labelledby="game-panel-heading">
+        <h2 id="game-panel-heading" class="game-panel__label">Tu partida · Stack Tower Neon</h2>
+        <div class="container game-stage">
+        <!-- Loading Screen -->
+        <div id="loading-screen" class="screen active">
+            <div class="title">STACK TOWER</div>
+            <div class="subtitle">NEON</div>
+            <div class="loading-text">⚡ CARGANDO GAME...</div>
+        </div>
+        
+        <!-- Menu Screen -->
+        <div id="menu-screen" class="screen">
+            <div class="title">STACK TOWER</div>
+            <div class="subtitle">NEON</div>
+            <div class="instructions">
+                🎮 Apila bloques perfectamente<br>
+                🎯 Consigue puntos de PERFECTO<br>
+                🔥 ¡Haz combos épicos!
+            </div>
+            <details class="menu-details">
+                <summary>📖 Más sobre el juego y cómo entrenar reflejos</summary>
+                <div class="menu-details__body">
+                    <p>Stack Tower Neon es un <strong>juego de reflejos y apilado</strong> de <strong>LIPA Studios</strong>: entrenador de reflejos para precisión y tiempo de reacción. Apila bloques para sumar puntos y mejorar coordinación ojo-mano.</p>
+                    <p><strong>Cómo jugar:</strong> en partida, pulsa <strong>APILAR</strong> cuando el bloque móvil encaje con la torre. Los apilados perfectos suben el multiplicador.</p>
+                    <p><strong>Tip:</strong> la velocidad aumenta por nivel — mantén el foco. Funciona bien también en <strong>móviles gaming baratos</strong>.</p>
+                </div>
+            </details>
+            <div class="controls">
+                <button class="btn primary" onclick="startGame()" aria-label="Iniciar juego">🚀 JUGAR</button>
+                <button type="button" class="btn" id="btn-audio" onclick="toggleAudio()" aria-label="Activar o desactivar audio">🔊 AUDIO</button>
+            </div>
+            <div class="controls" style="margin-top: 14px;">
+                <a href="#guia-seo" class="btn" aria-label="Ir a la guía más abajo en la página">📄 Guía y texto completo</a>
+            </div>
+            <div class="controls" style="margin-top: 18px;">
+                <a href="/blog.html" class="btn">📝 Blog</a>
+                <a href="/help.html" class="btn">❓ Ayuda</a>
+                <a href="/about.html" class="btn">ℹ️ Sobre nosotros</a>
+            </div>
+            <div class="controls" style="margin-top: 10px;">
+                <a href="/juegos-de-reflejos.html" class="btn">🎯 Más juegos</a>
+                <a href="/entrenador-reflejos.html" class="btn">⚡ Entrenador</a>
+                <a href="/moviles-gaming-baratos.html" class="btn">📱 Guía móviles</a>
+            </div>
+            <div class="controls" style="margin-top: 10px;">
+                <a href="/privacy.html" class="btn" style="font-size: 0.8rem; padding: 8px 16px;">Privacidad</a>
+                <a href="/terms.html" class="btn" style="font-size: 0.8rem; padding: 8px 16px;">Términos</a>
+                <a href="/contact.html" class="btn" style="font-size: 0.8rem; padding: 8px 16px;">Contacto</a>
+            </div>
+        </div>
+        
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen">
+            <div class="ui">
+                <div class="score" id="score" aria-live="polite" aria-atomic="true">0</div>
+                <div style="color: #FF0080;">NIVEL <span id="level">1</span></div>
+            </div>
             
-            <div style="color: #e8f6ff; line-height: 1.8; font-size: 1.1rem;">
-                <p style="margin-bottom: 20px; font-size: 1.2rem;">
+            <div class="game-area" id="game-area"></div>
+            
+            <div class="controls">
+                <button class="btn" onclick="stackBlock()" aria-label="Apilar bloque">📦 APILAR</button>
+                <button class="btn" onclick="pauseGame()" id="pause-btn">⏸️ PAUSA</button>
+                <button class="btn" onclick="showMenu()">🏠 MENU</button>
+            </div>
+        </div>
+        
+        <!-- Game Over Screen -->
+        <div id="gameover-screen" class="screen">
+            <div class="title">GAME OVER</div>
+            <div style="font-size: 2rem; color: #39FF14; margin: 20px 0;">
+                PUNTOS: <span id="final-score">0</span>
+            </div>
+            <div id="new-record" class="hidden" style="color: #FF0080; font-size: 1.2rem; margin: 10px 0;">
+                🏆 ¡NUEVO RÉCORD!
+            </div>
+            <div class="controls">
+                <button class="btn primary" onclick="startGame()" aria-label="Jugar otra partida">🔄 JUGAR OTRA VEZ</button>
+                <button class="btn" onclick="shareScore()">📤 COMPARTIR</button>
+                <button class="btn" onclick="showMenu()">🏠 MENU</button>
+            </div>
+        </div>
+        </div>
+    </section>
+    
+    <!-- Editorial Content Section (CRITICAL FOR ADSENSE) -->
+    <div id="guia-seo" style="max-width: 1200px; margin: 30px auto; padding: 0 20px;">
+        <article class="seo-article">
+            <h1>Stack Tower Neon: El Mejor Juego de Reflejos Gratis Online</h1>
+            
+            <div class="seo-body">
+                <p class="seo-lead">
                     <strong>Stack Tower Neon</strong> es el <strong>mejor juego de reflejos y apilado</strong> desarrollado por <strong>LIPA Studios</strong>. 
                     Este juego actúa como un <strong>entrenador de reflejos profesional</strong> que te ayuda a mejorar tu precisión, tiempo de reacción 
                     y coordinación ojo-mano mientras te diviertes con mecánicas de juego adictivas y efectos visuales neon espectaculares.
@@ -485,6 +848,11 @@
                     <li style="margin-bottom: 10px;"><strong>Consigue combos:</strong> Los apilados perfectos consecutivos aumentan tu multiplicador de puntos.</li>
                     <li style="margin-bottom: 10px;"><strong>Mejora tu récord:</strong> Intenta superar tu mejor puntuación y mejorar tus reflejos.</li>
                 </ol>
+                <p style="margin-bottom: 20px;">
+                    Si buscas un plan completo, visita la
+                    <a href="/guia-reflejos.html" style="color: #00FFFF; text-decoration: underline;">guia definitiva para mejorar reflejos</a>
+                    con rutina de 7 dias y ejercicios diarios.
+                </p>
                 
                 <h2 style="color: #39FF14; font-size: 1.8rem; margin-top: 30px; margin-bottom: 15px;">Optimizado para Móviles Gaming Baratos</h2>
                 <p style="margin-bottom: 20px;">
@@ -537,87 +905,6 @@
                 </div>
             </div>
         </article>
-    </div>
-    
-    <div class="container">
-        <!-- Loading Screen -->
-        <div id="loading-screen" class="screen active">
-            <div class="title">STACK TOWER</div>
-            <div class="subtitle">NEON</div>
-            <div class="loading-text">⚡ CARGANDO GAME...</div>
-        </div>
-        
-        <!-- Menu Screen -->
-        <div id="menu-screen" class="screen">
-            <div class="title">STACK TOWER</div>
-            <div class="subtitle">NEON</div>
-            <div class="instructions">
-                🎮 Apila bloques perfectamente<br>
-                🎯 Consigue puntos de PERFECTO<br>
-                🔥 ¡Haz combos épicos!
-            </div>
-            <div style="max-width: 600px; margin: 20px auto; padding: 15px; background: rgba(0, 255, 255, 0.1); border: 1px solid #00FFFF; border-radius: 8px; font-size: 0.9rem; line-height: 1.6; text-align: left;">
-                <h3 style="color: #39FF14; margin-bottom: 10px; font-size: 1.1rem;">📖 Sobre Stack Tower Neon - El Mejor Juego de Reflejos</h3>
-                <p style="margin-bottom: 10px;">Stack Tower Neon es el <strong>mejor juego de reflejos y apilado</strong> desarrollado por <strong>LIPA Studios</strong>. Perfecto como <strong>entrenador de reflejos</strong> para mejorar tu precisión y tiempo de reacción. El objetivo es simple: apila bloques perfectamente para conseguir la máxima puntuación y mejorar tus reflejos.</p>
-                <p style="margin-bottom: 10px;"><strong>🎯 Cómo Jugar:</strong> Haz clic en el botón "APILAR" cuando el bloque móvil esté perfectamente alineado con la torre. Cuanto más precisa sea tu apilado, más puntos conseguirás. Los apilados perfectos te dan bonificaciones especiales y mejoran tus reflejos.</p>
-                <p style="margin-bottom: 10px;"><strong>🏆 Sistema de Puntuación:</strong> Cada apilado perfecto aumenta tu multiplicador de puntos. Los combos consecutivos te dan recompensas aún mayores. ¡Intenta alcanzar el máximo nivel posible!</p>
-                <p style="margin-bottom: 10px;"><strong>📱 Optimizado para Móviles Gaming Baratos:</strong> Stack Tower Neon funciona perfectamente en cualquier dispositivo móvil, incluso en móviles gaming baratos. No necesitas un teléfono caro para disfrutar de este juego de reflejos adictivo.</p>
-                <p><strong>💡 Tip Pro:</strong> La velocidad aumenta con cada nivel, así que mantén la concentración y mejora tus reflejos para conseguir récords épicos. Este juego es perfecto como <strong>entrenador de reflejos</strong> para gamers que buscan mejorar su precisión.</p>
-            </div>
-            <div class="controls">
-                <button class="btn primary" onclick="startGame()">🚀 JUGAR</button>
-                <button class="btn" onclick="toggleAudio()">🔊 AUDIO</button>
-            </div>
-            <div class="controls" style="margin-top: 20px;">
-                <a href="/about.html" class="btn">ℹ️ SOBRE NOSOTROS</a>
-                <a href="/help.html" class="btn">❓ AYUDA</a>
-                <a href="/news.html" class="btn">📰 NOTICIAS</a>
-                <a href="/blog.html" class="btn">📝 BLOG</a>
-            </div>
-            <div class="controls" style="margin-top: 10px;">
-                <a href="/juegos-de-reflejos.html" class="btn">🎯 JUEGOS DE REFLEJOS</a>
-                <a href="/entrenador-reflejos.html" class="btn">⚡ ENTRENADOR</a>
-                <a href="/moviles-gaming-baratos.html" class="btn">📱 MÓVILES GAMING</a>
-                <a href="/moviles-gamers-baratos.html" class="btn">🎮 MÓVILES GAMERS</a>
-            </div>
-            <div class="controls" style="margin-top: 10px;">
-                <a href="/privacy.html" class="btn" style="font-size: 0.8rem; padding: 8px 16px;">Privacidad</a>
-                <a href="/terms.html" class="btn" style="font-size: 0.8rem; padding: 8px 16px;">Términos</a>
-                <a href="/contact.html" class="btn" style="font-size: 0.8rem; padding: 8px 16px;">Contacto</a>
-            </div>
-        </div>
-        
-        <!-- Game Screen -->
-        <div id="game-screen" class="screen">
-            <div class="ui">
-                <div class="score" id="score">0</div>
-                <div style="color: #FF0080;">NIVEL <span id="level">1</span></div>
-            </div>
-            
-            <div class="game-area" id="game-area"></div>
-            
-            <div class="controls">
-                <button class="btn" onclick="stackBlock()">📦 APILAR</button>
-                <button class="btn" onclick="pauseGame()" id="pause-btn">⏸️ PAUSA</button>
-                <button class="btn" onclick="showMenu()">🏠 MENU</button>
-            </div>
-        </div>
-        
-        <!-- Game Over Screen -->
-        <div id="gameover-screen" class="screen">
-            <div class="title">GAME OVER</div>
-            <div style="font-size: 2rem; color: #39FF14; margin: 20px 0;">
-                PUNTOS: <span id="final-score">0</span>
-            </div>
-            <div id="new-record" class="hidden" style="color: #FF0080; font-size: 1.2rem; margin: 10px 0;">
-                🏆 ¡NUEVO RÉCORD!
-            </div>
-            <div class="controls">
-                <button class="btn primary" onclick="startGame()">🔄 JUGAR OTRA VEZ</button>
-                <button class="btn" onclick="shareScore()">📤 COMPARTIR</button>
-                <button class="btn" onclick="showMenu()">🏠 MENU</button>
-            </div>
-        </div>
     </div>
     
     <!-- Bottom Banner Ad -->
@@ -838,8 +1125,8 @@
         
         function toggleAudio() {
             gameState.audioEnabled = !gameState.audioEnabled;
-            const btn = event.target;
-            btn.textContent = gameState.audioEnabled ? '🔊 AUDIO' : '🔇 AUDIO';
+            const btn = document.getElementById('btn-audio');
+            if (btn) btn.textContent = gameState.audioEnabled ? '🔊 AUDIO' : '🔇 AUDIO';
             
             if (gameState.audioEnabled && audioContext) {
                 audioContext.resume();
@@ -1216,11 +1503,12 @@
             }
         });
         
-        // Initialize
+        // Initialize (breve splash: en landings de juegos la espera artificial >1s sube el abandono)
+        const splashMs = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 200 : 650;
         setTimeout(() => {
             initAudio();
             showMenu();
-        }, 1500);
+        }, splashMs);
         
         console.log('🎮 Stack Tower Neon - PRODUCTION VERSION LOADED!');
     </script>
@@ -1245,8 +1533,9 @@
                 <div>
                     <h4 style="color: #39FF14; margin-bottom: 10px;">📱 Recursos</h4>
                     <ul style="list-style: none; padding: 0;">
+                        <li style="margin: 5px 0;"><a href="/guia-reflejos.html" style="color: #00ffee;">Guia para Mejorar Reflejos</a></li>
+                        <li style="margin: 5px 0;"><a href="/top-juegos-reflejos.html" style="color: #00ffee;">Top Juegos de Reflejos</a></li>
                         <li style="margin: 5px 0;"><a href="/moviles-gaming-baratos.html" style="color: #00ffee;">Móviles Gaming Baratos</a></li>
-                        <li style="margin: 5px 0;"><a href="/moviles-gamers-baratos.html" style="color: #00ffee;">Móviles Gamers Baratos</a></li>
                         <li style="margin: 5px 0;"><a href="/blog.html" style="color: #00ffee;">Blog Gaming</a></li>
                         <li style="margin: 5px 0;"><a href="/help.html" style="color: #00ffee;">Ayuda y Tutoriales</a></li>
                         <li style="margin: 5px 0;"><a href="/news.html" style="color: #00ffee;">Noticias</a></li>
@@ -1259,12 +1548,17 @@
                         <li style="margin: 5px 0;"><a href="/contact.html" style="color: #00ffee;">Contacto</a></li>
                         <li style="margin: 5px 0;"><a href="/privacy.html" style="color: #00ffee;">Privacidad</a></li>
                         <li style="margin: 5px 0;"><a href="/terms.html" style="color: #00ffee;">Términos</a></li>
+                        <li style="margin: 5px 0;"><a href="/editorial.html" style="color: #00ffee;">Politica Editorial</a></li>
+                        <li style="margin: 5px 0;"><a href="/disclaimer.html" style="color: #00ffee;">Aviso de Afiliados</a></li>
                     </ul>
                 </div>
             </div>
             <div style="border-top: 1px solid rgba(0, 255, 255, 0.3); padding-top: 20px; color: #888; font-size: 0.9rem;">
-                <p>&copy; 2024 LIPA Studios. Todos los derechos reservados.</p>
+                <p>&copy; 2024–2026 Luis Alberto Moratalla · LipaStudios. <a href="/about.html" style="color: #00ffee;">Sobre mí</a></p>
                 <p style="margin-top: 10px;">Juegos de reflejos gratis | Entrenador de reflejos online | Optimizado para móviles gaming baratos</p>
+            </div>
+            <div class="legal-info" style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid rgba(0,255,255,0.3); font-size: 0.875rem; color: #888;">
+                <p>© 2026 LipaStudios | Responsable: Luis Alberto Moratalla | NIF: 50468195P | C/ Almansa 2, 28300 Aranjuez, Madrid | Email: <a href="mailto:lipastudios4@gmail.com" style="color: #00ffee;">lipastudios4@gmail.com</a></p>
             </div>
         </div>
     </footer>

@@ -51,9 +51,9 @@ class SearchConsoleAPI {
         
         const ranges = {
             '24h': { clicks: 0, impressions: 12, ctr: 0, position: 16.2 },
-            '7d': { clicks: 2, impressions: 89, ctr: 2.2, position: 15.8 },
-            '28d': { clicks: 7, impressions: 320, ctr: 2.2, position: 15.4 },
-            '3m': { clicks: 10, impressions: 871, ctr: 1.1, position: 15.4 }
+            '7d': { clicks: 3, impressions: 140, ctr: 2.1, position: 15.6 },
+            '28d': { clicks: 9, impressions: 520, ctr: 1.7, position: 15.5 },
+            '3m': { clicks: 19, impressions: 1740, ctr: 1.1, position: 15.4 }
         };
         
         return ranges[dateRange] || ranges['28d'];
@@ -126,8 +126,8 @@ class SearchConsoleAPI {
      */
     getDefaultData(dateRange) {
         return {
-            clicks: 10,
-            impressions: 871,
+            clicks: 19,
+            impressions: 1740,
             ctr: 1.1,
             position: 15.4
         };

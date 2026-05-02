@@ -1,0 +1,33 @@
+# Copiar a .github/workflows/sync-to-lipastudios-landing.yml cuando uses un token con scope "workflow"
+# o crear el archivo desde la pestaña Actions del repo en GitHub.
+
+name: Sync main to lipastudios-landing
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+concurrency:
+  group: sync-lipa
+  cancel-in-progress: true
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Push to lipastudios-landing
+        env:
+          TOKEN: ${{ secrets.LIPA_MIRROR_TOKEN }}
+        run: |
+          if [ -z "$TOKEN" ]; then
+            echo "::notice::LIPA_MIRROR_TOKEN no definido. Omitiendo mirror."
+            exit 0
+          fi
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git remote add lipa "https://x-access-token:${TOKEN}@github.com/citry84-afk/lipastudios-landing.git"
+          git push lipa HEAD:main

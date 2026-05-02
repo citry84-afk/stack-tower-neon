@@ -11,7 +11,14 @@ http://stacktowerneon.com/*  https://stacktowerneon.com/:splat  301!
 http://www.stacktowerneon.com/*  https://stacktowerneon.com/:splat  301!
 
 # PÁGINAS HTML REALES - Permitir acceso directo (sin redirección)
-# Estas páginas deben ser accesibles directamente para SEO
+# Rutas sin .html deben servir el HTML correspondiente (evitar catch-all)
+/privacy             /privacy.html        200
+/about               /about.html          200
+/help                /help.html          200
+/news                /news.html          200
+/contact             /contact.html        200
+/blog                /blog.html          200
+/terms               /terms.html          200
 /about.html          /about.html          200
 /help.html           /help.html           200
 /news.html           /news.html           200
@@ -19,9 +26,14 @@ http://www.stacktowerneon.com/*  https://stacktowerneon.com/:splat  301!
 /blog.html           /blog.html           200
 /privacy.html        /privacy.html        200
 /terms.html          /terms.html          200
+/editorial.html      /editorial.html      200
+/disclaimer.html     /disclaimer.html     200
 /juegos-de-reflejos.html  /juegos-de-reflejos.html  200
+/top-juegos-reflejos.html /top-juegos-reflejos.html 200
+/guia-reflejos.html  /guia-reflejos.html  200
 /moviles-gaming-baratos.html  /moviles-gaming-baratos.html  200
-/moviles-gamers-baratos.html  /moviles-gamers-baratos.html  200
+/moviles-gamers-baratos.html  /moviles-gaming-baratos.html  301
+/moviles-gamers-baratos      /moviles-gaming-baratos.html  301
 /entrenador-reflejos.html  /entrenador-reflejos.html  200
 /neon-runner.html    /neon-runner.html    200
 
@@ -32,8 +44,16 @@ http://www.stacktowerneon.com/*  https://stacktowerneon.com/:splat  301!
 /robots.txt          /robots.txt          200
 /sitemap.xml         /sitemap.xml         200
 /ads.txt             /ads.txt            200
+/app-ads.txt         /app-ads.txt        200
 /manifest.json       /manifest.json       200
 /consent.js          /consent.js          200
+
+# Bloquear páginas de test/backup/debug (evitar revisión AdSense)
+/test*              /404                  404
+/debug*             /404                  404
+/index-backup.html  /404                  404
+/index-wow.html     /404                  404
+/stack-tower-fixed.html /404              404
 
 # Assets y recursos estáticos
 /assets/*            /assets/:splat       200

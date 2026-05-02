@@ -4,9 +4,6 @@ Allow: /
 # Sitemap
 Sitemap: https://lipastudios.com/sitemap.xml
 
-# Crawl-delay for better server performance
-Crawl-delay: 1
-
 # Important pages for Google - SEO optimized
 Allow: /privacy.html
 Allow: /terms.html
@@ -15,11 +12,15 @@ Allow: /help.html
 Allow: /news.html
 Allow: /contact.html
 Allow: /blog.html
+Allow: /guia-reflejos.html
+Allow: /top-juegos-reflejos.html
 Allow: /juegos-de-reflejos.html
 Allow: /moviles-gaming-baratos.html
-Allow: /moviles-gamers-baratos.html
 Allow: /entrenador-reflejos.html
+Allow: /editorial.html
+Allow: /disclaimer.html
 Allow: /ads.txt
+Allow: /app-ads.txt
 
 # Block unnecessary files and test pages
 Disallow: /consent.js
