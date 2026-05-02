@@ -1,0 +1,44 @@
+# Opcional: cada push a main en este repo replica el contenido en lipastudios-landing
+# para que Netlify (si sigue enlazado solo a lipastudios-landing) vuelva a desplegar solo.
+#
+# Configuración única en GitHub (stack-tower-neon):
+#   Settings → Secrets and variables → Actions → New repository secret
+#   Nombre: LIPA_MIRROR_TOKEN
+#   Valor: Personal Access Token (classic) o fine-grained con permiso "Contents: Read and write"
+#          en el repo citry84-afk/lipastudios-landing
+#
+# Si el push falla por historiales divergentes, alinea las ramas una vez a mano o usa
+# la opción más simple: en Netlify enlaza directamente este repositorio (stack-tower-neon).
+
+name: Sync main to lipastudios-landing
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+concurrency:
+  group: sync-lipa
+  cancel-in-progress: true
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Push to lipastudios-landing
+        env:
+          TOKEN: ${{ secrets.LIPA_MIRROR_TOKEN }}
+        run: |
+          if [ -z "$TOKEN" ]; then
+            echo "::notice::LIPA_MIRROR_TOKEN no está definido. Omitiendo mirror (configura el secret o enlaza Netlify a este repo)."
+            exit 0
+          fi
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git remote add lipa "https://x-access-token:${TOKEN}@github.com/citry84-afk/lipastudios-landing.git"
+          git push lipa HEAD:main

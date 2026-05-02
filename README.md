@@ -4,6 +4,10 @@
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/YOUR-USERNAME/stack-tower-neon)
 
+## lipastudios.com — deploy sin pasos manuales en Netlify
+
+Netlify ya publica **solo** con cada push a `main` del repo que tengas enlazado. Si desarrollas en **este** repo pero Netlify sigue apuntando a `lipastudios-landing`, lee **[DEPLOY-LIPA.md](./DEPLOY-LIPA.md)** (enlazar Netlify aquí *o* mirror automático con un secret).
+
 ## 🚀 Quick Deploy (1-Click Setup)
 
 ### Option 1: Netlify (Recommended)
