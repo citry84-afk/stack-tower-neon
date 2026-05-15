@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aim Trainer Gratis en el Navegador | Neon · LIPA Studios</title>
+  <meta name="description" content="Aim trainer gratis online: 30 segundos de dianas, mide precisión y puntuación. Sin descarga. Ideal para gamers y FPS. Ranking diario.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://lipastudios.com/aim-trainer-neon.html">
+  <link rel="stylesheet" href="/css/site-nav.css">
+  <link rel="stylesheet" href="/css/mini-games.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#ff0080">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5XL1W8RNTP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-5XL1W8RNTP');
+  </script>
+  <script src="/consent.js"></script>
+</head>
+<body class="game-page">
+  <nav class="site-nav" role="navigation" aria-label="Navegación principal">
+    <div class="site-nav__inner">
+      <div class="site-nav__top">
+        <a class="site-nav__brand" href="/">🎮 LIPA Studios</a>
+        <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="primary-nav">Menú</button>
+      </div>
+      <div id="primary-nav" class="nav-links">
+        <a href="/">Inicio</a>
+        <a href="/test-reflejos.html">Test reflejos</a>
+        <a href="/aim-trainer-neon.html" aria-current="page">Aim trainer</a>
+        <a href="/juegos-de-reflejos.html">Juegos</a>
+        <a href="/entrenador-reflejos.html">Entrenador</a>
+      </div>
+    </div>
+    <div class="nav-backdrop" id="nav-backdrop"></div>
+  </nav>
+  <script src="/js/site-nav.js" defer></script>
+
+  <main class="wrap">
+    <h1>🎯 Neon Aim Trainer</h1>
+    <p class="lead">30 segundos de <strong>dianas aleatorias</strong>. Toca cada objetivo antes de que desaparezca. Suma combo y sube en el ranking de hoy.</p>
+
+    <div class="stats">
+      <div class="stat"><span>Tiempo</span><strong id="aim-timer">30 s</strong></div>
+      <div class="stat"><span>Puntos</span><strong id="aim-score">0</strong></div>
+      <div class="stat"><span>Precisión</span><strong id="aim-accuracy">100%</strong></div>
+      <div class="stat"><span>Combo</span><strong id="aim-combo">0</strong></div>
+    </div>
+
+    <div id="aim-arena" aria-label="Zona de juego aim trainer"></div>
+
+    <div id="aim-overlay" class="game-overlay" hidden>
+      <p><strong>Fin de ronda</strong></p>
+      <p>Puntos: <strong id="aim-final-score">0</strong></p>
+      <p>Precisión: <strong id="aim-final-acc">0%</strong> · Mejor combo: <strong id="aim-final-combo">0</strong></p>
+      <p style="margin-top:12px;">
+        <button type="button" class="btn btn--ghost" id="aim-share">Compartir</button>
+      </p>
+    </div>
+
+    <button type="button" class="btn" id="aim-start">▶ Empezar 30 s</button>
+
+    <section class="card">
+      <h2>🏆 Ranking de hoy</h2>
+      <div id="aim-leaderboard"></div>
+    </section>
+
+    <section class="card">
+      <h2>Siguiente en tu rutina</h2>
+      <div class="hub-links">
+        <a href="/test-reflejos.html">⚡ Test de reflejos (ms)</a>
+        <a href="/grid-reflejos-neon.html">🔲 Grid 4×4</a>
+        <a href="/">🎮 Stack Tower Neon</a>
+        <a href="/blog/reflejos-fps-aim.html">📖 Guía aim FPS</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="/js/lipa-daily.js"></script>
+  <script src="/js/neon-aim-trainer.js"></script>
+</body>
+</html>

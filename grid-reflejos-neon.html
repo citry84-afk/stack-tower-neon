@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grid Reflejos 4×4 Gratis | Juego Neon · LIPA Studios</title>
+  <meta name="description" content="Juego de reflejos 4x4 gratis: toca la celda iluminada antes de que expire. Un fallo y termina. Ranking diario. Sin descarga.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://lipastudios.com/grid-reflejos-neon.html">
+  <link rel="stylesheet" href="/css/site-nav.css">
+  <link rel="stylesheet" href="/css/mini-games.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#39FF14">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5XL1W8RNTP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-5XL1W8RNTP');
+  </script>
+  <script src="/consent.js"></script>
+</head>
+<body class="game-page">
+  <nav class="site-nav" role="navigation" aria-label="Navegación principal">
+    <div class="site-nav__inner">
+      <div class="site-nav__top">
+        <a class="site-nav__brand" href="/">🎮 LIPA Studios</a>
+        <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="primary-nav">Menú</button>
+      </div>
+      <div id="primary-nav" class="nav-links">
+        <a href="/">Inicio</a>
+        <a href="/test-reflejos.html">Test reflejos</a>
+        <a href="/grid-reflejos-neon.html" aria-current="page">Grid 4×4</a>
+        <a href="/juegos-de-reflejos.html">Juegos</a>
+      </div>
+    </div>
+    <div class="nav-backdrop" id="nav-backdrop"></div>
+  </nav>
+  <script src="/js/site-nav.js" defer></script>
+
+  <main class="wrap">
+    <h1>🔲 Neon Grid Reflex</h1>
+    <p class="lead">Cuadrícula <strong>4×4</strong>: solo una celda se ilumina. Tócala a tiempo; cada acierto acelera el reloj. <strong>Un error = fin de partida.</strong></p>
+
+    <div class="stats">
+      <div class="stat"><span>Aciertos</span><strong id="grid-score">0</strong></div>
+      <div class="stat"><span>Combo</span><strong id="grid-combo">0</strong></div>
+      <div class="stat"><span>Límite</span><strong id="grid-timer">900 ms</strong></div>
+    </div>
+
+    <div id="grid-board" aria-label="Cuadrícula 4 por 4"></div>
+
+    <div id="grid-overlay" class="game-overlay" hidden>
+      <p><strong>Game over</strong></p>
+      <p id="grid-final-reason">—</p>
+      <p>Récord: <strong id="grid-final-score">0</strong> · Combo: <strong id="grid-final-combo">0</strong></p>
+      <p style="margin-top:12px;">
+        <button type="button" class="btn btn--ghost" id="grid-share">Compartir</button>
+      </p>
+    </div>
+
+    <button type="button" class="btn" id="grid-start">▶ Jugar</button>
+
+    <section class="card">
+      <h2>🏆 Ranking de hoy</h2>
+      <div id="grid-leaderboard"></div>
+    </section>
+
+    <section class="card">
+      <h2>Entrena hoy</h2>
+      <div class="hub-links">
+        <a href="/test-reflejos.html">⚡ Test ms</a>
+        <a href="/aim-trainer-neon.html">🎯 Aim trainer</a>
+        <a href="/">🎮 Stack Tower</a>
+        <a href="/neon-beat.html">🎵 Neon Beat</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="/js/lipa-daily.js"></script>
+  <script src="/js/neon-grid-reflex.js"></script>
+</body>
+</html>

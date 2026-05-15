@@ -1,0 +1,128 @@
+/* LIPA Studios — minijuegos de entrenamiento */
+body.game-page {
+  font-family: 'Orbitron', system-ui, sans-serif;
+  background: linear-gradient(135deg, #050505 0%, #0a0a0a 50%, #1a0a1a 100%);
+  color: #e8f6ff;
+  margin: 0;
+  line-height: 1.6;
+}
+.game-page .wrap { max-width: 720px; margin: 0 auto; padding: 24px 16px 48px; }
+.game-page h1 {
+  color: #00ffff;
+  text-shadow: 0 0 12px #00ffff;
+  font-size: clamp(1.3rem, 4vw, 1.9rem);
+  margin-bottom: 8px;
+}
+.game-page .lead { color: #b8d4e8; margin-bottom: 16px; }
+.game-page .stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.game-page .stat {
+  flex: 1;
+  min-width: 90px;
+  background: rgba(0,0,0,0.4);
+  border: 1px solid #00ffff;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  font-size: 0.85rem;
+}
+.game-page .stat span { display: block; color: #888; font-size: 0.7rem; }
+.game-page .stat strong { color: #39FF14; font-size: 1.1rem; }
+.game-page .card {
+  background: rgba(0,0,0,0.35);
+  border: 2px solid #00ffff;
+  border-radius: 12px;
+  padding: 18px;
+  margin-top: 18px;
+}
+.game-page .card h2 { color: #39FF14; font-size: 1rem; margin: 0 0 12px; }
+.game-page .btn {
+  background: #00ffff;
+  color: #000;
+  padding: 12px 22px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  font-family: inherit;
+}
+.game-page .btn--ghost {
+  background: transparent;
+  color: #00ffff;
+  border: 2px solid #00ffff;
+}
+.game-page .muted { color: #888; font-size: 0.9rem; }
+.game-page .lb-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(0,255,255,0.15);
+}
+.game-page .hub-links { display: grid; gap: 8px; }
+.game-page .hub-links a {
+  color: #00ffee;
+  text-decoration: none;
+  padding: 8px 10px;
+  border: 1px solid rgba(0,255,255,0.25);
+  border-radius: 8px;
+}
+#aim-arena {
+  position: relative;
+  height: min(55vh, 380px);
+  min-height: 260px;
+  border: 3px solid #FF0080;
+  border-radius: 14px;
+  background: rgba(0,0,0,0.5);
+  margin-bottom: 14px;
+  touch-action: manipulation;
+  overflow: hidden;
+}
+.aim-target {
+  position: absolute;
+  border-radius: 50%;
+  border: 3px solid #39FF14;
+  background: radial-gradient(circle, #39FF14 0%, #00ffff 70%);
+  box-shadow: 0 0 16px #39FF14;
+  cursor: pointer;
+  padding: 0;
+  animation: aim-pulse 0.5s ease-in-out infinite alternate;
+}
+.aim-target--hit { transform: scale(1.2); opacity: 0; }
+.aim-target--miss { border-color: #FF4500; background: #FF4500; }
+@keyframes aim-pulse {
+  from { box-shadow: 0 0 8px #39FF14; }
+  to { box-shadow: 0 0 20px #00ffff; }
+}
+#grid-board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  max-width: 360px;
+  margin: 0 auto 16px;
+}
+.grid-cell {
+  aspect-ratio: 1;
+  border: 2px solid #333;
+  border-radius: 10px;
+  background: rgba(0,0,0,0.5);
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.1s, border-color 0.1s;
+}
+.grid-cell--active {
+  background: rgba(57,255,20,0.45);
+  border-color: #39FF14;
+  box-shadow: 0 0 18px #39FF14;
+}
+.game-overlay {
+  text-align: center;
+  padding: 20px;
+  border: 2px solid #39FF14;
+  border-radius: 12px;
+  margin-bottom: 14px;
+}
+.game-overlay[hidden] { display: none !important; }
