@@ -130,7 +130,8 @@
     'aim-trainer': 'lipa_aim_best',
     'grid-reflex': 'lipa_grid_best',
     'stack-tower': 'stackTowerHighScore',
-    'neon-beat': 'neonBeatBest'
+    'flash-tap': 'lipa_flash_tap_best',
+    'esquiva-neon': 'lipa_esquiva_best'
   };
 
   var WEEKLY_POOL = [
@@ -262,10 +263,100 @@
     } catch (e) { /* ignore */ }
   }
 
-  function getWeeklyChallengeDef() {
-    var weekId = getWeekId();
-    var idx = seedFromString(weekId) % WEEKLY_POOL.length;
+  function getWeeklyChallengeDefForWeek(weekId) {
+    var idx = seedFromString(weekId || getWeekId()) % WEEKLY_POOL.length;
     return WEEKLY_POOL[idx];
+  }
+
+  function getWeeklyChallengeDef() {
+    return getWeeklyChallengeDefForWeek(getWeekId());
+  }
+
+  function buildChallengeUrl(opts) {
+    opts = opts || {};
+    var weekId = opts.weekId || getWeekId();
+    var def = getWeeklyChallengeDefForWeek(weekId);
+    var origin = 'https://lipastudios.com';
+    if (typeof location !== 'undefined' && location.origin && location.origin.indexOf('http') === 0) {
+      origin = location.origin;
+    }
+    var parts = ['reto=' + encodeURIComponent(weekId)];
+    if (opts.vs != null && def.game !== 'any') {
+      parts.push('vs=' + encodeURIComponent(opts.vs));
+    }
+    if (opts.from) {
+      parts.push('from=' + encodeURIComponent(String(opts.from).substring(0, 20)));
+    }
+    return origin + '/jugar.html?' + parts.join('&');
+  }
+
+  function parseChallengeFromUrl(search) {
+    var qs = search;
+    if (qs == null && typeof location !== 'undefined') qs = location.search;
+    if (!qs) return null;
+    var params = new URLSearchParams(qs.charAt(0) === '?' ? qs : '?' + qs);
+    var weekId = params.get('reto') || params.get('desafio');
+    if (!weekId) return null;
+    var vsRaw = params.get('vs');
+    var from = params.get('from');
+    var def = getWeeklyChallengeDefForWeek(weekId);
+    return {
+      weekId: weekId,
+      vs: vsRaw != null && vsRaw !== '' ? parseFloat(vsRaw) : null,
+      from: from ? decodeURIComponent(from) : null,
+      def: def,
+      isCurrentWeek: weekId === getWeekId()
+    };
+  }
+
+  function formatVsLabel(def, vs) {
+    if (vs == null || isNaN(vs)) return '';
+    if (def.type === 'max_ms') return 'Supera una media de ' + vs + ' ms';
+    if (def.type === 'play_count') return 'Juega a ' + Math.ceil(vs) + ' minijuegos distintos';
+    return 'Supera ' + vs + ' puntos';
+  }
+
+  function didBeatChallengeScore(def, myScore, vs) {
+    if (vs == null || isNaN(vs) || myScore == null) return false;
+    if (def.type === 'max_ms') return myScore <= vs;
+    if (def.type === 'play_count') return myScore >= vs;
+    return myScore >= vs;
+  }
+
+  function buildMyChallengeUrl(fromName) {
+    var w = getWeeklyChallenge();
+    var vs = null;
+    if (w.def.game !== 'any') {
+      if (w.def.type === 'play_count') vs = w.state.plays.length || null;
+      else vs = w.state.values[w.def.game] || null;
+    }
+    return buildChallengeUrl({
+      weekId: w.weekId,
+      vs: vs,
+      from: fromName || null
+    });
+  }
+
+  function copyToClipboard(text) {
+    if (global.navigator && global.navigator.clipboard && global.navigator.clipboard.writeText) {
+      return global.navigator.clipboard.writeText(text);
+    }
+    return new Promise(function (resolve, reject) {
+      try {
+        var ta = global.document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.left = '-9999px';
+        global.document.body.appendChild(ta);
+        ta.select();
+        global.document.execCommand('copy');
+        global.document.body.removeChild(ta);
+        resolve();
+      } catch (e) {
+        reject(e);
+      }
+    });
   }
 
   function getWeeklyChallenge() {
@@ -346,7 +437,8 @@
       aim: parseInt(localStorage.getItem(BEST_KEYS['aim-trainer']) || '0', 10) || null,
       grid: parseInt(localStorage.getItem(BEST_KEYS['grid-reflex']) || '0', 10) || null,
       stack: parseInt(localStorage.getItem(BEST_KEYS['stack-tower']) || '0', 10) || null,
-      beat: parseInt(localStorage.getItem(BEST_KEYS['neon-beat']) || '0', 10) || null,
+      flashTap: parseInt(localStorage.getItem(BEST_KEYS['flash-tap']) || '0', 10) || null,
+      esquiva: parseInt(localStorage.getItem(BEST_KEYS['esquiva-neon']) || '0', 10) || null,
       streak: getGlobalStreak(),
       totalDays: getGlobalTrain().totalDays || 0,
       gamesToday: getWeeklyState().plays.length
@@ -366,6 +458,13 @@
     bumpGlobalTrain: bumpGlobalTrain,
     getGlobalStreak: getGlobalStreak,
     getWeeklyChallenge: getWeeklyChallenge,
+    getWeeklyChallengeDefForWeek: getWeeklyChallengeDefForWeek,
+    buildChallengeUrl: buildChallengeUrl,
+    buildMyChallengeUrl: buildMyChallengeUrl,
+    parseChallengeFromUrl: parseChallengeFromUrl,
+    formatVsLabel: formatVsLabel,
+    didBeatChallengeScore: didBeatChallengeScore,
+    copyToClipboard: copyToClipboard,
     recordSession: recordSession,
     getAllRecords: getAllRecords,
     updateBest: updateBest

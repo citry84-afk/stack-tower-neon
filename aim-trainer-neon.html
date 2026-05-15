@@ -8,6 +8,7 @@
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://lipastudios.com/aim-trainer-neon.html">
   <link rel="stylesheet" href="/css/site-nav.css">
+<link rel="stylesheet" href="/css/lipa-ui.css">
   <link rel="stylesheet" href="/css/mini-games.css">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
   <meta name="theme-color" content="#ff0080">
@@ -20,7 +21,7 @@
   </script>
   <script src="/consent.js"></script>
 </head>
-<body class="game-page">
+<body class="lipa-page game-page">
   <nav class="site-nav" role="navigation" aria-label="Navegación principal">
     <div class="site-nav__inner">
       <div class="site-nav__top">
@@ -56,6 +57,8 @@
       <p><strong>Fin de ronda</strong></p>
       <p>Puntos: <strong id="aim-final-score">0</strong></p>
       <p>Precisión: <strong id="aim-final-acc">0%</strong> · Mejor combo: <strong id="aim-final-combo">0</strong></p>
+      <label for="aim-name" class="flash-name-label">Nombre (ranking)</label>
+      <input type="text" id="aim-name" class="flash-name-input" maxlength="15" placeholder="Tu nombre" autocomplete="nickname">
       <p style="margin-top:12px;">
         <button type="button" class="btn btn--ghost" id="aim-share">Compartir</button>
       </p>

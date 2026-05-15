@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neon Esquiva Gratis | Reflejos y cambio de carril · LIPA Studios</title>
+  <meta name="description" content="Neon Esquiva: esquiva obstáculos en 3 carriles. Entrena reflejos y decisiones rápidas. 30 segundos gratis en el navegador.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://lipastudios.com/esquiva-neon.html">
+  <link rel="stylesheet" href="/css/lipa-ui.css">
+  <link rel="stylesheet" href="/css/site-nav.css">
+  <link rel="stylesheet" href="/css/mini-games.css">
+  <meta name="theme-color" content="#000000">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5XL1W8RNTP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-5XL1W8RNTP');
+  </script>
+  <script src="/consent.js"></script>
+</head>
+<body class="lipa-page game-page">
+  <nav class="site-nav" role="navigation" aria-label="Navegación principal">
+    <div class="site-nav__inner">
+      <div class="site-nav__top">
+        <a class="site-nav__brand" href="/">LIPA Studios</a>
+        <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="primary-nav">Menú</button>
+      </div>
+      <div id="primary-nav" class="nav-links">
+        <a href="/">Inicio</a>
+        <a href="/jugar.html">Jugar</a>
+        <a href="/esquiva-neon.html" aria-current="page">Esquiva</a>
+        <a href="/toque-flash-neon.html">Flash Tap</a>
+      </div>
+    </div>
+    <div class="nav-backdrop" id="nav-backdrop"></div>
+  </nav>
+  <script src="/js/site-nav.js" defer></script>
+
+  <main class="wrap">
+    <h1>Neon Esquiva</h1>
+    <p class="lead">Cambia de carril antes de que el bloque te alcance. Flechas, botones o toca izquierda/derecha en la pantalla.</p>
+
+    <div class="stats">
+      <div class="stat"><span>Tiempo</span><strong id="esquiva-timer">30 s</strong></div>
+      <div class="stat"><span>Puntos</span><strong id="esquiva-score">0</strong></div>
+      <div class="stat"><span>Esquivados</span><strong id="esquiva-dodged">0</strong></div>
+    </div>
+
+    <div class="esquiva-box">
+      <canvas id="esquiva-canvas" aria-label="Tres carriles"></canvas>
+    </div>
+
+    <div class="esquiva-controls">
+      <button type="button" class="btn btn--ghost" id="esquiva-left" aria-label="Carril izquierda">←</button>
+      <button type="button" class="btn btn--ghost" id="esquiva-right" aria-label="Carril derecha">→</button>
+    </div>
+
+    <div id="esquiva-overlay" class="game-overlay" hidden>
+      <p><strong>Fin de ronda</strong></p>
+      <p>Puntos: <strong id="esquiva-final-score">0</strong> · Esquivados: <strong id="esquiva-final-dodged">0</strong></p>
+      <button type="button" class="btn btn--ghost" id="esquiva-share">Compartir</button>
+    </div>
+
+    <button type="button" class="btn" id="esquiva-start">Empezar 30 s</button>
+
+    <section class="card">
+      <h2>Ranking de hoy</h2>
+      <div id="esquiva-leaderboard"></div>
+    </section>
+
+    <section class="card">
+      <h2>Siguiente en tu rutina</h2>
+      <div class="hub-links">
+        <a href="/toque-flash-neon.html">Neon Flash Tap</a>
+        <a href="/grid-reflejos-neon.html">Grid 4×4</a>
+        <a href="/jugar.html">Arcade completo</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="/js/lipa-daily.js"></script>
+  <script src="/js/neon-esquiva.js"></script>
+</body>
+</html>

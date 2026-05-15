@@ -7,16 +7,14 @@
   <meta name="description" content="Juegos gratis online en español: reflejos, aim trainer, grid 4x4, stack tower y más. Sin descarga ni registro. Optimizado para móvil. Entrena 5 minutos al día.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://lipastudios.com/jugar.html">
+  <link rel="stylesheet" href="/css/lipa-ui.css">
   <link rel="stylesheet" href="/css/site-nav.css">
   <link rel="stylesheet" href="/css/arcade-hub.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
-  <meta name="theme-color" content="#00ffff">
+  <meta name="theme-color" content="#000000">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://lipastudios.com/jugar.html">
   <meta property="og:title" content="Juegos Gratis en el Navegador | LIPA Studios">
-  <meta property="og:description" content="Arcade neon gratis: reflejos, precisión y ritmo. Juega al instante en móvil o PC.">
+  <meta property="og:description" content="Arcade neon gratis: reflejos, precisión y esquiva. Juega al instante en móvil o PC.">
   <meta property="og:image" content="https://lipastudios.com/og-image.jpg">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-5XL1W8RNTP"></script>
   <script>
@@ -42,140 +40,148 @@
         { "@type": "ListItem", "position": 2, "name": "Neon Aim Trainer", "url": "https://lipastudios.com/aim-trainer-neon.html" },
         { "@type": "ListItem", "position": 3, "name": "Neon Grid 4x4", "url": "https://lipastudios.com/grid-reflejos-neon.html" },
         { "@type": "ListItem", "position": 4, "name": "Stack Tower Neon", "url": "https://lipastudios.com/" },
-        { "@type": "ListItem", "position": 5, "name": "Neon Runner", "url": "https://lipastudios.com/neon-runner.html" },
-        { "@type": "ListItem", "position": 6, "name": "Neon Beat", "url": "https://lipastudios.com/neon-beat.html" }
+        { "@type": "ListItem", "position": 5, "name": "Neon Flash Tap", "url": "https://lipastudios.com/toque-flash-neon.html" },
+        { "@type": "ListItem", "position": 6, "name": "Neon Esquiva", "url": "https://lipastudios.com/esquiva-neon.html" }
       ]
     }
   }
   </script>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Orbitron', system-ui, sans-serif;
-      background: linear-gradient(160deg, #050505 0%, #0d0d1a 40%, #1a0510 100%);
-      color: #e8f6ff;
-      min-height: 100vh;
-    }
-  </style>
 </head>
-<body>
+<body class="lipa-page">
   <nav class="site-nav" role="navigation" aria-label="Navegación principal">
     <div class="site-nav__inner">
       <div class="site-nav__top">
-        <a class="site-nav__brand" href="/">🎮 LIPA Studios</a>
+        <a class="site-nav__brand" href="/">LIPA Studios</a>
         <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Abrir menú">Menú</button>
       </div>
       <div id="primary-nav" class="nav-links">
         <a href="/">Inicio</a>
         <a href="/jugar.html" aria-current="page">Jugar</a>
         <a href="/entrenador-reflejos.html">Entrenador</a>
-        <a href="/blog.html">Blog</a>
         <a href="/guia-reflejos.html">Guías</a>
-        <a href="/about.html">Sobre el proyecto</a>
+        <a href="/blog.html">Blog</a>
       </div>
     </div>
     <div class="nav-backdrop" id="nav-backdrop"></div>
   </nav>
   <script src="/js/site-nav.js" defer></script>
 
-  <header class="arcade-hero">
-    <h1>Juegos gratis en el navegador</h1>
-    <p class="tagline">
-      Arcade <strong>neon</strong> hecho en España: entrena reflejos, puntería y ritmo.
-      Sin descargas, sin registro — abre y juega en móvil o PC.
-    </p>
-    <div class="arcade-chips" role="list">
-      <span class="arcade-chip" role="listitem">100 % gratis</span>
-      <span class="arcade-chip" role="listitem">Español</span>
-      <span class="arcade-chip" role="listitem">Móvil y PC</span>
-      <span class="arcade-chip" role="listitem">Ranking diario</span>
+  <main class="lipa-main">
+    <header class="arcade-hero">
+      <p class="lipa-hero__eyebrow">Arcade · reflejos · gratis</p>
+      <h1>Juegos en el navegador</h1>
+      <p class="tagline">
+        Entrena reflejos, puntería y ritmo. Sin descargas ni registro — abre y juega en móvil o PC.
+      </p>
+      <div class="arcade-chips" role="list">
+        <span class="arcade-chip" role="listitem">100 % gratis</span>
+        <span class="arcade-chip" role="listitem">Español</span>
+        <span class="arcade-chip" role="listitem">Móvil y PC</span>
+      </div>
+      <div class="lipa-actions">
+        <a href="/test-reflejos.html" class="lipa-btn lipa-btn--primary">Test de reflejos</a>
+        <a href="/entrenador-reflejos.html" class="lipa-btn lipa-btn--secondary">Rutina 5 min</a>
+      </div>
+    </header>
+
+    <section class="lipa-section" aria-labelledby="games-title">
+      <div class="lipa-section__head">
+        <h2 id="games-title" class="lipa-section__title">Elige un juego</h2>
+        <p class="lipa-section__sub">Seis minijuegos para entrenar hoy.</p>
+      </div>
+
+      <div class="arcade-grid" aria-label="Catálogo de juegos">
+        <a href="/test-reflejos.html" class="arcade-card">
+          <div class="arcade-card__visual arcade-card__visual--test">
+            ⚡
+            <span class="arcade-card__badge">Popular</span>
+          </div>
+          <div class="arcade-card__body">
+            <h2>Neon Reaction Test</h2>
+            <p>Mide tu tiempo de reacción en milisegundos. Ideal para comparar con amigos.</p>
+            <span class="arcade-card__cta">Hacer test →</span>
+          </div>
+        </a>
+
+        <a href="/aim-trainer-neon.html" class="arcade-card">
+          <div class="arcade-card__visual arcade-card__visual--aim">🎯</div>
+          <div class="arcade-card__body">
+            <h2>Neon Aim Trainer</h2>
+            <p>30 segundos de dianas. Entrena puntería estilo FPS con precisión y combo.</p>
+            <span class="arcade-card__cta">Entrenar aim →</span>
+          </div>
+        </a>
+
+        <a href="/grid-reflejos-neon.html" class="arcade-card">
+          <div class="arcade-card__visual arcade-card__visual--grid">🔲</div>
+          <div class="arcade-card__body">
+            <h2>Neon Grid 4×4</h2>
+            <p>Reflejos puros: toca la celda correcta antes de que expire. Un fallo y pierdes.</p>
+            <span class="arcade-card__cta">Jugar grid →</span>
+          </div>
+        </a>
+
+        <a href="/" class="arcade-card">
+          <div class="arcade-card__visual arcade-card__visual--stack">
+            🎮
+            <span class="arcade-card__badge">Reto diario</span>
+          </div>
+          <div class="arcade-card__body">
+            <h2>Stack Tower Neon</h2>
+            <p>El clásico de apilado neon. Incluye reto diario con ranking compartido.</p>
+            <span class="arcade-card__cta">Apilar bloques →</span>
+          </div>
+        </a>
+
+        <a href="/toque-flash-neon.html" class="arcade-card">
+          <div class="arcade-card__visual arcade-card__visual--flash">⚡</div>
+          <div class="arcade-card__body">
+            <h2>Neon Flash Tap</h2>
+            <p>Toca el círculo antes de que desaparezca. Reflejos visuales en 30 s.</p>
+            <span class="arcade-card__cta">Jugar →</span>
+          </div>
+        </a>
+
+        <a href="/esquiva-neon.html" class="arcade-card">
+          <div class="arcade-card__visual arcade-card__visual--esquiva">🔀</div>
+          <div class="arcade-card__body">
+            <h2>Neon Esquiva</h2>
+            <p>Tres carriles: cambia a tiempo y esquiva bloques que caen.</p>
+            <span class="arcade-card__cta">Esquivar →</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <div class="lipa-dashboard">
+      <section class="weekly-panel" id="lipa-weekly-panel" aria-live="polite"></section>
+
+      <section class="progress-section" aria-labelledby="progress-title">
+        <h2 id="progress-title">Tu progreso</h2>
+        <div id="lipa-progress-panel" class="progress-panel"></div>
+      </section>
     </div>
-  </header>
 
-  <section class="weekly-panel" id="lipa-weekly-panel" aria-live="polite"></section>
+    <div class="lipa-container">
+      <a href="/entrenador-reflejos.html" class="lipa-callout">
+        <strong>⚡ Rutina de 5 minutos</strong>
+        <span>Test → Aim → Grid → Stack → Flash Tap (o Esquiva)</span>
+      </a>
+      <p class="arcade-footer-note" style="margin-top:12px;">
+        <a href="/blog/reflejos-5-minutos.html">Guía rutina 5 min</a> ·
+        <a href="/guia-reflejos.html">Plan 7 días</a>
+      </p>
+    </div>
 
-  <section class="progress-section" aria-labelledby="progress-title">
-    <h2 id="progress-title">Tu progreso LIPA</h2>
-    <div id="lipa-progress-panel" class="progress-panel"></div>
-  </section>
+    <p class="arcade-footer-note">
+      ¿Buscas guías o artículos? Visita el
+      <a href="/blog.html">blog</a> o
+      <a href="/juegos-de-reflejos.html">todos los juegos de reflejos</a>.
+    </p>
+  </main>
 
-  <p style="text-align:center;margin:0 0 20px;padding:0 16px;">
-    <a href="/entrenador-reflejos.html" class="arcade-routine" style="margin-bottom:0;">
-      <strong>⚡ Rutina de 5 minutos</strong>
-      Test → Aim → Grid → Stack Tower → Runner
-    </a>
-  </p>
-
-  <section class="arcade-grid" aria-label="Catálogo de juegos">
-    <a href="/test-reflejos.html" class="arcade-card">
-      <div class="arcade-card__visual arcade-card__visual--test">
-        ⚡
-        <span class="arcade-card__badge">Nuevo</span>
-      </div>
-      <div class="arcade-card__body">
-        <h2>Neon Reaction Test</h2>
-        <p>Mide tu tiempo de reacción en milisegundos. Ideal para comparar con amigos.</p>
-        <span class="arcade-card__cta">Hacer test</span>
-      </div>
-    </a>
-
-    <a href="/aim-trainer-neon.html" class="arcade-card">
-      <div class="arcade-card__visual arcade-card__visual--aim">🎯</div>
-      <div class="arcade-card__body">
-        <h2>Neon Aim Trainer</h2>
-        <p>30 segundos de dianas. Entrena puntería estilo FPS con precisión y combo.</p>
-        <span class="arcade-card__cta">Entrenar aim</span>
-      </div>
-    </a>
-
-    <a href="/grid-reflejos-neon.html" class="arcade-card">
-      <div class="arcade-card__visual arcade-card__visual--grid">🔲</div>
-      <div class="arcade-card__body">
-        <h2>Neon Grid 4×4</h2>
-        <p>Reflejos puros: toca la celda correcta antes de que expire. Un fallo y pierdes.</p>
-        <span class="arcade-card__cta">Jugar grid</span>
-      </div>
-    </a>
-
-    <a href="/" class="arcade-card">
-      <div class="arcade-card__visual arcade-card__visual--stack">
-        🎮
-        <span class="arcade-card__badge">Reto diario</span>
-      </div>
-      <div class="arcade-card__body">
-        <h2>Stack Tower Neon</h2>
-        <p>El clásico de apilado neon. Incluye reto diario con ranking compartido.</p>
-        <span class="arcade-card__cta">Apilar bloques</span>
-      </div>
-    </a>
-
-    <a href="/neon-runner.html" class="arcade-card">
-      <div class="arcade-card__visual arcade-card__visual--runner">🏃</div>
-      <div class="arcade-card__body">
-        <h2>Neon Runner</h2>
-        <p>Corre, esquiva y suma metros. Coordinación y reflejos en endless runner.</p>
-        <span class="arcade-card__cta">Correr</span>
-      </div>
-    </a>
-
-    <a href="/neon-beat.html" class="arcade-card">
-      <div class="arcade-card__visual arcade-card__visual--beat">🎵</div>
-      <div class="arcade-card__body">
-        <h2>Neon Beat</h2>
-        <p>Ritmo y reflejos musicales en 4 carriles. Sincroniza al compás.</p>
-        <span class="arcade-card__cta">Jugar ritmo</span>
-      </div>
-    </a>
-  </section>
-
-  <p class="arcade-footer-note">
-    ¿Buscas guías, móviles gaming baratos o artículos? Visita el
-    <a href="/blog.html">blog</a>, la <a href="/guia-reflejos.html">guía de 7 días</a> o
-    <a href="/juegos-de-reflejos.html">todo sobre juegos de reflejos</a>.
-  </p>
-
-  <footer style="text-align:center;padding:24px;color:#666;font-size:0.85rem;border-top:1px solid rgba(0,255,255,0.2);">
-    <p>© 2024–2026 LIPA Studios · <a href="/privacy.html" style="color:#00ffee;">Privacidad</a> · <a href="/terms.html" style="color:#00ffee;">Términos</a></p>
+  <footer class="lipa-footer">
+    <p>© 2024–2026 LIPA Studios · <a href="/privacy.html">Privacidad</a> · <a href="/terms.html">Términos</a></p>
   </footer>
   <script src="/js/lipa-daily.js"></script>
   <script src="/js/lipa-progress.js"></script>

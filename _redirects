@@ -35,7 +35,6 @@ http://www.stacktowerneon.com/*  https://stacktowerneon.com/:splat  301!
 /moviles-gamers-baratos.html  /moviles-gaming-baratos.html  301
 /moviles-gamers-baratos      /moviles-gaming-baratos.html  301
 /entrenador-reflejos.html  /entrenador-reflejos.html  200
-/neon-runner.html    /neon-runner.html    200
 
 # Blog posts - Permitir acceso directo
 /blog/*.html         /blog/:splat         200
@@ -90,6 +89,9 @@ http://www.stacktowerneon.com/*  https://stacktowerneon.com/:splat  301!
 # SEO-friendly game routes (redirecciones a index.html)
 /jugar              /jugar.html                       200
 /arcade             /jugar.html                       200
+/desafio            /jugar.html                       200
+/neon-beat.html     /toque-flash-neon.html            301
+/neon-runner.html   /esquiva-neon.html                301
 /juego              /index.html                       200
 /torre              /index.html                       200
 /neon               /index.html                       200

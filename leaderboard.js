@@ -656,11 +656,16 @@ class DailyLeaderboard {
     shareRanking(scoreData, userRank) {
         const gameNames = {
             'stack-tower-neon': 'Stack Tower Neon',
-            'neon-runner-wow': 'Neon Runner WOW',
-            'neon-beat-wow': 'Neon Beat WOW',
+            'aim-trainer': 'Neon Aim Trainer',
+            'flash-tap': 'Neon Flash Tap',
+            'esquiva-neon': 'Neon Esquiva',
+            'reaction-test': 'Test reflejos',
+            'grid-reflex': 'Grid 4×4',
+            'neon-runner-wow': 'Neon Esquiva',
+            'neon-beat-wow': 'Neon Flash Tap',
+            'neon-runner-lipastudios': 'Neon Esquiva',
+            'neon-beat-stage': 'Neon Flash Tap',
             'neon-lab-physics-wow': 'Neon Lab Physics WOW',
-            'neon-runner-lipastudios': 'Neon Runner',
-            'neon-beat-stage': 'Neon Beat Stage',
             'neon-lab-physics': 'Neon Lab Physics'
         };
         

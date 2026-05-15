@@ -354,13 +354,18 @@ class UnifiedGlobalLeaderboard {
 
     getGameIcon(gameName) {
         const icons = {
-            'neon-runner-wow': '🏃‍♂️',
             'stack-tower-neon': '📚',
-            'neon-beat-stage': '🎵',
+            'aim-trainer': '🎯',
+            'flash-tap': '⚡',
+            'esquiva-neon': '🔀',
+            'reaction-test': '⚡',
+            'grid-reflex': '🔲',
+            'neon-runner-wow': '🔀',
+            'neon-beat-stage': '⚡',
             'neon-lab-physics-wow': '🧪',
             'stack-tower-wow': '📚',
-            'neon-beat-wow': '🎵',
-            'neon-runner': '🏃‍♂️',
+            'neon-beat-wow': '⚡',
+            'neon-runner': '🔀',
             'neon-lab-physics': '🧪'
         };
         return icons[gameName] || '🎮';

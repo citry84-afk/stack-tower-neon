@@ -16,12 +16,15 @@ DEFAULT_URLS = [
     f"https://{HOST}/test-reflejos.html",
     f"https://{HOST}/aim-trainer-neon.html",
     f"https://{HOST}/grid-reflejos-neon.html",
-    f"https://{HOST}/neon-beat.html",
+    f"https://{HOST}/toque-flash-neon.html",
+    f"https://{HOST}/esquiva-neon.html",
     f"https://{HOST}/moviles-gaming-baratos.html",
     f"https://{HOST}/guia-reflejos.html",
     f"https://{HOST}/juegos-de-reflejos.html",
     f"https://{HOST}/blog.html",
     f"https://{HOST}/blog/mejorar-reflejos-guia-completa.html",
+    f"https://{HOST}/blog/reflejos-5-minutos.html",
+    f"https://{HOST}/entrenador-reflejos.html",
     f"https://{HOST}/editorial.html",
 ]
 

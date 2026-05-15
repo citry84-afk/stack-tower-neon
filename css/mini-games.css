@@ -1,128 +1,368 @@
-/* LIPA Studios — minijuegos de entrenamiento */
+/* LIPA Studios — minijuegos (sobre lipa-ui.css) */
 body.game-page {
-  font-family: 'Orbitron', system-ui, sans-serif;
-  background: linear-gradient(135deg, #050505 0%, #0a0a0a 50%, #1a0a1a 100%);
-  color: #e8f6ff;
+  font-family: var(--lipa-font, -apple-system, system-ui, sans-serif);
+  background: var(--lipa-bg, #000);
+  color: var(--lipa-text, #f5f5f7);
   margin: 0;
-  line-height: 1.6;
+  line-height: 1.47;
 }
-.game-page .wrap { max-width: 720px; margin: 0 auto; padding: 24px 16px 48px; }
+
+.game-page .wrap {
+  max-width: var(--lipa-max, 720px);
+  margin: 0 auto;
+  padding: var(--lipa-space-lg, 24px) var(--lipa-space-lg, 24px) var(--lipa-space-2xl, 48px);
+}
+
 .game-page h1 {
-  color: #00ffff;
-  text-shadow: 0 0 12px #00ffff;
-  font-size: clamp(1.3rem, 4vw, 1.9rem);
-  margin-bottom: 8px;
+  font-family: var(--lipa-font-display);
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--lipa-text);
+  margin: 0 0 var(--lipa-space-sm, 12px);
+  text-shadow: none;
 }
-.game-page .lead { color: #b8d4e8; margin-bottom: 16px; }
+
+.game-page .lead {
+  color: var(--lipa-text-secondary);
+  margin-bottom: var(--lipa-space-lg, 24px);
+  font-size: 1.0625rem;
+}
+
 .game-page .stats {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: var(--lipa-space-sm, 12px);
+  margin-bottom: var(--lipa-space-lg, 24px);
 }
+
 .game-page .stat {
-  flex: 1;
-  min-width: 90px;
-  background: rgba(0,0,0,0.4);
-  border: 1px solid #00ffff;
-  border-radius: 10px;
-  padding: 10px;
+  background: var(--lipa-surface);
+  border: 1px solid var(--lipa-border);
+  border-radius: var(--lipa-radius-sm, 10px);
+  padding: var(--lipa-space-md, 16px);
   text-align: center;
-  font-size: 0.85rem;
 }
-.game-page .stat span { display: block; color: #888; font-size: 0.7rem; }
-.game-page .stat strong { color: #39FF14; font-size: 1.1rem; }
+
+.game-page .stat span {
+  display: block;
+  color: var(--lipa-text-tertiary);
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+.game-page .stat strong {
+  color: var(--lipa-text);
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
 .game-page .card {
-  background: rgba(0,0,0,0.35);
-  border: 2px solid #00ffff;
-  border-radius: 12px;
-  padding: 18px;
-  margin-top: 18px;
+  background: var(--lipa-surface);
+  border: 1px solid var(--lipa-border);
+  border-radius: var(--lipa-radius, 14px);
+  padding: var(--lipa-space-lg, 24px);
+  margin-top: var(--lipa-space-lg, 24px);
 }
-.game-page .card h2 { color: #39FF14; font-size: 1rem; margin: 0 0 12px; }
+
+.game-page .card h2 {
+  color: var(--lipa-text);
+  font-size: 17px;
+  font-weight: 600;
+  margin: 0 0 var(--lipa-space-md, 16px);
+}
+
 .game-page .btn {
-  background: #00ffff;
+  background: var(--lipa-accent);
   color: #000;
   padding: 12px 22px;
   border: none;
-  border-radius: 8px;
-  font-weight: bold;
+  border-radius: 980px;
+  font-weight: 600;
+  font-size: 15px;
   cursor: pointer;
   font-family: inherit;
 }
+
 .game-page .btn--ghost {
   background: transparent;
-  color: #00ffff;
-  border: 2px solid #00ffff;
+  color: var(--lipa-text);
+  border: 1px solid var(--lipa-border);
 }
-.game-page .muted { color: #888; font-size: 0.9rem; }
+
+.game-page .muted {
+  color: var(--lipa-text-secondary);
+  font-size: 14px;
+}
+
 .game-page .lb-row {
   display: flex;
   justify-content: space-between;
-  padding: 6px 0;
-  border-bottom: 1px solid rgba(0,255,255,0.15);
+  padding: 10px 0;
+  border-bottom: 1px solid var(--lipa-border);
+  font-size: 15px;
 }
-.game-page .hub-links { display: grid; gap: 8px; }
+
+.game-page .hub-links {
+  display: grid;
+  gap: var(--lipa-space-xs, 8px);
+}
+
 .game-page .hub-links a {
-  color: #00ffee;
+  color: var(--lipa-text);
   text-decoration: none;
-  padding: 8px 10px;
-  border: 1px solid rgba(0,255,255,0.25);
-  border-radius: 8px;
+  padding: 12px 14px;
+  border: 1px solid var(--lipa-border);
+  border-radius: var(--lipa-radius-sm, 10px);
+  font-size: 14px;
+  transition: background 0.2s;
 }
+
+.game-page .hub-links a:hover {
+  background: var(--lipa-surface-hover);
+}
+
 #aim-arena {
   position: relative;
   height: min(55vh, 380px);
   min-height: 260px;
-  border: 3px solid #FF0080;
-  border-radius: 14px;
-  background: rgba(0,0,0,0.5);
-  margin-bottom: 14px;
-  touch-action: manipulation;
+  border: 1px solid var(--lipa-border);
+  border-radius: var(--lipa-radius, 14px);
+  background: var(--lipa-bg-elevated);
+  margin-bottom: var(--lipa-space-md, 16px);
   overflow: hidden;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  isolation: isolate;
 }
+
+#aim-arena[data-aim-wait]::after {
+  content: 'Preparando zona de juego…';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--lipa-text-muted, #888);
+  font-size: 0.95rem;
+  pointer-events: none;
+}
+
 .aim-target {
   position: absolute;
+  z-index: 2;
+  border: none;
   border-radius: 50%;
-  border: 3px solid #39FF14;
-  background: radial-gradient(circle, #39FF14 0%, #00ffff 70%);
-  box-shadow: 0 0 16px #39FF14;
+  background: radial-gradient(circle at 30% 30%, #ff6b9d, var(--lipa-pink, #ff0080));
+  border: 2px solid #fff;
   cursor: pointer;
   padding: 0;
-  animation: aim-pulse 0.5s ease-in-out infinite alternate;
+  box-shadow: 0 0 18px rgba(255, 0, 128, 0.55);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  animation: flash-pop 0.15s ease-out;
 }
-.aim-target--hit { transform: scale(1.2); opacity: 0; }
-.aim-target--miss { border-color: #FF4500; background: #FF4500; }
-@keyframes aim-pulse {
-  from { box-shadow: 0 0 8px #39FF14; }
-  to { box-shadow: 0 0 20px #00ffff; }
+
+.aim-target--hit {
+  background: radial-gradient(circle, #39ff14, #166534);
+  transform: scale(1.1);
+  opacity: 0.85;
 }
+
+.aim-target--miss {
+  background: radial-gradient(circle, #6b7280, #374151);
+  opacity: 0.5;
+}
+
 #grid-board {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 8px;
-  max-width: 360px;
-  margin: 0 auto 16px;
+  max-width: 320px;
+  margin: 0 auto var(--lipa-space-md, 16px);
 }
+
 .grid-cell {
   aspect-ratio: 1;
-  border: 2px solid #333;
-  border-radius: 10px;
-  background: rgba(0,0,0,0.5);
+  border-radius: var(--lipa-radius-sm, 10px);
+  border: 1px solid var(--lipa-border);
+  background: var(--lipa-surface);
   cursor: pointer;
-  padding: 0;
   transition: background 0.1s, border-color 0.1s;
 }
-.grid-cell--active {
-  background: rgba(57,255,20,0.45);
-  border-color: #39FF14;
-  box-shadow: 0 0 18px #39FF14;
+
+.grid-cell.active {
+  background: var(--lipa-accent-soft);
+  border-color: var(--lipa-accent);
 }
+
+.grid-cell.wrong {
+  background: rgba(255, 55, 95, 0.2);
+  border-color: var(--lipa-pink);
+}
+
+#rt-tap-zone {
+  min-height: 220px;
+  border-radius: var(--lipa-radius, 14px);
+  border: 1px solid var(--lipa-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  margin-bottom: var(--lipa-space-lg, 24px);
+  transition: background 0.15s, border-color 0.15s;
+  background: var(--lipa-surface);
+}
+
+#rt-tap-zone:focus {
+  outline: 2px solid var(--lipa-accent);
+  outline-offset: 4px;
+}
+
+#rt-wait {
+  background: rgba(255, 55, 95, 0.08);
+  border-color: rgba(255, 55, 95, 0.35);
+}
+
+#rt-go {
+  background: rgba(48, 209, 88, 0.12);
+  border-color: rgba(48, 209, 88, 0.4);
+}
+
+#rt-go .rt-big {
+  color: var(--lipa-success);
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+#rt-too-soon {
+  background: rgba(255, 149, 0, 0.1);
+  border-color: rgba(255, 149, 0, 0.4);
+}
+
+#rt-result .rt-ms {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--lipa-accent);
+  text-shadow: none;
+}
+
+.game-page .lipa-footer {
+  margin-top: var(--lipa-space-xl, 32px);
+}
+
+#flash-arena {
+  position: relative;
+  height: min(55vh, 380px);
+  min-height: 260px;
+  border: 1px solid var(--lipa-border);
+  border-radius: var(--lipa-radius, 14px);
+  background: var(--lipa-bg-elevated);
+  margin-bottom: var(--lipa-space-md, 16px);
+  overflow: hidden;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  isolation: isolate;
+}
+
+#flash-arena[data-flash-wait]::after {
+  content: 'Preparando zona de juego…';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--lipa-text-muted, #888);
+  font-size: 0.95rem;
+  pointer-events: none;
+}
+
+.flash-target {
+  position: absolute;
+  z-index: 2;
+  border: none;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #5eead4, var(--lipa-accent));
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+  cursor: pointer;
+  padding: 0;
+  animation: flash-pop 0.15s ease-out;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.flash-name-label {
+  display: block;
+  margin: 12px 0 6px;
+  font-size: 0.9rem;
+  color: var(--lipa-text-muted, #888);
+}
+
+.flash-name-input {
+  width: 100%;
+  max-width: 220px;
+  margin: 0 auto 12px;
+  display: block;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--lipa-border);
+  background: var(--lipa-bg);
+  color: var(--lipa-text);
+  font-size: 1rem;
+}
+
+.flash-target--miss {
+  background: radial-gradient(circle, #ff375f, #991b1b);
+  opacity: 0.7;
+}
+
+@keyframes flash-pop {
+  from { transform: scale(0.6); opacity: 0.5; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.esquiva-box {
+  position: relative;
+  height: min(52vh, 400px);
+  min-height: 280px;
+  border: 1px solid var(--lipa-border);
+  border-radius: var(--lipa-radius, 14px);
+  overflow: hidden;
+  margin-bottom: 12px;
+  background: #0a0a0f;
+}
+
+#esquiva-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: manipulation;
+}
+
+.esquiva-controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.esquiva-controls .btn {
+  min-height: 48px;
+  font-size: 1.25rem;
+}
+
 .game-overlay {
   text-align: center;
-  padding: 20px;
-  border: 2px solid #39FF14;
-  border-radius: 12px;
-  margin-bottom: 14px;
+  padding: 16px;
+  border: 1px solid var(--lipa-border);
+  border-radius: var(--lipa-radius, 14px);
+  margin-bottom: 16px;
+  background: var(--lipa-surface);
 }
-.game-overlay[hidden] { display: none !important; }
+
+.game-overlay[hidden] {
+  display: none !important;
+}
