@@ -176,6 +176,26 @@
       cta: 'Jugar Stack'
     },
     {
+      id: 'flash-180',
+      game: 'flash-tap',
+      type: 'min_score',
+      target: 180,
+      title: 'Flash Tap — 180 pts',
+      desc: 'Toca los círculos a tiempo y suma 180 puntos o más en 30 s.',
+      url: '/toque-flash-neon.html',
+      cta: 'Jugar Flash Tap'
+    },
+    {
+      id: 'esquiva-120',
+      game: 'esquiva-neon',
+      type: 'min_score',
+      target: 120,
+      title: 'Neon Esquiva — 120 pts',
+      desc: 'Esquiva bloques y supera 120 puntos en una ronda.',
+      url: '/esquiva-neon.html',
+      cta: 'Jugar Esquiva'
+    },
+    {
       id: 'explorer',
       game: 'any',
       type: 'play_count',
