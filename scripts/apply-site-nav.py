@@ -26,7 +26,7 @@ NAV_REPLACEMENT = """    <nav class="site-nav" role="navigation" aria-label="Nav
                 <a href="/blog.html">Blog</a>
                 <a href="/entrenador-reflejos.html">Entrenador</a>
                 <a href="/help.html">Ayuda</a>
-                <a href="/about.html">Sobre mí</a>
+                <a href="/about.html">Sobre el proyecto</a>
             </div>
         </div>
         <div class="nav-backdrop" id="nav-backdrop" aria-hidden="true"></div>

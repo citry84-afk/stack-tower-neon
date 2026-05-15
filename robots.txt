@@ -32,6 +32,7 @@ Disallow: /index-backup.html
 Disallow: /index-wow.html
 Disallow: /stack-tower-fixed.html
 Disallow: /dashboard/
+Disallow: /moviles-gamers-baratos.html
 
 # Allow Googlebot full access
 User-agent: Googlebot
