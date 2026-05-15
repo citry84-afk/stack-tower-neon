@@ -100,6 +100,9 @@
     var prevBest = parseInt(localStorage.getItem(STORAGE_BEST) || '9999', 10);
     if (best < prevBest) localStorage.setItem(STORAGE_BEST, String(best));
     LipaDaily.bumpStreak(STORAGE_STREAK);
+    if (window.LipaDaily.recordSession) {
+      LipaDaily.recordSession('reaction-test', { score: avg, higherIsBetter: false });
+    }
     var name = localStorage.getItem('lipa_player_name') || '';
     if (!name) {
       name = prompt('Nombre para el ranking de hoy (máx. 15):', 'Jugador') || 'Jugador';

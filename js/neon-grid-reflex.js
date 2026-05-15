@@ -128,6 +128,7 @@
     board.submit(name, score, { combo: combo });
     board._save();
     LipaDaily.bumpStreak('lipa_grid_streak');
+    if (LipaDaily.recordSession) LipaDaily.recordSession('grid-reflex', { score: score });
     renderBoard();
   }
 

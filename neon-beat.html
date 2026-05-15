@@ -249,6 +249,9 @@
         document.getElementById('final-score').textContent = score;
         var best = parseInt(localStorage.getItem('neonBeatBest') || '0', 10);
         if (score > best) localStorage.setItem('neonBeatBest', String(score));
+        if (window.LipaDaily && LipaDaily.recordSession) {
+          LipaDaily.recordSession('neon-beat', { score: score });
+        }
         lanes.forEach(function (l) {
           l.querySelectorAll('.note').forEach(function (n) { n.remove(); });
         });

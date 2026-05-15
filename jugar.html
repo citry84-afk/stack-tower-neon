@@ -90,11 +90,21 @@
       <span class="arcade-chip" role="listitem">Móvil y PC</span>
       <span class="arcade-chip" role="listitem">Ranking diario</span>
     </div>
-    <a href="/entrenador-reflejos.html" class="arcade-routine">
-      <strong>⚡ Rutina de 5 minutos</strong>
-      Test → Aim → Grid → Stack Tower → Runner. Plan paso a paso en el entrenador.
-    </a>
   </header>
+
+  <section class="weekly-panel" id="lipa-weekly-panel" aria-live="polite"></section>
+
+  <section class="progress-section" aria-labelledby="progress-title">
+    <h2 id="progress-title">Tu progreso LIPA</h2>
+    <div id="lipa-progress-panel" class="progress-panel"></div>
+  </section>
+
+  <p style="text-align:center;margin:0 0 20px;padding:0 16px;">
+    <a href="/entrenador-reflejos.html" class="arcade-routine" style="margin-bottom:0;">
+      <strong>⚡ Rutina de 5 minutos</strong>
+      Test → Aim → Grid → Stack Tower → Runner
+    </a>
+  </p>
 
   <section class="arcade-grid" aria-label="Catálogo de juegos">
     <a href="/test-reflejos.html" class="arcade-card">
@@ -167,5 +177,7 @@
   <footer style="text-align:center;padding:24px;color:#666;font-size:0.85rem;border-top:1px solid rgba(0,255,255,0.2);">
     <p>© 2024–2026 LIPA Studios · <a href="/privacy.html" style="color:#00ffee;">Privacidad</a> · <a href="/terms.html" style="color:#00ffee;">Términos</a></p>
   </footer>
+  <script src="/js/lipa-daily.js"></script>
+  <script src="/js/lipa-progress.js"></script>
 </body>
 </html>

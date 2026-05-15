@@ -36,6 +36,7 @@
     <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" as="style">
     <link rel="stylesheet" href="/css/site-nav.css">
+    <link rel="stylesheet" href="/css/arcade-hub.css">
     
     <!-- PWA and Mobile -->
     <meta name="theme-color" content="#00ffff">
@@ -842,6 +843,7 @@
                 🔥 ¡Haz combos épicos!
             </div>
             <div id="daily-challenge-panel" class="daily-panel" aria-live="polite"></div>
+            <div id="lipa-weekly-compact" class="weekly-panel weekly-panel--compact" aria-live="polite"></div>
             <details class="menu-details">
                 <summary>📖 Más sobre el juego y cómo entrenar reflejos</summary>
                 <div class="menu-details__body">
@@ -1023,6 +1025,7 @@
     
     <script src="/js/lipa-daily.js"></script>
     <script src="/js/stack-tower-daily.js"></script>
+    <script src="/js/lipa-progress.js"></script>
     <script>
         // Simplified Game State
         let gameState = {

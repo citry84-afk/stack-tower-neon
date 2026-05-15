@@ -57,6 +57,9 @@
   }
 
   function onGameOver(score) {
+    if (score > 0 && window.LipaDaily && LipaDaily.recordSession) {
+      LipaDaily.recordSession('stack-tower', { score: score });
+    }
     if (!dailyMode || score <= 0) {
       dailyMode = false;
       return;

@@ -146,6 +146,7 @@
     board.submit(name, score, { accuracy: acc, hits: hits, maxCombo: maxCombo });
     board._save();
     LipaDaily.bumpStreak('lipa_aim_streak');
+    if (LipaDaily.recordSession) LipaDaily.recordSession('aim-trainer', { score: score });
     renderBoard();
   }
 
