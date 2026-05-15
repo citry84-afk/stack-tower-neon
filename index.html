@@ -331,6 +331,26 @@
             line-height: 1.45;
             opacity: 0.92;
         }
+        .daily-panel {
+            margin: 16px 0 20px;
+            padding: 14px 16px;
+            border-radius: 12px;
+            border: 2px solid #FFD700;
+            background: rgba(255, 215, 0, 0.06);
+            text-align: left;
+            font-size: 0.85rem;
+        }
+        .daily-title { color: #FFD700; font-weight: bold; margin: 0 0 8px; }
+        .daily-tag { font-size: 0.75rem; opacity: 0.85; }
+        .daily-desc { margin: 0 0 10px; line-height: 1.4; }
+        .daily-top { margin: 0 0 12px; padding-left: 18px; }
+        .daily-muted { color: #888; list-style: none; margin-left: -18px; }
+        .daily-btn { width: 100%; margin-top: 4px; }
+        #daily-gameover-msg {
+            color: #FFD700;
+            font-size: 0.95rem;
+            margin: 10px 0;
+        }
         
         /* Panel del juego — ya no “caja negra vacía” */
         .game-panel {
@@ -771,19 +791,23 @@
     </section>
 
     <section class="start-here" aria-labelledby="start-here-title">
-        <h2 id="start-here-title" class="start-here__title">Empieza aquí</h2>
+        <h2 id="start-here-title" class="start-here__title">Entrena hoy · 3 minutos</h2>
         <div class="start-here__grid">
-            <a href="#juego" class="start-here__card start-here__card--primary">
-                <strong>🎮 Jugar Stack Tower Neon</strong>
-                <span>Reflejos y apilado gratis en el navegador. Sin instalar.</span>
+            <a href="/test-reflejos.html" class="start-here__card start-here__card--primary">
+                <strong>⚡ Test de reflejos</strong>
+                <span>Mide tus milisegundos. Ranking diario y racha.</span>
+            </a>
+            <a href="#juego" class="start-here__card">
+                <strong>🎮 Stack Tower + reto diario</strong>
+                <span>Apilado y precisión. Misma dificultad para todos hoy.</span>
+            </a>
+            <a href="/neon-runner.html" class="start-here__card">
+                <strong>🏃 Neon Runner</strong>
+                <span>Coordinación y esquiva. Optimizado para móvil.</span>
             </a>
             <a href="/guia-reflejos.html" class="start-here__card">
                 <strong>📘 Plan 7 días</strong>
-                <span>Rutina diaria para mejorar tiempo de reacción y precisión.</span>
-            </a>
-            <a href="/moviles-gaming-baratos.html" class="start-here__card">
-                <strong>📱 Móviles gaming baratos</strong>
-                <span>Comparativa Top 5 desde 120 € para jugar fluido.</span>
+                <span>Rutina completa para mejorar reacción y precisión.</span>
             </a>
         </div>
     </section>
@@ -808,6 +832,7 @@
                 🎯 Consigue puntos de PERFECTO<br>
                 🔥 ¡Haz combos épicos!
             </div>
+            <div id="daily-challenge-panel" class="daily-panel" aria-live="polite"></div>
             <details class="menu-details">
                 <summary>📖 Más sobre el juego y cómo entrenar reflejos</summary>
                 <div class="menu-details__body">
@@ -830,7 +855,8 @@
             </div>
             <div class="controls" style="margin-top: 10px;">
                 <a href="/juegos-de-reflejos.html" class="btn">🎯 Más juegos</a>
-                <a href="/entrenador-reflejos.html" class="btn">⚡ Entrenador</a>
+                <a href="/test-reflejos.html" class="btn">⚡ Test reflejos</a>
+                <a href="/entrenador-reflejos.html" class="btn">📋 Entrenador</a>
                 <a href="/moviles-gaming-baratos.html" class="btn">📱 Guía móviles</a>
             </div>
             <div class="controls" style="margin-top: 10px;">
@@ -865,6 +891,7 @@
             <div id="new-record" class="hidden" style="color: #FF0080; font-size: 1.2rem; margin: 10px 0;">
                 🏆 ¡NUEVO RÉCORD!
             </div>
+            <p id="daily-gameover-msg" hidden></p>
             <div class="controls">
                 <button class="btn primary" onclick="startGame()" aria-label="Jugar otra partida">🔄 JUGAR OTRA VEZ</button>
                 <button class="btn" onclick="shareScore()">📤 COMPARTIR</button>
@@ -985,6 +1012,8 @@
              data-full-width-responsive="true"></ins>
     </div>
     
+    <script src="/js/lipa-daily.js"></script>
+    <script src="/js/stack-tower-daily.js"></script>
     <script>
         // Simplified Game State
         let gameState = {
@@ -1213,9 +1242,15 @@
             gameState.gameActive = false;
             stopBackgroundMusic(); // Stop music when returning to menu
             showScreen('menu');
+            if (window.StackTowerDaily && StackTowerDaily.renderMenuPanel) {
+                StackTowerDaily.renderMenuPanel();
+            }
         }
         
-        function startGame() {
+        function startGame(daily) {
+            if (window.StackTowerDaily && StackTowerDaily.setDailyMode) {
+                StackTowerDaily.setDailyMode(!!daily);
+            }
             gameState.score = 0;
             gameState.level = 1;
             gameState.blocks = [];
@@ -1223,6 +1258,8 @@
             gameState.gameActive = true;
             gameState.streak = 0;
             gamePaused = false;
+            var dg = document.getElementById('daily-gameover-msg');
+            if (dg) dg.hidden = true;
             
             showScreen('game');
             
@@ -1300,7 +1337,9 @@
             
             // Add moving animation data
             gameState.currentBlock.direction = 1;
-            gameState.currentBlock.speed = 2 + gameState.level * 0.5;
+            var baseSpeed = 2 + gameState.level * 0.5;
+            gameState.currentBlock.speed = (window.StackTowerDaily && StackTowerDaily.applyBlockSpeed)
+                ? StackTowerDaily.applyBlockSpeed(baseSpeed) : baseSpeed;
             
             animateBlock(gameState.currentBlock);
         }
@@ -1410,7 +1449,9 @@
             updateUI();
             
             // Level progression
-            if (gameState.score > 0 && gameState.score % 20 === 0) {
+            var levelStep = (window.StackTowerDaily && StackTowerDaily.getLevelStep)
+                ? StackTowerDaily.getLevelStep() : 20;
+            if (gameState.score > 0 && gameState.score % levelStep === 0) {
                 gameState.level++;
                 showIndicator(`¡NIVEL ${gameState.level}!`);
             }
@@ -1501,9 +1542,14 @@
                     document.getElementById('new-record').classList.add('hidden');
                 }
                 
+                if (window.StackTowerDaily && StackTowerDaily.onGameOver) {
+                    StackTowerDaily.onGameOver(gameState.score);
+                }
                 showScreen('gameover');
             }, 1000);
         }
+        
+        window.startGame = startGame;
         
         function pauseGame() {
             if (!gameState.gameActive) return;
@@ -1536,6 +1582,10 @@
         
         function getBlockColor() {
             const colors = ['#FF0080', '#00FFFF', '#39FF14', '#FFD700', '#FF4500', '#8A2BE2'];
+            if (window.StackTowerDaily && StackTowerDaily.isDailyMode && StackTowerDaily.isDailyMode()) {
+                var idx = StackTowerDaily.seededColorIndex();
+                if (idx !== null) return colors[idx];
+            }
             return colors[Math.floor(Math.random() * colors.length)];
         }
         

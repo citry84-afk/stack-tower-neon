@@ -31,6 +31,27 @@
     <mobile:mobile/>
   </url>
   <url>
+    <loc>https://lipastudios.com/test-reflejos.html</loc>
+    <lastmod>2026-05-15T14:00:00+00:00</lastmod>
+    <priority>0.92</priority>
+    <changefreq>weekly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://lipastudios.com/neon-beat.html</loc>
+    <lastmod>2026-05-15T14:00:00+00:00</lastmod>
+    <priority>0.85</priority>
+    <changefreq>monthly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://lipastudios.com/neon-runner.html</loc>
+    <lastmod>2026-05-15T14:00:00+00:00</lastmod>
+    <priority>0.85</priority>
+    <changefreq>monthly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
     <loc>https://lipastudios.com/about.html</loc>
     <lastmod>2026-02-01T17:35:00+00:00</lastmod>
     <priority>0.90</priority>

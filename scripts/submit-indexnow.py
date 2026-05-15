@@ -12,6 +12,8 @@ KEY_LOCATION = f"https://{HOST}/{KEY}.txt"
 
 DEFAULT_URLS = [
     f"https://{HOST}/",
+    f"https://{HOST}/test-reflejos.html",
+    f"https://{HOST}/neon-beat.html",
     f"https://{HOST}/moviles-gaming-baratos.html",
     f"https://{HOST}/guia-reflejos.html",
     f"https://{HOST}/juegos-de-reflejos.html",
