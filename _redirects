@@ -88,6 +88,8 @@ http://www.stacktowerneon.com/*  https://stacktowerneon.com/:splat  301!
 /moviles-gaming     /moviles-gaming-baratos.html      200
 
 # SEO-friendly game routes (redirecciones a index.html)
+/jugar              /jugar.html                       200
+/arcade             /jugar.html                       200
 /juego              /index.html                       200
 /torre              /index.html                       200
 /neon               /index.html                       200

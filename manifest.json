@@ -1,12 +1,12 @@
 {
-  "name": "Stack Tower Neon - Juegos de Reflejos | LIPA Studios",
-  "short_name": "Stack Tower Neon",
-  "description": "El mejor juego de reflejos y entrenador de reflejos gratis. Juegos neon adictivos optimizados para móviles gaming baratos. Mejora tu precisión y tiempo de reacción.",
-  "start_url": "/",
+  "name": "LIPA Studios — Juegos Gratis en el Navegador",
+  "short_name": "LIPA Juegos",
+  "description": "Juegos gratis online en español: reflejos, aim trainer, stack tower neon y arcade. Sin descarga. Entrena 5 minutos al día.",
+  "start_url": "/jugar.html",
   "display": "standalone",
   "background_color": "#0a0a0a",
   "theme_color": "#00ffff",
-  "orientation": "portrait",
+  "orientation": "any",
   "icons": [
     {
       "src": "/favicon-192.png",
@@ -21,36 +21,33 @@
       "purpose": "any maskable"
     }
   ],
-  "categories": ["games", "entertainment", "education", "arcade"],
+  "categories": ["games", "entertainment", "education"],
   "lang": "es",
   "scope": "/",
-  "screenshots": [
-    {
-      "src": "/screenshot-wide.png",
-      "sizes": "1280x720",
-      "type": "image/png",
-      "form_factor": "wide"
-    },
-    {
-      "src": "/screenshot-narrow.png",
-      "sizes": "750x1334",
-      "type": "image/png",
-      "form_factor": "narrow"
-    }
-  ],
   "shortcuts": [
     {
-      "name": "Jugar",
+      "name": "Arcade",
       "short_name": "Jugar",
-      "description": "Iniciar juego de reflejos",
-      "url": "/?action=play",
+      "description": "Todos los juegos gratis",
+      "url": "/jugar.html",
       "icons": [{ "src": "/favicon-192.png", "sizes": "192x192" }]
     },
     {
-      "name": "Juegos de Reflejos",
-      "short_name": "Reflejos",
-      "description": "Ver todos los juegos de reflejos",
-      "url": "/juegos-de-reflejos.html",
+      "name": "Test reflejos",
+      "short_name": "Test ms",
+      "url": "/test-reflejos.html",
+      "icons": [{ "src": "/favicon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Stack Tower",
+      "short_name": "Stack",
+      "url": "/",
+      "icons": [{ "src": "/favicon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Entrenador",
+      "short_name": "Rutina",
+      "url": "/entrenador-reflejos.html",
       "icons": [{ "src": "/favicon-192.png", "sizes": "192x192" }]
     }
   ]

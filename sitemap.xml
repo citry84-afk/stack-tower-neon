@@ -10,6 +10,13 @@
     <mobile:mobile/>
   </url>
   <url>
+    <loc>https://lipastudios.com/jugar.html</loc>
+    <lastmod>2026-05-16T16:00:00+00:00</lastmod>
+    <priority>0.98</priority>
+    <changefreq>weekly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
     <loc>https://lipastudios.com/juegos-de-reflejos.html</loc>
     <lastmod>2026-05-15T12:00:00+00:00</lastmod>
     <priority>0.95</priority>
