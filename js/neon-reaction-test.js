@@ -117,6 +117,9 @@
     if (state === 'idle' || state === 'done') {
       results = [];
       round = 0;
+      if (window.LipaAnalytics && LipaAnalytics.trackGameStart) {
+        LipaAnalytics.trackGameStart('reaction-test');
+      }
       startRound();
       return;
     }

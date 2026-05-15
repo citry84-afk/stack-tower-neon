@@ -1,93 +1,38 @@
-# 🎯 CHECKLIST FINAL - GOOGLE ADSENSE APPROVAL
+# Checklist AdSense — lipastudios.com
 
-## ✅ REQUISITOS TÉCNICOS COMPLETADOS
+Sitio principal: **https://lipastudios.com** (Netlify `lipastudios`)
 
-### 📄 Páginas Esenciales
-- [x] **privacy.html** - Política de privacidad completa
-- [x] **terms.html** - Términos de servicio detallados
-- [x] **contact.html** - Página de contacto con FAQ
-- [x] **about.html** - Información sobre LIPA Studios
-- [x] **help.html** - Tutoriales y guías de juego
-- [x] **news.html** - Contenido actualizado regularmente
+## Requisitos cumplidos
 
-### 🔧 Configuración Técnica
-- [x] **ads.txt** - Configurado correctamente
-- [x] **robots.txt** - Optimizado para SEO
-- [x] **sitemap.xml** - URLs actualizadas
-- [x] **manifest.json** - PWA configurado
-- [x] **consent.js** - Google Consent Mode v2
+- [x] `privacy.html`, `terms.html`, `contact.html`, `about.html`, `editorial.html`, `disclaimer.html`
+- [x] `help.html`, `news.html`, blog con artículos enlazados
+- [x] `ads.txt` → `google.com, pub-4837743291717475`
+- [x] `consent.js` — Consent Mode v2 + carga AdSense tras aceptar
+- [x] `robots.txt` + `sitemap.xml` con arcade y minijuegos
+- [x] Contenido editorial: guía plegable en home, entrenador, rutina 5 min, 40+ posts blog
+- [x] Arcade funcional: 6 minijuegos + Stack Tower
+- [x] Slots de anuncio en `index.html` (inferior), `jugar.html`, `entrenador-reflejos.html`
+- [x] GA4 `G-5XL1W8RNTP` + eventos `lipa_game_start` / `lipa_game_complete`
 
-### 🎨 SEO y Estructura
-- [x] **Meta tags completos** - Título, descripción, keywords
-- [x] **Open Graph** - Facebook/Twitter cards
-- [x] **Structured Data** - JSON-LD VideoGame schema
-- [x] **Canonical URLs** - Evitar contenido duplicado
-- [x] **Navegación interna** - 6 páginas enlazadas
+## Antes de reaplicar en AdSense
 
-### 📱 Optimización Móvil
-- [x] **Responsive design** - Funciona en todos los dispositivos
-- [x] **Touch controls** - Optimizado para móviles
-- [x] **PWA ready** - Instalable como app
-- [x] **Fast loading** - Optimizado para velocidad
+1. En Search Console, verificar propiedad **lipastudios.com** sin errores críticos.
+2. Solicitar indexación de: `/jugar.html`, `/toque-flash-neon.html`, `/esquiva-neon.html`, `/blog/reflejos-5-minutos.html`.
+3. En AdSense → Sitios, usar solo **lipastudios.com** (no subdominios viejos de Beat/Runner).
+4. Tras aprobar, revisar que los anuncios no tapen botones de juego en móvil.
 
-## 🚀 TÉCNICAS ULTRA AVANZADAS APLICADAS
+## IndexNow
 
-### 📚 Contenido de Calidad
-- [x] **Tutoriales detallados** - Guías paso a paso
-- [x] **FAQ completas** - Preguntas frecuentes
-- [x] **Testimonios** - Comentarios de usuarios
-- [x] **Noticias regulares** - Contenido actualizado
-- [x] **Información de contacto** - Múltiples formas
+```bash
+chmod +x scripts/ping-indexnow.sh && ./scripts/ping-indexnow.sh
+```
 
-### 🔗 Estructura de Enlaces
-- [x] **Navegación principal** - 6 páginas enlazadas
-- [x] **Enlaces internos** - Estructura lógica
-- [x] **Footer de navegación** - Para SEO
-- [x] **Breadcrumbs** - Navegación clara
+## Analytics (retención por juego)
 
-### 📊 Datos Estructurados
-- [x] **VideoGame schema** - Información del juego
-- [x] **Organization schema** - Datos de LIPA Studios
-- [x] **Offer schema** - Precio gratuito
-- [x] **BreadcrumbList** - Navegación estructurada
+En GA4 → Informes → Exploraciones, usar eventos:
 
-## 🎯 PROBABILIDAD DE APROBACIÓN: 99%
+- `lipa_game_start` — inicios por `game_id`
+- `lipa_game_complete` — partidas terminadas con `score`
+- `lipa_arcade_view` — visitas al hub `/jugar.html`
 
-### ✅ Puntos Fuertes
-1. **Contenido único y original** - Juegos desarrollados por LIPA Studios
-2. **Navegación completa** - 6 páginas esenciales
-3. **SEO optimizado** - Meta tags, structured data, sitemap
-4. **Móvil optimizado** - PWA, responsive design
-5. **Políticas completas** - Privacidad, términos, contacto
-6. **Contenido de calidad** - Tutoriales, noticias, FAQ
-
-### 🚀 Próximos Pasos
-1. **Esperar 24-48 horas** para reindexación
-2. **Verificar Google Search Console** - Sin errores
-3. **Reaplicar a AdSense** - Con todos los sitios optimizados
-4. **Monitorear aprobación** - Debería ser aprobado en 1-2 días
-
-## 📋 SITIOS LISTOS PARA ADSENSE
-
-1. ✅ **stack-tower-neon2.netlify.app**
-2. ✅ **runnerwow.netlify.app**
-3. ✅ **neon-beat-wow.netlify.app**
-4. ✅ **neon-lab-physics-wow.netlify.app**
-5. ✅ **neon-runner-lipastudios.netlify.app**
-6. ✅ **neon-beat-stage.netlify.app**
-7. ✅ **neon-lab-physics.netlify.app**
-8. ✅ **neon-corp-manager.netlify.app**
-
-## 🎉 RESULTADO ESPERADO
-
-**¡APROBACIÓN GARANTIZADA AL 99%!** 🚀
-
-Todos los requisitos de Google AdSense están cumplidos y superados. El sitio tiene:
-- Contenido de alta calidad
-- Navegación completa
-- SEO optimizado
-- Móvil optimizado
-- Políticas completas
-- Estructura profesional
-
-**¡Listo para monetizar!** 💰
+El panel **Tu progreso** en `/jugar.html` muestra qué minijuegos jugaste esta semana (local).

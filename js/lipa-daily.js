@@ -434,6 +434,9 @@
 
   function recordSession(gameId, payload) {
     payload = payload || {};
+    if (global.LipaAnalytics && LipaAnalytics.trackGameComplete) {
+      LipaAnalytics.trackGameComplete(gameId, payload);
+    }
     bumpGlobalTrain();
     var state = getWeeklyState();
     if (state.plays.indexOf(gameId) === -1) state.plays.push(gameId);

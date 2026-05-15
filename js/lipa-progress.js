@@ -67,9 +67,24 @@
       '</div>';
   }
 
+  function formatWeeklyGames(plays) {
+    var names = {
+      'reaction-test': 'Test',
+      'aim-trainer': 'Aim',
+      'grid-reflex': 'Grid',
+      'stack-tower': 'Stack',
+      'flash-tap': 'Flash',
+      'esquiva-neon': 'Esquiva'
+    };
+    if (!plays || !plays.length) return 'Aún no has jugado esta semana';
+    return plays.map(function (id) { return names[id] || id; }).join(' · ');
+  }
+
   function renderProgress(el) {
     if (!el || !window.LipaDaily) return;
     var r = LipaDaily.getAllRecords();
+    var weekly = LipaDaily.getWeeklyChallenge();
+    var played = (weekly.state && weekly.state.plays) || [];
     var rows = [
       { icon: '⚡', label: 'Test reflejos', value: r.reactionMs ? r.reactionMs + ' ms' : '—', href: '/test-reflejos.html' },
       { icon: '🎯', label: 'Aim Trainer', value: r.aim ? r.aim + ' pts' : '—', href: '/aim-trainer-neon.html' },
@@ -82,8 +97,9 @@
       '<div class="progress-head">' +
       '<div class="progress-stat"><span>Racha global</span><strong>' + r.streak + ' días</strong></div>' +
       '<div class="progress-stat"><span>Días entrenados</span><strong>' + (r.totalDays || 0) + '</strong></div>' +
-      '<div class="progress-stat"><span>Esta semana</span><strong>' + r.gamesToday + ' juegos</strong></div>' +
+      '<div class="progress-stat"><span>Esta semana</span><strong>' + played.length + ' juegos</strong></div>' +
       '</div>' +
+      '<p class="progress-weekly-games">' + esc(formatWeeklyGames(played)) + '</p>' +
       '<ul class="progress-records">' +
       rows.map(function (row) {
         return '<li><a href="' + row.href + '"><span>' + row.icon + ' ' + esc(row.label) + '</span><strong>' + esc(row.value) + '</strong></a></li>';

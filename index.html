@@ -751,6 +751,7 @@
     </div>
     
     <script src="/js/lipa-daily.js"></script>
+  <script src="/js/lipa-analytics.js"></script>
     <script src="/js/stack-tower-daily.js"></script>
     <script src="/js/lipa-progress.js"></script>
     <script>
@@ -987,6 +988,9 @@
         }
         
         function startGame(daily) {
+            if (window.LipaAnalytics && LipaAnalytics.trackGameStart) {
+                LipaAnalytics.trackGameStart('stack-tower');
+            }
             if (window.StackTowerDaily && StackTowerDaily.setDailyMode) {
                 StackTowerDaily.setDailyMode(!!daily);
             }

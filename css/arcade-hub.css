@@ -160,6 +160,25 @@
   padding: 0;
 }
 
+.progress-weekly-games {
+  margin: 0 0 var(--lipa-space-md, 16px);
+  font-size: 13px;
+  color: var(--lipa-text-secondary, #888);
+  line-height: 1.5;
+}
+
+.lipa-ad-slot {
+  margin: var(--lipa-space-lg, 24px) auto;
+  max-width: 728px;
+  min-height: 90px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.lipa-ad-slot ins {
+  display: block;
+}
+
 .arcade-footer-note {
   text-align: center;
   font-size: 14px;

@@ -13,13 +13,26 @@
   const ADSENSE_CLIENT = 'ca-pub-4837743291717475';
   const saved = (function(){ try { return JSON.parse(localStorage.getItem(CHOICE_KEY)||'null'); } catch(e){ return null; } })();
 
+  function fillAdSlots() {
+    try {
+      var slots = document.querySelectorAll('ins.adsbygoogle');
+      for (var i = 0; i < slots.length; i++) {
+        if (slots[i].getAttribute('data-adsbygoogle-status')) continue;
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      }
+    } catch (e) { /* ignore */ }
+  }
+
   function loadAdSense() {
-    if (document.querySelector('script[src*="adsbygoogle"]')) return;
+    if (document.querySelector('script[src*="adsbygoogle"]')) {
+      fillAdSlots();
+      return;
+    }
     var s = document.createElement('script');
     s.async = true;
     s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + ADSENSE_CLIENT + '&crossorigin=anonymous';
     document.head.appendChild(s);
-    s.onload = function(){ try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch(e){} };
+    s.onload = function () { fillAdSlots(); };
   }
 
   function apply(status){
