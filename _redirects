@@ -39,6 +39,8 @@ http://www.stacktowerneon.com/*  https://stacktowerneon.com/:splat  301!
 /recreo-neon              /recreo-neon.html         200
 /jugar.html               /recreo-neon.html         301
 /jugar                    /recreo-neon.html         301
+/entreno-completo.html    /entreno-completo.html    200
+/entreno-completo         /entreno-completo.html    200
 
 # Blog posts - Permitir acceso directo
 /blog/*.html         /blog/:splat         200

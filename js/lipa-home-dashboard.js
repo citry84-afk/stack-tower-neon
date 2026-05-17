@@ -92,6 +92,40 @@
     root.appendChild(dash);
 
     mountContinue();
+    mountTodayMissions();
+  }
+
+  function mountTodayMissions() {
+    var el = document.getElementById('home-today-missions');
+    if (!el || !global.LipaBrain || !global.LipaCurriculum) return;
+
+    var profile = LipaBrain.getProfile();
+    if (!profile || !profile.courseId) {
+      el.hidden = true;
+      return;
+    }
+
+    if (LipaBrain.refreshProfileRoutine) LipaBrain.refreshProfileRoutine();
+    profile = LipaBrain.getProfile();
+    var steps = profile.routine && profile.routine.steps;
+    if (!steps || !steps.length) {
+      el.hidden = true;
+      return;
+    }
+
+    var items = steps
+      .map(function (s) {
+        var label = (s.missionTag ? s.missionTag + ' · ' : '') + (s.missionSubject || s.name || '');
+        return '<li>' + label.replace(/</g, '&lt;') + '</li>';
+      })
+      .join('');
+
+    el.innerHTML =
+      '<p class="brain-eyebrow">Tus misiones de hoy (' + steps.length + ')</p>' +
+      '<ul class="home-today-missions__list">' +
+      items +
+      '</ul>';
+    el.hidden = false;
   }
 
   document.addEventListener('DOMContentLoaded', mount);

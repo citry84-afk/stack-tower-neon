@@ -230,3 +230,127 @@
 .home-recreo-neon__note a {
   color: #67e8f9 !important;
 }
+
+.home-today-missions {
+  max-width: var(--lipa-max-wide, 1100px);
+  margin: 0 auto 1rem;
+  padding: 0 1.5rem;
+  text-align: center;
+}
+
+.home-today-missions__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  justify-content: center;
+  list-style: none;
+  margin: 0.5rem 0 0;
+  padding: 0;
+}
+
+.home-today-missions__list li {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 0.3rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(124, 58, 237, 0.1);
+  color: #5b21b6;
+}
+
+.entreno-completo-main {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
+}
+
+.entreno-completo { text-align: center; }
+.entreno-completo__stars { font-size: 2rem; margin: 0 0 0.5rem; }
+.entreno-completo h1 {
+  font-family: var(--lipa-font-display, 'Nunito', sans-serif);
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  margin: 0 0 0.5rem;
+}
+.entreno-completo__lead {
+  color: var(--lipa-text-secondary);
+  line-height: 1.5;
+  margin: 0 0 1.25rem;
+}
+.entreno-completo__stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.65rem;
+  margin-bottom: 1.25rem;
+}
+.entreno-completo__stats div {
+  padding: 0.75rem 0.5rem;
+  border-radius: 14px;
+  background: rgba(124, 58, 237, 0.08);
+  border: 1px solid rgba(124, 58, 237, 0.15);
+}
+.entreno-completo__stats strong { display: block; font-size: 1.25rem; }
+.entreno-completo__stats span {
+  font-size: 11px;
+  color: var(--lipa-text-secondary);
+  text-transform: uppercase;
+}
+.entreno-completo__missions {
+  list-style: none;
+  margin: 0 0 1.25rem;
+  padding: 0;
+  text-align: left;
+}
+.entreno-completo__missions li {
+  padding: 0.45rem 0;
+  border-bottom: 1px solid rgba(124, 58, 237, 0.1);
+  font-size: 14px;
+}
+.entreno-completo__mission-n {
+  font-weight: 800;
+  color: #7c3aed;
+  margin-right: 0.35rem;
+}
+.entreno-completo__reward {
+  margin: 1.5rem 0;
+  padding: 1.25rem;
+  border-radius: 20px;
+  background: linear-gradient(165deg, #0a0a12, #1a0a2e);
+  border: 2px solid rgba(0, 255, 255, 0.25);
+  color: #e2e8f0;
+}
+.entreno-completo__reward h2 {
+  margin: 0.25rem 0;
+  font-family: var(--lipa-font-display, 'Orbitron', sans-serif);
+}
+.entreno-completo__reward-label {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #67e8f9;
+}
+.entreno-completo__recreo {
+  display: inline-block;
+  margin-top: 0.75rem;
+}
+.entreno-completo__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+.entreno-completo__foot {
+  margin-top: 1.25rem;
+  font-size: 13px;
+  color: var(--lipa-text-secondary);
+}
+.recreo-unlock-banner {
+  max-width: var(--lipa-max, 980px);
+  margin: 0 auto 1rem;
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  background: rgba(6, 182, 212, 0.12);
+  border: 1px solid rgba(6, 182, 212, 0.35);
+  text-align: center;
+  font-size: 14px;
+}

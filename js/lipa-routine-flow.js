@@ -171,9 +171,13 @@
     var pct = Math.round(((idx + (opts.justFinished ? 1 : 0)) / total) * 100);
     if (opts.justFinished && idx >= total - 1) pct = 100;
 
-    var nextLabel = 'Siguiente ejercicio';
+    var missionLine = step.missionTag
+      ? step.missionTag + ' · ' + (step.missionSubject || '') + (step.missionDur ? ' · ' + step.missionDur : '')
+      : 'Paso ' + (idx + 1) + ' / ' + total;
+
+    var nextLabel = 'Siguiente misión';
     if (opts.justFinished && idx >= total - 1) {
-      nextLabel = 'Finalizar rutina';
+      nextLabel = 'Ver mi recompensa';
     } else if (opts.justFinished && idx < total - 1) {
       var next = state.steps[idx + 1];
       nextLabel = 'Siguiente: ' + (next.emoji ? next.emoji + ' ' : '') + next.name;
@@ -182,8 +186,8 @@
     bar.innerHTML =
       '<div class="lipa-routine-bar__inner">' +
       '<div class="lipa-routine-bar__top">' +
-      '<span class="lipa-routine-bar__eyebrow">Rutina guiada</span>' +
-      '<span class="lipa-routine-bar__step">Paso ' + (idx + 1) + ' / ' + total + '</span>' +
+      '<span class="lipa-routine-bar__eyebrow">Entreno de hoy</span>' +
+      '<span class="lipa-routine-bar__step">' + esc(missionLine) + '</span>' +
       '</div>' +
       '<div class="lipa-routine-bar__track" aria-hidden="true"><span class="lipa-routine-bar__fill" style="width:' + pct + '%"></span></div>' +
       '<p class="lipa-routine-bar__title">' + esc(step.emoji + ' ' + step.name) + '</p>' +
@@ -237,23 +241,70 @@
     return labels.slice(0, 3).join(', ') + ' y más';
   }
 
+  function missionSubjectsList(state) {
+    if (!state || !state.steps) return [];
+    var out = [];
+    var seen = {};
+    state.steps.forEach(function (step) {
+      var label = step.missionSubject || step.subjectLabel;
+      if (!label || seen[label]) return;
+      seen[label] = true;
+      out.push(label);
+    });
+    return out;
+  }
+
+  function markDailyComplete(state) {
+    var day = today();
+    try {
+      localStorage.setItem('lipa_daily_done_' + day, '1');
+      localStorage.setItem('lipa_recreo_unlock', day);
+    } catch (e) { /* ignore */ }
+    if (global.LipaBrain && LipaBrain.bumpStreak) {
+      LipaBrain.bumpStreak();
+    }
+    if (global.LipaBrain && LipaBrain.addXp) {
+      LipaBrain.addXp(15 + (state && state.steps ? state.steps.length * 3 : 0));
+    }
+  }
+
   function saveRoutineSummary(state) {
     try {
       var stats = global.LipaBrain && LipaBrain.getStats ? LipaBrain.getStats() : {};
+      var rank = stats.rank || {};
+      var courseLabel = '';
+      if (state.courseId && global.LipaCurriculum) {
+        var c = LipaCurriculum.getCourse(state.courseId);
+        if (c) courseLabel = c.label;
+      }
       sessionStorage.setItem(
         'lipa-routine-summary',
         JSON.stringify({
           practiced: routineSummaryLine(state),
+          subjects: missionSubjectsList(state),
+          missions: (state.steps || []).map(function (s) {
+            return {
+              tag: s.missionTag,
+              subject: s.missionSubject || s.subjectLabel,
+              name: s.name,
+              emoji: s.emoji
+            };
+          }),
           minutes: state.minutes,
           steps: state.steps.length,
           xp: stats.xp || 0,
-          streak: stats.streak || 0
+          streak: stats.streak || 0,
+          rankName: rank.name,
+          rankEmoji: rank.emoji,
+          courseLabel: courseLabel,
+          date: today()
         })
       );
     } catch (e) { /* ignore */ }
   }
 
   function finishRoutine(state) {
+    markDailyComplete(state);
     saveRoutineSummary(state);
     clearState();
     document.body.classList.remove('lipa-routine-active');
@@ -270,7 +321,7 @@
         steps: state && state.steps ? state.steps.length : 0
       });
     }
-    global.location.href = '/mi-rutina-cerebro.html?rutina-completa=1';
+    global.location.href = '/entreno-completo.html';
   }
 
   function goNext(skipped) {
@@ -441,7 +492,8 @@
     el.innerHTML =
       '<p><strong>¡Entrenamiento completado!</strong> Tu cerebro ha entrenado hoy.</p>' +
       detail +
-      '<p><a href="/mi-evolucion.html">Ver mi evolución</a> · <a href="/para-padres.html">Informe para padres</a></p>';
+      '<p><a href="/entreno-completo.html">Ver resumen y Recreo Neon</a> · ' +
+      '<a href="/mi-evolucion.html">Mi evolución</a> · <a href="/para-padres.html">Para padres</a></p>';
     container.insertBefore(el, container.firstChild);
     if (global.history && global.history.replaceState) {
       global.history.replaceState({}, '', global.location.pathname);

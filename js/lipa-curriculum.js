@@ -386,16 +386,29 @@
     };
   }
 
-  /** Rutina PDF §6: mates + lectura + inglés + ciencias + reto rápido (~7 min). */
+  function annotateDailyMissions(steps) {
+    var roleLabels = ['Matemáticas', 'Lenguaje', 'Inglés', 'Naturales / Sociales', 'Reto rápido'];
+    var roleDur = ['~2 min', '~2 min', '~1 min', '~1 min', '~1 min'];
+    steps.forEach(function (s, i) {
+      s.missionIndex = i + 1;
+      s.missionTag = 'Misión ' + (i + 1);
+      s.missionSubject = s.subjectLabel || roleLabels[i] || s.name;
+      s.missionDur = roleDur[i] || '~1 min';
+    });
+    return steps;
+  }
+
+  /** Brain Gym diario: 5 misiones (mates, lengua, inglés, ciencias, reto) ~7 min. */
   function buildStructuredSevenMinSteps(profile, course, pool, rng, diffLabels) {
-    var picked = [];
     var math = pickOneFromSubject(pool, 'matematicas', 'neon-calculo', rng);
     var lang = pickOneFromSubject(pool, 'lenguaje', 'neon-lectura', rng) ||
       pickOneFromSubject(pool, 'lenguaje', null, rng);
     var eng = pickOneFromSubject(pool, 'ingles', 'neon-palabras', rng) ||
       pickOneFromSubject(pool, 'ingles', null, rng);
-    var sci = pickOneFromSubject(pool, 'naturales', null, rng);
+    var sci = pickOneFromSubject(pool, 'naturales', null, rng) ||
+      pickOneFromSubject(pool, 'sociales', null, rng);
 
+    var picked = [];
     if (math) picked.push(math);
     if (lang) picked.push(lang);
     if (eng) picked.push(eng);
@@ -417,7 +430,7 @@
       }
     }
 
-    return steps;
+    return annotateDailyMissions(steps);
   }
 
   function pickBalancedAcrossSubjects(pool, count, rng) {
@@ -484,10 +497,15 @@
       : function () { return Math.random(); };
 
     var diffLabels = META.DIFFICULTY_LABELS || {};
-    var useStructured =
-      minutes >= 7 &&
-      (!subjectIds || subjectIds.length >= 4) &&
-      (focus === 'all' || focus === 'both' || focus === 'balanced' || !focus);
+    var broadFocus =
+      !subjectIds ||
+      subjectIds.length >= 3 ||
+      focus === 'all' ||
+      focus === 'both' ||
+      focus === 'balanced' ||
+      !focus;
+
+    var useStructured = minutes >= 5 && broadFocus && pool.length >= 3;
 
     var steps = useStructured
       ? buildStructuredSevenMinSteps(profile, course, pool, rng, diffLabels)
@@ -518,9 +536,11 @@
 
     var subLine = subjectsLabel(subjectIds, course);
 
+    var missionHint = steps.length >= 5 ? ' · 5 misiones guiadas' : '';
+
     return {
-      title: course.shortLabel + ' · Brain Gym · ' + minutes + ' min',
-      subtitle: subLine + ' · ' + course.label + ' (' + course.ageRange + ')',
+      title: course.shortLabel + ' · Entreno de hoy · ' + minutes + ' min',
+      subtitle: subLine + missionHint + ' · ' + course.label,
       minutes: minutes,
       steps: steps,
       firstUrl: steps[0] ? steps[0].url : '/cursos.html',
