@@ -148,8 +148,8 @@ body.game-page {
   pointer-events: none;
 }
 
-.aim-target {
-  position: absolute;
+#aim-arena .aim-target {
+  position: absolute !important;
   z-index: 2;
   border: none;
   border-radius: 50%;
@@ -157,15 +157,18 @@ body.game-page {
   border: 2px solid #fff;
   cursor: pointer;
   padding: 0;
+  margin: 0;
+  box-sizing: border-box;
   box-shadow: 0 0 18px rgba(255, 0, 128, 0.55);
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: none;
+  appearance: none;
   animation: flash-pop 0.15s ease-out;
 }
 
 .aim-target--hit {
-  background: radial-gradient(circle, #39ff14, #166534);
-  transform: scale(1.1);
+  background: radial-gradient(circle, #39ff14, #166534) !important;
   opacity: 0.85;
 }
 
@@ -365,4 +368,121 @@ body.game-page {
 
 .game-overlay[hidden] {
   display: none !important;
+}
+
+/* —— LIPA Brain Gym (mates + cálculo mental) —— */
+.game-page--brain {
+  --brain-accent: #a855f7;
+  --brain-glow: rgba(168, 85, 247, 0.45);
+}
+
+.brain-eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--brain-accent, #a855f7);
+  margin: 0 0 8px;
+}
+
+.btn--brain {
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  color: #fff;
+}
+
+.math-arena {
+  border: 1px solid var(--lipa-border);
+  border-radius: var(--lipa-radius, 14px);
+  background: var(--lipa-bg-elevated);
+  padding: var(--lipa-space-lg, 24px);
+  margin-bottom: var(--lipa-space-md, 16px);
+  text-align: center;
+}
+
+.math-question {
+  font-family: var(--lipa-font-display);
+  font-size: clamp(1.75rem, 6vw, 2.5rem);
+  font-weight: 700;
+  margin: 0 0 var(--lipa-space-lg, 24px);
+  color: var(--lipa-text);
+  letter-spacing: -0.02em;
+}
+
+.math-choices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+.math-choice {
+  min-height: 56px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  border: 1px solid var(--lipa-border);
+  border-radius: 12px;
+  background: var(--lipa-surface);
+  color: var(--lipa-text);
+  cursor: pointer;
+  transition: transform 0.12s, border-color 0.12s, background 0.12s;
+  touch-action: manipulation;
+}
+
+.math-choice:active {
+  transform: scale(0.97);
+}
+
+.math-choice--ok {
+  border-color: #22c55e;
+  background: rgba(34, 197, 94, 0.2);
+}
+
+.math-choice--bad {
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.15);
+}
+
+.calc-levels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: var(--lipa-space-md, 16px);
+}
+
+.calc-level {
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--lipa-border);
+  background: transparent;
+  color: var(--lipa-text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.calc-level--active {
+  border-color: var(--brain-accent, #a855f7);
+  color: var(--lipa-text);
+  background: rgba(168, 85, 247, 0.15);
+}
+
+.tablas-range-label {
+  display: block;
+  font-size: 13px;
+  color: var(--lipa-text-secondary);
+  margin-bottom: 6px;
+}
+
+.tablas-range {
+  width: 100%;
+  max-width: 320px;
+  margin-bottom: var(--lipa-space-lg, 24px);
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--lipa-border);
+  background: var(--lipa-surface);
+  color: var(--lipa-text);
+  font-size: 15px;
 }

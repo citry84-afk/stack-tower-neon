@@ -110,8 +110,71 @@
 .arcade-card__visual--grid,
 .arcade-card__visual--stack,
 .arcade-card__visual--flash,
-.arcade-card__visual--esquiva {
+.arcade-card__visual--esquiva,
+.arcade-card__visual--calculo,
+.arcade-card__visual--tablas,
+.arcade-card__visual--palabras {
   background: var(--lipa-bg-elevated);
+}
+
+.arcade-card__visual--calculo {
+  background: linear-gradient(145deg, #1e1033 0%, #3b0764 100%);
+}
+
+.arcade-card__visual--tablas {
+  background: linear-gradient(145deg, #2e1065 0%, #6b21a8 100%);
+}
+
+.arcade-card__visual--palabras {
+  background: linear-gradient(145deg, #042f2e 0%, #0d9488 55%, #134e4a 100%);
+}
+
+.brain-hero h1 {
+  background: linear-gradient(90deg, #c4b5fd, #a855f7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.brain-chip {
+  border-color: rgba(168, 85, 247, 0.45);
+  color: #d8b4fe;
+}
+
+.lipa-btn--brain {
+  background: linear-gradient(135deg, #7c3aed, #a855f7) !important;
+  color: #fff !important;
+  border: none !important;
+}
+
+.lipa-callout--brain {
+  border-color: rgba(168, 85, 247, 0.35);
+  background: rgba(124, 58, 237, 0.08);
+}
+
+.brain-routine-list {
+  margin: 0 0 24px;
+  padding-left: 1.25rem;
+  line-height: 1.8;
+  color: var(--lipa-text-secondary);
+}
+
+.brain-routine-list a {
+  color: #c4b5fd;
+  font-weight: 500;
+}
+
+.brain-eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #a855f7;
+  margin: 0 0 8px;
+}
+
+.brain-hub-page .brain-eyebrow {
+  text-align: center;
 }
 
 .arcade-card__badge {

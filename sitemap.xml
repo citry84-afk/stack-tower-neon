@@ -73,6 +73,55 @@
     <mobile:mobile/>
   </url>
   <url>
+    <loc>https://lipastudios.com/gym-cerebro.html</loc>
+    <lastmod>2026-05-16T18:00:00+00:00</lastmod>
+    <priority>0.94</priority>
+    <changefreq>weekly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://lipastudios.com/mi-rutina-cerebro.html</loc>
+    <lastmod>2026-05-16T20:00:00+00:00</lastmod>
+    <priority>0.92</priority>
+    <changefreq>weekly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://lipastudios.com/mi-evolucion.html</loc>
+    <lastmod>2026-05-16T22:00:00+00:00</lastmod>
+    <priority>0.91</priority>
+    <changefreq>weekly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://lipastudios.com/entrenador-cerebro.html</loc>
+    <lastmod>2026-05-16T18:00:00+00:00</lastmod>
+    <priority>0.90</priority>
+    <changefreq>monthly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://lipastudios.com/neon-calculo.html</loc>
+    <lastmod>2026-05-16T18:00:00+00:00</lastmod>
+    <priority>0.88</priority>
+    <changefreq>weekly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://lipastudios.com/neon-palabras.html</loc>
+    <lastmod>2026-05-16T23:00:00+00:00</lastmod>
+    <priority>0.88</priority>
+    <changefreq>weekly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://lipastudios.com/tablas-relampago.html</loc>
+    <lastmod>2026-05-16T18:00:00+00:00</lastmod>
+    <priority>0.88</priority>
+    <changefreq>weekly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
     <loc>https://lipastudios.com/about.html</loc>
     <lastmod>2026-02-01T17:35:00+00:00</lastmod>
     <priority>0.90</priority>
@@ -250,6 +299,31 @@
     <loc>https://lipastudios.com/blog/reflejos-5-minutos.html</loc>
     <lastmod>2026-02-01T19:00:00+00:00</lastmod>
     <priority>0.70</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://lipastudios.com/blog/vocabulario-ingles-juego-neon-palabras.html</loc>
+    <lastmod>2026-05-16T23:00:00+00:00</lastmod>
+    <priority>0.75</priority>
+    <changefreq>monthly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://lipastudios.com/blog/calculo-mental-5-minutos.html</loc>
+    <lastmod>2026-05-16T18:00:00+00:00</lastmod>
+    <priority>0.75</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://lipastudios.com/blog/tablas-multiplicar-juego.html</loc>
+    <lastmod>2026-05-16T18:00:00+00:00</lastmod>
+    <priority>0.75</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://lipastudios.com/blog/gym-cerebro-reflejos-mates.html</loc>
+    <lastmod>2026-05-16T18:00:00+00:00</lastmod>
+    <priority>0.75</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>

@@ -1,0 +1,303 @@
+/* Mi evolución — Brain Gym */
+.brain-evo-page .brain-evo-hero {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.brain-evo-grid {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+@media (min-width: 640px) {
+  .brain-evo-grid--stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .brain-evo-grid--stats .brain-evo-stat--wide {
+    grid-column: span 2;
+  }
+}
+
+.brain-evo-stat {
+  background: linear-gradient(145deg, rgba(124, 58, 237, 0.12), rgba(0, 255, 255, 0.06));
+  border: 1px solid rgba(124, 58, 237, 0.35);
+  border-radius: 14px;
+  padding: 16px 18px;
+}
+
+.brain-evo-stat__label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--lipa-text-secondary);
+  margin: 0 0 6px;
+}
+
+.brain-evo-stat__value {
+  font-family: var(--lipa-font-display);
+  font-size: 1.75rem;
+  margin: 0;
+  color: var(--lipa-text);
+}
+
+.brain-evo-stat__sub {
+  font-size: 13px;
+  color: var(--lipa-text-secondary);
+  margin: 6px 0 0;
+}
+
+.brain-evo-rank {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brain-evo-rank__emoji {
+  font-size: 2.5rem;
+}
+
+.brain-evo-xp-bar {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  margin-top: 10px;
+  overflow: hidden;
+}
+
+.brain-evo-xp-bar__fill {
+  height: 100%;
+  background: linear-gradient(90deg, #7c3aed, #00ffff);
+  border-radius: 4px;
+  transition: width 0.4s ease;
+}
+
+.brain-evo-section {
+  margin-bottom: 28px;
+}
+
+.brain-evo-section h2 {
+  font-family: var(--lipa-font-display);
+  font-size: 1.15rem;
+  margin: 0 0 12px;
+}
+
+.brain-evo-activities {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.brain-evo-act {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s, transform 0.15s;
+}
+
+.brain-evo-act:hover {
+  border-color: rgba(124, 58, 237, 0.5);
+  transform: translateY(-1px);
+}
+
+.brain-evo-act__emoji {
+  font-size: 1.5rem;
+  width: 40px;
+  text-align: center;
+}
+
+.brain-evo-act__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.brain-evo-act__info strong {
+  display: block;
+  font-size: 15px;
+}
+
+.brain-evo-act__info span {
+  font-size: 13px;
+  color: var(--lipa-text-secondary);
+}
+
+.brain-evo-act__lvl {
+  font-family: var(--lipa-font-display);
+  font-size: 14px;
+  color: #a78bfa;
+  white-space: nowrap;
+}
+
+.brain-evo-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.brain-evo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: rgba(124, 58, 237, 0.2);
+  border: 1px solid rgba(167, 139, 250, 0.4);
+  border-radius: 999px;
+  font-size: 13px;
+}
+
+.brain-evo-badge--locked {
+  opacity: 0.45;
+  border-style: dashed;
+}
+
+.brain-evo-backup {
+  font-size: 13px;
+  color: var(--lipa-text-secondary);
+  padding: 14px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  word-break: break-all;
+}
+
+.brain-evo-backup code {
+  font-family: ui-monospace, monospace;
+  color: #00ffff;
+  font-size: 14px;
+}
+
+.brain-evo-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 64px;
+  padding: 8px 0;
+}
+
+.brain-evo-chart__bar {
+  flex: 1;
+  min-width: 8px;
+  background: linear-gradient(180deg, #7c3aed, rgba(124, 58, 237, 0.3));
+  border-radius: 3px 3px 0 0;
+  min-height: 4px;
+}
+
+.brain-evo-empty {
+  text-align: center;
+  padding: 32px 16px;
+  color: var(--lipa-text-secondary);
+}
+
+.brain-evo-empty .lipa-btn {
+  margin-top: 16px;
+}
+
+.brain-evo-backup-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.brain-evo-import-label {
+  cursor: pointer;
+  margin: 0;
+}
+
+.brain-evo-backup-msg {
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+.brain-evo-backup-msg--ok {
+  color: #6ee7b7;
+}
+
+.brain-evo-backup-msg--err {
+  color: #fca5a5;
+}
+
+.brain-routine-lvl {
+  font-size: 12px;
+  color: #a78bfa;
+  font-weight: 600;
+}
+
+.brain-onboard__opt--soon {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.brain-pillars {
+  display: grid;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+@media (min-width: 560px) {
+  .brain-pillars {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.brain-pillar {
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.brain-pillar--live {
+  border-color: rgba(124, 58, 237, 0.45);
+}
+
+.brain-pillar--soon {
+  opacity: 0.7;
+}
+
+.brain-pillar strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.brain-pillar span {
+  font-size: 13px;
+  color: var(--lipa-text-secondary);
+}
+
+.brain-pillar__tag {
+  display: inline-block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 8px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: rgba(124, 58, 237, 0.25);
+  color: #c4b5fd;
+}
+
+.brain-pillar--soon .brain-pillar__tag {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--lipa-text-secondary);
+}
+
+.brain-level-pill {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #c4b5fd;
+  background: rgba(124, 58, 237, 0.25);
+  border: 1px solid rgba(167, 139, 250, 0.35);
+  border-radius: 999px;
+  padding: 4px 12px;
+  margin-bottom: 12px;
+}

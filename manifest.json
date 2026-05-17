@@ -1,11 +1,11 @@
 {
-  "name": "LIPA Studios — Juegos Gratis en el Navegador",
-  "short_name": "LIPA Juegos",
-  "description": "Juegos gratis online en español: reflejos, aim trainer, stack tower neon y arcade. Sin descarga. Entrena 5 minutos al día.",
-  "start_url": "/jugar.html",
+  "name": "LIPA Brain Gym — Tu gym cerebral diario",
+  "short_name": "Brain Gym",
+  "description": "Rutina diaria de ejercicios para el cerebro: cálculo, idiomas y reflejos en 5–15 min. Gratis, sin registro.",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#0a0a0a",
-  "theme_color": "#00ffff",
+  "theme_color": "#7c3aed",
   "orientation": "any",
   "icons": [
     {
@@ -26,28 +26,41 @@
   "scope": "/",
   "shortcuts": [
     {
+      "name": "Brain Gym",
+      "short_name": "Brain Gym",
+      "description": "Gimnasio mental mates + reflejos",
+      "url": "/gym-cerebro.html",
+      "icons": [{ "src": "/favicon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Mi evolución",
+      "short_name": "Evolución",
+      "description": "Progreso, rango y logros",
+      "url": "/mi-evolucion.html",
+      "icons": [{ "src": "/favicon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Neon Cálculo",
+      "short_name": "Cálculo",
+      "url": "/neon-calculo.html",
+      "icons": [{ "src": "/favicon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Neon Palabras",
+      "short_name": "Palabras",
+      "url": "/neon-palabras.html",
+      "icons": [{ "src": "/favicon-192.png", "sizes": "192x192" }]
+    },
+    {
       "name": "Arcade",
       "short_name": "Jugar",
-      "description": "Todos los juegos gratis",
       "url": "/jugar.html",
       "icons": [{ "src": "/favicon-192.png", "sizes": "192x192" }]
     },
     {
-      "name": "Test reflejos",
-      "short_name": "Test ms",
-      "url": "/test-reflejos.html",
-      "icons": [{ "src": "/favicon-192.png", "sizes": "192x192" }]
-    },
-    {
-      "name": "Stack Tower",
-      "short_name": "Stack",
-      "url": "/",
-      "icons": [{ "src": "/favicon-192.png", "sizes": "192x192" }]
-    },
-    {
-      "name": "Entrenador",
+      "name": "Mi rutina",
       "short_name": "Rutina",
-      "url": "/entrenador-reflejos.html",
+      "url": "/mi-rutina-cerebro.html",
       "icons": [{ "src": "/favicon-192.png", "sizes": "192x192" }]
     }
   ]

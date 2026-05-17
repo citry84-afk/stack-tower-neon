@@ -128,7 +128,11 @@
     board.submit(name, score, { combo: combo });
     board._save();
     LipaDaily.bumpStreak('lipa_grid_streak');
-    if (LipaDaily.recordSession) LipaDaily.recordSession('grid-reflex', { score: score });
+    if (window.LipaBrain && LipaBrain.recordActivityResult) {
+      LipaBrain.recordActivityResult('grid-reflex', { score: score, correct: score, wrong: 0 });
+    } else if (LipaDaily.recordSession) {
+      LipaDaily.recordSession('grid-reflex', { score: score });
+    }
     renderBoard();
   }
 

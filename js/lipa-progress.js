@@ -74,7 +74,10 @@
       'grid-reflex': 'Grid',
       'stack-tower': 'Stack',
       'flash-tap': 'Flash',
-      'esquiva-neon': 'Esquiva'
+      'esquiva-neon': 'Esquiva',
+      'neon-calculo': 'Cálculo',
+      'tablas-relampago': 'Tablas',
+      'neon-palabras': 'Palabras'
     };
     if (!plays || !plays.length) return 'Aún no has jugado esta semana';
     return plays.map(function (id) { return names[id] || id; }).join(' · ');
@@ -91,7 +94,10 @@
       { icon: '🔲', label: 'Grid 4×4', value: r.grid ? r.grid + ' aciertos' : '—', href: '/grid-reflejos-neon.html' },
       { icon: '🎮', label: 'Stack Tower', value: r.stack ? r.stack + ' pts' : '—', href: '/' },
       { icon: '⚡', label: 'Flash Tap', value: r.flashTap ? r.flashTap + ' pts' : '—', href: '/toque-flash-neon.html' },
-      { icon: '🔀', label: 'Neon Esquiva', value: r.esquiva ? r.esquiva + ' pts' : '—', href: '/esquiva-neon.html' }
+      { icon: '🔀', label: 'Neon Esquiva', value: r.esquiva ? r.esquiva + ' pts' : '—', href: '/esquiva-neon.html' },
+      { icon: '➕', label: 'Neon Cálculo', value: r.calculo ? r.calculo + ' pts' : '—', href: '/neon-calculo.html' },
+      { icon: '✖️', label: 'Tablas Relámpago', value: r.tablas ? r.tablas + ' pts' : '—', href: '/tablas-relampago.html' },
+      { icon: '🗣️', label: 'Neon Palabras', value: r.palabras ? r.palabras + ' pts' : '—', href: '/neon-palabras.html' }
     ];
     el.innerHTML =
       '<div class="progress-head">' +

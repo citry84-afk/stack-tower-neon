@@ -5,7 +5,6 @@
   'use strict';
 
   var DURATION = 30;
-  var SPAWN_INTERVAL = 850;
   var SPAWN_RETRIES = 24;
   var board = null;
   var arena, timerEl, scoreEl, accEl, comboEl, overlay, btnStart, btnShare, lbEl;
@@ -49,7 +48,7 @@
     if (btnStart) btnStart.addEventListener('click', startGame);
     if (btnShare) btnShare.addEventListener('click', share);
     if (arena) {
-      arena.addEventListener('click', onArenaMiss);
+      arena.addEventListener('pointerdown', onArenaMiss);
       if (window.ResizeObserver) {
         var ro = new ResizeObserver(function () {
           if (running && !activeTarget) spawnTarget();
@@ -91,37 +90,61 @@
       clearTimeout(targetTimeout);
       targetTimeout = null;
     }
-    if (activeTarget && activeTarget.parentNode) activeTarget.remove();
+    if (arena) {
+      var nodes = arena.querySelectorAll('.aim-target');
+      for (var i = 0; i < nodes.length; i++) nodes[i].remove();
+    }
     activeTarget = null;
   }
 
   function arenaSize() {
     if (!arena) return { w: 0, h: 0 };
-    var rect = arena.getBoundingClientRect();
     return {
-      w: rect.width || arena.clientWidth || 0,
-      h: rect.height || arena.clientHeight || 0
+      w: arena.clientWidth || arena.offsetWidth || 0,
+      h: arena.clientHeight || arena.offsetHeight || 0
     };
   }
 
+  function applyTargetStyle(el, x, y, size) {
+    el.style.cssText =
+      'position:absolute;' +
+      'left:' + x + 'px;' +
+      'top:' + y + 'px;' +
+      'width:' + size + 'px;' +
+      'height:' + size + 'px;' +
+      'z-index:2;' +
+      'margin:0;' +
+      'padding:0;' +
+      'border:2px solid #fff;' +
+      'border-radius:50%;' +
+      'box-sizing:border-box;' +
+      'cursor:pointer;' +
+      'touch-action:manipulation;' +
+      '-webkit-appearance:none;' +
+      'appearance:none;' +
+      'background:radial-gradient(circle at 30% 30%, #ff6b9d, #ff0080);' +
+      'box-shadow:0 0 18px rgba(255, 0, 128, 0.55);';
+  }
+
   function bindTap(target) {
-    var tapped = false;
-    function tap(e) {
-      if (tapped) return;
-      tapped = true;
+    var locked = false;
+    function hit(e) {
+      if (locked) return;
+      if (e.type === 'click' && e.pointerType !== 'mouse') return;
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      locked = true;
       e.preventDefault();
       e.stopPropagation();
       onHit(target);
-      setTimeout(function () { tapped = false; }, 200);
     }
-    target.addEventListener('click', tap);
-    target.addEventListener('touchend', tap, { passive: false });
+    target.addEventListener('pointerdown', hit);
+    target.addEventListener('click', hit);
   }
 
   function spawnTarget() {
     if (!running || !arena) return;
     clearTarget();
-    var pad = 28;
+    var pad = 16;
     var box = arenaSize();
     var w = box.w - pad * 2;
     var h = box.h - pad * 2;
@@ -139,17 +162,15 @@
     spawnAttempts = 0;
     arena.removeAttribute('data-aim-wait');
 
-    var size = Math.max(40, Math.min(56, 52 - Math.floor(score / 80)));
+    var size = Math.max(44, Math.min(56, 52 - Math.floor(score / 80)));
     var x = pad + Math.random() * Math.max(0, w - size);
     var y = pad + Math.random() * Math.max(0, h - size);
-    var el = document.createElement('button');
-    el.type = 'button';
+    var el = document.createElement('div');
     el.className = 'aim-target';
-    el.style.left = x + 'px';
-    el.style.top = y + 'px';
-    el.style.width = size + 'px';
-    el.style.height = size + 'px';
+    el.setAttribute('role', 'button');
+    el.setAttribute('tabindex', '0');
     el.setAttribute('aria-label', 'Diana');
+    applyTargetStyle(el, x, y, size);
     bindTap(el);
     arena.appendChild(el);
     activeTarget = el;
@@ -160,9 +181,12 @@
         misses++;
         combo = 0;
         el.classList.add('aim-target--miss');
-        setTimeout(function () { if (el.parentNode) el.remove(); }, 150);
         activeTarget = null;
         updateHud();
+        setTimeout(function () {
+          if (el.parentNode) el.remove();
+          if (running) spawnTarget();
+        }, 120);
       }
     }, ttl);
   }
@@ -178,13 +202,17 @@
     if (combo > maxCombo) maxCombo = combo;
     score += 10 + combo * 2;
     el.classList.add('aim-target--hit');
-    setTimeout(function () { if (el.parentNode) el.remove(); }, 100);
     activeTarget = null;
     updateHud();
+    setTimeout(function () {
+      if (el.parentNode) el.remove();
+      if (running) spawnTarget();
+    }, 80);
   }
 
   function onArenaMiss(e) {
     if (!running || e.target !== arena) return;
+    if (e.target.closest && e.target.closest('.aim-target')) return;
     misses++;
     combo = 0;
     updateHud();
@@ -220,7 +248,11 @@
     getBoard().submit(name, score, { accuracy: acc, hits: hits, maxCombo: maxCombo });
     if (getBoard()._save) getBoard()._save();
     if (window.LipaDaily && LipaDaily.bumpStreak) LipaDaily.bumpStreak('lipa_aim_streak');
-    if (window.LipaDaily && LipaDaily.recordSession) LipaDaily.recordSession('aim-trainer', { score: score });
+    if (window.LipaBrain && LipaBrain.recordActivityResult) {
+      LipaBrain.recordActivityResult('aim-trainer', { score: score, accuracy: hits / Math.max(1, hits + misses) });
+    } else if (window.LipaDaily && LipaDaily.recordSession) {
+      LipaDaily.recordSession('aim-trainer', { score: score });
+    }
     var best = parseInt(localStorage.getItem('lipa_aim_best') || '0', 10);
     if (score > best) localStorage.setItem('lipa_aim_best', String(score));
     renderBoard();
@@ -240,16 +272,20 @@
     spawnAttempts = 0;
     if (arena) arena.innerHTML = '';
     updateHud();
-    requestAnimationFrame(function () {
-      requestAnimationFrame(function () {
-        if (running) {
-          spawnTarget();
-          spawnTimer = setInterval(function () {
-            if (running) spawnTarget();
-          }, SPAWN_INTERVAL);
-        }
-      });
-    });
+    function trySpawn(attempt) {
+      if (!running) return;
+      var box = arenaSize();
+      if (box.w >= 80 && box.h >= 80) {
+        spawnTarget();
+        return;
+      }
+      if (attempt < 30) {
+        requestAnimationFrame(function () { trySpawn(attempt + 1); });
+      } else {
+        spawnTarget();
+      }
+    }
+    trySpawn(0);
     if (tickTimer) clearInterval(tickTimer);
     tickTimer = setInterval(function () {
       timeLeft -= 0.1;

@@ -100,7 +100,16 @@
     var prevBest = parseInt(localStorage.getItem(STORAGE_BEST) || '9999', 10);
     if (best < prevBest) localStorage.setItem(STORAGE_BEST, String(best));
     LipaDaily.bumpStreak(STORAGE_STREAK);
-    if (window.LipaDaily.recordSession) {
+    if (window.LipaBrain && LipaBrain.recordActivityResult) {
+      LipaBrain.recordActivityResult('reaction-test', {
+        score: avg,
+        higherIsBetter: false,
+        correct: results.length,
+        wrong: 0,
+        accuracy: 1,
+        extra: { best: best }
+      });
+    } else if (window.LipaDaily.recordSession) {
       LipaDaily.recordSession('reaction-test', { score: avg, higherIsBetter: false });
     }
     var name = localStorage.getItem('lipa_player_name') || '';

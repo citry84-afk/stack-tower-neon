@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Informe para padres | LIPA Brain Gym</title>
+  <meta name="description" content="Resumen semanal para familias: días entrenados, materias del cole, retos rápidos y recomendaciones. Sin cuenta, en tu dispositivo.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://lipastudios.com/para-padres.html">
+  <link rel="stylesheet" href="/css/lipa-ui.css">
+  <link rel="stylesheet" href="/css/site-nav.css">
+  <link rel="stylesheet" href="/css/brain-gym.css?v=3">
+  <link rel="stylesheet" href="/css/brain-design-system.css?v=3">
+  <link rel="stylesheet" href="/css/brain-profiles.css">
+  <link rel="stylesheet" href="/css/brain-parent-dashboard.css">
+  <meta name="theme-color" content="#2ed3a6">
+  <link rel="manifest" href="/manifest.json">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5XL1W8RNTP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-5XL1W8RNTP');
+  </script>
+  <script src="/consent.js"></script>
+</head>
+<body class="lipa-page lipa-brain-soft parent-dash-page">
+  <nav class="site-nav" role="navigation" aria-label="Navegación principal">
+    <div class="site-nav__inner">
+      <div class="site-nav__top">
+        <a class="site-nav__brand" href="/">LIPA Studios</a>
+        <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="primary-nav">Menú</button>
+      </div>
+      <div id="primary-nav" class="nav-links">
+        <a href="/">Brain Gym</a>
+        <a href="/cursos.html">Cursos</a>
+        <a href="/para-padres.html" aria-current="page">Para padres</a>
+        <a href="/mi-evolucion.html">Mi evolución</a>
+        <a href="/mi-rutina-cerebro.html">Mi rutina</a>
+      </div>
+    </div>
+    <div class="nav-backdrop" id="nav-backdrop"></div>
+  </nav>
+  <script src="/js/site-nav.js" defer></script>
+
+  <main class="lipa-main lipa-container parent-dash-main">
+    <header class="parent-dash-hero">
+      <p class="brain-eyebrow">LIPA Brain Gym · informe familiar</p>
+      <h1>Resumen para padres y madres</h1>
+      <p>Progreso de la semana, materias practicadas y qué reforzar — sin registro, en este dispositivo.</p>
+    </header>
+    <div id="parent-dash-root" aria-live="polite">
+      <p class="parent-dash-loading">Cargando informe…</p>
+    </div>
+    <p class="parent-dash-navlinks">
+      <a href="/mi-evolucion.html">Vista del niño/a</a> ·
+      <a href="/mi-rutina-cerebro.html">Ajustar rutina</a> ·
+      <a href="/">Inicio</a>
+    </p>
+  </main>
+
+  <footer class="lipa-footer lipa-footer--site lipa-footer--compact">
+    <p>© 2024–2026 LIPA Studios · <a href="/privacy.html">Privacidad</a></p>
+  </footer>
+
+  <script src="/js/lipa-daily.js"></script>
+  <script src="/js/lipa-curriculum-meta.js"></script>
+  <script src="/js/lipa-curriculum-build.js"></script>
+  <script src="/js/lipa-curriculum-data.js"></script>
+  <script src="/js/lipa-curriculum.js"></script>
+  <script src="/js/lipa-quick-tests-meta.js"></script>
+  <script src="/js/lipa-quick-tests-data.js"></script>
+  <script src="/js/lipa-quick-tests.js"></script>
+  <script src="/js/lipa-brain-catalog.js"></script>
+  <script src="/js/lipa-brain-profiles.js"></script>
+  <script src="/js/lipa-brain-core.js"></script>
+  <script src="/js/lipa-parent-dashboard.js"></script>
+  <script src="/js/lipa-pwa.js?v=2"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      if (window.LipaParentDashboard) {
+        LipaParentDashboard.render(document.getElementById('parent-dash-root'));
+      }
+    });
+  </script>
+</body>
+</html>

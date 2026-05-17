@@ -200,7 +200,9 @@
     $('esquiva-final-dodged').textContent = dodged;
     var name = window.prompt('Nombre para el ranking (opcional):', '') || 'Jugador';
     board.submit(name, score, { dodged: dodged });
-    if (window.LipaDaily && LipaDaily.recordSession) {
+    if (window.LipaBrain && LipaBrain.recordActivityResult) {
+      LipaBrain.recordActivityResult('esquiva-neon', { score: score, correct: dodged, wrong: 0 });
+    } else if (window.LipaDaily && LipaDaily.recordSession) {
       LipaDaily.recordSession('esquiva-neon', { score: score });
     }
     var best = parseInt(localStorage.getItem('lipa_esquiva_best') || '0', 10);

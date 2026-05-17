@@ -645,7 +645,8 @@ body.game-page {
   font-size: 14px;
 }
 
-.rutina-5min__list a {
+.rutina-5min__list a,
+.rutina-5min__list a:visited {
   color: var(--lipa-accent);
   font-weight: 600;
   text-decoration: none;
@@ -657,7 +658,8 @@ body.game-page {
   color: var(--lipa-text-secondary);
 }
 
-.rutina-5min__links a {
+.rutina-5min__links a,
+.rutina-5min__links a:visited {
   color: var(--lipa-accent);
 }
 

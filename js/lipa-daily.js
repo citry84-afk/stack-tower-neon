@@ -131,7 +131,10 @@
     'grid-reflex': 'lipa_grid_best',
     'stack-tower': 'stackTowerHighScore',
     'flash-tap': 'lipa_flash_tap_best',
-    'esquiva-neon': 'lipa_esquiva_best'
+    'esquiva-neon': 'lipa_esquiva_best',
+    'neon-calculo': 'lipa_calculo_best',
+    'tablas-relampago': 'lipa_tablas_best',
+    'neon-palabras': 'lipa_palabras_best'
   };
 
   var WEEKLY_POOL = [
@@ -196,12 +199,42 @@
       cta: 'Jugar Esquiva'
     },
     {
+      id: 'calculo-120',
+      game: 'neon-calculo',
+      type: 'min_score',
+      target: 120,
+      title: 'Neon Cálculo — 120 pts',
+      desc: 'Suma 120 puntos o más en una ronda de cálculo mental.',
+      url: '/neon-calculo.html',
+      cta: 'Jugar Cálculo'
+    },
+    {
+      id: 'tablas-100',
+      game: 'tablas-relampago',
+      type: 'min_score',
+      target: 100,
+      title: 'Tablas — 100 pts',
+      desc: 'Practica tablas y supera 100 puntos en 30 segundos.',
+      url: '/tablas-relampago.html',
+      cta: 'Tablas Relámpago'
+    },
+    {
+      id: 'palabras-90',
+      game: 'neon-palabras',
+      type: 'min_score',
+      target: 90,
+      title: 'Neon Palabras — 90 pts',
+      desc: 'Traduce vocabulario ES ↔ EN y supera 90 puntos en 30 s.',
+      url: '/neon-palabras.html',
+      cta: 'Jugar Palabras'
+    },
+    {
       id: 'explorer',
       game: 'any',
       type: 'play_count',
-      target: 4,
+      target: 5,
       title: 'Explorador LIPA',
-      desc: 'Juega a 4 minijuegos distintos esta semana (cualquiera del arcade).',
+      desc: 'Juega a 5 minijuegos distintos esta semana (arcade o Brain Gym).',
       url: '/jugar.html',
       cta: 'Ver arcade'
     }
@@ -462,6 +495,9 @@
       stack: parseInt(localStorage.getItem(BEST_KEYS['stack-tower']) || '0', 10) || null,
       flashTap: parseInt(localStorage.getItem(BEST_KEYS['flash-tap']) || '0', 10) || null,
       esquiva: parseInt(localStorage.getItem(BEST_KEYS['esquiva-neon']) || '0', 10) || null,
+      calculo: parseInt(localStorage.getItem(BEST_KEYS['neon-calculo']) || '0', 10) || null,
+      tablas: parseInt(localStorage.getItem(BEST_KEYS['tablas-relampago']) || '0', 10) || null,
+      palabras: parseInt(localStorage.getItem(BEST_KEYS['neon-palabras']) || '0', 10) || null,
       streak: getGlobalStreak(),
       totalDays: getGlobalTrain().totalDays || 0,
       gamesToday: getWeeklyState().plays.length

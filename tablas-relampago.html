@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tablas Relámpago Gratis | Tablas de Multiplicar Juego · LIPA Brain Gym</title>
+  <meta name="description" content="Tablas Relámpago: practica las tablas de multiplicar en 30 segundos. Juego gratis de mates en el navegador. LIPA Brain Gym.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://lipastudios.com/tablas-relampago.html">
+  <link rel="stylesheet" href="/css/lipa-ui.css">
+  <link rel="stylesheet" href="/css/site-nav.css">
+  <link rel="stylesheet" href="/css/mini-games.css">
+  <link rel="stylesheet" href="/css/brain-gym.css">
+  <link rel="stylesheet" href="/css/brain-design-system.css?v=2">
+  <meta name="theme-color" content="#2ed3a6">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5XL1W8RNTP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-5XL1W8RNTP');
+  </script>
+  <script src="/consent.js"></script>
+</head>
+<body class="lipa-page lipa-brain-soft game-page game-page--brain">
+  <nav class="site-nav" role="navigation" aria-label="Navegación principal">
+    <div class="site-nav__inner">
+      <div class="site-nav__top">
+        <a class="site-nav__brand" href="/">LIPA Studios</a>
+        <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="primary-nav">Menú</button>
+      </div>
+      <div id="primary-nav" class="nav-links">
+        <a href="/gym-cerebro.html">Brain Gym</a>
+        <a href="/tablas-relampago.html" aria-current="page">Tablas</a>
+        <a href="/jugar.html">Arcade</a>
+      </div>
+    </div>
+    <div class="nav-backdrop" id="nav-backdrop"></div>
+  </nav>
+  <script src="/js/site-nav.js" defer></script>
+
+  <main class="wrap">
+    <p class="brain-eyebrow">LIPA Brain Gym · tablas de multiplicar</p>
+    <h1>Tablas Relámpago</h1>
+    <p class="lead">Multiplicaciones rápidas. Elige rango de tablas y no rompas el combo.</p>
+    <p id="tablas-brain-level" class="brain-level-pill" aria-live="polite">Nivel Brain 1</p>
+
+    <label for="tablas-range" class="tablas-range-label">Rango de tablas</label>
+    <select id="tablas-range" class="tablas-range">
+      <option value="2-6">Del 2 al 6 (primaria)</option>
+      <option value="7-9">Del 7 al 9</option>
+      <option value="2-12" selected>Del 2 al 12 (completo)</option>
+    </select>
+
+    <div class="stats">
+      <div class="stat"><span>Tiempo</span><strong id="tablas-timer">30 s</strong></div>
+      <div class="stat"><span>Puntos</span><strong id="tablas-score">0</strong></div>
+      <div class="stat"><span>Precisión</span><strong id="tablas-accuracy">100%</strong></div>
+      <div class="stat"><span>Combo</span><strong id="tablas-combo">0</strong></div>
+    </div>
+
+    <div id="tablas-arena" class="math-arena" aria-live="polite">
+      <div class="math-arena__inner">
+        <p id="tablas-streak" class="math-streak" hidden>🔥 Combo <span id="tablas-streak-n">0</span></p>
+        <p id="tablas-question" class="math-question">Pulsa empezar</p>
+        <div id="tablas-choices" class="math-choices"></div>
+      </div>
+    </div>
+
+    <div id="tablas-overlay" class="game-overlay" hidden>
+      <p><strong>Fin de ronda</strong></p>
+      <p>Puntos: <strong id="tablas-final-score">0</strong></p>
+      <p>Precisión: <strong id="tablas-final-acc">0%</strong> · Mejor combo: <strong id="tablas-final-combo">0</strong></p>
+      <label for="tablas-name" class="flash-name-label">Nombre (ranking)</label>
+      <input type="text" id="tablas-name" class="flash-name-input" maxlength="15" placeholder="Tu nombre" autocomplete="nickname">
+      <button type="button" class="btn btn--ghost" id="tablas-share">Compartir</button>
+      <p style="margin-top:12px;font-size:14px;"><a href="/mi-evolucion.html">Ver mi evolución →</a></p>
+    </div>
+
+    <button type="button" class="btn btn--brain" id="tablas-start">Empezar 30 s</button>
+
+    <section class="card">
+      <h2>Ranking de hoy</h2>
+      <div id="tablas-leaderboard"></div>
+    </section>
+
+    <section class="card">
+      <h2>Siguiente en tu gym</h2>
+      <div class="hub-links">
+        <a href="/neon-calculo.html">Neon Cálculo</a>
+        <a href="/entrenador-cerebro.html">Rutina cerebro 5 min</a>
+        <a href="/gym-cerebro.html">Brain Gym completo</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="/js/lipa-daily.js"></script>
+  <script src="/js/lipa-brain-catalog.js"></script>
+    <script src="/js/lipa-mascot.js"></script>
+  <script src="/js/lipa-game-feedback.js"></script>
+  <script src="/js/lipa-game-hint.js"></script>
+  <script src="/js/lipa-curriculum-meta.js"></script>
+  <script src="/js/lipa-curriculum-build.js"></script>
+  <script src="/js/lipa-curriculum-data.js"></script>
+  <script src="/js/lipa-curriculum.js"></script>
+  <script src="/js/lipa-curriculum-session.js"></script>
+  <script src="/js/lipa-brain-core.js"></script>
+  <script src="/js/lipa-routine-flow.js"></script>
+  <script src="/js/lipa-analytics.js"></script>
+  <script src="/js/neon-tablas.js"></script>
+</body>
+</html>

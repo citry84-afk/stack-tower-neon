@@ -12,7 +12,10 @@
     'esquiva-start': 'esquiva-neon',
     'grid-start': 'grid-reflex',
     'btn-test-start': 'reaction-test',
-    'reaction-start': 'reaction-test'
+    'reaction-start': 'reaction-test',
+    'calc-start': 'neon-calculo',
+    'tablas-start': 'tablas-relampago',
+    'palabras-start': 'neon-palabras'
   };
 
   var GAME_LABELS = {
@@ -21,7 +24,11 @@
     'grid-reflex': 'Grid 4×4',
     'stack-tower': 'Stack Tower',
     'flash-tap': 'Flash Tap',
-    'esquiva-neon': 'Neon Esquiva'
+    'esquiva-neon': 'Neon Esquiva',
+    'neon-calculo': 'Neon Cálculo',
+    'tablas-relampago': 'Tablas Relámpago',
+    'neon-palabras': 'Neon Palabras',
+    'gym-cerebro-hub': 'Brain Gym'
   };
 
   function gtagEvent(name, params) {

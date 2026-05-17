@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neon Palabras Gratis | Vocabulario Inglés Español · LIPA Brain Gym</title>
+  <meta name="description" content="Neon Palabras: traduce vocabulario inglés y español en 30 segundos. Juego gratis de idiomas en el navegador. LIPA Brain Gym.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://lipastudios.com/neon-palabras.html">
+  <link rel="stylesheet" href="/css/lipa-ui.css">
+  <link rel="stylesheet" href="/css/site-nav.css">
+  <link rel="stylesheet" href="/css/mini-games.css">
+  <link rel="stylesheet" href="/css/brain-gym.css">
+  <link rel="stylesheet" href="/css/brain-design-system.css?v=2">
+  <meta name="theme-color" content="#2ed3a6">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5XL1W8RNTP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-5XL1W8RNTP');
+  </script>
+  <script src="/consent.js"></script>
+</head>
+<body class="lipa-page lipa-brain-soft game-page game-page--brain game-page--lang">
+  <nav class="site-nav" role="navigation" aria-label="Navegación principal">
+    <div class="site-nav__inner">
+      <div class="site-nav__top">
+        <a class="site-nav__brand" href="/">LIPA Studios</a>
+        <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="primary-nav">Menú</button>
+      </div>
+      <div id="primary-nav" class="nav-links">
+        <a href="/gym-cerebro.html">Brain Gym</a>
+        <a href="/neon-palabras.html" aria-current="page">Neon Palabras</a>
+        <a href="/jugar.html">Arcade</a>
+      </div>
+    </div>
+    <div class="nav-backdrop" id="nav-backdrop"></div>
+  </nav>
+  <script src="/js/site-nav.js" defer></script>
+
+  <main class="wrap">
+    <p class="brain-eyebrow brain-eyebrow--lang">LIPA Brain Gym · idiomas</p>
+    <h1>Neon Palabras</h1>
+    <p class="lead">Traduce al instante entre español e inglés. 30 segundos, combo y nivel Brain adaptativo.</p>
+    <p id="palabras-brain-level" class="brain-level-pill brain-level-pill--lang" aria-live="polite">Nivel Brain 1</p>
+
+    <label for="palabras-mode" class="tablas-range-label">Modo</label>
+    <select id="palabras-mode" class="tablas-range">
+      <option value="es-en" selected>Español → Inglés</option>
+      <option value="en-es">Inglés → Español</option>
+      <option value="mix">Mix (alterna)</option>
+    </select>
+
+    <div class="stats">
+      <div class="stat"><span>Tiempo</span><strong id="palabras-timer">30 s</strong></div>
+      <div class="stat"><span>Puntos</span><strong id="palabras-score">0</strong></div>
+      <div class="stat"><span>Precisión</span><strong id="palabras-accuracy">100%</strong></div>
+      <div class="stat"><span>Combo</span><strong id="palabras-combo">0</strong></div>
+    </div>
+
+    <div id="palabras-arena" class="math-arena math-arena--lang" aria-live="polite">
+      <div class="math-arena__inner">
+        <p id="palabras-streak" class="math-streak" hidden>🔥 Combo <span id="palabras-streak-n">0</span></p>
+        <p id="palabras-direction" class="lang-direction">¿Cómo se dice en inglés?</p>
+        <p id="palabras-prompt" class="math-question lang-prompt">Pulsa empezar</p>
+        <div id="palabras-choices" class="math-choices"></div>
+      </div>
+    </div>
+
+    <div id="palabras-overlay" class="game-overlay" hidden>
+      <p><strong>Fin de ronda</strong></p>
+      <p>Puntos: <strong id="palabras-final-score">0</strong></p>
+      <p>Precisión: <strong id="palabras-final-acc">0%</strong> · Mejor combo: <strong id="palabras-final-combo">0</strong></p>
+      <label for="palabras-name" class="flash-name-label">Nombre (ranking)</label>
+      <input type="text" id="palabras-name" class="flash-name-input" maxlength="15" placeholder="Tu nombre" autocomplete="nickname">
+      <button type="button" class="btn btn--ghost" id="palabras-share">Compartir</button>
+      <p style="margin-top:12px;font-size:14px;"><a href="/mi-evolucion.html">Ver mi evolución →</a></p>
+    </div>
+
+    <button type="button" class="btn btn--brain btn--lang" id="palabras-start">Empezar 30 s</button>
+
+    <section class="card">
+      <h2>Ranking de hoy</h2>
+      <div id="palabras-leaderboard"></div>
+    </section>
+
+    <section class="card">
+      <h2>Siguiente en tu gym</h2>
+      <div class="hub-links">
+        <a href="/neon-calculo.html">Neon Cálculo</a>
+        <a href="/gym-cerebro.html">Brain Gym</a>
+        <a href="/entrenador-cerebro.html">Rutina 5 min</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="/js/lipa-daily.js"></script>
+  <script src="/js/lipa-vocab-bank.js"></script>
+  <script src="/js/lipa-brain-catalog.js"></script>
+    <script src="/js/lipa-mascot.js"></script>
+  <script src="/js/lipa-game-feedback.js"></script>
+  <script src="/js/lipa-game-hint.js"></script>
+  <script src="/js/lipa-curriculum-meta.js"></script>
+  <script src="/js/lipa-curriculum-build.js"></script>
+  <script src="/js/lipa-curriculum-data.js"></script>
+  <script src="/js/lipa-curriculum.js"></script>
+  <script src="/js/lipa-curriculum-session.js"></script>
+  <script src="/js/lipa-brain-core.js"></script>
+  <script src="/js/lipa-routine-flow.js"></script>
+  <script src="/js/lipa-analytics.js"></script>
+  <script src="/js/neon-palabras.js"></script>
+</body>
+</html>

@@ -201,7 +201,16 @@
     var nameInput = document.getElementById('flash-name');
     var name = (nameInput && nameInput.value.trim()) || 'Jugador';
     getBoard().submit(name.substring(0, 15), score, { hits: hits, misses: misses });
-    if (window.LipaDaily && LipaDaily.recordSession) {
+    var total = hits + misses;
+    if (window.LipaBrain && LipaBrain.recordActivityResult) {
+      LipaBrain.recordActivityResult('flash-tap', {
+        score: score,
+        correct: hits,
+        wrong: misses,
+        accuracy: total ? hits / total : 1,
+        durationSec: DURATION
+      });
+    } else if (window.LipaDaily && LipaDaily.recordSession) {
       LipaDaily.recordSession('flash-tap', { score: score });
     }
     var best = parseInt(localStorage.getItem('lipa_flash_tap_best') || '0', 10);

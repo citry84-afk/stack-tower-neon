@@ -57,8 +57,12 @@
   }
 
   function onGameOver(score) {
-    if (score > 0 && window.LipaDaily && LipaDaily.recordSession) {
-      LipaDaily.recordSession('stack-tower', { score: score });
+    if (score > 0) {
+      if (window.LipaBrain && LipaBrain.recordActivityResult) {
+        LipaBrain.recordActivityResult('stack-tower', { score: score });
+      } else if (window.LipaDaily && LipaDaily.recordSession) {
+        LipaDaily.recordSession('stack-tower', { score: score });
+      }
     }
     if (!dailyMode || score <= 0) {
       dailyMode = false;

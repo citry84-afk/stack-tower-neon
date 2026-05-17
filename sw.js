@@ -3,24 +3,103 @@
  * PWA Optimization & Offline Functionality
  */
 
-const CACHE_NAME = 'stack-tower-neon-v1.3.0';
-const CACHE_VERSION = '1.3.0';
+const CACHE_NAME = 'lipa-brain-gym-v3.15.0-curriculum-variety';
+const CACHE_VERSION = '2.0.0';
 
 // Essential files to cache for offline play
 const STATIC_CACHE_URLS = [
     '/',
     '/index.html',
+    '/jugar.html',
+    '/gym-cerebro.html',
+    '/cursos.html',
+    '/retos-rapidos.html',
+    '/reto-rapido.html',
+    '/para-padres.html',
+    '/curso.html',
+    '/materia.html',
+    '/unidad.html',
+    '/js/lipa-curriculum-meta.js',
+    '/js/lipa-curriculum-build.js',
+    '/js/lipa-curriculum-data.js',
+    '/js/lipa-curriculum.js',
+    '/js/lipa-curriculum-page.js',
+    '/js/lipa-quick-tests-meta.js',
+    '/js/lipa-quick-tests-data.js',
+    '/js/lipa-quick-tests.js',
+    '/js/lipa-quick-test-page.js',
+    '/js/lipa-home-quick-tests.js',
+    '/js/lipa-parent-dashboard.js',
+    '/css/brain-parent-dashboard.css',
+    '/css/curriculum.css',
+    '/neon-silabas.html',
+    '/neon-palabra.html',
+    '/neon-lectura.html',
+    '/neon-frase.html',
+    '/js/lipa-lengua-bank.js',
+    '/js/neon-lengua.js',
+    '/js/lipa-routine-flow.js',
+    '/neon-vida.html',
+    '/neon-cuerpo.html',
+    '/neon-planeta.html',
+    '/neon-entorno.html',
+    '/neon-mapa.html',
+    '/neon-historia.html',
+    '/js/lipa-naturales-bank.js',
+    '/js/lipa-sociales-bank.js',
+    '/js/neon-naturales.js',
+    '/js/neon-sociales.js',
+    '/neon-peques.html',
+    '/neon-colores.html',
+    '/neon-numeros.html',
+    '/js/lipa-peques-bank.js',
+    '/js/neon-peques.js',
+    '/mi-rutina-cerebro.html',
+    '/mi-evolucion.html',
+    '/entrenador-cerebro.html',
+    '/neon-calculo.html',
+    '/tablas-relampago.html',
+    '/neon-palabras.html',
+    '/js/lipa-vocab-bank.js',
+    '/js/neon-palabras.js',
+    '/test-reflejos.html',
     '/about.html',
     '/help.html',
-    '/news.html',
-    '/contact.html',
     '/blog.html',
-    '/juegos-de-reflejos.html',
-    '/moviles-gaming-baratos.html',
     '/entrenador-reflejos.html',
-    '/css/style.css',
-    '/js/analytics.js',
-    '/js/ads-manager.js',
+    '/css/lipa-ui.css',
+    '/css/brain-gym.css',
+    '/css/brain-design-system.css',
+    '/js/lipa-mascot.js',
+    '/js/lipa-game-feedback.js',
+    '/js/lipa-home-dashboard.js',
+    '/js/lipa-game-hint.js',
+    '/js/lipa-curriculum-session.js',
+    '/js/lipa-home-lipi.js',
+    '/js/lipa-routine-subjects.js',
+    '/js/lipa-curriculum-meta.js',
+    '/js/lipa-curriculum-build.js',
+    '/js/lipa-curriculum-data.js',
+    '/assets/lipi.svg',
+    '/js/lipa-brain-profiles.js',
+    '/js/lipa-profile-switcher.js',
+    '/css/brain-profiles.css',
+    '/neon-ordenar.html',
+    '/neon-mayor-menor.html',
+    '/js/neon-ordenar.js',
+    '/js/neon-mayor-menor.js',
+    '/neon-clasifica.html',
+    '/js/neon-clasifica.js',
+    '/css/brain-evolution.css',
+    '/css/mini-games.css',
+    '/js/lipa-daily.js',
+    '/js/lipa-brain-catalog.js',
+    '/js/lipa-brain-core.js',
+    '/js/lipa-pwa.js',
+    '/js/lipa-home-brain.js',
+    '/js/lipa-brain-onboarding.js',
+    '/css/brain-onboarding.css',
+    '/stack-tower.html',
     '/manifest.json',
     'https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap'
 ];
@@ -141,30 +220,45 @@ function handleAdRequest(request) {
         });
 }
 
-// Static resources - cache first with network fallback
+// Static resources — HTML: network first; assets: cache first
 function handleStaticResource(request) {
+    var isHtml = request.destination === 'document' ||
+        request.url.endsWith('.html') ||
+        request.url.endsWith('/');
+
+    if (isHtml) {
+        return fetch(request)
+            .then(function (networkResponse) {
+                if (networkResponse.ok) {
+                    var clone = networkResponse.clone();
+                    caches.open(CACHE_NAME).then(function (cache) {
+                        cache.put(request, clone);
+                    });
+                }
+                return networkResponse;
+            })
+            .catch(function () {
+                return caches.match(request).then(function (cached) {
+                    return cached || createOfflineGameResponse();
+                });
+            });
+    }
+
     return caches.match(request)
-        .then((cachedResponse) => {
+        .then(function (cachedResponse) {
             if (cachedResponse) {
                 return cachedResponse;
             }
-            
-            // Not in cache, fetch from network
             return fetch(request)
-                .then((networkResponse) => {
-                    // Cache successful responses
+                .then(function (networkResponse) {
                     if (networkResponse.ok) {
-                        const responseClone = networkResponse.clone();
+                        var responseClone = networkResponse.clone();
                         caches.open(CACHE_NAME)
-                            .then((cache) => cache.put(request, responseClone));
+                            .then(function (cache) { cache.put(request, responseClone); });
                     }
                     return networkResponse;
                 })
-                .catch(() => {
-                    // Offline and not cached - return offline page
-                    if (request.destination === 'document') {
-                        return createOfflineGameResponse();
-                    }
+                .catch(function () {
                     throw new Error('Resource not available offline');
                 });
         });
