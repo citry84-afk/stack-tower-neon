@@ -58,6 +58,11 @@
 
   var ROT_MATES = ['neon-calculo', 'neon-ordenar', 'neon-mayor-menor', 'neon-clasifica'];
   var ROT_INGLES = ['neon-palabras', 'flash-tap'];
+  var ROT_INFANTIL = ['neon-peques', 'neon-colores', 'neon-numeros', 'flash-tap'];
+  var ROT_INFANTIL_EN = ['neon-peques', 'neon-colores', 'flash-tap'];
+  var ROT_NATURALES = ['neon-vida', 'neon-cuerpo', 'neon-planeta'];
+  var ROT_SOCIALES = ['neon-mapa', 'neon-entorno', 'neon-historia'];
+  var ROT_LENGUA = ['neon-lectura', 'neon-silabas', 'neon-palabra', 'neon-frase'];
 
   function rot(pool, slot) {
     return pool[((slot % pool.length) + pool.length) % pool.length];
@@ -69,6 +74,23 @@
 
   function liveIngles(id, title, slot, difficulty, brainLevel, tip) {
     return liveGame(id, title, rot(ROT_INGLES, slot), difficulty, brainLevel, tip || 'Inglés');
+  }
+
+  function liveInfantil(id, title, slot, difficulty, tip, brainLevel) {
+    var a = livePeques(id, title, rot(ROT_INFANTIL, slot), difficulty, tip, brainLevel);
+    return a;
+  }
+
+  function liveLenguaRot(id, title, slot, difficulty, tip, brainLevel) {
+    return liveLengua(id, title, rot(ROT_LENGUA, slot), difficulty, tip, brainLevel);
+  }
+
+  function liveNaturalesRot(id, title, slot, difficulty, tip, brainLevel) {
+    return liveNaturales(id, title, rot(ROT_NATURALES, slot), difficulty, tip, brainLevel);
+  }
+
+  function liveSocialesRot(id, title, slot, difficulty, tip, brainLevel) {
+    return liveSociales(id, title, rot(ROT_SOCIALES, slot), difficulty, tip, brainLevel);
   }
 
   function primaria4Naturales() {
@@ -181,34 +203,35 @@
 
   function infantilSubjects(id, tier) {
     var bl = tier === 0 ? 1 : tier === 1 ? 3 : 5;
+    var extraLive = tier >= 1;
     return [
       subject('matematicas', [
         unit(id + '-m-colores', 'Colores y números', 'Juegos grandes con pictogramas.', [
-          livePeques(id + '-m-c1', '¿Qué color?', 'neon-colores', 1, 'Toca el color', bl),
-          livePeques(id + '-m-c2', '¿Cuántos hay?', 'neon-numeros', 1, 'Cuenta hasta 5', bl),
-          soon(id + '-m-c3', 'Grande o pequeño', 'multiple-choice', 2),
+          liveInfantil(id + '-m-c1', '¿Qué color?', 0, 1, 'Toca el color', bl),
+          liveInfantil(id + '-m-c2', '¿Cuántos hay?', 1, 1, 'Cuenta hasta 5', bl),
+          extraLive ? liveInfantil(id + '-m-c3', 'Toca rápido', 3, 2, 'Atención', bl) : soon(id + '-m-c3', 'Grande o pequeño', 'multiple-choice', 2),
           soon(id + '-m-c4', 'Formas', 'matching', 2),
           soon(id + '-m-c5', 'Reto visual', 'quiz', 3)
         ]),
         unit(id + '-m-formas', 'Formas y clasificar', 'Agrupar y reconocer.', [
-          livePeques(id + '-m-f1', '¿Qué es?', 'neon-peques', 1, 'Vocabulario visual', bl),
-          livePeques(id + '-m-f2', 'Colores mix', 'neon-colores', 2, 'Repaso', bl),
-          soon(id + '-m-f3', 'Igual o diferente', 'matching', 2),
+          liveInfantil(id + '-m-f1', '¿Qué es?', 2, 1, 'Vocabulario visual', bl),
+          liveInfantil(id + '-m-f2', 'Colores mix', 0, 2, 'Repaso', bl),
+          extraLive ? liveInfantil(id + '-m-f3', 'Cuenta y toca', 1, 2, 'Números', bl) : soon(id + '-m-f3', 'Igual o diferente', 'matching', 2),
           soon(id + '-m-f4', 'Seriaciones', 'ordering', 3),
           soon(id + '-m-f5', 'Misión formas', 'quiz', 4)
         ])
       ], 'live'),
       subject('lenguaje', [
         unit(id + '-l-vocab', 'Vocabulario', 'Palabras del día a día con dibujos.', [
-          livePeques(id + '-l-v1', 'Nombres', 'neon-peques', 1, 'Toca la palabra', bl),
-          livePeques(id + '-l-v2', '¿Qué es esto?', 'neon-peques', 2, 'Imagen y palabra', bl),
-          soon(id + '-l-v3', 'Rimas', 'listening', 2),
+          liveInfantil(id + '-l-v1', 'Nombres', 0, 1, 'Toca la palabra', bl),
+          liveInfantil(id + '-l-v2', '¿Qué es esto?', 1, 2, 'Imagen y palabra', bl),
+          extraLive ? liveInfantil(id + '-l-v3', 'Colores y palabras', 0, 2, 'Repaso', bl) : soon(id + '-l-v3', 'Rimas', 'listening', 2),
           soon(id + '-l-v4', 'Sonidos iniciales', 'matching', 3),
           soon(id + '-l-v5', 'Cuento corto', 'reading', 4)
         ]),
         unit(id + '-l-sonidos', 'Sonidos', 'Conciencia fonológica suave.', [
-          livePeques(id + '-l-s1', 'Palabras', 'neon-peques', 1, 'Escucha con los ojos', bl),
-          soon(id + '-l-s2', 'Sílabas con palmas', 'listening', 2),
+          liveInfantil(id + '-l-s1', 'Palabras', 2, 1, 'Escucha con los ojos', bl),
+          extraLive ? liveInfantil(id + '-l-s2', 'Cuenta sonidos', 1, 2, 'Números', bl) : soon(id + '-l-s2', 'Sílabas con palmas', 'listening', 2),
           soon(id + '-l-s3', 'Empieza por…', 'multiple-choice', 2),
           soon(id + '-l-s4', 'Canción', 'listening', 3),
           soon(id + '-l-s5', 'Reto sonidos', 'quiz', 4)
@@ -216,27 +239,27 @@
       ], 'live'),
       subject('ingles', [
         unit(id + '-i-hola', 'Hello', 'Primeras palabras en inglés.', [
-          livePeques(id + '-i-h1', 'Animals EN', 'neon-peques', 1, 'Dog, cat…', bl),
-          soon(id + '-i-h2', 'Colours EN', 'listening', 2),
-          soon(id + '-i-h3', 'Hello song', 'listening', 2),
+          liveInfantil(id + '-i-h1', 'Animals EN', 0, 1, 'Dog, cat…', bl),
+          liveInfantil(id + '-i-h2', 'Colours EN', 1, 2, 'Red, blue…', bl),
+          extraLive ? liveReflex(id + '-i-h3', 'Point and tap', 'flash-tap', 2) : soon(id + '-i-h3', 'Hello song', 'listening', 2),
           soon(id + '-i-h4', 'Point and say', 'mini-game', 3),
           soon(id + '-i-h5', 'Mini quiz', 'quiz', 4)
         ])
       ], 'live'),
       subject('naturales', [
         unit(id + '-n-animales', 'Animales y plantas', 'Explorar el entorno.', [
-          livePeques(id + '-n-a1', 'Animal o cosa', 'neon-peques', 1, 'Seres vivos', bl),
-          livePeques(id + '-n-a2', 'Colores naturaleza', 'neon-colores', 2, 'Planta, sol…', bl),
-          soon(id + '-n-a3', 'Partes de la planta', 'matching', 2),
+          liveInfantil(id + '-n-a1', 'Animal o cosa', 0, 1, 'Seres vivos', bl),
+          liveInfantil(id + '-n-a2', 'Colores naturaleza', 1, 2, 'Planta, sol…', bl),
+          extraLive ? liveInfantil(id + '-n-a3', '¿Cuántos?', 2, 2, 'Contar', bl) : soon(id + '-n-a3', 'Partes de la planta', 'matching', 2),
           soon(id + '-n-a4', 'Estaciones', 'ordering', 3),
           soon(id + '-n-a5', 'Reto naturaleza', 'quiz', 4)
         ])
       ], 'live'),
       subject('sociales', [
         unit(id + '-s-emos', 'Emociones y normas', 'Convivir en el aula.', [
-          livePeques(id + '-s-e1', 'Familia', 'neon-peques', 1, 'Mamá, papá…', bl),
-          livePeques(id + '-s-e2', 'En el cole', 'neon-peques', 2, 'Colegio, amigos', bl),
-          soon(id + '-s-e3', 'Caras felices', 'matching', 2),
+          liveInfantil(id + '-s-e1', 'Familia', 0, 1, 'Mamá, papá…', bl),
+          liveInfantil(id + '-s-e2', 'En el cole', 1, 2, 'Colegio, amigos', bl),
+          extraLive ? liveInfantil(id + '-s-e3', 'Turnos y colores', 2, 2, 'Convivencia', bl) : soon(id + '-s-e3', 'Caras felices', 'matching', 2),
           soon(id + '-s-e4', 'Turnos', 'ordering', 2),
           soon(id + '-s-e5', 'Misión emociones', 'quiz', 4)
         ])
@@ -244,8 +267,8 @@
       subject('brain-gym-diario', [
         unit(id + '-d1', 'Atención visual', 'Juegos cortos para peques.', [
           liveReflex(id + '-d-f', 'Flash tap suave', 'flash-tap', 1),
-          livePeques(id + '-d-p', 'Neon Peques', 'neon-peques', 1, 'Calentamiento', bl),
-          livePeques(id + '-d-n', 'Cuenta rápido', 'neon-numeros', 1, '1 min', bl)
+          liveInfantil(id + '-d-p', 'Neon Peques', 0, 1, 'Calentamiento', bl),
+          liveInfantil(id + '-d-n', 'Cuenta rápido', 2, 1, '1 min', bl)
         ])
       ], 'live')
     ];
@@ -630,15 +653,15 @@
     return [
       unit('p3-m-mult', 'Multiplicación con llevadas', 'Tablas y productos.', [
         liveGame('p3-m-m1', 'Tablas 2–5', 'tablas-relampago', 1, 3),
-        liveGame('p3-m-m2', 'Tablas 6–9', 'tablas-relampago', 2, 4),
+        liveMates('p3-m-m2', 'Mental × tablas', 1, 2, 4),
         liveGame('p3-m-m3', 'Mix tablas', 'tablas-relampago', 3, 4),
         liveMates('p3-m-m4', 'Cálculo avanzado', 3, 3, 4),
         soon('p3-m-m5', 'Problemas de grupos', 'quiz', 5)
       ]),
       unit('p3-m-div', 'División sencilla', 'Repartir y agrupar.', [
         liveGame('p3-m-d1', 'Tablas para dividir', 'tablas-relampago', 1, 3),
-        soon('p3-m-d2', 'Reparto visual', 'drag-drop', 2),
-        liveGame('p3-m-d3', 'Operaciones mixtas', 'neon-calculo', 3, 4),
+        liveMates('p3-m-d2', 'Reparto mental', 2, 2, 3),
+        liveMates('p3-m-d3', 'Operaciones mixtas', 0, 3, 4),
         soon('p3-m-d4', 'Problemas dos pasos', 'multiple-choice', 4),
         soon('p3-m-d5', 'Misión división', 'quiz', 5)
       ]),
@@ -659,7 +682,7 @@
       unit('p3-m-problemas', 'Problemas de dos pasos', 'Planificar antes de calcular.', [
         liveMates('p3-m-p1', 'Calentamiento', 0, 1, 3),
         liveMates('p3-m-p2', 'Dos operaciones', 1, 3, 4),
-        liveGame('p3-m-p3', 'Tablas en problemas', 'tablas-relampago', 3, 4),
+        liveGame('p3-m-p3', 'Tablas en problemas', 'tablas-relampago', 2, 4),
         soon('p3-m-p4', 'Elige el plan', 'multiple-choice', 4),
         soon('p3-m-p5', 'Misión detective', 'quiz', 5)
       ])
@@ -676,9 +699,9 @@
         soon('p3-l-t5', 'Misión redactor', 'quiz', 5)
       ]),
       unit('p3-l-ortografia', 'b/v, g/j, r/rr', 'Reglas frecuentes en 3º.', [
-        liveLengua('p3-l-o1', 'Completa la palabra', 'neon-palabra', 2, 'Sílabas trabadas', 8),
-        liveLengua('p3-l-o2', 'Ordena sílabas', 'neon-silabas', 3, 'Palabras largas', 8),
-        soon('p3-l-o3', 'r o rr', 'multiple-choice', 3),
+        liveLenguaRot('p3-l-o1', 'Completa la palabra', 2, 2, 'Sílabas trabadas', 8),
+        liveLenguaRot('p3-l-o2', 'Ordena sílabas', 1, 3, 'Palabras largas', 8),
+        liveLenguaRot('p3-l-o3', 'Lee y corrige', 0, 3, 'Comprensión', 8),
         soon('p3-l-o4', 'Dictado', 'listening', 4),
         soon('p3-l-o5', 'Reto ortografía', 'quiz', 5)
       ]),
@@ -696,21 +719,21 @@
     return [
       unit('p3-i-present', 'Present simple', 'Rutinas y hechos.', [
         liveIngles('p3-i-p1', 'Daily routines', 0, 1, 3),
-        soon('p3-i-p2', 'He / she + verb', 'multiple-choice', 2),
+        liveIngles('p3-i-p2', 'School words', 1, 2, 3),
         soon('p3-i-p3', 'Fill the gap', 'typing', 3),
         soon('p3-i-p4', 'Listening routines', 'listening', 3),
         soon('p3-i-p5', 'Grammar quiz', 'quiz', 5)
       ]),
       unit('p3-i-can', 'Can / can\'t y there is/are', 'Habilidad y descripción.', [
         liveIngles('p3-i-c1', 'Places vocab', 0, 2, 3),
-        soon('p3-i-c2', 'Can you…?', 'roleplay', 2),
+        liveIngles('p3-i-c2', 'Listen & tap', 1, 2, 3),
         soon('p3-i-c3', 'There is / are', 'multiple-choice', 3),
         soon('p3-i-c4', 'Describe a room', 'typing', 3),
         soon('p3-i-c5', 'City mission', 'quiz', 4)
       ]),
       unit('p3-i-listen', 'Listening instrucciones', 'Seguir órdenes en inglés.', [
         liveReflex('p3-i-l1', 'Listen & tap', 'flash-tap', 1),
-        liveIngles('p3-i-l2', 'School objects', 1, 2, 3),
+        liveIngles('p3-i-l2', 'School objects', 0, 2, 3),
         soon('p3-i-l3', 'Follow directions', 'listening', 3),
         soon('p3-i-l4', 'Classroom game', 'mini-game', 3),
         soon('p3-i-l5', 'Listening test', 'quiz', 5)
@@ -721,25 +744,25 @@
   function primaria3Naturales() {
     return [
       unit('p3-n-vida', 'Seres vivos', 'Ecosistemas y cadenas alimenticias.', [
-        liveNaturales('p3-n-v1', 'Ecosistema', 'neon-cuerpo', 2, 'Comprensión', 8),
-        liveNaturales('p3-n-v2', 'Clasifica', 'neon-vida', 3, 'Materiales e imanes', 8),
-        liveNaturales('p3-n-v3', 'Cadena alimenticia', 'neon-vida', 3, 'Clasifica', 8, 'Cadena alimenticia', 'ordering', 3),
-        liveNaturales('p3-n-v4', 'Adaptaciones', 'neon-cuerpo', 3, 'Lee', 8, 'Adaptaciones', 'matching', 4),
-        liveNaturales('p3-n-v5', 'Reto biología', 'neon-planeta', 4, 'V o F', 8, 'Reto biología', 'quiz', 5)
+        liveNaturalesRot('p3-n-v1', 'Ecosistema', 1, 2, 'Comprensión', 8),
+        liveNaturalesRot('p3-n-v2', 'Clasifica', 0, 3, 'Seres vivos', 8),
+        liveNaturalesRot('p3-n-v3', 'Cadena alimenticia', 0, 3, 'Clasifica', 8),
+        liveNaturalesRot('p3-n-v4', 'Adaptaciones', 2, 3, 'Verdadero o falso', 8),
+        liveNaturalesRot('p3-n-v5', 'Reto biología', 2, 4, 'Ciencia', 9)
       ]),
       unit('p3-n-cuerpo', 'Cuerpo y salud', 'Sistemas del cuerpo humano.', [
-        liveNaturales('p3-n-c1', 'Cuerpo humano', 'neon-cuerpo', 2, 'Preguntas', 8),
-        liveNaturales('p3-n-c2', 'Verdadero o falso', 'neon-planeta', 2, 'Ciencia', 8),
-        liveNaturales('p3-n-c3', 'Sistema digestivo', 'neon-cuerpo', 3, 'Cuerpo', 8, 'Sistema digestivo', 'matching', 3),
-        liveNaturales('p3-n-c4', 'Hábitos sanos', 'neon-planeta', 2, 'Salud', 8, 'Hábitos sanos', 'drag-drop', 2),
-        liveNaturales('p3-n-c5', 'Misión salud', 'neon-vida', 4, 'Clasifica', 8, 'Misión salud', 'quiz', 4)
+        liveNaturalesRot('p3-n-c1', 'Cuerpo humano', 1, 2, 'Preguntas', 8),
+        liveNaturalesRot('p3-n-c2', 'Verdadero o falso', 2, 2, 'Ciencia', 8),
+        liveNaturalesRot('p3-n-c3', 'Sistema digestivo', 1, 3, 'Cuerpo', 8),
+        liveNaturalesRot('p3-n-c4', 'Hábitos sanos', 2, 2, 'Salud', 8),
+        liveNaturalesRot('p3-n-c5', 'Misión salud', 0, 4, 'Clasifica', 9)
       ]),
       unit('p3-n-materia', 'Materia y energía', 'Estados, electricidad y fósiles.', [
-        liveNaturales('p3-n-m1', 'Estados del agua', 'neon-planeta', 2, 'V o F', 8),
-        liveNaturales('p3-n-m2', 'Plantas y oxígeno', 'neon-cuerpo', 3, 'Lee', 8),
-        liveNaturales('p3-n-m3', 'Circuito simple', 'neon-planeta', 3, 'Energía', 8, 'Circuito simple', 'mini-game', 4),
-        liveNaturales('p3-n-m4', 'Energías', 'neon-vida', 3, 'Materia', 8, 'Energías', 'matching', 3),
-        liveNaturales('p3-n-m5', 'Reto física', 'neon-cuerpo', 4, 'Ciencia', 8, 'Reto física', 'quiz', 5)
+        liveNaturalesRot('p3-n-m1', 'Estados del agua', 2, 2, 'V o F', 8),
+        liveNaturalesRot('p3-n-m2', 'Plantas y oxígeno', 1, 3, 'Lee', 8),
+        liveNaturalesRot('p3-n-m3', 'Materia y energía', 0, 3, 'Clasifica', 8),
+        liveNaturalesRot('p3-n-m4', 'Energías', 2, 3, 'Verdadero o falso', 8),
+        liveNaturalesRot('p3-n-m5', 'Reto física', 1, 4, 'Ciencia', 9)
       ])
     ];
   }
@@ -747,25 +770,25 @@
   function primaria3Sociales() {
     return [
       unit('p3-s-entorno', 'Mi entorno', 'Constitución y derechos.', [
-        liveSociales('p3-s-e1', 'Constitución', 'neon-entorno', 2, 'Lee', 8),
-        liveSociales('p3-s-e2', 'Ordena el texto', 'neon-historia', 2, 'Historia', 8),
-        liveSociales('p3-s-e3', 'Derechos', 'neon-entorno', 3, 'Constitución', 8, 'Derechos', 'matching', 3),
-        liveSociales('p3-s-e4', 'Debate corto', 'neon-entorno', 3, 'Convivencia', 8, 'Debate corto', 'roleplay', 4),
-        liveSociales('p3-s-e5', 'Misión ciudadana', 'neon-historia', 4, 'Ordena', 8, 'Misión ciudadana', 'quiz', 5)
+        liveSocialesRot('p3-s-e1', 'Constitución', 1, 2, 'Lee', 8),
+        liveSocialesRot('p3-s-e2', 'Ordena el texto', 2, 2, 'Historia', 8),
+        liveSocialesRot('p3-s-e3', 'Derechos', 0, 3, 'Mapas y leyes', 8),
+        liveSocialesRot('p3-s-e4', 'Debate corto', 1, 3, 'Convivencia', 8),
+        liveSocialesRot('p3-s-e5', 'Misión ciudadana', 2, 4, 'Ordena', 9)
       ]),
       unit('p3-s-mapas', 'Mapas y paisaje', 'Península y clima.', [
-        liveSociales('p3-s-m1', 'Península Ibérica', 'neon-mapa', 2, 'Mapas', 8),
-        liveSociales('p3-s-m2', 'Clima y relieve', 'neon-entorno', 3, 'Lee y responde', 8),
-        liveSociales('p3-s-m3', 'Climas de España', 'neon-entorno', 3, 'Lee y responde', 8),
-        liveSociales('p3-s-m4', 'Escala del mapa', 'neon-historia', 4, 'Ordena', 8),
-        liveSociales('p3-s-m5', 'Reto mapas', 'neon-mapa', 4, 'España', 9)
+        liveSocialesRot('p3-s-m1', 'Península Ibérica', 0, 2, 'Mapas', 8),
+        liveSocialesRot('p3-s-m2', 'Clima y relieve', 1, 3, 'Lee y responde', 8),
+        liveSocialesRot('p3-s-m3', 'Climas de España', 2, 3, 'Ordena', 8),
+        liveSocialesRot('p3-s-m4', 'Escala del mapa', 0, 4, 'Geografía', 9),
+        liveSocialesRot('p3-s-m5', 'Reto mapas', 1, 4, 'España', 9)
       ]),
       unit('p3-s-historia', 'Historia cercana', 'Edad Media y Roma.', [
-        liveSociales('p3-s-h1', 'Ordena: Roma', 'neon-historia', 2, 'Palabras', 8),
-        liveSociales('p3-s-h2', 'Edad Media', 'neon-entorno', 3, 'Preguntas', 8),
-        liveSociales('p3-s-h3', 'Castillos', 'neon-historia', 3, 'Edad Media', 8, 'Castillos', 'matching', 3),
-        liveSociales('p3-s-h4', 'Línea del tiempo', 'neon-historia', 4, 'Ordena', 8, 'Línea del tiempo', 'ordering', 4),
-        liveSociales('p3-s-h5', 'Misión histórica', 'neon-entorno', 4, 'Historia', 8, 'Misión histórica', 'quiz', 5)
+        liveSocialesRot('p3-s-h1', 'Ordena: Roma', 2, 2, 'Palabras', 8),
+        liveSocialesRot('p3-s-h2', 'Edad Media', 1, 3, 'Preguntas', 8),
+        liveSocialesRot('p3-s-h3', 'Castillos', 0, 3, 'Mapas', 8),
+        liveSocialesRot('p3-s-h4', 'Línea del tiempo', 2, 4, 'Ordena', 9),
+        liveSocialesRot('p3-s-h5', 'Misión histórica', 1, 4, 'Historia', 9)
       ])
     ];
   }
@@ -893,7 +916,7 @@
       unit('eso1-i-tenses', 'Tiempos verbales', 'Present, past y vocabulario de ESO.', [
         liveIngles('eso1-i-t1', 'Vocabulario base', 0, 2, 8, 'Palabras frecuentes'),
         liveIngles('eso1-i-t2', 'Daily routines', 1, 3, 9, 'Present simple'),
-        liveGame('eso1-i-t3', 'Listening tap', 'flash-tap', 2, null, 'Atención auditiva'),
+        liveIngles('eso1-i-t3', 'Listening words', 0, 2, 9, 'Vocabulario'),
         soon('eso1-i-t4', 'Past simple gap', 'typing', 3),
         soon('eso1-i-t5', 'Grammar quiz', 'quiz', 5)
       ]),
@@ -1040,14 +1063,14 @@
   function eso2Math() {
     return [
       unit('eso2-m-ecuaciones', 'Ecuaciones', 'Primer grado y proporcionalidad.', [
-        liveGame('eso2-m-e1', 'Cálculo intenso', 'neon-calculo', 3, 10, 'Operaciones'),
+        liveMates('eso2-m-e1', 'Cálculo intenso', 0, 3, 10, 'Operaciones'),
         liveGame('eso2-m-e2', 'Tablas 2–12', 'tablas-relampago', 3, 10, 'Productos'),
         liveGame('eso2-m-e3', 'Grid reflejos', 'grid-reflex', 2, null, 'Atención'),
         soon('eso2-m-e4', 'Ecuación x', 'multiple-choice', 4),
         soon('eso2-m-e5', 'Proporcionalidad', 'quiz', 5)
       ]),
       unit('eso2-m-proporc', 'Proporcionalidad', 'Regla de tres y porcentajes.', [
-        liveGame('eso2-m-p1', 'Mix avanzado', 'neon-calculo', 3, 11),
+        liveMates('eso2-m-p1', 'Mix avanzado', 1, 3, 11),
         liveGame('eso2-m-p2', 'Tablas combo', 'tablas-relampago', 3, 11),
         liveGame('eso2-m-p3', 'Stack Tower', 'stack-tower', 2, null, 'Precisión'),
         soon('eso2-m-p4', 'Gráficas', 'mini-game', 4),
@@ -1114,10 +1137,6 @@
     );
   }
 
-  var ROT_NATURALES = ['neon-vida', 'neon-cuerpo', 'neon-planeta'];
-  var ROT_SOCIALES = ['neon-mapa', 'neon-entorno', 'neon-historia'];
-  var ROT_LENGUA = ['neon-lectura', 'neon-silabas', 'neon-palabra', 'neon-frase'];
-
   function gameForSoonBase(subjectId, type, course) {
     var infantil = course.stage === 'infantil';
     var byType = {
@@ -1126,7 +1145,7 @@
         ? 'neon-clasifica'
         : (infantil ? 'neon-peques' : 'neon-silabas'),
       'multiple-choice': subjectId === 'matematicas' ? 'neon-mayor-menor' : (infantil ? 'neon-peques' : 'neon-lectura'),
-      quiz: infantil ? 'neon-numeros' : 'neon-calculo',
+      quiz: infantil ? 'neon-numeros' : (subjectId === 'ingles' ? 'neon-palabras' : 'neon-calculo'),
       listening: 'neon-palabras',
       'drag-drop': infantil ? 'neon-colores' : 'neon-vida',
       'mini-game': 'flash-tap',
@@ -1153,7 +1172,7 @@
     var base = gameForSoonBase(subjectId, type, course);
     var extras = [];
     if (infantil) {
-      extras = ['neon-peques', 'neon-colores', 'neon-numeros', 'neon-palabras'];
+      extras = subjectId === 'ingles' ? ROT_INFANTIL_EN : ROT_INFANTIL;
     } else if (subjectId === 'naturales') {
       extras = ROT_NATURALES;
     } else if (subjectId === 'sociales') {
@@ -1163,7 +1182,7 @@
     } else if (subjectId === 'lenguaje') {
       extras = ROT_LENGUA;
     } else if (subjectId === 'ingles') {
-      extras = ['neon-palabras'];
+      extras = ROT_INGLES.concat(['neon-ordenar']);
     } else if (subjectId === 'brain-gym-diario') {
       extras = ['flash-tap', 'reaction-test', 'grid-reflex'];
     }
@@ -1175,9 +1194,15 @@
   }
 
   function gameForSoon(subjectId, type, course, slotIndex) {
+    if (type === 'mini-game') return 'flash-tap';
+    var base = gameForSoonBase(subjectId, type, course);
     var pool = gamesPoolFor(subjectId, type, course);
+    var alts = pool.filter(function (g) {
+      return g !== base;
+    });
     var i = typeof slotIndex === 'number' ? slotIndex : 0;
-    return pool[i % pool.length];
+    if (i === 0 || !alts.length) return base;
+    return alts[(i - 1) % alts.length];
   }
 
   function promoteSoonActivities(courses) {
@@ -1191,8 +1216,8 @@
             var cap = full ? 99 : (course.stage === 'eso' ? 2 : 4);
             var limited = soonIdx >= cap;
             if (limited) return;
-            soonIdx++;
             var gameId = gameForSoon(block.subjectId, act.type, course, soonIdx);
+            soonIdx++;
             var diff = act.difficulty || 1;
             act.status = 'live';
             act.type = 'mini-game';
