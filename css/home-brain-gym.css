@@ -1,0 +1,232 @@
+/**
+ * Home Brain Gym — bloques de la auditoría (cómo funciona, padres, recreo)
+ */
+.home-como-funciona {
+  max-width: var(--lipa-max-wide, 1100px);
+  margin: 0 auto 2rem;
+  padding: 0 1.5rem;
+  text-align: center;
+}
+
+.home-como-funciona__title {
+  font-family: var(--lipa-font-display, 'Nunito', sans-serif);
+  font-size: clamp(1.35rem, 3.5vw, 1.75rem);
+  margin: 0 0 1.25rem;
+  color: var(--lipa-text, #1e1b4b);
+}
+
+.home-como-funciona__steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.home-como-funciona__step {
+  padding: 1rem 0.85rem;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 2px solid rgba(124, 58, 237, 0.12);
+  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.08);
+}
+
+.home-como-funciona__n {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #7c3aed, #2ed3a6);
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+}
+
+.home-como-funciona__step strong {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 1rem;
+}
+
+.home-como-funciona__step span {
+  font-size: 13px;
+  color: var(--lipa-text-secondary, #64748b);
+  line-height: 1.4;
+}
+
+.home-cursos-cta {
+  max-width: var(--lipa-max-wide, 1100px);
+  margin: 0 auto 2rem;
+  padding: 1.25rem 1.5rem;
+  border-radius: 20px;
+  background: linear-gradient(145deg, rgba(46, 184, 154, 0.12), rgba(124, 58, 237, 0.1));
+  border: 2px solid rgba(46, 184, 154, 0.25);
+  text-align: center;
+}
+
+.home-cursos-cta h2 {
+  font-family: var(--lipa-font-display, 'Nunito', sans-serif);
+  margin: 0 0 0.35rem;
+  font-size: 1.35rem;
+}
+
+.home-cursos-cta p {
+  margin: 0 0 1rem;
+  color: var(--lipa-text-secondary);
+  font-size: 15px;
+}
+
+.home-materias {
+  max-width: var(--lipa-max-wide, 1100px);
+  margin: 0 auto 2.5rem;
+  padding: 0 1.5rem;
+}
+
+.home-materias__head {
+  text-align: center;
+  margin-bottom: 1.25rem;
+}
+
+.home-materias__head h2 {
+  font-family: var(--lipa-font-display, 'Nunito', sans-serif);
+  margin: 0.25rem 0;
+}
+
+.home-materias__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr));
+  gap: 0.75rem;
+}
+
+.home-materia-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 1rem 0.65rem;
+  border-radius: 16px;
+  text-decoration: none !important;
+  color: inherit !important;
+  font-weight: 700;
+  font-size: 14px;
+  border: 2px solid transparent;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.home-materia-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.home-materia-card__emoji {
+  font-size: 1.75rem;
+}
+
+.home-materia-card--math { background: rgba(168, 85, 247, 0.12); border-color: rgba(168, 85, 247, 0.25); }
+.home-materia-card--lang { background: rgba(244, 114, 182, 0.12); border-color: rgba(244, 114, 182, 0.25); }
+.home-materia-card--en { background: rgba(56, 189, 248, 0.12); border-color: rgba(56, 189, 248, 0.25); }
+.home-materia-card--sci { background: rgba(74, 222, 128, 0.12); border-color: rgba(74, 222, 128, 0.25); }
+.home-materia-card--soc { background: rgba(251, 191, 36, 0.12); border-color: rgba(251, 191, 36, 0.3); }
+
+.home-padres-teaser {
+  max-width: 640px;
+  margin: 0 auto 2.5rem;
+  padding: 1.5rem;
+  border-radius: 20px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid rgba(46, 184, 154, 0.2);
+  box-shadow: 0 8px 28px rgba(46, 184, 154, 0.1);
+}
+
+.home-padres-teaser h2 {
+  font-family: var(--lipa-font-display, 'Nunito', sans-serif);
+  margin: 0.25rem 0 0.5rem;
+  font-size: 1.35rem;
+}
+
+.home-padres-teaser p {
+  margin: 0 0 1rem;
+  color: var(--lipa-text-secondary);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.home-recreo-neon {
+  max-width: var(--lipa-max-wide, 1100px);
+  margin: 0 auto 3rem;
+  padding: 1.5rem;
+  border-radius: 24px;
+  background: linear-gradient(165deg, #0a0a12 0%, #12122a 45%, #1a0a2e 100%);
+  border: 2px solid rgba(0, 255, 255, 0.2);
+  color: #e2e8f0;
+  text-align: center;
+}
+
+.home-recreo-neon__eyebrow {
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #67e8f9;
+  margin: 0 0 0.35rem;
+}
+
+.home-recreo-neon h2 {
+  font-family: var(--lipa-font-display, 'Orbitron', sans-serif);
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.25rem, 3vw, 1.6rem);
+  color: #f0fdfa;
+}
+
+.home-recreo-neon__lead {
+  margin: 0 auto 1.25rem;
+  max-width: 32rem;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #94a3b8;
+}
+
+.home-recreo-neon__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr));
+  gap: 0.65rem;
+  margin-bottom: 1.25rem;
+}
+
+.home-recreo-neon__game {
+  display: block;
+  padding: 0.85rem 0.5rem;
+  border-radius: 12px;
+  background: rgba(0, 255, 255, 0.06);
+  border: 1px solid rgba(0, 255, 255, 0.15);
+  color: #e2e8f0 !important;
+  text-decoration: none !important;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.home-recreo-neon__game:hover {
+  background: rgba(0, 255, 255, 0.12);
+  border-color: rgba(0, 255, 255, 0.35);
+}
+
+.home-recreo-neon__game span {
+  display: block;
+  font-size: 1.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.home-recreo-neon__note {
+  font-size: 13px;
+  color: #64748b;
+  margin: 0;
+}
+
+.home-recreo-neon__note a {
+  color: #67e8f9 !important;
+}

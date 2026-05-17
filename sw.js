@@ -3,7 +3,7 @@
  * PWA Optimization & Offline Functionality
  */
 
-const CACHE_NAME = 'lipa-brain-gym-v3.17.1-guided-work';
+const CACHE_NAME = 'lipa-brain-gym-v3.18.0-recreo-neon';
 const CACHE_VERSION = '2.0.0';
 
 // Essential files to cache for offline play
@@ -13,6 +13,8 @@ const STATIC_CACHE_URLS = [
     '/jugar.html',
     '/gym-cerebro.html',
     '/cursos.html',
+    '/recreo-neon.html',
+    '/css/home-brain-gym.css',
     '/retos-rapidos.html',
     '/reto-rapido.html',
     '/para-padres.html',
