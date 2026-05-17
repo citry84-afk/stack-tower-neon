@@ -18,7 +18,19 @@
 
   function mountContinue() {
     var continueEl = document.getElementById('brain-home-continue');
-    if (!continueEl || !global.LipaBrain) return;
+    if (!continueEl) return;
+
+    if (global.LipaGuidedPath) {
+      LipaGuidedPath.mountStrip(continueEl, { page: 'home' }, { compact: true });
+      LipaGuidedPath.wireStrip(continueEl);
+      continueEl.hidden = false;
+      return;
+    }
+
+    if (!global.LipaBrain) {
+      continueEl.hidden = true;
+      return;
+    }
 
     var profile = LipaBrain.getProfile();
     if (!profile || !profile.courseId || !global.LipaCurriculum) {

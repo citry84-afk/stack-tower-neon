@@ -3,7 +3,7 @@
  * PWA Optimization & Offline Functionality
  */
 
-const CACHE_NAME = 'lipa-brain-gym-v3.16.0-curriculum-infantil';
+const CACHE_NAME = 'lipa-brain-gym-v3.17.1-guided-work';
 const CACHE_VERSION = '2.0.0';
 
 // Essential files to cache for offline play
@@ -24,6 +24,11 @@ const STATIC_CACHE_URLS = [
     '/js/lipa-curriculum-data.js',
     '/js/lipa-curriculum.js',
     '/js/lipa-curriculum-page.js',
+    '/js/lipa-guided-path.js',
+    '/js/lipa-brain-profiles.js',
+    '/js/lipa-brain-core.js',
+    '/js/lipa-brain-onboarding.js',
+    '/css/lipa-guided-path.css',
     '/js/lipa-quick-tests-meta.js',
     '/js/lipa-quick-tests-data.js',
     '/js/lipa-quick-tests.js',

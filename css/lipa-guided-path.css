@@ -1,0 +1,141 @@
+/**
+ * Ruta guiada — CTA único hasta el trabajo del día
+ */
+.lipa-guided-strip {
+  display: grid;
+  gap: 0.85rem;
+  margin: 0 0 1.25rem;
+  padding: 1.1rem 1.15rem;
+  border-radius: 20px;
+  background: linear-gradient(145deg, rgba(124, 58, 237, 0.14) 0%, rgba(46, 184, 154, 0.1) 50%, rgba(255, 255, 255, 0.95) 100%);
+  border: 2px solid rgba(124, 58, 237, 0.22);
+  box-shadow: 0 8px 28px rgba(124, 58, 237, 0.12);
+}
+
+.lipa-guided-strip--compact {
+  padding: 0.9rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.lipa-guided-strip--compact .lipa-guided-strip__title {
+  display: none;
+}
+
+.lipa-guided-strip__steps {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.25rem;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.lipa-guided-strip__step {
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(124, 58, 237, 0.08);
+  color: var(--lipa-text-secondary, #64748b);
+}
+
+.lipa-guided-strip__step--done {
+  background: rgba(46, 184, 154, 0.15);
+  color: #0d5c4a;
+}
+
+.lipa-guided-strip__step--current {
+  background: rgba(124, 58, 237, 0.2);
+  color: #5b21b6;
+}
+
+.lipa-guided-strip__sep {
+  color: rgba(124, 58, 237, 0.45);
+  font-size: 10px;
+}
+
+.lipa-guided-strip__eyebrow {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #7c3aed;
+}
+
+.lipa-guided-strip__title {
+  margin: 0.15rem 0 0;
+  font-family: var(--lipa-font-display, 'Nunito', sans-serif);
+  font-size: clamp(1.15rem, 3vw, 1.45rem);
+  line-height: 1.25;
+  color: var(--lipa-text, #1e1b4b);
+}
+
+.lipa-guided-strip__sub {
+  margin: 0.35rem 0 0;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--lipa-text-secondary, #64748b);
+}
+
+.lipa-guided-strip__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.85rem;
+}
+
+.lipa-guided-strip__btn-primary {
+  flex: 1 1 12rem;
+  justify-content: center;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.lipa-guided-strip__btn-secondary {
+  flex: 1 1 10rem;
+  font-size: 0.9rem;
+}
+
+.curriculum-guided-mount {
+  max-width: var(--lipa-max-wide, 1100px);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.curriculum-picker-page .curriculum-guided-mount {
+  padding: 0;
+  margin-bottom: 0.5rem;
+}
+
+.curriculum-activity-card--next {
+  outline: 3px solid rgba(124, 58, 237, 0.55);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.12);
+}
+
+.curriculum-activity-card--next .curriculum-activity-card__cta {
+  color: #7c3aed;
+  font-weight: 800;
+}
+
+.curriculum-subject-card--next,
+.curriculum-unit-card--next {
+  outline: 3px solid rgba(124, 58, 237, 0.5);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.1);
+}
+
+.curriculum-subject-card--next .curriculum-meta-row__cta,
+.curriculum-unit-card--next h3 {
+  color: #7c3aed;
+}
+
+.site-nav__work {
+  font-weight: 800 !important;
+  color: #c4b5fd !important;
+}
+
+body.lipa-brain-soft .brain-home-continue .lipa-guided-strip {
+  margin: 0;
+}

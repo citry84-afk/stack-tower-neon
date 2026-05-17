@@ -138,7 +138,7 @@
     if (result.passed && next && next.type === 'activity' && next.href.indexOf(meta.ctx.activityId) < 0) {
       nextHtml =
         '<a href="' + esc(next.href) + '" class="lipa-btn lipa-btn--primary lipa-curriculum-complete__next">' +
-        'Siguiente: ' + esc(next.label) + ' →</a>';
+        '▶ Siguiente misión: ' + esc(next.label) + ' →</a>';
     }
 
     var pct = result.accuracy != null ? Math.round(result.accuracy * 100) : '—';
@@ -154,7 +154,7 @@
       '<div class="lipa-curriculum-complete__actions">' +
       nextHtml +
       '<a href="' + esc(unitUrl(meta.ctx)) + '" class="lipa-btn lipa-btn--secondary">Volver a la unidad</a>' +
-      '<a href="/curso.html?c=' + encodeURIComponent(meta.ctx.courseId) + '" class="lipa-btn lipa-btn--ghost">Ver curso</a>' +
+      '<a href="/curso.html?c=' + encodeURIComponent(meta.ctx.courseId) + '&empezar=1" class="lipa-btn lipa-btn--ghost">Rutina del curso</a>' +
       '</div>',
       'lipa-curriculum-complete--ok'
     );

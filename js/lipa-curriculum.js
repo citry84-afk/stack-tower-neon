@@ -605,35 +605,72 @@
     return 'Próximamente';
   }
 
-  /** Siguiente actividad live sin completar; si no hay, enlace al curso. */
-  function getContinueTarget(courseId) {
+  /**
+   * Primera actividad live sin completar (opcional: materia, unidad, después de activityId).
+   */
+  function findNextActivity(courseId, opts) {
+    opts = opts || {};
     var course = getCourse(courseId);
     if (!course) return null;
 
     var found = null;
+    var pastAnchor = !opts.afterActivityId;
+
     course.subjects.forEach(function (block) {
       if (found) return;
+      if (opts.subjectId && block.subjectId !== opts.subjectId) return;
       var sub = enrichSubject(course, block);
       if (sub.status === 'soon') return;
       sub.units.forEach(function (unit) {
         if (found) return;
+        if (opts.unitId && unit.id !== opts.unitId) return;
         unit.activities.forEach(function (act) {
           if (found) return;
+          if (opts.afterActivityId && act.id === opts.afterActivityId) {
+            pastAnchor = true;
+            return;
+          }
+          if (!pastAnchor && opts.afterActivityId) return;
           if (act.status !== 'live') return;
           if (isActivityComplete(act.id)) return;
           var url = activityUrl(course.id, sub.subjectId, unit.id, act);
           if (!url) return;
           found = {
+            courseId: course.id,
+            subjectId: sub.subjectId,
+            unitId: unit.id,
+            activityId: act.id,
+            url: url,
             href: url,
             label: act.title || unit.title,
             sublabel: sub.label + ' · ' + unit.title,
-            type: 'activity'
+            type: 'activity',
+            activity: act,
+            unit: unit,
+            subject: sub,
+            course: course
           };
         });
       });
     });
 
-    if (found) return found;
+    return found;
+  }
+
+  /** Siguiente actividad live sin completar; si no hay, enlace al curso. */
+  function getContinueTarget(courseId) {
+    var found = findNextActivity(courseId);
+    if (found) {
+      return {
+        href: found.href,
+        label: found.label,
+        sublabel: found.sublabel,
+        type: 'activity'
+      };
+    }
+
+    var course = getCourse(courseId);
+    if (!course) return null;
 
     var cp = courseProgress(course);
     return {
@@ -684,6 +721,7 @@
     courseGamesLabel: courseGamesLabel,
     subjectFooterLabel: subjectFooterLabel,
     getContinueTarget: getContinueTarget,
+    findNextActivity: findNextActivity,
     esc: esc,
     COURSES: COURSES
   };

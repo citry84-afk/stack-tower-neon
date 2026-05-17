@@ -43,6 +43,7 @@
     <link rel="stylesheet" href="/css/brain-design-system.css?v=2">
     <link rel="stylesheet" href="/css/brain-profiles.css">
     <link rel="stylesheet" href="/css/brain-onboarding.css">
+    <link rel="stylesheet" href="/css/lipa-guided-path.css?v=1">
     
     <!-- PWA and Mobile -->
     <meta name="theme-color" content="#2ed3a6">
@@ -491,13 +492,13 @@
     <script src="/js/site-nav.js" defer></script>
     <section class="landing-hero landing-hero--home landing-hero--brain-gym" aria-labelledby="hero-title">
         <p class="landing-hero__eyebrow">LIPA Brain Gym · por curso escolar</p>
-        <h1 id="hero-title" class="landing-hero__title">7 minutos al día para reforzar el cole jugando</h1>
+        <h1 id="hero-title" class="landing-hero__title">Un botón y empiezas el cole</h1>
         <div id="lipi-mascot-mount"></div>
         <p class="landing-hero__lead">
-            Rutina diaria con <strong>mates, lenguaje e inglés</strong> del currículo español. Sesiones cortas, progreso visible y sin sensación de deberes.
+            Eliges curso <strong>una vez</strong>. Lipi te guía misión a misión — mates, lenguaje e inglés — sin pensar en menús.
         </p>
         <p class="landing-hero__steps">
-            1. Elige curso · 2. Entrena 7 min · 3. Gana XP y racha
+            1. Curso · 2. Trabajo · 3. XP y racha
         </p>
         <div class="hero-chips" role="list">
             <span class="hero-chip hero-chip--accent" role="listitem">7 min recomendados</span>
@@ -506,8 +507,8 @@
             <span class="hero-chip hero-chip--brain" role="listitem"><a href="/mi-evolucion.html">📈 Mi evolución</a></span>
         </div>
         <div class="hero-actions">
-            <button type="button" id="hero-start-routine" class="btn-hero-primary btn-hero-primary--brain">Empezar entrenamiento de hoy</button>
-            <a href="/cursos.html" class="btn-hero-secondary">Elegir mi curso</a>
+            <button type="button" id="hero-start-routine" class="btn-hero-primary btn-hero-primary--brain">▶ Empezar mi trabajo</button>
+            <a href="/cursos.html?empezar=1" class="btn-hero-secondary">Configurar curso</a>
         </div>
     </section>
 
@@ -515,9 +516,9 @@
         <h2 id="entreno-hoy-title" class="home-entreno-hoy__title">Tu entreno de hoy</h2>
         <p id="brain-home-greet" class="home-entreno-hoy__greet"></p>
         <div id="brain-home-dash"></div>
-        <div id="lipa-routine-subjects-mount" data-lipa-routine-subjects="compact"></div>
-        <p class="home-entreno-hoy__lead">Elige materias con un toque — mates, inglés, naturales, sociales y más. <a href="/para-padres.html">Informe para padres →</a></p>
         <div id="brain-home-continue" class="brain-home-continue" hidden></div>
+        <p class="home-entreno-hoy__lead">Pulsa el botón morado: Lipi te lleva al siguiente juego. ¿Una materia concreta? Elígela abajo. <a href="/para-padres.html">Informe para padres →</a></p>
+        <div id="lipa-routine-subjects-mount" data-lipa-routine-subjects="compact"></div>
         <div id="lipa-brain-plan-mount"></div>
     </section>
 
@@ -781,13 +782,14 @@
   <script src="/js/lipa-brain-core.js"></script>
   <script src="/js/lipa-profile-switcher.js"></script>
   <script src="/js/lipa-routine-flow.js"></script>
+  <script src="/js/lipa-guided-path.js"></script>
   <script src="/js/lipa-brain-plan.js"></script>
   <script src="/js/lipa-brain-onboarding.js"></script>
   <script src="/js/lipa-mascot.js"></script>
   <script src="/js/lipa-routine-subjects.js"></script>
   <script src="/js/lipa-home-lipi.js"></script>
   <script src="/js/lipa-home-dashboard.js"></script>
-  <script src="/js/lipa-home-brain.js?v=2"></script>
+  <script src="/js/lipa-home-brain.js?v=3"></script>
   <script src="/js/lipa-pwa.js?v=2"></script>
   <script src="/js/lipa-analytics.js"></script>
     <!-- Initialize AdSense -->

@@ -83,8 +83,11 @@
             '</strong><span>' + C.esc(course.ageRange) + ' · ' + C.esc(games) + '</span></span>' +
             '<span class="lipa-course-pick__go" aria-hidden="true">' + (picked ? '✓' : '→') + '</span></button></li>';
         } else {
+          var courseHref =
+            '/curso.html?c=' + encodeURIComponent(course.id) +
+            (options.guidedLinks ? '&empezar=1' : '');
           list +=
-            '<li><a href="/curso.html?c=' + encodeURIComponent(course.id) + '" class="' + pickClass + '">' +
+            '<li><a href="' + courseHref + '" class="' + pickClass + '" data-course-id="' + C.esc(course.id) + '">' +
             '<span class="lipa-course-pick__orb">' + C.esc(course.shortLabel) + '</span>' +
             '<span class="lipa-course-pick__body"><strong>' + C.esc(course.label) +
             (C.isFeaturedCourse(course.id) ? ' <span class="lipa-course-pick__mvp">Más contenido</span>' : '') +
@@ -136,21 +139,40 @@
         });
       });
     });
+
+    picker.querySelectorAll('a.lipa-course-pick[data-course-id]').forEach(function (link) {
+      link.addEventListener('click', function () {
+        var id = link.getAttribute('data-course-id');
+        if (global.LipaGuidedPath && LipaGuidedPath.hasProfile && LipaGuidedPath.hasProfile()) {
+          LipaGuidedPath.saveCourseId(id);
+        }
+      });
+    });
   }
 
   function renderCoursesPage(root) {
     C.init();
+    var hasProf = global.LipaGuidedPath && LipaGuidedPath.hasProfile();
     var html =
       '<div class="curriculum-picker-page">' +
       '<div id="lipi-mascot-mount" class="curriculum-picker-page__mascot"></div>' +
+      '<div id="lipa-guided-mount" class="curriculum-guided-mount"></div>' +
       '<header class="curriculum-hero curriculum-hero--picker curriculum-hero--playful">' +
       '<p class="brain-eyebrow">LIPA Brain Gym</p>' +
-      '<h1>¿En qué curso estás?</h1>' +
-      '<p class="curriculum-hero__lead">Elige tu etapa y curso. Cada tarjeta abre mates, lenguaje, inglés y retos de 5–10 min.</p>' +
-      '<p class="curriculum-hero__chips"><span>🎯 Por curso del cole</span><span>⚡ 7 min al día</span></p>' +
+      '<h1>' + (hasProf ? 'Tu curso y tu trabajo' : '¿En qué curso estás?') + '</h1>' +
+      '<p class="curriculum-hero__lead">' +
+      (hasProf
+        ? 'Pulsa el botón de arriba para entrenar hoy. Si cambias de curso, elige una tarjeta abajo.'
+        : 'Elige curso una vez; después Lipi te guía misión a misión sin menús.') +
+      '</p>' +
+      '<p class="curriculum-hero__chips"><span>🎯 Sin pensar</span><span>⚡ 7 min al día</span></p>' +
       '</header><div class="curriculum-wrap curriculum-wrap--picker">';
 
-    html += buildCoursePickerHtml({ mode: 'link', defaultStage: defaultPickerStage() });
+    html += buildCoursePickerHtml({
+      mode: 'link',
+      defaultStage: defaultPickerStage(),
+      guidedLinks: !!(global.LipaGuidedPath && LipaGuidedPath.hasProfile())
+    });
     html +=
       '<div class="lipa-course-picker__promo">' +
       '<a href="/retos-rapidos.html" class="lipa-course-picker__promo-card">' +
@@ -164,12 +186,21 @@
     wireCoursePicker(root);
     document.title = 'Cursos escolares | LIPA Brain Gym';
     if (global.LipaMascot) LipaMascot.render(document.getElementById('lipi-mascot-mount'), 'welcome');
+    mountGuidedStrip({ page: 'courses' });
   }
 
   function sanitizeMotion(html) {
     return html
       .replace(/<motion\b([^>]*)>/gi, '<div$1>')
       .replace(/<\/motion>/gi, '</div>');
+  }
+
+  function mountGuidedStrip(ctx) {
+    var mount = document.getElementById('lipa-guided-mount');
+    if (!mount || !global.LipaGuidedPath) return;
+    LipaGuidedPath.mountStrip(mount, ctx);
+    LipaGuidedPath.wireStrip(mount);
+    LipaGuidedPath.tryAutoStart(ctx);
   }
 
   function renderCoursePage(root) {
@@ -191,10 +222,11 @@
     ]);
 
     html += '<div class="curriculum-wrap">' +
+      '<div id="lipa-guided-mount" class="curriculum-guided-mount"></div>' +
       '<header class="curriculum-course-header">' +
       '<div><p class="brain-eyebrow">' + C.esc(course.ageRange) + (prog.total ? ' · ' + prog.total + ' juegos' : '') + '</p>' +
       '<h1>' + C.esc(course.label) + '</h1>' +
-      '<p>Refuerza lo del cole con juegos cortos. Empieza por la materia que quieras.</p></div>' +
+      '<p>Tu trabajo de hoy está arriba: un botón y Lipi te pasa de misión en misión.</p></div>' +
       '<div class="curriculum-progress-ring"><strong>' + prog.percent + '%</strong><span>completado</span></div>' +
       '</header>' +
       progressBar(prog.percent, prog.done + ' de ' + prog.total + ' actividades');
@@ -202,16 +234,23 @@
     var schoolIds = C.schoolSubjectIds();
     var schoolBlocks = course.subjects.filter(function (b) { return schoolIds.indexOf(b.subjectId) >= 0; });
     var dailyBlock = course.subjects.filter(function (b) { return b.subjectId === 'brain-gym-diario'; })[0];
+    var nextAct = C.findNextActivity(course.id);
 
     function subjectCard(block) {
       var sub = C.enrichSubject(course, block);
       var sp = C.subjectProgress(sub);
       var themeClass = 'curriculum-subject-card--' + (sub.theme || 'default');
-      return '<a href="/materia.html?c=' + encodeURIComponent(course.id) + '&m=' + encodeURIComponent(sub.subjectId) + '" class="curriculum-subject-card ' + themeClass + '">' +
+      var isNext = nextAct && nextAct.subjectId === sub.subjectId;
+      var materiaHref =
+        '/materia.html?c=' + encodeURIComponent(course.id) + '&m=' + encodeURIComponent(sub.subjectId) +
+        (isNext ? '&empezar=1' : '');
+      return '<a href="' + materiaHref + '" class="curriculum-subject-card ' + themeClass +
+        (isNext ? ' curriculum-subject-card--next' : '') + '">' +
         '<div class="curriculum-subject-card__top"><span class="curriculum-subject-card__emoji">' + sub.emoji + '</span><h2>' + C.esc(sub.label) + '</h2></div>' +
         '<p>' + C.esc(sub.desc) + '</p>' +
         progressBar(sp.percent, sp.done + '/' + sp.total + ' actividades') +
-        '<div class="curriculum-meta-row"><span>' + sub.units.length + ' unidades</span><span class="curriculum-meta-row__cta">' + C.esc(C.subjectFooterLabel(sub, sp)) + ' →</span></div>';
+        '<div class="curriculum-meta-row"><span>' + sub.units.length + ' unidades</span><span class="curriculum-meta-row__cta">' +
+        (isNext ? 'Siguiente · ' : '') + C.esc(C.subjectFooterLabel(sub, sp)) + ' →</span></div>';
     }
 
     html += '<h2 class="curriculum-zone-title">Materias del cole</h2>' +
@@ -241,6 +280,7 @@
 
     root.innerHTML = sanitizeMotion(html);
     document.title = course.label + ' | LIPA Brain Gym';
+    mountGuidedStrip({ page: 'course', courseId: course.id });
   }
 
   function renderSubjectPage(root) {
@@ -264,7 +304,7 @@
 
     var liveN = C.countLiveActivitiesForSubject(course.id, sub.subjectId);
     var routineBox = '';
-    if (liveN > 0) {
+    if (liveN > 0 && !global.LipaGuidedPath) {
       routineBox =
         '<div class="curriculum-subject-routine curriculum-subject-routine--' + esc(sub.theme || 'default') + '">' +
         '<p class="curriculum-subject-routine__lead">Entrena solo <strong>' + esc(sub.label) + '</strong> sin buscar en el menú.</p>' +
@@ -279,12 +319,12 @@
         '</div>' +
         '<p class="curriculum-subject-routine__meta">' + liveN + ' actividades disponibles · se guarda en tu rutina</p>' +
         '</div>';
-    } else {
+    } else if (liveN <= 0) {
       routineBox =
         '<p class="curriculum-subject-routine curriculum-subject-routine--empty">Próximamente más juegos en esta materia. Mientras tanto, explora las unidades.</p>';
     }
 
-    html += '<div class="curriculum-wrap"><div id="lipi-mascot-mount"></div><header class="curriculum-hero" style="text-align:left;padding-left:0">' +
+    html += '<div class="curriculum-wrap"><div id="lipa-guided-mount" class="curriculum-guided-mount"></div><div id="lipi-mascot-mount"></div><header class="curriculum-hero" style="text-align:left;padding-left:0">' +
       '<p class="brain-eyebrow">' + sub.emoji + ' ' + C.esc(course.label) + '</p>' +
       '<h1 style="text-align:left">' + C.esc(sub.label) + '</h1>' +
       '<p style="text-align:left;margin:0">' + C.esc(sub.desc) + '</p></header>' +
@@ -292,9 +332,16 @@
       progressBar(sp.percent, 'Progreso en ' + sub.label) +
       '<ol class="curriculum-unit-list" style="margin-top:1.25rem">';
 
+    var nextInSubject = C.findNextActivity(course.id, { subjectId: sub.subjectId });
+    var nextUnitId = nextInSubject && nextInSubject.unit ? nextInSubject.unit.id : null;
+
     sub.units.forEach(function (unit, idx) {
       var up = C.unitProgress(unit);
-      html += '<li><a href="/unidad.html?c=' + encodeURIComponent(course.id) + '&m=' + encodeURIComponent(sub.subjectId) + '&u=' + encodeURIComponent(unit.id) + '" class="curriculum-unit-card">' +
+      var isNextUnit = nextUnitId && unit.id === nextUnitId;
+      var unitHref =
+        '/unidad.html?c=' + encodeURIComponent(course.id) + '&m=' + encodeURIComponent(sub.subjectId) +
+        '&u=' + encodeURIComponent(unit.id) + (isNextUnit ? '&empezar=1' : '');
+      html += '<li><a href="' + unitHref + '" class="curriculum-unit-card' + (isNextUnit ? ' curriculum-unit-card--next' : '') + '">' +
         '<h3>Unidad ' + (idx + 1) + ': ' + C.esc(unit.title) + '</h3>' +
         '<p>' + C.esc(unit.description) + '</p>' +
         progressBar(up.percent, up.hasLive ? up.done + '/' + up.total + ' completadas' : 'Próximamente') +
@@ -308,9 +355,12 @@
       LipaMascot.render(
         document.getElementById('lipi-mascot-mount'),
         'routine',
-        'Pulsa «Rutina 5 min» para entrenar solo ' + sub.label + ' — ¡rápido y sin vueltas!'
+        global.LipaGuidedPath
+          ? 'Pulsa el botón morado: Lipi te lleva a la siguiente misión.'
+          : 'Pulsa «Rutina 5 min» para entrenar solo ' + sub.label + ' — ¡rápido y sin vueltas!'
       );
     }
+    mountGuidedStrip({ page: 'subject', subjectId: sub.subjectId, subjectLabel: sub.label });
   }
 
   function renderUnitPage(root) {
@@ -331,7 +381,10 @@
       { label: ctx.unit.title }
     ]);
 
-    html += '<div class="curriculum-wrap"><div id="lipi-mascot-mount"></div><header class="curriculum-hero" style="text-align:left;padding:0 0 1rem">' +
+    var nextInUnit = C.findNextActivity(courseId, { subjectId: subjectId, unitId: unitId });
+    var nextActId = nextInUnit && nextInUnit.activity ? nextInUnit.activity.id : null;
+
+    html += '<div class="curriculum-wrap"><div id="lipa-guided-mount" class="curriculum-guided-mount"></div><div id="lipi-mascot-mount"></div><header class="curriculum-hero" style="text-align:left;padding:0 0 1rem">' +
       '<h1 style="text-align:left;font-size:1.5rem">' + C.esc(ctx.unit.title) + '</h1>' +
       '<p style="text-align:left">' + C.esc(ctx.unit.description) + '</p></header>' +
       '<div class="curriculum-activity-grid">';
@@ -343,7 +396,8 @@
       var done = C.isActivityComplete(act.id);
       var url = C.activityUrl(courseId, subjectId, unitId, act);
       var isLive = act.status === 'live' && url;
-      var cls = 'curriculum-activity-card' + (isLive ? ' curriculum-activity-card--live' : ' curriculum-activity-card--soon') + (done ? ' curriculum-activity-card--done' : '');
+      var isNext = isLive && nextActId && act.id === nextActId && !done;
+      var cls = 'curriculum-activity-card' + (isLive ? ' curriculum-activity-card--live' : ' curriculum-activity-card--soon') + (done ? ' curriculum-activity-card--done' : '') + (isNext ? ' curriculum-activity-card--next' : '');
       var gameMeta = act.gameId && catalogGames[act.gameId];
       var gameLabel = gameMeta ? (gameMeta.short || gameMeta.name) : '';
 
@@ -352,7 +406,7 @@
           '<span class="curriculum-activity-card__level">' + act.difficulty + '</span>' +
           '<span class="curriculum-activity-card__body"><strong>' + C.esc(act.title) + '</strong>' +
           '<span>' + (gameLabel ? C.esc(gameLabel) + ' · ' : '') + C.esc(diff.name) + ' · ~' + act.estimatedMinutes + ' min · meta 60% · +' + act.rewardXp + ' XP' + (done ? ' · ✓ hecho' : '') + '</span></span>' +
-          '<span class="curriculum-activity-card__cta">' + (done ? 'Repetir' : 'Jugar') + ' →</span></a>';
+          '<span class="curriculum-activity-card__cta">' + (isNext ? 'Siguiente →' : done ? 'Repetir' : 'Jugar') + ' →</span></a>';
       } else {
         html += '<div class="' + cls + '">' +
           '<span class="curriculum-activity-card__level">' + act.difficulty + '</span>' +
@@ -371,9 +425,17 @@
       LipaMascot.render(
         document.getElementById('lipi-mascot-mount'),
         'routine',
-        'Elige una misión. Necesitas al menos 60% de aciertos para marcarla hecha.'
+        nextActId
+          ? 'La misión resaltada es la que toca ahora. Pulsa el botón morado o la tarjeta.'
+          : 'Elige una misión. Necesitas al menos 60% de aciertos para marcarla hecha.'
       );
     }
+    mountGuidedStrip({
+      page: 'unit',
+      subjectId: ctx.subject.subjectId,
+      unitId: ctx.unit.id,
+      subjectLabel: ctx.subject.label
+    });
   }
 
   function boot() {

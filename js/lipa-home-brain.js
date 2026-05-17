@@ -6,6 +6,10 @@
 
   function startRoutine(e) {
     if (e) e.preventDefault();
+    if (window.LipaGuidedPath && LipaGuidedPath.startRoutine) {
+      LipaGuidedPath.startRoutine(e);
+      return;
+    }
     if (!window.LipaBrainPlan) {
       window.location.href = '/entrenador-cerebro.html';
       return;
@@ -35,7 +39,12 @@
 
   document.addEventListener('DOMContentLoaded', function () {
     var btn = document.getElementById('hero-start-routine');
-    if (btn) btn.addEventListener('click', startRoutine);
+    if (btn) {
+      btn.addEventListener('click', startRoutine);
+      if (window.LipaGuidedPath && LipaGuidedPath.hasProfile()) {
+        btn.textContent = '▶ Empezar mi trabajo de hoy';
+      }
+    }
 
     if (
       document.body.getAttribute('data-brain-onboard-auto') === '1' &&
