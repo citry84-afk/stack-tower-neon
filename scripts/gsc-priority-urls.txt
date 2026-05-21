@@ -1,0 +1,12 @@
+# Máx. ~10 «Solicitar indexación» por día en GSC (cuenta manual).
+# Pegar en Inspección de URLs → Solicitar indexación.
+https://lipastudios.com/
+https://lipastudios.com/cursos.html
+https://lipastudios.com/gym-cerebro.html
+https://lipastudios.com/para-padres.html
+https://lipastudios.com/blog/refuerzo-escolar-7-minutos-brain-gym.html
+https://lipastudios.com/editorial.html
+https://lipastudios.com/primaria/4-primaria
+https://lipastudios.com/primaria/1-primaria
+https://lipastudios.com/infantil/5-anos
+https://lipastudios.com/eso/1-eso

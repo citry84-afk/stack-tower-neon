@@ -16,10 +16,15 @@ COURSE_LOCS = (
 
 
 def fix_malformed_lastmod(text: str) -> str:
-    return re.sub(
+    text = re.sub(
         r"<lastmod>2026-02-01-(\d{2})T",
         r"<lastmod>2026-02-\1T",
         text,
+    )
+    # 2026 no es bisiesto: 29-feb es fecha inválida en GSC
+    return text.replace(
+        "<lastmod>2026-02-29T10:00:00+00:00</lastmod>",
+        "<lastmod>2026-02-28T10:00:00+00:00</lastmod>",
     )
 
 
@@ -42,25 +47,10 @@ def remove_pre_marker_course_dupes(text: str) -> str:
     return head + "".join(kept) + MARKER + after
 
 
-def remove_trailing_brain_gym_dupes(text: str) -> str:
-    if MARKER not in text:
-        return text
-    head, tail = text.split(MARKER, 1)
-    blocks = re.findall(r"  <url>[\s\S]*?</url>\n", tail)
-    rest: list[str] = []
-    for block in blocks:
-        m = re.search(r"<loc>(.*?)</loc>", block)
-        if m and any(m.group(1).startswith(p) for p in COURSE_LOCS):
-            continue
-        rest.append(block)
-    return head + MARKER + "\n" + "".join(rest)
-
-
 def main() -> None:
     text = SITEMAP.read_text(encoding="utf-8")
     text = fix_malformed_lastmod(text)
     text = remove_pre_marker_course_dupes(text)
-    text = remove_trailing_brain_gym_dupes(text)
     SITEMAP.write_text(text, encoding="utf-8")
 
     locs = re.findall(r"<loc>(.*?)</loc>", text)
