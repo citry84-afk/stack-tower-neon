@@ -19,6 +19,13 @@ Allow: /moviles-gaming-baratos.html
 Allow: /entrenador-reflejos.html
 Disallow: /jugar.html
 Disallow: /jugar
+Disallow: /reto-rapido.html
+# Landings de materia (noindex): evitar rastreo duplicado
+Disallow: /*/mates.html
+Disallow: /*/lengua.html
+Disallow: /*/ingles.html
+Disallow: /*/naturales.html
+Disallow: /*/sociales.html
 Allow: /test-reflejos.html
 Allow: /aim-trainer-neon.html
 Allow: /grid-reflejos-neon.html

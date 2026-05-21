@@ -94,6 +94,20 @@
     <mobile:mobile/>
   </url>
   <url>
+    <loc>https://lipastudios.com/unidad.html</loc>
+    <lastmod>2026-05-19</lastmod>
+    <priority>0.84</priority>
+    <changefreq>weekly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://lipastudios.com/retos-rapidos.html</loc>
+    <lastmod>2026-05-19</lastmod>
+    <priority>0.86</priority>
+    <changefreq>weekly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
     <loc>https://lipastudios.com/para-padres.html</loc>
     <lastmod>2026-05-19</lastmod>
     <priority>0.90</priority>

@@ -8,9 +8,11 @@ Sitio principal: **https://lipastudios.com** (Netlify). Producto editorial: **LI
 - [x] `ads.txt` → `google.com, pub-4837743291717475`
 - [x] `consent.js` — Consent Mode v2 + AdSense tras consentimiento
 - [x] `robots.txt` + `sitemap.xml` (arcade, blog, **11 landings de curso**, sin páginas materia `noindex`)
-- [x] Contenido útil indexable: home con guía Brain Gym plegable, `cursos.html` (~500 palabras), 11 landings `/primaria/…`, `/infantil/…`, `/eso/…`, blog 40+ artículos con autor
+- [x] Contenido útil indexable: home con guía Brain Gym plegable, `cursos.html` (~500 palabras), 11 landings `/primaria/…`, `/infantil/…`, `/eso/…`, blog 40+ artículos con autor y CTA a Cursos
+- [x] `robots.txt` bloquea landings materia `noindex` y `reto-rapido.html`
 - [x] `curso.html` y `materia.html` con texto estático + OG/schema (no solo shell JS)
-- [x] Slots de anuncio: `index.html`, `cursos.html`, `recreo-neon.html`, `entrenador-reflejos.html`
+- [x] Slots de anuncio: `index.html`, `cursos.html`, `gym-cerebro.html`, `para-padres.html`, `entrenador-cerebro.html`, `recreo-neon.html`, `entrenador-reflejos.html`
+- [x] `retos-rapidos.html`, `unidad.html` con copy estático; `reto-rapido.html` en `noindex` (URL dinámica)
 - [x] GA4 `G-5XL1W8RNTP`
 - [x] `jugar.html` eliminado → redirige a `recreo-neon.html` (hub arcade)
 

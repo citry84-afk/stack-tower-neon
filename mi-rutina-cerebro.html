@@ -11,6 +11,10 @@
   <meta property="og:title" content="Mi rutina cerebral | LIPA Brain Gym">
   <meta property="og:description" content="Plan personalizado de mates y reflejos según tu curso y tiempo disponible.">
   <meta property="og:image" content="https://lipastudios.com/og-image.jpg">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebPage","name":"Mi rutina cerebral LIPA Brain Gym","description":"Personaliza materias y tiempo de la rutina diaria de refuerzo escolar.","url":"https://lipastudios.com/mi-rutina-cerebro.html","isPartOf":{"@type":"WebSite","name":"LIPA Brain Gym","url":"https://lipastudios.com/"}}
+  </script>
+  <link rel="stylesheet" href="/css/course-landing.css">
   <link rel="stylesheet" href="/css/lipa-ui.css">
   <link rel="stylesheet" href="/css/site-nav.css">
   <link rel="stylesheet" href="/css/arcade-hub.css">
@@ -55,7 +59,14 @@
       <p class="brain-eyebrow">Programación cerebral</p>
       <h1 style="font-family:var(--lipa-font-display);font-size:clamp(1.75rem,4vw,2.25rem);margin:0 0 12px;">Mi rutina</h1>
       <p style="color:var(--lipa-text-secondary);margin:0;">Elige las materias de hoy (mates, inglés, naturales…) y juega tu rutina. Sin cuenta.</p>
+      <p style="color:var(--lipa-text-secondary);margin:12px 0 0;font-size:15px;">Primero elige etapa en <a href="/cursos.html">Cursos</a> (Infantil, Primaria o ESO). Guía: <a href="/blog/refuerzo-escolar-7-minutos-brain-gym.html">refuerzo en 7 minutos</a>.</p>
     </header>
+
+    <article class="course-landing-article" style="margin-bottom:1.25rem;">
+      <h2 style="font-size:1.1rem;margin:0 0 8px;">Cómo personalizar</h2>
+      <p style="margin:0;color:var(--lipa-text-secondary);line-height:1.6;font-size:15px;">Marca las asignaturas que quieres practicar hoy. Lipi propone la misión pendiente del currículo LOMLOE. El progreso se guarda en este navegador; las familias ven el resumen en <a href="/para-padres.html">Para padres</a>.</p>
+      <p style="margin:12px 0 0;font-size:14px;"><a href="/primaria/4-primaria">4º Primaria</a> · <a href="/infantil/5-anos">3º Infantil</a> · <a href="/eso/1-eso">1º ESO</a> · <a href="/cursos.html">ver los 11 cursos</a></p>
+    </article>
 
     <div id="lipa-guided-mount" class="curriculum-guided-mount" style="max-width:640px;margin:0 auto 1.25rem;"></div>
     <div id="lipa-routine-subjects-mount" data-lipa-routine-subjects></div>
@@ -71,8 +82,14 @@
     </p>
   </main>
 
-  <footer class="lipa-footer">
-    <p>© 2024–2026 LIPA Studios · <a href="/privacy.html">Privacidad</a></p>
+  <footer class="lipa-footer lipa-footer--site lipa-footer--compact">
+    <nav class="lipa-footer__links" aria-label="Enlaces del sitio">
+      <a href="/about.html">Sobre</a>
+      <a href="/editorial.html">Editorial</a>
+      <a href="/contact.html">Contacto</a>
+      <a href="/privacy.html">Privacidad</a>
+    </nav>
+    <p class="lipa-footer__copy">© 2024–2026 LIPA Studios · LIPA Brain Gym</p>
   </footer>
 
   <script src="/js/lipa-daily.js"></script>
