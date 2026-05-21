@@ -83,9 +83,16 @@
             '</strong><span>' + C.esc(course.ageRange) + ' · ' + C.esc(games) + '</span></span>' +
             '<span class="lipa-course-pick__go" aria-hidden="true">' + (picked ? '✓' : '→') + '</span></button></li>';
         } else {
-          var courseHref =
-            '/curso.html?c=' + encodeURIComponent(course.id) +
-            (options.guidedLinks ? '&empezar=1' : '');
+          var seoPath =
+            !options.guidedLinks &&
+            global.LipaCourseSeo &&
+            LipaCourseSeo.seoPathForCourseId
+              ? LipaCourseSeo.seoPathForCourseId(course.id)
+              : null;
+          var courseHref = seoPath
+            ? seoPath
+            : '/curso.html?c=' + encodeURIComponent(course.id) +
+              (options.guidedLinks ? '&empezar=1' : '');
           list +=
             '<li><a href="' + courseHref + '" class="' + pickClass + '" data-course-id="' + C.esc(course.id) + '">' +
             '<span class="lipa-course-pick__orb">' + C.esc(course.shortLabel) + '</span>' +
@@ -241,9 +248,16 @@
       var sp = C.subjectProgress(sub);
       var themeClass = 'curriculum-subject-card--' + (sub.theme || 'default');
       var isNext = nextAct && nextAct.subjectId === sub.subjectId;
-      var materiaHref =
-        '/materia.html?c=' + encodeURIComponent(course.id) + '&m=' + encodeURIComponent(sub.subjectId) +
-        (isNext ? '&empezar=1' : '');
+      var seoMateria =
+        !isNext &&
+        global.LipaCourseSeo &&
+        LipaCourseSeo.seoPathForSubject
+          ? LipaCourseSeo.seoPathForSubject(course.id, sub.subjectId)
+          : null;
+      var materiaHref = seoMateria
+        ? seoMateria
+        : '/materia.html?c=' + encodeURIComponent(course.id) + '&m=' + encodeURIComponent(sub.subjectId) +
+          (isNext ? '&empezar=1' : '');
       return '<a href="' + materiaHref + '" class="curriculum-subject-card ' + themeClass +
         (isNext ? ' curriculum-subject-card--next' : '') + '">' +
         '<div class="curriculum-subject-card__top"><span class="curriculum-subject-card__emoji">' + sub.emoji + '</span><h2>' + C.esc(sub.label) + '</h2></div>' +
@@ -279,7 +293,11 @@
       '<a href="/entrenador-cerebro.html">Entrenador 7 min</a></div></div>';
 
     root.innerHTML = sanitizeMotion(html);
-    document.title = course.label + ' | LIPA Brain Gym';
+    if (global.LipaCourseSeo && LipaCourseSeo.applyForCourse) {
+      LipaCourseSeo.applyForCourse(course);
+    } else {
+      document.title = course.label + ' | LIPA Brain Gym';
+    }
     mountGuidedStrip({ page: 'course', courseId: course.id });
   }
 
@@ -350,7 +368,11 @@
 
     html += '</ol></div>';
     root.innerHTML = sanitizeMotion(html);
-    document.title = sub.label + ' · ' + course.label + ' | LIPA Brain Gym';
+    if (global.LipaCourseSeo && LipaCourseSeo.applyForSubject) {
+      LipaCourseSeo.applyForSubject(course, sub);
+    } else {
+      document.title = sub.label + ' · ' + course.label + ' | LIPA Brain Gym';
+    }
     if (global.LipaMascot) {
       LipaMascot.render(
         document.getElementById('lipi-mascot-mount'),

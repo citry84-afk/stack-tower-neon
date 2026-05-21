@@ -235,7 +235,7 @@
       target: 5,
       title: 'Explorador LIPA',
       desc: 'Juega a 5 minijuegos distintos esta semana (arcade o Brain Gym).',
-      url: '/jugar.html',
+      url: '/recreo-neon.html',
       cta: 'Ver arcade'
     }
   ];
@@ -340,7 +340,7 @@
     if (opts.from) {
       parts.push('from=' + encodeURIComponent(String(opts.from).substring(0, 20)));
     }
-    return origin + '/jugar.html?' + parts.join('&');
+    return origin + '/recreo-neon.html?' + parts.join('&');
   }
 
   function parseChallengeFromUrl(search) {

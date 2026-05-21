@@ -70,7 +70,7 @@
 
   function initHubPage() {
     var path = global.location && global.location.pathname;
-    if (path && /jugar\.html$/.test(path)) trackArcadeView();
+    if (path && /recreo-neon\.html$/.test(path)) trackArcadeView();
   }
 
   global.LipaAnalytics = {

@@ -42,6 +42,22 @@ http://www.stacktowerneon.com/*  https://stacktowerneon.com/:splat  301!
 /entreno-completo.html    /entreno-completo.html    200
 /entreno-completo         /entreno-completo.html    200
 
+# Landings SEO por curso (Brain Gym) — HTML estático con meta propia
+/primaria/1-primaria      /primaria/1-primaria.html  200
+/primaria/2-primaria      /primaria/2-primaria.html  200
+/primaria/3-primaria      /primaria/3-primaria.html  200
+/primaria/4-primaria      /primaria/4-primaria.html  200
+/primaria/5-primaria      /primaria/5-primaria.html  200
+/primaria/6-primaria      /primaria/6-primaria.html  200
+/infantil/3-anos          /infantil/3-anos.html      200
+/infantil/4-anos          /infantil/4-anos.html      200
+/infantil/5-anos          /infantil/5-anos.html      200
+/eso/1-eso                /eso/1-eso.html            200
+/eso/2-eso                /eso/2-eso.html            200
+/para-padres              /para-padres.html          200
+/cursos                   /cursos.html               200
+/recreo-neon              /recreo-neon.html          200
+
 # Blog posts - Permitir acceso directo
 /blog/*.html         /blog/:splat         200
 
@@ -70,7 +86,6 @@ http://www.stacktowerneon.com/*  https://stacktowerneon.com/:splat  301!
 
 # Game action routes for better UX
 /play               /index.html?action=play     200
-/jugar              /index.html?action=play     200
 /scores             /index.html?action=scores   200
 /puntuaciones       /index.html?action=scores   200
 /leaderboard        /index.html?action=scores   200
@@ -91,11 +106,8 @@ http://www.stacktowerneon.com/*  https://stacktowerneon.com/:splat  301!
 /reflejos           /juegos-de-reflejos.html          200
 /entrenador-reflejos /entrenador-reflejos.html        200
 /moviles-gaming     /moviles-gaming-baratos.html      200
-
-# SEO-friendly game routes (redirecciones a index.html)
-/jugar              /jugar.html                       200
-/arcade             /jugar.html                       200
-/desafio            /jugar.html                       200
+/arcade             /recreo-neon.html                 301
+/desafio            /recreo-neon.html                 301
 /neon-beat.html     /toque-flash-neon.html            301
 /neon-runner.html   /esquiva-neon.html                301
 /juego              /index.html                       200
@@ -171,6 +183,63 @@ http://www.stacktowerneon.com/*  https://stacktowerneon.com/:splat  301!
 /v1/*              /:splat                                  301
 /v2/*              /:splat                                  301
 
-# CATCH-ALL AL FINAL - Solo para rutas que no existen
-# Esta regla debe ir AL FINAL para no interferir con páginas HTML reales
+# SUBJECT LANDINGS (auto)
+/infantil/3-anos/mates  /infantil/3-anos/mates.html  200
+/infantil/3-anos/lengua  /infantil/3-anos/lengua.html  200
+/infantil/3-anos/ingles  /infantil/3-anos/ingles.html  200
+/infantil/3-anos/naturales  /infantil/3-anos/naturales.html  200
+/infantil/3-anos/sociales  /infantil/3-anos/sociales.html  200
+/infantil/4-anos/mates  /infantil/4-anos/mates.html  200
+/infantil/4-anos/lengua  /infantil/4-anos/lengua.html  200
+/infantil/4-anos/ingles  /infantil/4-anos/ingles.html  200
+/infantil/4-anos/naturales  /infantil/4-anos/naturales.html  200
+/infantil/4-anos/sociales  /infantil/4-anos/sociales.html  200
+/infantil/5-anos/mates  /infantil/5-anos/mates.html  200
+/infantil/5-anos/lengua  /infantil/5-anos/lengua.html  200
+/infantil/5-anos/ingles  /infantil/5-anos/ingles.html  200
+/infantil/5-anos/naturales  /infantil/5-anos/naturales.html  200
+/infantil/5-anos/sociales  /infantil/5-anos/sociales.html  200
+/primaria/1-primaria/mates  /primaria/1-primaria/mates.html  200
+/primaria/1-primaria/lengua  /primaria/1-primaria/lengua.html  200
+/primaria/1-primaria/ingles  /primaria/1-primaria/ingles.html  200
+/primaria/1-primaria/naturales  /primaria/1-primaria/naturales.html  200
+/primaria/1-primaria/sociales  /primaria/1-primaria/sociales.html  200
+/primaria/2-primaria/mates  /primaria/2-primaria/mates.html  200
+/primaria/2-primaria/lengua  /primaria/2-primaria/lengua.html  200
+/primaria/2-primaria/ingles  /primaria/2-primaria/ingles.html  200
+/primaria/2-primaria/naturales  /primaria/2-primaria/naturales.html  200
+/primaria/2-primaria/sociales  /primaria/2-primaria/sociales.html  200
+/primaria/3-primaria/mates  /primaria/3-primaria/mates.html  200
+/primaria/3-primaria/lengua  /primaria/3-primaria/lengua.html  200
+/primaria/3-primaria/ingles  /primaria/3-primaria/ingles.html  200
+/primaria/3-primaria/naturales  /primaria/3-primaria/naturales.html  200
+/primaria/3-primaria/sociales  /primaria/3-primaria/sociales.html  200
+/primaria/4-primaria/mates  /primaria/4-primaria/mates.html  200
+/primaria/4-primaria/lengua  /primaria/4-primaria/lengua.html  200
+/primaria/4-primaria/ingles  /primaria/4-primaria/ingles.html  200
+/primaria/4-primaria/naturales  /primaria/4-primaria/naturales.html  200
+/primaria/4-primaria/sociales  /primaria/4-primaria/sociales.html  200
+/primaria/5-primaria/mates  /primaria/5-primaria/mates.html  200
+/primaria/5-primaria/lengua  /primaria/5-primaria/lengua.html  200
+/primaria/5-primaria/ingles  /primaria/5-primaria/ingles.html  200
+/primaria/5-primaria/naturales  /primaria/5-primaria/naturales.html  200
+/primaria/5-primaria/sociales  /primaria/5-primaria/sociales.html  200
+/primaria/6-primaria/mates  /primaria/6-primaria/mates.html  200
+/primaria/6-primaria/lengua  /primaria/6-primaria/lengua.html  200
+/primaria/6-primaria/ingles  /primaria/6-primaria/ingles.html  200
+/primaria/6-primaria/naturales  /primaria/6-primaria/naturales.html  200
+/primaria/6-primaria/sociales  /primaria/6-primaria/sociales.html  200
+/eso/1-eso/mates  /eso/1-eso/mates.html  200
+/eso/1-eso/lengua  /eso/1-eso/lengua.html  200
+/eso/1-eso/ingles  /eso/1-eso/ingles.html  200
+/eso/1-eso/naturales  /eso/1-eso/naturales.html  200
+/eso/1-eso/sociales  /eso/1-eso/sociales.html  200
+/eso/2-eso/mates  /eso/2-eso/mates.html  200
+/eso/2-eso/lengua  /eso/2-eso/lengua.html  200
+/eso/2-eso/ingles  /eso/2-eso/ingles.html  200
+/eso/2-eso/naturales  /eso/2-eso/naturales.html  200
+/eso/2-eso/sociales  /eso/2-eso/sociales.html  200
+# /SUBJECT LANDINGS
+
+# CATCH-ALL — debe ser la última regla
 /*                  /index.html                              200

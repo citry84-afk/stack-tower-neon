@@ -74,6 +74,11 @@
   font-size: 1.35rem;
 }
 
+.home-cursos-cta__quick a {
+  color: #7c3aed !important;
+  font-weight: 600;
+}
+
 .home-cursos-cta p {
   margin: 0 0 1rem;
   color: var(--lipa-text-secondary);

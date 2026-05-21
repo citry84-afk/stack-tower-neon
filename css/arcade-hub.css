@@ -590,3 +590,30 @@
     padding: 0;
   }
 }
+
+.recreo-unlock-banner,
+.recreo-locked-notice {
+  max-width: var(--lipa-max, 980px);
+  margin: 0 auto 1rem;
+  padding: 0.85rem 1.1rem;
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.recreo-unlock-banner {
+  background: rgba(6, 182, 212, 0.12);
+  border: 1px solid rgba(6, 182, 212, 0.35);
+  text-align: center;
+}
+
+.recreo-locked-notice {
+  border: 1px solid rgba(251, 191, 36, 0.45);
+  background: rgba(251, 191, 36, 0.1);
+  color: var(--lipa-text-secondary);
+}
+
+.recreo-locked-notice a {
+  color: #a78bfa !important;
+  font-weight: 700;
+}

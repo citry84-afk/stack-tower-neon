@@ -17,7 +17,8 @@ Allow: /top-juegos-reflejos.html
 Allow: /juegos-de-reflejos.html
 Allow: /moviles-gaming-baratos.html
 Allow: /entrenador-reflejos.html
-Allow: /jugar.html
+Disallow: /jugar.html
+Disallow: /jugar
 Allow: /test-reflejos.html
 Allow: /aim-trainer-neon.html
 Allow: /grid-reflejos-neon.html

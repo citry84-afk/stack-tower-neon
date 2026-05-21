@@ -703,6 +703,43 @@
     };
   }
 
+  /** Actividades del curso completadas desde una fecha (ISO), agrupadas por materia. */
+  function weekCompletionsBySubject(courseId, sinceDateStr) {
+    init();
+    var course = getCourse(courseId);
+    if (!course) return [];
+    var since = sinceDateStr ? new Date(sinceDateStr + 'T00:00:00').getTime() : 0;
+    var prog = getProgress();
+    var schoolIds = schoolSubjectIds();
+    var rows = [];
+
+    course.subjects.forEach(function (block) {
+      if (schoolIds.indexOf(block.subjectId) < 0) return;
+      var sub = enrichSubject(course, block);
+      var weekCount = 0;
+      sub.units.forEach(function (unit) {
+        unit.activities.forEach(function (act) {
+          var rec = prog[act.id];
+          if (!rec || !rec.lastAt) return;
+          if (new Date(rec.lastAt).getTime() >= since) {
+            weekCount += 1;
+          }
+        });
+      });
+      if (weekCount > 0) {
+        rows.push({
+          subjectId: block.subjectId,
+          label: sub.label,
+          emoji: sub.emoji,
+          weekCount: weekCount
+        });
+      }
+    });
+
+    rows.sort(function (a, b) { return b.weekCount - a.weekCount; });
+    return rows;
+  }
+
   init();
 
   global.LipaCurriculum = {
@@ -742,6 +779,7 @@
     subjectFooterLabel: subjectFooterLabel,
     getContinueTarget: getContinueTarget,
     findNextActivity: findNextActivity,
+    weekCompletionsBySubject: weekCompletionsBySubject,
     esc: esc,
     COURSES: COURSES
   };

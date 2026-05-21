@@ -73,6 +73,7 @@
 
   <main class="lipa-main">
     <div id="recreo-unlock-banner" class="recreo-unlock-banner" hidden></div>
+    <div id="recreo-locked-notice" class="recreo-locked-notice" hidden role="status"></div>
     <header class="arcade-hero">
       <p class="lipa-hero__eyebrow">Recompensa · después del Brain Gym</p>
       <h1>Recreo Neon</h1>
@@ -221,15 +222,25 @@
   <script src="/js/lipa-progress.js"></script>
   <script>
     (function () {
-      var b = document.getElementById('recreo-unlock-banner');
-      if (!b) return;
+      var day = new Date().toISOString().split('T')[0];
+      var unlocked = false;
       try {
-        var day = new Date().toISOString().split('T')[0];
-        if (localStorage.getItem('lipa_recreo_unlock') === day) {
-          b.innerHTML = '🎁 <strong>¡Recompensa desbloqueada!</strong> Has completado tu Brain Gym de hoy.';
-          b.hidden = false;
-        }
+        unlocked = localStorage.getItem('lipa_recreo_unlock') === day;
       } catch (e) { /* ignore */ }
+      var banner = document.getElementById('recreo-unlock-banner');
+      if (banner && unlocked) {
+        banner.innerHTML =
+          '🎁 <strong>¡Recompensa desbloqueada!</strong> Has completado tu Brain Gym de hoy.';
+        banner.hidden = false;
+      }
+      var locked = document.getElementById('recreo-locked-notice');
+      if (locked && !unlocked) {
+        locked.innerHTML =
+          '🧠 <strong>Primero el cole.</strong> Completa tu rutina de 7 min en el ' +
+          '<a href="/">Brain Gym</a> para desbloquear el recreo como recompensa. ' +
+          'Puedes mirar el catálogo, pero el entreno diario es lo que más ayuda.';
+        locked.hidden = false;
+      }
     })();
   </script>
 </body>

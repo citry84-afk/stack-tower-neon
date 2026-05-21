@@ -1,0 +1,32 @@
+.blog-author {
+  margin: 0 0 1.5rem;
+  padding: 1rem 1.15rem;
+  background: rgba(46, 211, 166, 0.12);
+  border: 1px solid rgba(46, 211, 166, 0.35);
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: #c8c8d4;
+}
+
+.blog-author__label {
+  margin: 0 0 0.35rem;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #2ed3a6;
+  font-weight: 700;
+}
+
+.blog-author p {
+  margin: 0.35rem 0 0;
+}
+
+.blog-author a {
+  font-weight: 600;
+}
+
+.blog-author__updated {
+  font-size: 13px;
+  opacity: 0.85;
+}

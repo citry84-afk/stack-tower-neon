@@ -3,14 +3,13 @@
  * PWA Optimization & Offline Functionality
  */
 
-const CACHE_NAME = 'lipa-brain-gym-v3.19.0-daily-missions';
+const CACHE_NAME = 'lipa-brain-gym-v3.22.1-seo-redirects';
 const CACHE_VERSION = '2.0.0';
 
 // Essential files to cache for offline play
 const STATIC_CACHE_URLS = [
     '/',
     '/index.html',
-    '/jugar.html',
     '/gym-cerebro.html',
     '/cursos.html',
     '/recreo-neon.html',
@@ -28,6 +27,8 @@ const STATIC_CACHE_URLS = [
     '/js/lipa-curriculum-data.js',
     '/js/lipa-curriculum.js',
     '/js/lipa-curriculum-page.js',
+    '/js/lipa-course-seo.js',
+    '/css/course-landing.css',
     '/js/lipa-guided-path.js',
     '/js/lipa-brain-profiles.js',
     '/js/lipa-brain-core.js',
