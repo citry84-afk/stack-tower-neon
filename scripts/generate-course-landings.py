@@ -2,6 +2,7 @@
 """Genera landings SEO estáticas por curso (primaria, infantil, ESO)."""
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -330,6 +331,31 @@ def render_topics_block(copy: dict) -> str:
     return html
 
 
+def render_faq_schema(faq: list[tuple[str, str]]) -> str:
+    entities = [
+        {
+            "@type": "Question",
+            "name": q,
+            "acceptedAnswer": {"@type": "Answer", "text": a},
+        }
+        for q, a in faq
+    ]
+    entities.append(
+        {
+            "@type": "Question",
+            "name": "¿LIPA Brain Gym es gratis?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sí. El refuerzo escolar y las rutinas son gratuitas en el navegador, sin instalar apps ni crear cuenta.",
+            },
+        }
+    )
+    return json.dumps(
+        {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": entities},
+        ensure_ascii=False,
+    )
+
+
 def render_play_links(c: dict) -> str:
     items = []
     for sub_id, label, emoji in PLAY_SUBJECTS:
@@ -354,6 +380,34 @@ def page(c: dict) -> str:
     topics_html = render_topics_block(copy)
     faq_html = render_faq(copy["faq"])
     play_links = render_play_links(c)
+    faq_schema = render_faq_schema(copy["faq"])
+    breadcrumb_schema = json.dumps(
+        {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Inicio",
+                    "item": "https://lipastudios.com/",
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Cursos",
+                    "item": "https://lipastudios.com/cursos.html",
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": c["label"],
+                    "item": canonical,
+                },
+            ],
+        },
+        ensure_ascii=False,
+    )
 
     return f"""<!DOCTYPE html>
 <html lang="es">
@@ -368,6 +422,9 @@ def page(c: dict) -> str:
   <meta property="og:url" content="{canonical}">
   <meta property="og:title" content="{esc(title)}">
   <meta property="og:description" content="{esc(desc)}">
+  <meta property="og:image" content="https://lipastudios.com/og-image.jpg">
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:image" content="https://lipastudios.com/og-image.jpg">
   <link rel="stylesheet" href="/css/lipa-ui.css">
   <link rel="stylesheet" href="/css/site-nav.css">
   <link rel="stylesheet" href="/css/brain-gym.css?v=3">
@@ -375,7 +432,13 @@ def page(c: dict) -> str:
   <link rel="stylesheet" href="/css/course-landing.css">
   <meta name="theme-color" content="#2ed3a6">
   <script type="application/ld+json">
-  {{"@context":"https://schema.org","@type":"Course","name":"{esc(c['label'])}","description":"{esc(desc)}","provider":{{"@type":"Organization","name":"LIPA Studios","url":"https://lipastudios.com"}},"url":"{canonical}","inLanguage":"es","isAccessibleForFree":true,"educationalLevel":"{esc(c['stage'])}","typicalAgeRange":"{esc(c['age'])}"}}
+  {{"@context":"https://schema.org","@type":"Course","name":"{esc(c['label'])}","description":"{esc(desc)}","provider":{{"@type":"Organization","name":"LIPA Studios","url":"https://lipastudios.com","logo":"https://lipastudios.com/logo.png"}},"url":"{canonical}","inLanguage":"es","isAccessibleForFree":true,"educationalLevel":"{esc(c['stage'])}","typicalAgeRange":"{esc(c['age'])}","image":"https://lipastudios.com/og-image.jpg"}}
+  </script>
+  <script type="application/ld+json">
+  {breadcrumb_schema}
+  </script>
+  <script type="application/ld+json">
+  {faq_schema}
   </script>
 </head>
 <body class="lipa-page lipa-brain-soft">
@@ -405,7 +468,8 @@ def page(c: dict) -> str:
       {play_links}
 
       <h2>Informe para padres y privacidad</h2>
-      <p>En <a href="/para-padres.html">Para padres</a> verás cuántos días entrenó esta semana, qué materias tocó y sugerencias de repaso. Los datos permanecen en el navegador del dispositivo; no pedimos registro al menor. Más información en <a href="/privacy.html">Privacidad</a> y <a href="/contact.html">Contacto</a>.</p>
+      <p>En <a href="/para-padres.html">Para padres</a> verás cuántos días entrenó esta semana, qué materias tocó y sugerencias de repaso. Los datos permanecen en el navegador del dispositivo; no pedimos registro al menor. Más información en <a href="/privacy.html">Privacidad</a>, <a href="/editorial.html">política editorial</a> y <a href="/contact.html">Contacto</a>.</p>
+      <p>Guía general: <a href="/blog/refuerzo-escolar-7-minutos-brain-gym.html">refuerzo escolar en 7 minutos</a> · <a href="/cursos.html">todos los cursos</a>.</p>
 
       <h2>Preguntas frecuentes sobre {esc(c['label'])}</h2>
       <div class="course-landing-faq">
@@ -425,6 +489,7 @@ def page(c: dict) -> str:
     <p class="course-landing-links">
       <a href="/para-padres.html">Informe para padres</a> ·
       <a href="/cursos.html">Otros cursos</a> ·
+      <a href="/blog/refuerzo-escolar-7-minutos-brain-gym.html">Guía 7 min</a> ·
       <a href="/">Inicio Brain Gym</a>
     </p>
   </main>
