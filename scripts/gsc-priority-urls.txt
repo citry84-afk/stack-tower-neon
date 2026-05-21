@@ -1,5 +1,7 @@
 # Máx. ~10 «Solicitar indexación» por día en GSC (cuenta lipastudios4@gmail.com).
 # Inspección de URLs → Solicitar indexación.
+https://lipastudios.com/curso.html
+https://lipastudios.com/materia.html
 https://lipastudios.com/infantil/5-anos
 https://lipastudios.com/eso/1-eso
 https://lipastudios.com/primaria/2-primaria

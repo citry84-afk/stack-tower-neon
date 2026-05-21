@@ -6,7 +6,10 @@ KEY="a1bf3fb2f48c78dff2a3ed0cfdf42fec"
 KEY_LOCATION="https://${HOST}/${KEY}.txt"
 URLS='[
   "https://lipastudios.com/",
-  "https://lipastudios.com/jugar.html",
+  "https://lipastudios.com/cursos.html",
+  "https://lipastudios.com/curso.html",
+  "https://lipastudios.com/materia.html",
+  "https://lipastudios.com/recreo-neon.html",
   "https://lipastudios.com/entrenador-reflejos.html",
   "https://lipastudios.com/test-reflejos.html",
   "https://lipastudios.com/aim-trainer-neon.html",

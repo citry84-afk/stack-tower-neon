@@ -80,6 +80,20 @@
     <mobile:mobile/>
   </url>
   <url>
+    <loc>https://lipastudios.com/curso.html</loc>
+    <lastmod>2026-05-19</lastmod>
+    <priority>0.88</priority>
+    <changefreq>weekly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://lipastudios.com/materia.html</loc>
+    <lastmod>2026-05-19</lastmod>
+    <priority>0.85</priority>
+    <changefreq>weekly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
     <loc>https://lipastudios.com/para-padres.html</loc>
     <lastmod>2026-05-19</lastmod>
     <priority>0.90</priority>

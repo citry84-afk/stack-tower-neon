@@ -1,25 +1,30 @@
 # Checklist AdSense — lipastudios.com
 
-Sitio principal: **https://lipastudios.com** (Netlify `lipastudios`)
+Sitio principal: **https://lipastudios.com** (Netlify). Producto editorial: **LIPA Brain Gym** (refuerzo escolar LOMLOE).
 
 ## Requisitos cumplidos
 
-- [x] `privacy.html`, `terms.html`, `contact.html`, `about.html`, `editorial.html`, `disclaimer.html`
-- [x] `help.html`, `news.html`, blog con artículos enlazados
+- [x] Páginas legales y confianza: `about.html`, `contact.html`, `privacy.html`, `terms.html`, `help.html`, `editorial.html`, `disclaimer.html`
 - [x] `ads.txt` → `google.com, pub-4837743291717475`
-- [x] `consent.js` — Consent Mode v2 + carga AdSense tras aceptar
-- [x] `robots.txt` + `sitemap.xml` con arcade y minijuegos
-- [x] Contenido editorial: guía plegable en home, entrenador, rutina 5 min, 40+ posts blog
-- [x] Arcade funcional: 6 minijuegos + Stack Tower
-- [x] Slots de anuncio en `index.html` (inferior), `jugar.html`, `entrenador-reflejos.html`
-- [x] GA4 `G-5XL1W8RNTP` + eventos `lipa_game_start` / `lipa_game_complete`
+- [x] `consent.js` — Consent Mode v2 + AdSense tras consentimiento
+- [x] `robots.txt` + `sitemap.xml` (arcade, blog, **11 landings de curso**, sin páginas materia `noindex`)
+- [x] Contenido útil indexable: home con guía Brain Gym plegable, `cursos.html` (~500 palabras), 11 landings `/primaria/…`, `/infantil/…`, `/eso/…`, blog 40+ artículos con autor
+- [x] `curso.html` y `materia.html` con texto estático + OG/schema (no solo shell JS)
+- [x] Slots de anuncio: `index.html`, `cursos.html`, `recreo-neon.html`, `entrenador-reflejos.html`
+- [x] GA4 `G-5XL1W8RNTP`
+- [x] `jugar.html` eliminado → redirige a `recreo-neon.html` (hub arcade)
 
 ## Antes de reaplicar en AdSense
 
-1. En Search Console, verificar propiedad **lipastudios.com** sin errores críticos.
-2. Solicitar indexación de: `/jugar.html`, `/toque-flash-neon.html`, `/esquiva-neon.html`, `/blog/reflejos-5-minutos.html`.
-3. En AdSense → Sitios, usar solo **lipastudios.com** (no subdominios viejos de Beat/Runner).
-4. Tras aprobar, revisar que los anuncios no tapen botones de juego en móvil.
+1. **Search Console** (`lipastudios4@gmail.com`): sin errores críticos; sitemap enviado.
+2. Esperar **15–20 URLs indexadas** (landings de curso + `cursos.html` + `para-padres.html` + blog hub).
+3. Cuota GSC: máx. ~10 «Solicitar indexación»/día — lista en `scripts/gsc-priority-urls.txt`.
+4. En AdSense → Sitios, solo **lipastudios.com** (sin dominios viejos).
+5. Revisar en móvil que los anuncios no tapen botones de juego ni la ruta guiada.
+
+## URLs prioritarias para indexación (GSC)
+
+Ver `scripts/gsc-priority-urls.txt`. Incluye landings Infantil/Primaria/ESO y páginas núcleo Brain Gym.
 
 ## IndexNow
 
@@ -27,12 +32,8 @@ Sitio principal: **https://lipastudios.com** (Netlify `lipastudios`)
 chmod +x scripts/ping-indexnow.sh && ./scripts/ping-indexnow.sh
 ```
 
-## Analytics (retención por juego)
+O: `python3 scripts/submit-indexnow.py` (si SSL local falla, usar curl del README).
 
-En GA4 → Informes → Exploraciones, usar eventos:
+## Cuándo pedir revisión
 
-- `lipa_game_start` — inicios por `game_id`
-- `lipa_game_complete` — partidas terminadas con `score`
-- `lipa_arcade_view` — visitas al hub `/jugar.html`
-
-El panel **Tu progreso** en `/jugar.html` muestra qué minijuegos jugaste esta semana (local).
+Tras el último deploy con landings + home Brain Gym: esperar **2–3 días**, comprobar indexación en GSC, luego **Sitios → Solicitar revisión** en AdSense citando refuerzo escolar y páginas legales.
