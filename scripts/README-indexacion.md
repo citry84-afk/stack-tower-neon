@@ -1,28 +1,40 @@
 # Indexación y Search Console
 
-## Automatizado (ejecutar tras cada deploy GSC)
+## Cuenta y propiedad
+
+- Usar **lipastudios4@gmail.com** → [Search Console](https://search.google.com/search-console) (a veces `/u/1/`).
+- Propiedad: prefijo de URL **`https://lipastudios.com/`** (verificación en `index.html`).
+
+## Tras cada deploy (automático en repo)
 
 ```bash
 python3 scripts/fix-sitemap.py
-python3 scripts/validate-sitemap-live.py
-python3 scripts/submit-indexnow.py
-netlify deploy --prod
+./scripts/ping-indexnow.sh
 ```
 
-- **fix-sitemap.py** — fechas malformadas (`2026-02-01-23…`) y 29-feb en años no bisiestos.
-- **validate-sitemap-live.py** — HEAD/GET a cada URL del sitemap en producción (debe ser 200).
-- **submit-indexnow.py** — avisa a Bing/IndexNow de URLs prioritarias.
+Opcional comprobar sitemap en vivo:
 
-## Solo manual en GSC (tu sesión de Google)
+```bash
+python3 scripts/validate-sitemap-live.py
+```
 
-La cuenta del agente/navegador de Cursor **no** tiene acceso a la propiedad. Tú, con la cuenta verificada:
+## Manual en GSC (solo tú, ~10 URLs/día)
 
-1. [Search Console](https://search.google.com/search-console) → `lipastudios.com` (dominio o prefijo `https://lipastudios.com/`).
-2. **Sitemaps** → borrar entrada rota si existe → añadir `https://lipastudios.com/sitemap.xml` → Enviar.
-3. **Inspección de URLs** → hasta ~10/día: lista en `scripts/gsc-priority-urls.txt` → **Solicitar indexación**.
+1. Entra en **Sitemaps** → confirma `sitemap.xml` en estado correcto (sin errores 404).
+2. Abre **Inspección de URLs**.
+3. Copia una URL de `scripts/gsc-priority-urls.txt` (sección «Tanda actual»).
+4. Pega → **Probar URL publicada** → si OK, **Solicitar indexación**.
+5. Repite hasta **10 solicitudes** o hasta mensaje de **cuota superada** (vuelve al día siguiente).
+6. Cuando termines la tanda, descomenta la «Siguiente tanda» en el `.txt` y muévela arriba.
 
-## Sitemap actual
+### URLs ya priorizadas en deploys recientes
 
-~86 URLs indexables (11 landings Brain Gym, sin las 55 materias `noindex`).
-`robots.txt` declara `Sitemap: https://lipastudios.com/sitemap.xml`.
-`www` redirige 301 a apex (correcto para GSC).
+Home, `cursos.html`, `curso.html`, `materia.html`, `para-padres.html`, `gym-cerebro.html`, landings `4-primaria`, etc. — no hace falta repetirlas salvo que GSC diga «No indexada».
+
+## Sitemap
+
+~88 URLs indexables: 11 landings de curso, funnel Brain Gym, blog, arcade. **No** incluye las 55 páginas materia (`noindex`); `robots.txt` las bloquea al rastreo.
+
+## AdSense
+
+Cuando GSC muestre **15–20 URLs indexadas** (landings + cursos + para padres), espera 2–3 días y pide **revisión** en AdSense. Checklist: `ADSENSE_CHECKLIST.md`.
