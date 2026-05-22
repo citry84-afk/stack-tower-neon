@@ -19,7 +19,7 @@ Sitio principal: **https://lipastudios.com** (Netlify). Producto editorial: **LI
 ## Antes de reaplicar en AdSense
 
 1. **Search Console** (`lipastudios4@gmail.com`): sin errores críticos; sitemap enviado.
-2. Esperar **15–20 URLs indexadas** (landings de curso + `cursos.html` + `para-padres.html` + blog hub).
+2. ~~Esperar **15–20 URLs indexadas**~~ → **21 indexadas** en GSC (22 may 2026). Siguiente: que entren landings clave del funnel (`mi-rutina-cerebro`, `retos-rapidos`, `unidad`, landings curso).
 3. Cuota GSC: máx. ~10 «Solicitar indexación»/día — lista en `scripts/gsc-priority-urls.txt`.
 4. En AdSense → Sitios, solo **lipastudios.com** (sin dominios viejos).
 5. Revisar en móvil que los anuncios no tapen botones de juego ni la ruta guiada.
