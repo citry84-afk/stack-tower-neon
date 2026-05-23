@@ -12,6 +12,8 @@ Propiedad: `https://lipastudios.com/`
 | **Hoy (reintento)** | **Cuota superada** otra vez en `mi-rutina-cerebro.html` |
 | 2026-05-22 (3) | IndexNow ping OK (200). Informe: **21 indexadas**, **87 sin indexar**. Inspección: `retos-rapidos`, `mi-rutina-cerebro` → «Google no reconoce esta URL»; «Solicitar indexación» bloqueada por modal de carga / cuota |
 | **2026-05-22 (4)** | **Batch OK parcial:** `mi-rutina-cerebro` ✓ solicitada, `retos-rapidos` ✓ ya indexada, `unidad` ✓ solicitada. `primaria/5-primaria` → error GSC al solicitar; resto pendiente (cuota/error). Motivos 87 sin indexar documentados en `gsc-non-indexed-reasons.md`. |
+| **2026-05-22 (5)** | **2ª tanda (7 URLs):** solicitadas OK → `primaria/5-primaria`, `infantil/3-anos`, `primaria/2-primaria`, `eso/2-eso`. Ya indexadas → `infantil/4-anos`, `blog/refuerzo-escolar-7-minutos-brain-gym.html`. Error GSC → `primaria/3-primaria` (reintentar). Informe sigue en **21 indexadas** (GSC tarda en actualizar). |
+| **2026-05-22 (6)** | Mejora SEO: enlaces internos funnel en home, cursos, landings (11), entrenador-cerebro, unidad. IndexNow OK. Nueva tanda GSC preparada (10 URLs). |
 
 ## Tanda pendiente (10 URLs)
 

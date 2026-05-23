@@ -487,10 +487,12 @@ def page(c: dict) -> str:
       <a href="/curso.html?c={c['id']}" class="lipa-btn lipa-btn--secondary">Ver todas las materias</a>
     </div>
     <p class="course-landing-links">
-      <a href="/para-padres.html">Informe para padres</a> ·
-      <a href="/cursos.html">Otros cursos</a> ·
-      <a href="/blog/refuerzo-escolar-7-minutos-brain-gym.html">Guía 7 min</a> ·
-      <a href="/">Inicio Brain Gym</a>
+      <a href="/mi-rutina-cerebro.html">Mi rutina</a> ·
+      <a href="/para-padres.html">Para padres</a> ·
+      <a href="/cursos.html">Todos los cursos</a> ·
+      <a href="/entrenador-cerebro.html">Rutina 5 min</a> ·
+      <a href="/retos-rapidos.html">Retos rápidos</a> ·
+      <a href="/blog/refuerzo-escolar-7-minutos-brain-gym.html">Guía 7 min</a>
     </p>
   </main>
 {FOOTER}
