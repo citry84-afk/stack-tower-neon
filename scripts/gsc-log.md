@@ -14,6 +14,8 @@ Propiedad: `https://lipastudios.com/`
 | **2026-05-22 (4)** | **Batch OK parcial:** `mi-rutina-cerebro` ✓ solicitada, `retos-rapidos` ✓ ya indexada, `unidad` ✓ solicitada. `primaria/5-primaria` → error GSC al solicitar; resto pendiente (cuota/error). Motivos 87 sin indexar documentados en `gsc-non-indexed-reasons.md`. |
 | **2026-05-22 (5)** | **2ª tanda (7 URLs):** solicitadas OK → `primaria/5-primaria`, `infantil/3-anos`, `primaria/2-primaria`, `eso/2-eso`. Ya indexadas → `infantil/4-anos`, `blog/refuerzo-escolar-7-minutos-brain-gym.html`. Error GSC → `primaria/3-primaria` (reintentar). Informe sigue en **21 indexadas** (GSC tarda en actualizar). |
 | **2026-05-22 (6)** | Mejora SEO: enlaces internos funnel en home, cursos, landings (11), entrenador-cerebro, unidad. IndexNow OK. Nueva tanda GSC preparada (10 URLs). |
+| **2026-05-19** | **Push `1aff390`** (enlaces internos). IndexNow OK (200). **Batch GSC bloqueado:** cuota superada al solicitar `primaria/3-primaria` («Google no reconoce esta URL»). Reintentar mañana las 10 URLs de `gsc-priority-urls.txt`. |
+| **2026-05-19 (2)** | Reintento batch: inspección `entrenador-cerebro.html` → «no reconoce URL»; **cuota superada** al solicitar. **Sitemap** `sitemap.xml` reenviado en GSC. **IndexNow** 10 URLs prioridad → HTTP 200. Informe Páginas: **21 indexadas**, **87 sin indexar** (sin cambio aún). URLs live OK (200). |
 
 ## Tanda pendiente (10 URLs)
 
