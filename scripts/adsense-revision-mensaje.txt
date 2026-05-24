@@ -1,0 +1,29 @@
+Asunto: Revisión de lipastudios.com — LIPA Brain Gym (refuerzo escolar)
+
+Hola,
+
+Solicito revisión del sitio https://lipastudios.com tras mejoras de contenido e indexación.
+
+Qué es el sitio:
+- Plataforma educativa LIPA Brain Gym: rutinas cortas de refuerzo escolar (LOMLOE) para Infantil, Primaria y ESO.
+- Incluye landings por curso, blog con guías para familias, páginas legales y panel para padres.
+
+Mejoras recientes:
+- 11 landings de curso con contenido editorial y enlaces internos al funnel (cursos, rutina, padres).
+- Home y cursos.html con guía Brain Gym y cross-links a herramientas principales.
+- Blog ampliado con artículos de refuerzo, cálculo mental y rutinas de 5–7 minutos.
+- Páginas legales: about, contact, privacy, terms, help, editorial, disclaimer.
+- ads.txt verificado; Consent Mode v2 activo.
+
+Indexación (Google Search Console, propiedad https://lipastudios.com/):
+- 21+ páginas indexadas; sitemap.xml enviado; solicitudes de indexación en curso para landings Brain Gym.
+
+URLs representativas:
+- https://lipastudios.com/
+- https://lipastudios.com/cursos.html
+- https://lipastudios.com/gym-cerebro.html
+- https://lipastudios.com/primaria/4-primaria
+- https://lipastudios.com/para-padres.html
+- https://lipastudios.com/about.html
+
+Gracias por revisar el sitio.

@@ -38,4 +38,11 @@ O: `python3 scripts/submit-indexnow.py` (si SSL local falla, usar curl del READM
 
 ## Cuándo pedir revisión
 
-Tras el último deploy con landings + home Brain Gym: esperar **2–3 días**, comprobar indexación en GSC, luego **Sitios → Solicitar revisión** en AdSense citando refuerzo escolar y páginas legales.
+**Listo para pedir revisión** (21+ indexadas, deploy con funnel + blog). Pasos:
+
+1. [AdSense](https://adsense.google.com) → **Sitios** → `lipastudios.com`
+2. Si aparece «Contenido de poco valor» o «Preparando» → **Solicitar revisión**
+3. Copiar/adaptar el texto de `scripts/adsense-revision-mensaje.txt` (español, breve)
+4. Comprobar en móvil: anuncios no tapan botones de juego ni la ruta guiada
+
+No hace falta esperar a 50 indexadas; puedes volver a solicitar si GSC sube a ~30 en una semana.
