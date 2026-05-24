@@ -1,23 +1,20 @@
 # Máx. ~10 «Solicitar indexación» por día en GSC (cuenta lipastudios4@gmail.com).
 
-# --- Tanda actual (10) — solicitar en GSC ---
+# --- Tanda actual — reintentos + nuevas (máx. 10) ---
 https://lipastudios.com/primaria/3-primaria
-https://lipastudios.com/entrenador-cerebro.html
-https://lipastudios.com/primaria/1-primaria
-https://lipastudios.com/primaria/6-primaria
-https://lipastudios.com/infantil/5-anos
 https://lipastudios.com/eso/1-eso
-https://lipastudios.com/blog/calculo-mental-5-minutos.html
 https://lipastudios.com/blog/gym-cerebro-reflejos-mates.html
-https://lipastudios.com/guia-reflejos.html
-https://lipastudios.com/about.html
+https://lipastudios.com/juegos-de-reflejos.html
+https://lipastudios.com/primaria/4-primaria
+https://lipastudios.com/gym-cerebro.html
+https://lipastudios.com/mi-evolucion.html
+https://lipastudios.com/mi-rutina-cerebro.html
+https://lipastudios.com/cursos.html
+https://lipastudios.com/para-padres.html
 
-# --- Completadas (no repetir salvo «no indexada») ---
-# mi-rutina-cerebro, unidad, retos-rapidos (indexada), primaria/5, infantil/3-anos,
-# primaria/2, eso/2-eso, infantil/4-anos, blog/refuerzo-7-min (indexada)
+# --- Completadas batch 2026-05-20 (no repetir salvo «no indexada») ---
+# primaria/1-primaria, guia-reflejos.html (ya indexadas)
+# primaria/6-primaria, infantil/5-anos, about.html, blog/calculo-mental-5-minutos.html, entrenador-cerebro.html (solicitadas)
 
-# --- Siguiente tanda ---
-# https://lipastudios.com/juegos-de-reflejos.html
-# https://lipastudios.com/primaria/4-primaria
-# https://lipastudios.com/gym-cerebro.html
-# https://lipastudios.com/mi-evolucion.html
+# --- Completadas anteriores ---
+# mi-rutina-cerebro, unidad, retos-rapidos, primaria/5, infantil/3-anos, primaria/2, eso/2-eso, infantil/4-anos, blog/refuerzo-7-min
