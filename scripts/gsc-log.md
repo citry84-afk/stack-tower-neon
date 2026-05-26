@@ -18,6 +18,7 @@ Propiedad: `https://lipastudios.com/`
 | **2026-05-19 (2)** | Reintento batch: inspección `entrenador-cerebro.html` → «no reconoce URL»; **cuota superada** al solicitar. **Sitemap** `sitemap.xml` reenviado en GSC. **IndexNow** 10 URLs prioridad → HTTP 200. Informe Páginas: **21 indexadas**, **87 sin indexar** (sin cambio aún). URLs live OK (200). |
 | **2026-05-20** | **Batch 10 URLs OK parcial.** IndexNow 10 URLs → HTTP 200. **Ya indexadas:** `primaria/1-primaria`, `guia-reflejos.html`. **Solicitadas OK:** `primaria/6-primaria`, `infantil/5-anos`, `about.html`, `blog/calculo-mental-5-minutos.html`, `entrenador-cerebro.html`. **Error GSC:** `eso/1-eso`, `blog/gym-cerebro-reflejos-mates.html`. **Pendiente:** `primaria/3-primaria` (modal colgado). Informe sigue **21/87** (GSC tarda días). |
 | **2026-05-21** | IndexNow tanda actual OK (200). Inspección `cursos.html` → **ya indexada**. `para-padres` en curso. **GSC:** sesión cerrada en navegador automático → requiere login manual `lipastudios4@gmail.com` para seguir batch. |
+| **2026-05-26** | Push `434184e`: enlaces internos en `cursos.html` y `para-padres.html`. IndexNow tanda actual OK (200). Más enlaces en `mi-evolucion.html`. GSC automático: login requerido (`lipastudios4@gmail.com`). |
 
 ## Tanda pendiente (reintentos + siguiente)
 
