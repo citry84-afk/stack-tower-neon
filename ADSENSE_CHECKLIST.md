@@ -36,6 +36,31 @@ chmod +x scripts/ping-indexnow.sh && ./scripts/ping-indexnow.sh
 
 O: `python3 scripts/submit-indexnow.py` (si SSL local falla, usar curl del README).
 
+## ads.txt en AdSense («No se encuentra»)
+
+El archivo **sí está publicado**: [https://lipastudios.com/ads.txt](https://lipastudios.com/ads.txt)
+
+```
+google.com, pub-4837743291717475, DIRECT, f08c47fec0942fa0
+```
+
+Si en **Sitios** sigue en amarillo:
+
+1. Comprueba que el sitio en AdSense es **`lipastudios.com`** (sin `www`, sin Netlify).
+2. Tras el último deploy, espera **24–72 h**; la fecha «Última actualización» en AdSense a veces tarda en refrescarse.
+3. Abre la fila del sitio → revisa de nuevo el estado de `ads.txt`.
+
+## Código AdSense (`ca-pub-4837743291717475`)
+
+El snippet oficial se inyecta desde **`/consent.js`** en todas las páginas que lo incluyen:
+
+```html
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4837743291717475" crossorigin="anonymous"></script>
+```
+
+- El script se carga **siempre** (para que Google lo detecte).
+- Los bloques `<ins class="adsbygoogle">` solo se rellenan si el usuario **acepta cookies** (Consent Mode v2).
+
 ## Cuándo pedir revisión
 
 **Listo para pedir revisión** (21+ indexadas, deploy con funnel + blog). Pasos:

@@ -23,16 +23,28 @@
     } catch (e) { /* ignore */ }
   }
 
-  function loadAdSense() {
-    if (document.querySelector('script[src*="adsbygoogle"]')) {
-      fillAdSlots();
+  function ensureAdSenseScript(onReady) {
+    var existing = document.querySelector('script[src*="adsbygoogle"]');
+    if (existing) {
+      if (onReady) {
+        if (existing.getAttribute('data-lipa-loaded') === '1') onReady();
+        else existing.addEventListener('load', onReady, { once: true });
+      }
       return;
     }
     var s = document.createElement('script');
     s.async = true;
-    s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + ADSENSE_CLIENT + '&crossorigin=anonymous';
+    s.crossOrigin = 'anonymous';
+    s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + ADSENSE_CLIENT;
+    s.onload = function () {
+      s.setAttribute('data-lipa-loaded', '1');
+      if (onReady) onReady();
+    };
     document.head.appendChild(s);
-    s.onload = function () { fillAdSlots(); };
+  }
+
+  function loadAdSense() {
+    ensureAdSenseScript(fillAdSlots);
   }
 
   function apply(status){
@@ -47,6 +59,11 @@
   }
 
   function store(status){ try { localStorage.setItem(CHOICE_KEY, JSON.stringify({ status, ts: Date.now() })); } catch(e){} }
+
+  // Script AdSense siempre en <head> (crawler + Consent Mode v2); slots solo con consentimiento.
+  ensureAdSenseScript(function () {
+    if (saved && saved.status === 'granted') fillAdSlots();
+  });
 
   if (saved && saved.status) {
     apply(saved.status);
