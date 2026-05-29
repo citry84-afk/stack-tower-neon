@@ -138,114 +138,6 @@
     });
   }
 
-  function primaria4Naturales() {
-    return primaria3Naturales().map(function (u, i) {
-      return unit(
-        'p4-n-u' + (i + 1),
-        u.title,
-        u.description,
-        u.activities.map(function (a) {
-          var copy = {};
-          var k;
-          for (k in a) if (Object.prototype.hasOwnProperty.call(a, k)) copy[k] = a[k];
-          copy.id = (a.id || '').replace(/^p3-/, 'p4-');
-          if (copy.brainLevel) copy.brainLevel = Math.min(12, copy.brainLevel + 1);
-          return copy;
-        })
-      );
-    });
-  }
-
-  function primaria4Sociales() {
-    return primaria3Sociales().map(function (u, i) {
-      return unit(
-        'p4-s-u' + (i + 1),
-        u.title,
-        u.description,
-        u.activities.map(function (a) {
-          var copy = {};
-          var k;
-          for (k in a) if (Object.prototype.hasOwnProperty.call(a, k)) copy[k] = a[k];
-          copy.id = (a.id || '').replace(/^p3-/, 'p4-');
-          if (copy.brainLevel) copy.brainLevel = Math.min(12, copy.brainLevel + 1);
-          return copy;
-        })
-      );
-    });
-  }
-
-  function primaria5Naturales() {
-    return primaria4Naturales().map(function (u, i) {
-      return unit(
-        'p5-n-u' + (i + 1),
-        u.title,
-        u.description,
-        u.activities.map(function (a) {
-          var copy = {};
-          var k;
-          for (k in a) if (Object.prototype.hasOwnProperty.call(a, k)) copy[k] = a[k];
-          copy.id = (a.id || '').replace(/^p4-/, 'p5-');
-          if (copy.brainLevel) copy.brainLevel = Math.min(12, copy.brainLevel + 1);
-          return copy;
-        })
-      );
-    });
-  }
-
-  function primaria5Sociales() {
-    return primaria4Sociales().map(function (u, i) {
-      return unit(
-        'p5-s-u' + (i + 1),
-        u.title,
-        u.description,
-        u.activities.map(function (a) {
-          var copy = {};
-          var k;
-          for (k in a) if (Object.prototype.hasOwnProperty.call(a, k)) copy[k] = a[k];
-          copy.id = (a.id || '').replace(/^p4-/, 'p5-');
-          if (copy.brainLevel) copy.brainLevel = Math.min(12, copy.brainLevel + 1);
-          return copy;
-        })
-      );
-    });
-  }
-
-  function primaria6Naturales() {
-    return primaria5Naturales().map(function (u, i) {
-      return unit(
-        'p6-n-u' + (i + 1),
-        u.title,
-        u.description,
-        u.activities.map(function (a) {
-          var copy = {};
-          var k;
-          for (k in a) if (Object.prototype.hasOwnProperty.call(a, k)) copy[k] = a[k];
-          copy.id = (a.id || '').replace(/^p5-/, 'p6-');
-          if (copy.brainLevel) copy.brainLevel = Math.min(12, copy.brainLevel + 1);
-          return copy;
-        })
-      );
-    });
-  }
-
-  function primaria6Sociales() {
-    return primaria5Sociales().map(function (u, i) {
-      return unit(
-        'p6-s-u' + (i + 1),
-        u.title,
-        u.description,
-        u.activities.map(function (a) {
-          var copy = {};
-          var k;
-          for (k in a) if (Object.prototype.hasOwnProperty.call(a, k)) copy[k] = a[k];
-          copy.id = (a.id || '').replace(/^p5-/, 'p6-');
-          if (copy.brainLevel) copy.brainLevel = Math.min(12, copy.brainLevel + 1);
-          return copy;
-        })
-      );
-    });
-  }
-
   function infSid(tier, subLetter, num) {
     var n = num < 10 ? '0' + num : String(num);
     return infantilSaberPrefix(tier) + '-' + subLetter + '-' + n;
@@ -1030,54 +922,452 @@
     });
   }
 
+  /** —— 4º Primaria (LOMLOE RD 157/2022) —— */
+  function primaria4Math() {
+    return [
+      unit('p4-m-num', 'Números hasta 10.000', 'LOMLOE · valor posicional y comparación.', [
+        liveGame('p4-m-num1', 'Tablas express', 'tablas-relampago', 2, 4, null, 'p4-m-a1'),
+        liveMates('p4-m-num2', 'Cálculo mental', 1, 2, 5, null, 'p4-m-a1'),
+        liveGame('p4-m-num3', 'Mix operaciones', 'neon-calculo', 3, 5, null, 'p4-m-a1'),
+        liveMates('p4-m-num4', 'Dos pasos', 2, 3, 6, null, 'p4-m-a1'),
+        soon('p4-m-num5', 'Misión Números hasta 10.000', 'quiz', 5)
+      ], { saberIds: ['p4-m-a1'] }),
+      unit('p4-m-ops', 'Multiplicación y división', 'LOMLOE · productos y repartos con números mayores.', [
+        liveGame('p4-m-ops1', 'Tablas express', 'tablas-relampago', 2, 4, null, 'p4-m-a2'),
+        liveMates('p4-m-ops2', 'Cálculo mental', 1, 2, 5, null, 'p4-m-a2'),
+        liveGame('p4-m-ops3', 'Mix operaciones', 'neon-calculo', 3, 5, null, 'p4-m-a2'),
+        liveMates('p4-m-ops4', 'Dos pasos', 2, 3, 6, null, 'p4-m-a2'),
+        soon('p4-m-ops5', 'Misión Multiplicación y división', 'quiz', 5)
+      ], { saberIds: ['p4-m-a2'] }),
+      unit('p4-m-frac', 'Fracciones equivalentes', 'LOMLOE · comparar y simplificar fracciones.', [
+        liveGame('p4-m-frac1', 'Tablas express', 'tablas-relampago', 2, 4, null, 'p4-m-a3'),
+        liveMates('p4-m-frac2', 'Cálculo mental', 1, 2, 5, null, 'p4-m-a3'),
+        liveGame('p4-m-frac3', 'Mix operaciones', 'neon-calculo', 3, 5, null, 'p4-m-a3'),
+        liveMates('p4-m-frac4', 'Dos pasos', 2, 3, 6, null, 'p4-m-a3'),
+        soon('p4-m-frac5', 'Misión Fracciones equivalentes', 'quiz', 5)
+      ], { saberIds: ['p4-m-a3'] }),
+      unit('p4-m-dec', 'Decimales', 'LOMLOE · décimas, centésimas y cálculo.', [
+        liveGame('p4-m-dec1', 'Tablas express', 'tablas-relampago', 2, 4, null, 'p4-m-b1'),
+        liveMates('p4-m-dec2', 'Cálculo mental', 1, 2, 5, null, 'p4-m-b1'),
+        liveGame('p4-m-dec3', 'Mix operaciones', 'neon-calculo', 3, 5, null, 'p4-m-b1'),
+        liveMates('p4-m-dec4', 'Dos pasos', 2, 3, 6, null, 'p4-m-b1'),
+        soon('p4-m-dec5', 'Misión Decimales', 'quiz', 5)
+      ], { saberIds: ['p4-m-b1'] }),
+      unit('p4-m-prob', 'Problemas multiplicativos', 'LOMLOE · planificar operaciones combinadas.', [
+        liveGame('p4-m-prob1', 'Tablas express', 'tablas-relampago', 2, 4, null, 'p4-m-a4'),
+        liveMates('p4-m-prob2', 'Cálculo mental', 1, 2, 5, null, 'p4-m-a4'),
+        liveGame('p4-m-prob3', 'Mix operaciones', 'neon-calculo', 3, 5, null, 'p4-m-a4'),
+        liveMates('p4-m-prob4', 'Dos pasos', 2, 3, 6, null, 'p4-m-a4'),
+        soon('p4-m-prob5', 'Misión Problemas multiplicativos', 'quiz', 5)
+      ], { saberIds: ['p4-m-a4'] }),
+    ];
+  }
+
   function primaria4Lengua() {
-    return remapUnits(primaria3Lengua(), 'p4-l', 'p3-', 'p4-', 1);
-  }
-
-  function primaria5Lengua() {
-    return remapUnits(primaria3Lengua(), 'p5-l', 'p3-', 'p5-', 2);
-  }
-
-  function primaria6Lengua() {
-    return remapUnits(primaria3Lengua(), 'p6-l', 'p3-', 'p6-', 3);
+    return [
+      unit('p4-l-textos', 'Comprensión lectora', 'LOMLOE · textos para 4º.', [
+        liveLengua('p4-l-textos1', 'Lee y responde', 'neon-lectura', 2, 'Comprensión', 9, 'p4-l-c1'),
+        liveLenguaRot('p4-l-textos2', 'Ordena la frase', 2, 2, 'Sintaxis', 9, 'p4-l-c1'),
+        liveLenguaRot('p4-l-textos3', 'Completa', 1, 3, 'Ortografía', 9, 'p4-l-c1'),
+        soon('p4-l-textos4', 'Dictado', 'listening', 4),
+        soon('p4-l-textos5', 'Misión lengua', 'quiz', 5)
+      ], { saberIds: ['p4-l-c1'] }),
+      unit('p4-l-orto', 'Ortografía', 'LOMLOE · reglas ortográficas de 4º.', [
+        liveLengua('p4-l-orto1', 'Lee y responde', 'neon-lectura', 2, 'Comprensión', 9, 'p4-l-c2'),
+        liveLenguaRot('p4-l-orto2', 'Ordena la frase', 2, 2, 'Sintaxis', 9, 'p4-l-c2'),
+        liveLenguaRot('p4-l-orto3', 'Completa', 1, 3, 'Ortografía', 9, 'p4-l-c2'),
+        soon('p4-l-orto4', 'Dictado', 'listening', 4),
+        soon('p4-l-orto5', 'Misión lengua', 'quiz', 5)
+      ], { saberIds: ['p4-l-c2'] }),
+      unit('p4-l-gram', 'Sintaxis y literatura', 'LOMLOE · gramática y géneros literarios.', [
+        liveLengua('p4-l-gram1', 'Lee y responde', 'neon-lectura', 2, 'Comprensión', 9, 'p4-l-c3'),
+        liveLenguaRot('p4-l-gram2', 'Ordena la frase', 2, 2, 'Sintaxis', 9, 'p4-l-c3'),
+        liveLenguaRot('p4-l-gram3', 'Completa', 1, 3, 'Ortografía', 9, 'p4-l-c3'),
+        soon('p4-l-gram4', 'Dictado', 'listening', 4),
+        soon('p4-l-gram5', 'Misión lengua', 'quiz', 5)
+      ], { saberIds: ['p4-l-c3'] }),
+    ];
   }
 
   function primaria4Ingles() {
-    return remapUnits(primaria3Ingles(), 'p4-i', 'p3-', 'p4-', 1);
+    return [
+      unit('p4-i-past', 'Past simple', 'LOMLOE · acciones pasadas.', [
+        liveIngles('p4-i-past1', 'Vocab drill', 0, 1, 4, null, 'p4-i-e1'),
+        liveIngles('p4-i-past2', 'Listen & tap', 1, 2, 4, null, 'p4-i-e1'),
+        soon('p4-i-past3', 'Fill the gap', 'typing', 3),
+        soon('p4-i-past4', 'Grammar quiz', 'quiz', 4),
+        soon('p4-i-past5', 'English mission', 'quiz', 5)
+      ], { saberIds: ['p4-i-e1'] }),
+      unit('p4-i-comp', 'Comparatives', 'LOMLOE · comparar en inglés.', [
+        liveIngles('p4-i-comp1', 'Vocab drill', 0, 1, 4, null, 'p4-i-e2'),
+        liveIngles('p4-i-comp2', 'Listen & tap', 1, 2, 4, null, 'p4-i-e2'),
+        soon('p4-i-comp3', 'Fill the gap', 'typing', 3),
+        soon('p4-i-comp4', 'Grammar quiz', 'quiz', 4),
+        soon('p4-i-comp5', 'English mission', 'quiz', 5)
+      ], { saberIds: ['p4-i-e2'] }),
+      unit('p4-i-read', 'Reading comprehension', 'LOMLOE · leer y responder.', [
+        liveIngles('p4-i-read1', 'Vocab drill', 0, 1, 4, null, 'p4-i-e3'),
+        liveIngles('p4-i-read2', 'Listen & tap', 1, 2, 4, null, 'p4-i-e3'),
+        soon('p4-i-read3', 'Fill the gap', 'typing', 3),
+        soon('p4-i-read4', 'Grammar quiz', 'quiz', 4),
+        soon('p4-i-read5', 'English mission', 'quiz', 5)
+      ], { saberIds: ['p4-i-e3'] }),
+    ];
   }
 
-  function primaria5Ingles() {
-    return remapUnits(primaria3Ingles(), 'p5-i', 'p3-', 'p5-', 2);
+  function primaria4Naturales() {
+    return [
+      unit('p4-n-cel', 'Célula y clasificación', 'LOMLOE · seres vivos y funciones vitales.', [
+        liveNaturalesRot('p4-n-cel1', 'Preguntas', 1, 2, 'Ciencia', 9, 'p4-n-b1'),
+        liveNaturalesRot('p4-n-cel2', 'Verdadero o falso', 2, 2, 'Lee', 9, 'p4-n-b1'),
+        liveNaturalesRot('p4-n-cel3', 'Clasifica', 0, 3, 'Naturales', 9, 'p4-n-b1'),
+        liveNaturalesRot('p4-n-cel4', 'Experimento virtual', 1, 3, 'Comprensión', 10, 'p4-n-b1'),
+        liveNaturalesRot('p4-n-cel5', 'Reto científico', 2, 4, 'Misión', 10, 'p4-n-b1')
+      ], { saberIds: ['p4-n-b1'] }),
+      unit('p4-n-sal', 'Salud y consumo', 'LOMLOE · hábitos y alimentación.', [
+        liveNaturalesRot('p4-n-sal1', 'Preguntas', 1, 2, 'Ciencia', 9, 'p4-n-b2'),
+        liveNaturalesRot('p4-n-sal2', 'Verdadero o falso', 2, 2, 'Lee', 9, 'p4-n-b2'),
+        liveNaturalesRot('p4-n-sal3', 'Clasifica', 0, 3, 'Naturales', 9, 'p4-n-b2'),
+        liveNaturalesRot('p4-n-sal4', 'Experimento virtual', 1, 3, 'Comprensión', 10, 'p4-n-b2'),
+        liveNaturalesRot('p4-n-sal5', 'Reto científico', 2, 4, 'Misión', 10, 'p4-n-b2')
+      ], { saberIds: ['p4-n-b2'] }),
+      unit('p4-n-fuer', 'Fuerzas y máquinas', 'LOMLOE · movimiento y energía mecánica.', [
+        liveNaturalesRot('p4-n-fuer1', 'Preguntas', 1, 2, 'Ciencia', 9, 'p4-n-b3'),
+        liveNaturalesRot('p4-n-fuer2', 'Verdadero o falso', 2, 2, 'Lee', 9, 'p4-n-b3'),
+        liveNaturalesRot('p4-n-fuer3', 'Clasifica', 0, 3, 'Naturales', 9, 'p4-n-b3'),
+        liveNaturalesRot('p4-n-fuer4', 'Experimento virtual', 1, 3, 'Comprensión', 10, 'p4-n-b3'),
+        liveNaturalesRot('p4-n-fuer5', 'Reto científico', 2, 4, 'Misión', 10, 'p4-n-b3')
+      ], { saberIds: ['p4-n-b3'] }),
+    ];
   }
 
-  function primaria6Ingles() {
-    return remapUnits(primaria3Ingles(), 'p6-i', 'p3-', 'p6-', 3);
-  }
-
-  function primaria4Math() {
-    return remapUnits(primaria3Math(), 'p4-m', 'p3-', 'p4-', 1);
-  }
-
-  function primaria5Math() {
-    return remapUnits(primaria3Math(), 'p5-m', 'p3-', 'p5-', 2);
-  }
-
-  function primaria6Math() {
-    return remapUnits(primaria3Math(), 'p6-m', 'p3-', 'p6-', 3);
+  function primaria4Sociales() {
+    return [
+      unit('p4-s-der', 'Derechos y participación', 'LOMLOE · democracia local.', [
+        liveSocialesRot('p4-s-der1', 'Lee y responde', 1, 2, 'Historia', 9, 'p4-s-b1'),
+        liveSocialesRot('p4-s-der2', 'Mapas', 0, 2, 'Geografía', 9, 'p4-s-b1'),
+        liveSocialesRot('p4-s-der3', 'Ordena', 2, 3, 'Convivencia', 9, 'p4-s-b1'),
+        liveSocialesRot('p4-s-der4', 'Debate corto', 1, 3, 'Ciudadanía', 10, 'p4-s-b1'),
+        liveSocialesRot('p4-s-der5', 'Misión social', 2, 4, 'Reto', 10, 'p4-s-b1')
+      ], { saberIds: ['p4-s-b1'] }),
+      unit('p4-s-auto', 'Autonomías y economía', 'LOMLOE · territorio y recursos.', [
+        liveSocialesRot('p4-s-auto1', 'Lee y responde', 1, 2, 'Historia', 9, 'p4-s-b2'),
+        liveSocialesRot('p4-s-auto2', 'Mapas', 0, 2, 'Geografía', 9, 'p4-s-b2'),
+        liveSocialesRot('p4-s-auto3', 'Ordena', 2, 3, 'Convivencia', 9, 'p4-s-b2'),
+        liveSocialesRot('p4-s-auto4', 'Debate corto', 1, 3, 'Ciudadanía', 10, 'p4-s-b2'),
+        liveSocialesRot('p4-s-auto5', 'Misión social', 2, 4, 'Reto', 10, 'p4-s-b2')
+      ], { saberIds: ['p4-s-b2'] }),
+      unit('p4-s-mod', 'Edad Moderna temprana', 'LOMLOE · descubrimientos.', [
+        liveSocialesRot('p4-s-mod1', 'Lee y responde', 1, 2, 'Historia', 9, 'p4-s-b3'),
+        liveSocialesRot('p4-s-mod2', 'Mapas', 0, 2, 'Geografía', 9, 'p4-s-b3'),
+        liveSocialesRot('p4-s-mod3', 'Ordena', 2, 3, 'Convivencia', 9, 'p4-s-b3'),
+        liveSocialesRot('p4-s-mod4', 'Debate corto', 1, 3, 'Ciudadanía', 10, 'p4-s-b3'),
+        liveSocialesRot('p4-s-mod5', 'Misión social', 2, 4, 'Reto', 10, 'p4-s-b3')
+      ], { saberIds: ['p4-s-b3'] }),
+    ];
   }
 
   function primaria4Daily() {
-    return remapUnits(primaria3Daily(), 'p4-d', 'p3-', 'p4-', 1);
+    return mapDailyFromP1('p4', 3);
+  }
+
+  /** —— 5º Primaria (LOMLOE RD 157/2022) —— */
+  function primaria5Math() {
+    return [
+      unit('p5-m-dec', 'Operaciones con decimales', 'LOMLOE · sumar, restar y multiplicar decimales.', [
+        liveGame('p5-m-dec1', 'Tablas express', 'tablas-relampago', 2, 5, null, 'p5-m-a1'),
+        liveMates('p5-m-dec2', 'Cálculo mental', 1, 2, 6, null, 'p5-m-a1'),
+        liveGame('p5-m-dec3', 'Mix operaciones', 'neon-calculo', 3, 6, null, 'p5-m-a1'),
+        liveMates('p5-m-dec4', 'Dos pasos', 2, 3, 7, null, 'p5-m-a1'),
+        soon('p5-m-dec5', 'Misión Operaciones con decimales', 'quiz', 5)
+      ], { saberIds: ['p5-m-a1'] }),
+      unit('p5-m-frac', 'Fracciones y decimales', 'LOMLOE · equivalencias y comparación.', [
+        liveGame('p5-m-frac1', 'Tablas express', 'tablas-relampago', 2, 5, null, 'p5-m-a2'),
+        liveMates('p5-m-frac2', 'Cálculo mental', 1, 2, 6, null, 'p5-m-a2'),
+        liveGame('p5-m-frac3', 'Mix operaciones', 'neon-calculo', 3, 6, null, 'p5-m-a2'),
+        liveMates('p5-m-frac4', 'Dos pasos', 2, 3, 7, null, 'p5-m-a2'),
+        soon('p5-m-frac5', 'Misión Fracciones y decimales', 'quiz', 5)
+      ], { saberIds: ['p5-m-a2'] }),
+      unit('p5-m-pct', 'Porcentajes básicos', 'LOMLOE · descuentos y partes de un todo.', [
+        liveGame('p5-m-pct1', 'Tablas express', 'tablas-relampago', 2, 5, null, 'p5-m-a3'),
+        liveMates('p5-m-pct2', 'Cálculo mental', 1, 2, 6, null, 'p5-m-a3'),
+        liveGame('p5-m-pct3', 'Mix operaciones', 'neon-calculo', 3, 6, null, 'p5-m-a3'),
+        liveMates('p5-m-pct4', 'Dos pasos', 2, 3, 7, null, 'p5-m-a3'),
+        soon('p5-m-pct5', 'Misión Porcentajes básicos', 'quiz', 5)
+      ], { saberIds: ['p5-m-a3'] }),
+      unit('p5-m-med', 'Área y volumen', 'LOMLOE · medidas, perímetro y volumen.', [
+        liveGame('p5-m-med1', 'Tablas express', 'tablas-relampago', 2, 5, null, 'p5-m-b1'),
+        liveMates('p5-m-med2', 'Cálculo mental', 1, 2, 6, null, 'p5-m-b1'),
+        liveGame('p5-m-med3', 'Mix operaciones', 'neon-calculo', 3, 6, null, 'p5-m-b1'),
+        liveMates('p5-m-med4', 'Dos pasos', 2, 3, 7, null, 'p5-m-b1'),
+        soon('p5-m-med5', 'Misión Área y volumen', 'quiz', 5)
+      ], { saberIds: ['p5-m-b1'] }),
+      unit('p5-m-prop', 'Problemas de proporción', 'LOMLOE · escalas y repartos proporcionales.', [
+        liveGame('p5-m-prop1', 'Tablas express', 'tablas-relampago', 2, 5, null, 'p5-m-a4'),
+        liveMates('p5-m-prop2', 'Cálculo mental', 1, 2, 6, null, 'p5-m-a4'),
+        liveGame('p5-m-prop3', 'Mix operaciones', 'neon-calculo', 3, 6, null, 'p5-m-a4'),
+        liveMates('p5-m-prop4', 'Dos pasos', 2, 3, 7, null, 'p5-m-a4'),
+        soon('p5-m-prop5', 'Misión Problemas de proporción', 'quiz', 5)
+      ], { saberIds: ['p5-m-a4'] }),
+    ];
+  }
+
+  function primaria5Lengua() {
+    return [
+      unit('p5-l-arg', 'Textos argumentativos', 'LOMLOE · opinión y causa-consecuencia.', [
+        liveLengua('p5-l-arg1', 'Lee y responde', 'neon-lectura', 2, 'Comprensión', 10, 'p5-l-c1'),
+        liveLenguaRot('p5-l-arg2', 'Ordena la frase', 2, 2, 'Sintaxis', 10, 'p5-l-c1'),
+        liveLenguaRot('p5-l-arg3', 'Completa', 1, 3, 'Ortografía', 10, 'p5-l-c1'),
+        soon('p5-l-arg4', 'Dictado', 'listening', 4),
+        soon('p5-l-arg5', 'Misión lengua', 'quiz', 5)
+      ], { saberIds: ['p5-l-c1'] }),
+      unit('p5-l-orto', 'Ortografía', 'LOMLOE · reglas ortográficas de 5º.', [
+        liveLengua('p5-l-orto1', 'Lee y responde', 'neon-lectura', 2, 'Comprensión', 10, 'p5-l-c2'),
+        liveLenguaRot('p5-l-orto2', 'Ordena la frase', 2, 2, 'Sintaxis', 10, 'p5-l-c2'),
+        liveLenguaRot('p5-l-orto3', 'Completa', 1, 3, 'Ortografía', 10, 'p5-l-c2'),
+        soon('p5-l-orto4', 'Dictado', 'listening', 4),
+        soon('p5-l-orto5', 'Misión lengua', 'quiz', 5)
+      ], { saberIds: ['p5-l-c2'] }),
+      unit('p5-l-gram', 'Gramática avanzada', 'LOMLOE · oración compuesta.', [
+        liveLengua('p5-l-gram1', 'Lee y responde', 'neon-lectura', 2, 'Comprensión', 10, 'p5-l-c3'),
+        liveLenguaRot('p5-l-gram2', 'Ordena la frase', 2, 2, 'Sintaxis', 10, 'p5-l-c3'),
+        liveLenguaRot('p5-l-gram3', 'Completa', 1, 3, 'Ortografía', 10, 'p5-l-c3'),
+        soon('p5-l-gram4', 'Dictado', 'listening', 4),
+        soon('p5-l-gram5', 'Misión lengua', 'quiz', 5)
+      ], { saberIds: ['p5-l-c3'] }),
+    ];
+  }
+
+  function primaria5Ingles() {
+    return [
+      unit('p5-i-perf', 'Present perfect', 'LOMLOE · experiencias recientes.', [
+        liveIngles('p5-i-perf1', 'Vocab drill', 0, 1, 5, null, 'p5-i-e1'),
+        liveIngles('p5-i-perf2', 'Listen & tap', 1, 2, 5, null, 'p5-i-e1'),
+        soon('p5-i-perf3', 'Fill the gap', 'typing', 3),
+        soon('p5-i-perf4', 'Grammar quiz', 'quiz', 4),
+        soon('p5-i-perf5', 'English mission', 'quiz', 5)
+      ], { saberIds: ['p5-i-e1'] }),
+      unit('p5-i-fut', 'Future forms', 'LOMLOE · will y going to.', [
+        liveIngles('p5-i-fut1', 'Vocab drill', 0, 1, 5, null, 'p5-i-e2'),
+        liveIngles('p5-i-fut2', 'Listen & tap', 1, 2, 5, null, 'p5-i-e2'),
+        soon('p5-i-fut3', 'Fill the gap', 'typing', 3),
+        soon('p5-i-fut4', 'Grammar quiz', 'quiz', 4),
+        soon('p5-i-fut5', 'English mission', 'quiz', 5)
+      ], { saberIds: ['p5-i-e2'] }),
+      unit('p5-i-oral', 'Oral presentations', 'LOMLOE · exponer ideas.', [
+        liveIngles('p5-i-oral1', 'Vocab drill', 0, 1, 5, null, 'p5-i-e3'),
+        liveIngles('p5-i-oral2', 'Listen & tap', 1, 2, 5, null, 'p5-i-e3'),
+        soon('p5-i-oral3', 'Fill the gap', 'typing', 3),
+        soon('p5-i-oral4', 'Grammar quiz', 'quiz', 4),
+        soon('p5-i-oral5', 'English mission', 'quiz', 5)
+      ], { saberIds: ['p5-i-e3'] }),
+    ];
+  }
+
+  function primaria5Naturales() {
+    return [
+      unit('p5-n-rep', 'Reproducción y herencia', 'LOMLOE · ciclos vitales.', [
+        liveNaturalesRot('p5-n-rep1', 'Preguntas', 1, 2, 'Ciencia', 10, 'p5-n-b1'),
+        liveNaturalesRot('p5-n-rep2', 'Verdadero o falso', 2, 2, 'Lee', 10, 'p5-n-b1'),
+        liveNaturalesRot('p5-n-rep3', 'Clasifica', 0, 3, 'Naturales', 10, 'p5-n-b1'),
+        liveNaturalesRot('p5-n-rep4', 'Experimento virtual', 1, 3, 'Comprensión', 11, 'p5-n-b1'),
+        liveNaturalesRot('p5-n-rep5', 'Reto científico', 2, 4, 'Misión', 11, 'p5-n-b1')
+      ], { saberIds: ['p5-n-b1'] }),
+      unit('p5-n-eco', 'Ecosistemas', 'LOMLOE · medio ambiente y sostenibilidad.', [
+        liveNaturalesRot('p5-n-eco1', 'Preguntas', 1, 2, 'Ciencia', 10, 'p5-n-b2'),
+        liveNaturalesRot('p5-n-eco2', 'Verdadero o falso', 2, 2, 'Lee', 10, 'p5-n-b2'),
+        liveNaturalesRot('p5-n-eco3', 'Clasifica', 0, 3, 'Naturales', 10, 'p5-n-b2'),
+        liveNaturalesRot('p5-n-eco4', 'Experimento virtual', 1, 3, 'Comprensión', 11, 'p5-n-b2'),
+        liveNaturalesRot('p5-n-eco5', 'Reto científico', 2, 4, 'Misión', 11, 'p5-n-b2')
+      ], { saberIds: ['p5-n-b2'] }),
+      unit('p5-n-luz', 'Luz, sonido y electricidad', 'LOMLOE · ondas y circuitos.', [
+        liveNaturalesRot('p5-n-luz1', 'Preguntas', 1, 2, 'Ciencia', 10, 'p5-n-b3'),
+        liveNaturalesRot('p5-n-luz2', 'Verdadero o falso', 2, 2, 'Lee', 10, 'p5-n-b3'),
+        liveNaturalesRot('p5-n-luz3', 'Clasifica', 0, 3, 'Naturales', 10, 'p5-n-b3'),
+        liveNaturalesRot('p5-n-luz4', 'Experimento virtual', 1, 3, 'Comprensión', 11, 'p5-n-b3'),
+        liveNaturalesRot('p5-n-luz5', 'Reto científico', 2, 4, 'Misión', 11, 'p5-n-b3')
+      ], { saberIds: ['p5-n-b3'] }),
+    ];
+  }
+
+  function primaria5Sociales() {
+    return [
+      unit('p5-s-gob', 'Gobierno y democracia', 'LOMLOE · instituciones.', [
+        liveSocialesRot('p5-s-gob1', 'Lee y responde', 1, 2, 'Historia', 10, 'p5-s-b1'),
+        liveSocialesRot('p5-s-gob2', 'Mapas', 0, 2, 'Geografía', 10, 'p5-s-b1'),
+        liveSocialesRot('p5-s-gob3', 'Ordena', 2, 3, 'Convivencia', 10, 'p5-s-b1'),
+        liveSocialesRot('p5-s-gob4', 'Debate corto', 1, 3, 'Ciudadanía', 11, 'p5-s-b1'),
+        liveSocialesRot('p5-s-gob5', 'Misión social', 2, 4, 'Reto', 11, 'p5-s-b1')
+      ], { saberIds: ['p5-s-b1'] }),
+      unit('p5-s-geo', 'Recursos y población', 'LOMLOE · geografía humana.', [
+        liveSocialesRot('p5-s-geo1', 'Lee y responde', 1, 2, 'Historia', 10, 'p5-s-b2'),
+        liveSocialesRot('p5-s-geo2', 'Mapas', 0, 2, 'Geografía', 10, 'p5-s-b2'),
+        liveSocialesRot('p5-s-geo3', 'Ordena', 2, 3, 'Convivencia', 10, 'p5-s-b2'),
+        liveSocialesRot('p5-s-geo4', 'Debate corto', 1, 3, 'Ciudadanía', 11, 'p5-s-b2'),
+        liveSocialesRot('p5-s-geo5', 'Misión social', 2, 4, 'Reto', 11, 'p5-s-b2')
+      ], { saberIds: ['p5-s-b2'] }),
+      unit('p5-s-cont', 'Edad Moderna y Contemporánea', 'LOMLOE · revoluciones.', [
+        liveSocialesRot('p5-s-cont1', 'Lee y responde', 1, 2, 'Historia', 10, 'p5-s-b3'),
+        liveSocialesRot('p5-s-cont2', 'Mapas', 0, 2, 'Geografía', 10, 'p5-s-b3'),
+        liveSocialesRot('p5-s-cont3', 'Ordena', 2, 3, 'Convivencia', 10, 'p5-s-b3'),
+        liveSocialesRot('p5-s-cont4', 'Debate corto', 1, 3, 'Ciudadanía', 11, 'p5-s-b3'),
+        liveSocialesRot('p5-s-cont5', 'Misión social', 2, 4, 'Reto', 11, 'p5-s-b3')
+      ], { saberIds: ['p5-s-b3'] }),
+    ];
   }
 
   function primaria5Daily() {
-    return remapUnits(primaria3Daily(), 'p5-d', 'p3-', 'p5-', 2);
+    return mapDailyFromP1('p5', 4);
+  }
+
+  /** —— 6º Primaria (LOMLOE RD 157/2022) —— */
+  function primaria6Math() {
+    return [
+      unit('p6-m-prop', 'Proporcionalidad', 'LOMLOE · regla de tres y magnitudes.', [
+        liveGame('p6-m-prop1', 'Tablas express', 'tablas-relampago', 2, 6, null, 'p6-m-a1'),
+        liveMates('p6-m-prop2', 'Cálculo mental', 1, 2, 7, null, 'p6-m-a1'),
+        liveGame('p6-m-prop3', 'Mix operaciones', 'neon-calculo', 3, 7, null, 'p6-m-a1'),
+        liveMates('p6-m-prop4', 'Dos pasos', 2, 3, 8, null, 'p6-m-a1'),
+        soon('p6-m-prop5', 'Misión Proporcionalidad', 'quiz', 5)
+      ], { saberIds: ['p6-m-a1'] }),
+      unit('p6-m-int', 'Números enteros', 'LOMLOE · positivos, negativos y recta numérica.', [
+        liveGame('p6-m-int1', 'Tablas express', 'tablas-relampago', 2, 6, null, 'p6-m-a2'),
+        liveMates('p6-m-int2', 'Cálculo mental', 1, 2, 7, null, 'p6-m-a2'),
+        liveGame('p6-m-int3', 'Mix operaciones', 'neon-calculo', 3, 7, null, 'p6-m-a2'),
+        liveMates('p6-m-int4', 'Dos pasos', 2, 3, 8, null, 'p6-m-a2'),
+        soon('p6-m-int5', 'Misión Números enteros', 'quiz', 5)
+      ], { saberIds: ['p6-m-a2'] }),
+      unit('p6-m-frac', 'Fracciones avanzadas', 'LOMLOE · operaciones combinadas.', [
+        liveGame('p6-m-frac1', 'Tablas express', 'tablas-relampago', 2, 6, null, 'p6-m-a3'),
+        liveMates('p6-m-frac2', 'Cálculo mental', 1, 2, 7, null, 'p6-m-a3'),
+        liveGame('p6-m-frac3', 'Mix operaciones', 'neon-calculo', 3, 7, null, 'p6-m-a3'),
+        liveMates('p6-m-frac4', 'Dos pasos', 2, 3, 8, null, 'p6-m-a3'),
+        soon('p6-m-frac5', 'Misión Fracciones avanzadas', 'quiz', 5)
+      ], { saberIds: ['p6-m-a3'] }),
+      unit('p6-m-stat', 'Estadística básica', 'LOMLOE · media, moda y gráficos.', [
+        liveGame('p6-m-stat1', 'Tablas express', 'tablas-relampago', 2, 6, null, 'p6-m-b1'),
+        liveMates('p6-m-stat2', 'Cálculo mental', 1, 2, 7, null, 'p6-m-b1'),
+        liveGame('p6-m-stat3', 'Mix operaciones', 'neon-calculo', 3, 7, null, 'p6-m-b1'),
+        liveMates('p6-m-stat4', 'Dos pasos', 2, 3, 8, null, 'p6-m-b1'),
+        soon('p6-m-stat5', 'Misión Estadística básica', 'quiz', 5)
+      ], { saberIds: ['p6-m-b1'] }),
+      unit('p6-m-alg', 'Álgebra inicial', 'LOMLOE · incógnitas y problemas complejos.', [
+        liveGame('p6-m-alg1', 'Tablas express', 'tablas-relampago', 2, 6, null, 'p6-m-a4'),
+        liveMates('p6-m-alg2', 'Cálculo mental', 1, 2, 7, null, 'p6-m-a4'),
+        liveGame('p6-m-alg3', 'Mix operaciones', 'neon-calculo', 3, 7, null, 'p6-m-a4'),
+        liveMates('p6-m-alg4', 'Dos pasos', 2, 3, 8, null, 'p6-m-a4'),
+        soon('p6-m-alg5', 'Misión Álgebra inicial', 'quiz', 5)
+      ], { saberIds: ['p6-m-a4'] }),
+    ];
+  }
+
+  function primaria6Lengua() {
+    return [
+      unit('p6-l-anal', 'Análisis de textos', 'LOMLOE · ideas y argumentos.', [
+        liveLengua('p6-l-anal1', 'Lee y responde', 'neon-lectura', 2, 'Comprensión', 11, 'p6-l-c1'),
+        liveLenguaRot('p6-l-anal2', 'Ordena la frase', 2, 2, 'Sintaxis', 11, 'p6-l-c1'),
+        liveLenguaRot('p6-l-anal3', 'Completa', 1, 3, 'Ortografía', 11, 'p6-l-c1'),
+        soon('p6-l-anal4', 'Dictado', 'listening', 4),
+        soon('p6-l-anal5', 'Misión lengua', 'quiz', 5)
+      ], { saberIds: ['p6-l-c1'] }),
+      unit('p6-l-red', 'Ortografía y redacción', 'LOMLOE · textos formales.', [
+        liveLengua('p6-l-red1', 'Lee y responde', 'neon-lectura', 2, 'Comprensión', 11, 'p6-l-c2'),
+        liveLenguaRot('p6-l-red2', 'Ordena la frase', 2, 2, 'Sintaxis', 11, 'p6-l-c2'),
+        liveLenguaRot('p6-l-red3', 'Completa', 1, 3, 'Ortografía', 11, 'p6-l-c2'),
+        soon('p6-l-red4', 'Dictado', 'listening', 4),
+        soon('p6-l-red5', 'Misión lengua', 'quiz', 5)
+      ], { saberIds: ['p6-l-c2'] }),
+      unit('p6-l-lit', 'Literatura española', 'LOMLOE · autores y géneros.', [
+        liveLengua('p6-l-lit1', 'Lee y responde', 'neon-lectura', 2, 'Comprensión', 11, 'p6-l-c3'),
+        liveLenguaRot('p6-l-lit2', 'Ordena la frase', 2, 2, 'Sintaxis', 11, 'p6-l-c3'),
+        liveLenguaRot('p6-l-lit3', 'Completa', 1, 3, 'Ortografía', 11, 'p6-l-c3'),
+        soon('p6-l-lit4', 'Dictado', 'listening', 4),
+        soon('p6-l-lit5', 'Misión lengua', 'quiz', 5)
+      ], { saberIds: ['p6-l-c3'] }),
+    ];
+  }
+
+  function primaria6Ingles() {
+    return [
+      unit('p6-i-cond', 'Conditionals and modals', 'LOMLOE · hipótesis y obligación.', [
+        liveIngles('p6-i-cond1', 'Vocab drill', 0, 1, 6, null, 'p6-i-e1'),
+        liveIngles('p6-i-cond2', 'Listen & tap', 1, 2, 6, null, 'p6-i-e1'),
+        soon('p6-i-cond3', 'Fill the gap', 'typing', 3),
+        soon('p6-i-cond4', 'Grammar quiz', 'quiz', 4),
+        soon('p6-i-cond5', 'English mission', 'quiz', 5)
+      ], { saberIds: ['p6-i-e1'] }),
+      unit('p6-i-pass', 'Passive voice', 'LOMLOE · transformaciones.', [
+        liveIngles('p6-i-pass1', 'Vocab drill', 0, 1, 6, null, 'p6-i-e2'),
+        liveIngles('p6-i-pass2', 'Listen & tap', 1, 2, 6, null, 'p6-i-e2'),
+        soon('p6-i-pass3', 'Fill the gap', 'typing', 3),
+        soon('p6-i-pass4', 'Grammar quiz', 'quiz', 4),
+        soon('p6-i-pass5', 'English mission', 'quiz', 5)
+      ], { saberIds: ['p6-i-e2'] }),
+      unit('p6-i-proj', 'Project language', 'LOMLOE · vocabulario académico.', [
+        liveIngles('p6-i-proj1', 'Vocab drill', 0, 1, 6, null, 'p6-i-e3'),
+        liveIngles('p6-i-proj2', 'Listen & tap', 1, 2, 6, null, 'p6-i-e3'),
+        soon('p6-i-proj3', 'Fill the gap', 'typing', 3),
+        soon('p6-i-proj4', 'Grammar quiz', 'quiz', 4),
+        soon('p6-i-proj5', 'English mission', 'quiz', 5)
+      ], { saberIds: ['p6-i-e3'] }),
+    ];
+  }
+
+  function primaria6Naturales() {
+    return [
+      unit('p6-n-evo', 'Evolución y biodiversidad', 'LOMLOE · adaptación y conservación.', [
+        liveNaturalesRot('p6-n-evo1', 'Preguntas', 1, 2, 'Ciencia', 11, 'p6-n-b1'),
+        liveNaturalesRot('p6-n-evo2', 'Verdadero o falso', 2, 2, 'Lee', 11, 'p6-n-b1'),
+        liveNaturalesRot('p6-n-evo3', 'Clasifica', 0, 3, 'Naturales', 11, 'p6-n-b1'),
+        liveNaturalesRot('p6-n-evo4', 'Experimento virtual', 1, 3, 'Comprensión', 12, 'p6-n-b1'),
+        liveNaturalesRot('p6-n-evo5', 'Reto científico', 2, 4, 'Misión', 12, 'p6-n-b1')
+      ], { saberIds: ['p6-n-b1'] }),
+      unit('p6-n-cuer', 'Cuerpo humano avanzado', 'LOMLOE · sistemas y salud.', [
+        liveNaturalesRot('p6-n-cuer1', 'Preguntas', 1, 2, 'Ciencia', 11, 'p6-n-b2'),
+        liveNaturalesRot('p6-n-cuer2', 'Verdadero o falso', 2, 2, 'Lee', 11, 'p6-n-b2'),
+        liveNaturalesRot('p6-n-cuer3', 'Clasifica', 0, 3, 'Naturales', 11, 'p6-n-b2'),
+        liveNaturalesRot('p6-n-cuer4', 'Experimento virtual', 1, 3, 'Comprensión', 12, 'p6-n-b2'),
+        liveNaturalesRot('p6-n-cuer5', 'Reto científico', 2, 4, 'Misión', 12, 'p6-n-b2')
+      ], { saberIds: ['p6-n-b2'] }),
+      unit('p6-n-ene', 'Energía y sostenibilidad', 'LOMLOE · recursos y clima.', [
+        liveNaturalesRot('p6-n-ene1', 'Preguntas', 1, 2, 'Ciencia', 11, 'p6-n-b3'),
+        liveNaturalesRot('p6-n-ene2', 'Verdadero o falso', 2, 2, 'Lee', 11, 'p6-n-b3'),
+        liveNaturalesRot('p6-n-ene3', 'Clasifica', 0, 3, 'Naturales', 11, 'p6-n-b3'),
+        liveNaturalesRot('p6-n-ene4', 'Experimento virtual', 1, 3, 'Comprensión', 12, 'p6-n-b3'),
+        liveNaturalesRot('p6-n-ene5', 'Reto científico', 2, 4, 'Misión', 12, 'p6-n-b3')
+      ], { saberIds: ['p6-n-b3'] }),
+    ];
+  }
+
+  function primaria6Sociales() {
+    return [
+      unit('p6-s-ue', 'Constitución y UE', 'LOMLOE · ciudadanía europea.', [
+        liveSocialesRot('p6-s-ue1', 'Lee y responde', 1, 2, 'Historia', 11, 'p6-s-b1'),
+        liveSocialesRot('p6-s-ue2', 'Mapas', 0, 2, 'Geografía', 11, 'p6-s-b1'),
+        liveSocialesRot('p6-s-ue3', 'Ordena', 2, 3, 'Convivencia', 11, 'p6-s-b1'),
+        liveSocialesRot('p6-s-ue4', 'Debate corto', 1, 3, 'Ciudadanía', 12, 'p6-s-b1'),
+        liveSocialesRot('p6-s-ue5', 'Misión social', 2, 4, 'Reto', 12, 'p6-s-b1')
+      ], { saberIds: ['p6-s-b1'] }),
+      unit('p6-s-mund', 'Geografía mundial', 'LOMLOE · continentes y globalización.', [
+        liveSocialesRot('p6-s-mund1', 'Lee y responde', 1, 2, 'Historia', 11, 'p6-s-b2'),
+        liveSocialesRot('p6-s-mund2', 'Mapas', 0, 2, 'Geografía', 11, 'p6-s-b2'),
+        liveSocialesRot('p6-s-mund3', 'Ordena', 2, 3, 'Convivencia', 11, 'p6-s-b2'),
+        liveSocialesRot('p6-s-mund4', 'Debate corto', 1, 3, 'Ciudadanía', 12, 'p6-s-b2'),
+        liveSocialesRot('p6-s-mund5', 'Misión social', 2, 4, 'Reto', 12, 'p6-s-b2')
+      ], { saberIds: ['p6-s-b2'] }),
+      unit('p6-s-sig', 'Historia contemporánea', 'LOMLOE · siglo XX.', [
+        liveSocialesRot('p6-s-sig1', 'Lee y responde', 1, 2, 'Historia', 11, 'p6-s-b3'),
+        liveSocialesRot('p6-s-sig2', 'Mapas', 0, 2, 'Geografía', 11, 'p6-s-b3'),
+        liveSocialesRot('p6-s-sig3', 'Ordena', 2, 3, 'Convivencia', 11, 'p6-s-b3'),
+        liveSocialesRot('p6-s-sig4', 'Debate corto', 1, 3, 'Ciudadanía', 12, 'p6-s-b3'),
+        liveSocialesRot('p6-s-sig5', 'Misión social', 2, 4, 'Reto', 12, 'p6-s-b3')
+      ], { saberIds: ['p6-s-b3'] }),
+    ];
   }
 
   function primaria6Daily() {
-    return remapUnits(primaria3Daily(), 'p6-d', 'p3-', 'p6-', 3);
+    return mapDailyFromP1('p6', 5);
   }
-
   function eso2Math() {
     return remapUnits(primaria6Math(), 'eso2-m', 'p6-m-', 'eso2-m-', 2);
   }

@@ -227,7 +227,106 @@
       'brain-gym-diario': [
         { id: 'p3-d-01', tags: ['atencion'], title: 'Rutina diaria equilibrada', desc: 'Mates, lengua, inglés y reflejos en 7 min.' }
       ]
-    }
+    },
+    'primaria-4': {
+      matematicas: [
+        { id: 'p4-m-a1', tags: ['numeros'], title: 'Números hasta 10.000', desc: 'Lectura, comparación y valor posicional.' },
+        { id: 'p4-m-a2', tags: ['multiplicacion'], title: 'Multiplicación y división', desc: 'Productos y repartos con números mayores.' },
+        { id: 'p4-m-a3', tags: ['operaciones'], title: 'Fracciones equivalentes', desc: 'Comparar y simplificar fracciones.' },
+        { id: 'p4-m-b1', tags: ['operaciones'], title: 'Decimales', desc: 'Décimas, centésimas y relación con fracciones.' },
+        { id: 'p4-m-c1', tags: ['formas'], title: 'Ángulos y simetría', desc: 'Medir ángulos y ejes de simetría.' },
+        { id: 'p4-m-a4', tags: ['problemas-numericos'], title: 'Problemas multiplicativos', desc: 'Planificar operaciones combinadas.' },
+      ],
+      lenguaje: [
+        { id: 'p4-l-c1', tags: ['lectura'], title: 'Comprensión lectora', desc: 'Textos narrativos, informativos y descriptivos.' },
+        { id: 'p4-l-c2', tags: ['ortografia'], title: 'Ortografía avanzada', desc: 'R/rr, h, acentos y mayúsculas.' },
+        { id: 'p4-l-c3', tags: ['escritura'], title: 'Sintaxis y literatura', desc: 'Oración compuesta y géneros literarios.' },
+      ],
+      ingles: [
+        { id: 'p4-i-e1', tags: ['ingles-vocabulario'], title: 'Past simple', desc: 'Acciones pasadas y vocabulario cotidiano.' },
+        { id: 'p4-i-e2', tags: ['ingles-vocabulario'], title: 'Comparatives', desc: 'Comparar personas, lugares y cosas.' },
+        { id: 'p4-i-e3', tags: ['ingles-oral'], title: 'Reading comprehension', desc: 'Leer y responder en inglés.' },
+      ],
+      naturales: [
+        { id: 'p4-n-b1', tags: ['naturales-seres-vivos'], title: 'Célula y clasificación', desc: 'Seres vivos y funciones vitales.' },
+        { id: 'p4-n-b2', tags: ['naturales-salud'], title: 'Salud y consumo', desc: 'Hábitos saludables y alimentación.' },
+        { id: 'p4-n-b3', tags: ['naturales-materia'], title: 'Fuerzas y máquinas', desc: 'Movimiento, fuerzas y energía mecánica.' },
+      ],
+      sociales: [
+        { id: 'p4-s-b1', tags: ['sociales-convivencia'], title: 'Derechos y participación', desc: 'Democracia local y convivencia.' },
+        { id: 'p4-s-b2', tags: ['sociales-geografia'], title: 'Autonomías y economía', desc: 'Organización territorial y recursos.' },
+        { id: 'p4-s-b3', tags: ['sociales-historia'], title: 'Edad Moderna temprana', desc: 'Descubrimientos y sociedad.' },
+      ],
+      'brain-gym-diario': [
+        { id: 'p4-d-01', tags: ['atencion'], title: 'Rutina diaria equilibrada', desc: 'Mates, lengua, inglés y reflejos en 7 min.' }
+      ]
+    },
+    'primaria-5': {
+      matematicas: [
+        { id: 'p5-m-a1', tags: ['operaciones'], title: 'Operaciones con decimales', desc: 'Sumar, restar y multiplicar decimales.' },
+        { id: 'p5-m-a2', tags: ['operaciones'], title: 'Fracciones y decimales', desc: 'Equivalencias y comparación.' },
+        { id: 'p5-m-a3', tags: ['operaciones'], title: 'Porcentajes básicos', desc: 'Descuentos, partes y proporciones simples.' },
+        { id: 'p5-m-b1', tags: ['formas'], title: 'Área y volumen', desc: 'Medidas, perímetro, área y volumen.' },
+        { id: 'p5-m-c1', tags: ['formas'], title: 'Coordenadas y figuras', desc: 'Plano cartesiano y transformaciones.' },
+        { id: 'p5-m-a4', tags: ['problemas-numericos'], title: 'Problemas de proporción', desc: 'Escalas y repartos proporcionales.' },
+      ],
+      lenguaje: [
+        { id: 'p5-l-c1', tags: ['comprension'], title: 'Textos argumentativos', desc: 'Opinión, causa y consecuencia.' },
+        { id: 'p5-l-c2', tags: ['ortografia'], title: 'Ortografía 5º', desc: 'Reglas ortográficas y puntuación.' },
+        { id: 'p5-l-c3', tags: ['escritura'], title: 'Gramática avanzada', desc: 'Oración compuesta y conectores.' },
+      ],
+      ingles: [
+        { id: 'p5-i-e1', tags: ['ingles-vocabulario'], title: 'Present perfect', desc: 'Experiencias y resultados recientes.' },
+        { id: 'p5-i-e2', tags: ['ingles-vocabulario'], title: 'Future forms', desc: 'Will y going to para planes.' },
+        { id: 'p5-i-e3', tags: ['ingles-oral'], title: 'Oral presentations', desc: 'Exponer ideas con claridad.' },
+      ],
+      naturales: [
+        { id: 'p5-n-b1', tags: ['naturales-seres-vivos'], title: 'Reproducción y herencia', desc: 'Ciclos vitales y características.' },
+        { id: 'p5-n-b2', tags: ['naturales-seres-vivos'], title: 'Ecosistemas', desc: 'Medio ambiente y sostenibilidad.' },
+        { id: 'p5-n-b3', tags: ['naturales-materia'], title: 'Luz, sonido y electricidad', desc: 'Ondas, circuitos y energía.' },
+      ],
+      sociales: [
+        { id: 'p5-s-b1', tags: ['sociales-convivencia'], title: 'Gobierno y democracia', desc: 'Instituciones y participación.' },
+        { id: 'p5-s-b2', tags: ['sociales-geografia'], title: 'Recursos y población', desc: 'Geografía humana y económica.' },
+        { id: 'p5-s-b3', tags: ['sociales-historia'], title: 'Edad Moderna y Contemporánea', desc: 'Revoluciones y cambios sociales.' },
+      ],
+      'brain-gym-diario': [
+        { id: 'p5-d-01', tags: ['atencion'], title: 'Rutina diaria equilibrada', desc: 'Mates, lengua, inglés y reflejos en 7 min.' }
+      ]
+    },
+    'primaria-6': {
+      matematicas: [
+        { id: 'p6-m-a1', tags: ['operaciones'], title: 'Proporcionalidad', desc: 'Regla de tres y magnitudes proporcionales.' },
+        { id: 'p6-m-a2', tags: ['numeros'], title: 'Números enteros', desc: 'Positivos, negativos y recta numérica.' },
+        { id: 'p6-m-a3', tags: ['operaciones'], title: 'Fracciones y decimales avanzados', desc: 'Operaciones combinadas.' },
+        { id: 'p6-m-b1', tags: ['operaciones'], title: 'Estadística básica', desc: 'Media, moda y gráficos.' },
+        { id: 'p6-m-c1', tags: ['formas'], title: 'Geometría avanzada', desc: 'Circunferencia, área y volumen.' },
+        { id: 'p6-m-a4', tags: ['problemas-numericos'], title: 'Álgebra inicial', desc: 'Incógnitas y problemas complejos.' },
+      ],
+      lenguaje: [
+        { id: 'p6-l-c1', tags: ['comprension'], title: 'Análisis de textos', desc: 'Ideas, argumentos y estructura.' },
+        { id: 'p6-l-c2', tags: ['ortografia'], title: 'Ortografía y redacción', desc: 'Textos formales y revisión.' },
+        { id: 'p6-l-c3', tags: ['lectura'], title: 'Literatura española', desc: 'Autores, movimientos y géneros.' },
+      ],
+      ingles: [
+        { id: 'p6-i-e1', tags: ['ingles-vocabulario'], title: 'Conditionals and modals', desc: 'Hipótesis y obligación.' },
+        { id: 'p6-i-e2', tags: ['ingles-vocabulario'], title: 'Passive voice', desc: 'Transformaciones y estilo.' },
+        { id: 'p6-i-e3', tags: ['ingles-oral'], title: 'Project language', desc: 'Presentaciones y vocabulario académico.' },
+      ],
+      naturales: [
+        { id: 'p6-n-b1', tags: ['naturales-seres-vivos'], title: 'Evolución y biodiversidad', desc: 'Adaptación y conservación.' },
+        { id: 'p6-n-b2', tags: ['naturales-cuerpo'], title: 'Cuerpo humano avanzado', desc: 'Sistemas y salud integral.' },
+        { id: 'p6-n-b3', tags: ['naturales-materia'], title: 'Energía y sostenibilidad', desc: 'Recursos y cambio climático.' },
+      ],
+      sociales: [
+        { id: 'p6-s-b1', tags: ['sociales-convivencia'], title: 'Constitución y UE', desc: 'Ciudadanía europea y derechos.' },
+        { id: 'p6-s-b2', tags: ['sociales-geografia'], title: 'Geografía mundial', desc: 'Continentes, clima y globalización.' },
+        { id: 'p6-s-b3', tags: ['sociales-historia'], title: 'Historia contemporánea', desc: 'Siglo XX y sociedad actual.' },
+      ],
+      'brain-gym-diario': [
+        { id: 'p6-d-01', tags: ['atencion'], title: 'Rutina diaria equilibrada', desc: 'Mates, lengua, inglés y reflejos en 7 min.' }
+      ]
+    },
   };
 
   var SABER_INDEX = {};
