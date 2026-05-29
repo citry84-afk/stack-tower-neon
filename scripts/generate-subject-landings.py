@@ -2,9 +2,26 @@
 """Genera landings por materia (noindex; canonical al curso)."""
 from __future__ import annotations
 
+import importlib.util
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+
+_spec = importlib.util.spec_from_file_location(
+    "generate_course_landings", ROOT / "scripts" / "generate-course-landings.py"
+)
+_gen = importlib.util.module_from_spec(_spec)
+assert _spec.loader is not None
+_spec.loader.exec_module(_gen)
+COURSE_COPY: dict[str, dict] = _gen.COURSE_COPY
+
+SUBJECT_COPY_KEY = {
+    "matematicas": "mates",
+    "lenguaje": "lengua",
+    "ingles": "ingles",
+    "naturales": "naturales",
+    "sociales": "sociales",
+}
 REDIRECTS_MARKER_START = "# SUBJECT LANDINGS (auto)"
 REDIRECTS_MARKER_END = "# /SUBJECT LANDINGS"
 
@@ -29,6 +46,8 @@ SUBJECTS = [
     ("naturales", "naturales", "Naturales", "🔬", "Cuerpo, seres vivos y ciencias."),
     ("sociales", "sociales", "Sociales", "🌍", "Mapas, historia y convivencia."),
 ]
+
+SUBJECTS_BY_ID = {s[0]: s[2] for s in SUBJECTS}
 
 NAV = """  <nav class="site-nav" role="navigation" aria-label="Navegación principal">
     <div class="site-nav__inner">
@@ -67,6 +86,17 @@ def esc(s: str) -> str:
     )
 
 
+def subject_bullets(course_id: str, sub_id: str) -> str:
+    copy = COURSE_COPY.get(course_id, {})
+    key = SUBJECT_COPY_KEY.get(sub_id, "")
+    items = copy.get(key) if key else []
+    if not items:
+        return ""
+    lis = "".join(f"<li>{esc(x)}</li>" for x in items)
+    sub_label = SUBJECTS_BY_ID.get(sub_id, sub_id)
+    return f"<h2>Qué practica en {esc(sub_label)}</h2><ul>{lis}</ul>"
+
+
 def page(course: dict, sub_id: str, slug: str, label: str, emoji: str, blurb: str) -> str:
     path = f"/{course['slug']}/{slug}"
     course_canonical = f"https://lipastudios.com/{course['slug']}"
@@ -74,6 +104,8 @@ def page(course: dict, sub_id: str, slug: str, label: str, emoji: str, blurb: st
     desc = f"{label} para {course['label']} ({course['age']}): {blurb} Acceso directo a la rutina guiada."
     play = f"/materia.html?c={course['id']}&m={sub_id}&empezar=1"
     course_path = f"/{course['slug']}"
+    bullets_html = subject_bullets(course["id"], sub_id)
+    bullets_block = f"\n      {bullets_html}\n" if bullets_html else ""
     return f"""<!DOCTYPE html>
 <html lang="es">
 <head>
@@ -100,7 +132,7 @@ def page(course: dict, sub_id: str, slug: str, label: str, emoji: str, blurb: st
     </header>
     <article class="course-landing-article">
       <p>Esta página es un acceso rápido a <strong>{esc(label)}</strong> en {esc(course['label'])}. La guía completa del curso — contenidos LOMLOE, rutina semanal y preguntas frecuentes — está en <a href="{course_path}">la ficha de {esc(course['label'])}</a>.</p>
-      <p>Recomendamos empezar por la rutina guiada del curso para alternar materias con equilibrio. Si hoy solo quieres {esc(label.lower())}, pulsa el botón de abajo.</p>
+      <p>Recomendamos empezar por la rutina guiada del curso para alternar materias con equilibrio. Si hoy solo quieres {esc(label.lower())}, pulsa el botón de abajo.</p>{bullets_block}
       <p>Tras el entreno puedes usar <a href="/recreo-neon.html">Recreo Neon</a> como recompensa opcional. Las familias pueden revisar el progreso en <a href="/para-padres.html">Para padres</a>.</p>
     </article>
     <div class="course-landing-cta">

@@ -244,6 +244,13 @@
           extraLive ? liveReflex(id + '-i-h3', 'Point and tap', 'flash-tap', 2) : soon(id + '-i-h3', 'Hello song', 'listening', 2),
           soon(id + '-i-h4', 'Point and say', 'mini-game', 3),
           soon(id + '-i-h5', 'Mini quiz', 'quiz', 4)
+        ]),
+        unit(id + '-i-play', 'Play & body', 'Acciones y partes del cuerpo en inglés.', [
+          liveInfantil(id + '-i-p1', 'Body EN', 2, 1, 'Head, hand…', bl),
+          liveInfantil(id + '-i-p2', 'Actions EN', 0, 2, 'Jump, clap…', bl),
+          extraLive ? liveInfantil(id + '-i-p3', 'Listen & tap', 1, 2, 'Inglés oral', bl) : soon(id + '-i-p3', 'I like…', 'typing', 2),
+          soon(id + '-i-p4', 'Picture match', 'matching', 3),
+          soon(id + '-i-p5', 'English mission', 'quiz', 4)
         ])
       ], 'live'),
       subject('naturales', [
@@ -253,6 +260,13 @@
           extraLive ? liveInfantil(id + '-n-a3', '¿Cuántos?', 2, 2, 'Contar', bl) : soon(id + '-n-a3', 'Partes de la planta', 'matching', 2),
           soon(id + '-n-a4', 'Estaciones', 'ordering', 3),
           soon(id + '-n-a5', 'Reto naturaleza', 'quiz', 4)
+        ]),
+        unit(id + '-n-cuerpo', 'Cuerpo y clima', 'Salud y tiempo atmosférico.', [
+          liveInfantil(id + '-n-c1', 'Partes del cuerpo', 0, 1, 'Cabeza, pies…', bl),
+          liveInfantil(id + '-n-c2', 'Sol y lluvia', 1, 2, 'Clima', bl),
+          extraLive ? liveInfantil(id + '-n-c3', 'Fruta sana', 2, 2, 'Alimentación', bl) : soon(id + '-n-c3', 'Día y noche', 'ordering', 2),
+          soon(id + '-n-c4', 'Animales del bosque', 'matching', 3),
+          soon(id + '-n-c5', 'Misión naturaleza', 'quiz', 4)
         ])
       ], 'live'),
       subject('sociales', [
@@ -262,13 +276,22 @@
           extraLive ? liveInfantil(id + '-s-e3', 'Turnos y colores', 2, 2, 'Convivencia', bl) : soon(id + '-s-e3', 'Caras felices', 'matching', 2),
           soon(id + '-s-e4', 'Turnos', 'ordering', 2),
           soon(id + '-s-e5', 'Misión emociones', 'quiz', 4)
+        ]),
+        unit(id + '-s-cole', 'El cole y la calle', 'Normas y lugares del barrio.', [
+          liveInfantil(id + '-s-c1', 'Mi clase', 0, 1, 'Mesa, patio…', bl),
+          liveInfantil(id + '-s-c2', 'Señales', 1, 2, 'Pare, ceda…', bl),
+          extraLive ? liveInfantil(id + '-s-c3', 'Ayudar al compi', 2, 2, 'Convivencia', bl) : soon(id + '-s-c3', 'Ordena el día', 'ordering', 2),
+          soon(id + '-s-c4', 'Profesiones', 'matching', 3),
+          soon(id + '-s-c5', 'Misión ciudadana', 'quiz', 4)
         ])
       ], 'live'),
       subject('brain-gym-diario', [
         unit(id + '-d1', 'Atención visual', 'Juegos cortos para peques.', [
           liveReflex(id + '-d-f', 'Flash tap suave', 'flash-tap', 1),
           liveInfantil(id + '-d-p', 'Neon Peques', 0, 1, 'Calentamiento', bl),
-          liveInfantil(id + '-d-n', 'Cuenta rápido', 2, 1, '1 min', bl)
+          liveInfantil(id + '-d-n', 'Cuenta rápido', 2, 1, '1 min', bl),
+          liveReflex(id + '-d-r', 'Test reflejos', 'reaction-test', 2),
+          liveInfantil(id + '-d-c', 'Colores mix', 1, 2, 'Repaso', bl)
         ])
       ], 'live')
     ];
@@ -893,53 +916,15 @@
   }
 
   function eso1Math() {
-    return [
-      unit('eso1-m-enteros', 'Enteros y fracciones', 'Números positivos, negativos y fracciones simples.', [
-        liveMates('eso1-m-e1', 'Operaciones enteras', 0, 2, 8, 'Sin llevadas complejas'),
-        liveGame('eso1-m-e2', 'Tablas rápidas', 'tablas-relampago', 2, 8, 'Multiplicar con fluidez'),
-        liveMates('eso1-m-e3', 'Mix numérico', 1, 3, 9, 'Velocidad'),
-        soon('eso1-m-e4', 'Fracciones visuales', 'drag-drop', 3),
-        soon('eso1-m-e5', 'Reto racionales', 'quiz', 5)
-      ]),
-      unit('eso1-m-algebra', 'Álgebra inicial', 'Letras, expresiones y primeras ecuaciones.', [
-        liveMates('eso1-m-a1', 'Cálculo avanzado', 2, 3, 10, 'Operaciones mixtas'),
-        liveGame('eso1-m-a2', 'Tablas 2–12', 'tablas-relampago', 3, 10, 'Productos'),
-        liveGame('eso1-m-a3', 'Precisión aim', 'aim-trainer', 2, null, 'Atención'),
-        soon('eso1-m-a4', 'Ecuación simple', 'multiple-choice', 4),
-        soon('eso1-m-a5', 'Misión álgebra', 'quiz', 5)
-      ])
-    ];
+    return remapUnits(primaria6Math(), 'eso1-m', 'p6-m-', 'eso1-m-', 1);
   }
 
   function eso1Ingles() {
-    return [
-      unit('eso1-i-tenses', 'Tiempos verbales', 'Present, past y vocabulario de ESO.', [
-        liveIngles('eso1-i-t1', 'Vocabulario base', 0, 2, 8, 'Palabras frecuentes'),
-        liveIngles('eso1-i-t2', 'Daily routines', 1, 3, 9, 'Present simple'),
-        liveIngles('eso1-i-t3', 'Listening words', 0, 2, 9, 'Vocabulario'),
-        soon('eso1-i-t4', 'Past simple gap', 'typing', 3),
-        soon('eso1-i-t5', 'Grammar quiz', 'quiz', 5)
-      ]),
-      unit('eso1-i-speak', 'Comprensión y producción', 'Frases y diálogos cortos.', [
-        liveGame('eso1-i-s1', 'School & hobbies', 'neon-palabras', 2, 9),
-        liveReflex('eso1-i-s2', 'Reaction EN', 'reaction-test', 2),
-        soon('eso1-i-s3', 'Roleplay', 'roleplay', 3),
-        soon('eso1-i-s4', 'Writing 50 words', 'typing', 4),
-        soon('eso1-i-s5', 'Mission English', 'quiz', 5)
-      ])
-    ];
+    return remapUnits(primaria6Ingles(), 'eso1-i', 'p6-i-', 'eso1-i-', 1);
   }
 
   function eso1Lengua() {
-    return [
-      unit('eso1-l-textos', 'Textos y gramática', 'Comprensión y análisis básico.', [
-        liveLengua('eso1-l-t1', 'Comprensión lectora', 'neon-lectura', 3, 'Texto argumentativo', 10),
-        liveLengua('eso1-l-t2', 'Ordena la frase', 'neon-frase', 2, 'Morfosintaxis', 10),
-        soon('eso1-l-t3', 'Sinónimos', 'multiple-choice', 3),
-        soon('eso1-l-t4', 'Resumen corto', 'typing', 4),
-        soon('eso1-l-t5', 'Misión lengua', 'quiz', 5)
-      ])
-    ];
+    return remapUnits(primaria6Lengua(), 'eso1-l', 'p6-l-', 'eso1-l-', 1);
   }
 
   function eso1Naturales() {
@@ -1061,38 +1046,15 @@
   }
 
   function eso2Math() {
-    return [
-      unit('eso2-m-ecuaciones', 'Ecuaciones', 'Primer grado y proporcionalidad.', [
-        liveMates('eso2-m-e1', 'Cálculo intenso', 0, 3, 10, 'Operaciones'),
-        liveGame('eso2-m-e2', 'Tablas 2–12', 'tablas-relampago', 3, 10, 'Productos'),
-        liveGame('eso2-m-e3', 'Grid reflejos', 'grid-reflex', 2, null, 'Atención'),
-        soon('eso2-m-e4', 'Ecuación x', 'multiple-choice', 4),
-        soon('eso2-m-e5', 'Proporcionalidad', 'quiz', 5)
-      ]),
-      unit('eso2-m-proporc', 'Proporcionalidad', 'Regla de tres y porcentajes.', [
-        liveMates('eso2-m-p1', 'Mix avanzado', 1, 3, 11),
-        liveGame('eso2-m-p2', 'Tablas combo', 'tablas-relampago', 3, 11),
-        liveGame('eso2-m-p3', 'Stack Tower', 'stack-tower', 2, null, 'Precisión'),
-        soon('eso2-m-p4', 'Gráficas', 'mini-game', 4),
-        soon('eso2-m-p5', 'Reto mates ESO', 'quiz', 5)
-      ])
-    ];
+    return remapUnits(primaria6Math(), 'eso2-m', 'p6-m-', 'eso2-m-', 2);
   }
 
   function eso2Ingles() {
-    return remapUnits(eso1Ingles(), 'eso2-i', 'eso1-', 'eso2-', 1);
+    return remapUnits(primaria6Ingles(), 'eso2-i', 'p6-i-', 'eso2-i-', 2);
   }
 
   function eso2Lengua() {
-    return [
-      unit('eso2-l-arg', 'Argumentación', 'Opinión con razones y conectores.', [
-        liveLengua('eso2-l-a1', 'Comprensión', 'neon-lectura', 3, 'Texto argumentativo', 11),
-        liveLengua('eso2-l-a2', 'Ordena ideas', 'neon-frase', 3, 'Párrafo', 11),
-        soon('eso2-l-a3', 'Conectores', 'multiple-choice', 3),
-        soon('eso2-l-a4', 'Escribe opinión', 'typing', 4),
-        soon('eso2-l-a5', 'Misión lengua', 'quiz', 5)
-      ])
-    ];
+    return remapUnits(primaria6Lengua(), 'eso2-l', 'p6-l-', 'eso2-l-', 2);
   }
 
   function eso2Naturales() {
