@@ -866,6 +866,10 @@ button.lipa-course-pick {
   margin: 10px 0 0;
 }
 
+.brain-onboard__course-foot {
+  color: #667085;
+}
+
 .brain-onboard__course-foot a {
   color: #7c3aed;
   font-weight: 600;

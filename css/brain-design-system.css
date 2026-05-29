@@ -73,7 +73,7 @@ body.lipa-brain-soft .nav-links a[aria-current='page'] {
 }
 
 body.lipa-brain-soft h1,
-body.lipa-brain-soft h2,
+body.lipa-brain-soft h2:not(#brain-onboard-title),
 body.lipa-brain-soft h3,
 body.lipa-brain-soft .kid-title,
 body.lipa-brain-soft .curriculum-hero h1,
@@ -1479,9 +1479,9 @@ body.lipa-curriculum-active.game-page {
 .brain-onboard__subject-chip {
   padding: 8px 14px;
   border-radius: 999px;
-  border: 2px solid rgba(168, 85, 247, 0.35);
-  background: rgba(0, 0, 0, 0.2);
-  color: #f5f3ff;
+  border: 2px solid #d0d5dd;
+  background: #ffffff;
+  color: #172033;
   font-weight: 600;
   font-size: 13px;
   cursor: pointer;
@@ -1490,8 +1490,9 @@ body.lipa-curriculum-active.game-page {
 
 .brain-onboard__subject-chip--on,
 .brain-onboard__subject-preset:active {
-  border-color: #a855f7;
-  background: rgba(168, 85, 247, 0.35);
+  border-color: #7c3aed;
+  background: #f3edff;
+  color: #172033;
 }
 
 /* Rutina rápida desde página de materia */
@@ -1601,4 +1602,40 @@ body.lipa-brain-soft.game-page #rt-wait {
   .brain-home-dash {
     grid-template-columns: 1fr;
   }
+}
+
+/* Onboarding modal — legible en cualquier caché (panel claro, texto oscuro) */
+body.lipa-brain-soft #lipa-brain-onboarding .brain-onboard__panel {
+  background: #ffffff !important;
+  color: #172033 !important;
+  border-color: #e6e8ec !important;
+  box-shadow: 0 -8px 48px rgba(23, 32, 51, 0.12) !important;
+}
+
+body.lipa-brain-soft #lipa-brain-onboarding .brain-onboard__title,
+body.lipa-brain-soft #lipa-brain-onboarding #brain-onboard-title {
+  color: #172033 !important;
+  -webkit-text-fill-color: #172033 !important;
+}
+
+body.lipa-brain-soft #lipa-brain-onboarding .brain-onboard__lead,
+body.lipa-brain-soft #lipa-brain-onboarding .brain-onboard__hint,
+body.lipa-brain-soft #lipa-brain-onboarding .brain-onboard__name-label {
+  color: #475467 !important;
+}
+
+body.lipa-brain-soft #lipa-brain-onboarding .brain-onboard__kicker {
+  color: #5b21b6 !important;
+}
+
+body.lipa-brain-soft #lipa-brain-onboarding .brain-onboard__name-input {
+  background: #ffffff !important;
+  color: #172033 !important;
+  border-color: #d0d5dd !important;
+}
+
+body.lipa-brain-soft #lipa-brain-onboarding .brain-onboard__btn--ghost {
+  background: #ffffff !important;
+  color: #344054 !important;
+  border: 1px solid #d0d5dd !important;
 }

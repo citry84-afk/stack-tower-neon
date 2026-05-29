@@ -1,4 +1,4 @@
-/* Onboarding Brain Gym — wizard modal */
+/* Onboarding Brain Gym — wizard modal (tema claro, texto oscuro) */
 .brain-onboard {
   position: fixed;
   inset: 0;
@@ -7,6 +7,7 @@
   align-items: flex-end;
   justify-content: center;
   padding: 0;
+  color: #172033;
 }
 
 .brain-onboard[hidden] {
@@ -16,10 +17,11 @@
 .brain-onboard__backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.72);
+  background: rgba(23, 32, 51, 0.45);
   backdrop-filter: blur(6px);
 }
 
+body.lipa-brain-soft .brain-onboard .brain-onboard__panel,
 .brain-onboard__panel {
   position: relative;
   z-index: 1;
@@ -27,12 +29,13 @@
   max-width: 480px;
   max-height: min(92vh, 640px);
   overflow-y: auto;
-  background: linear-gradient(180deg, #1a1030 0%, #0a0a0f 100%);
-  border: 1px solid rgba(168, 85, 247, 0.4);
+  background: #ffffff !important;
+  border: 1px solid #e6e8ec;
   border-radius: 24px 24px 0 0;
   padding: 24px 20px 28px;
-  box-shadow: 0 -8px 48px rgba(124, 58, 237, 0.25);
+  box-shadow: 0 -8px 48px rgba(23, 32, 51, 0.12);
   animation: onboard-slide 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+  color: #172033;
 }
 
 @media (min-width: 520px) {
@@ -61,12 +64,12 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.15);
+  background: #e6e8ec;
   transition: background 0.2s, transform 0.2s;
 }
 
 .brain-onboard__dot--on {
-  background: #a855f7;
+  background: #7c3aed;
   transform: scale(1.15);
 }
 
@@ -75,24 +78,28 @@
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #c4b5fd;
+  color: #5b21b6;
   margin: 0 0 8px;
   text-align: center;
 }
 
+body.lipa-brain-soft .brain-onboard .brain-onboard__title,
+body.lipa-brain-soft .brain-onboard #brain-onboard-title,
 .brain-onboard__title {
-  font-family: var(--lipa-font-display);
+  font-family: var(--lipa-font-display, 'Nunito', system-ui, sans-serif);
   font-size: clamp(1.35rem, 4vw, 1.6rem);
-  font-weight: 700;
+  font-weight: 800;
   text-align: center;
   margin: 0 0 8px;
-  color: #fff;
+  color: #172033 !important;
   letter-spacing: -0.03em;
+  background: none !important;
+  -webkit-text-fill-color: #172033 !important;
 }
 
 .brain-onboard__lead {
   text-align: center;
-  color: var(--lipa-text-secondary);
+  color: #475467;
   font-size: 15px;
   margin: 0 0 20px;
   line-height: 1.45;
@@ -112,9 +119,9 @@
   width: 100%;
   padding: 14px 16px;
   border-radius: 14px;
-  border: 2px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--lipa-text);
+  border: 2px solid #e6e8ec;
+  background: #fafbfc;
+  color: #172033;
   font-family: inherit;
   font-size: 16px;
   font-weight: 500;
@@ -124,14 +131,19 @@
 }
 
 .brain-onboard__opt:hover {
-  border-color: rgba(168, 85, 247, 0.45);
-  background: rgba(168, 85, 247, 0.1);
+  border-color: rgba(124, 58, 237, 0.45);
+  background: #f3edff;
 }
 
 .brain-onboard__opt--picked {
-  border-color: #a855f7;
-  background: rgba(168, 85, 247, 0.2);
-  box-shadow: 0 0 20px rgba(168, 85, 247, 0.15);
+  border-color: #7c3aed;
+  background: #f3edff;
+  box-shadow: 0 0 0 1px rgba(124, 58, 237, 0.15);
+}
+
+.brain-onboard__opt--soon {
+  opacity: 0.55;
+  cursor: not-allowed;
 }
 
 .brain-onboard__opt-emoji {
@@ -145,24 +157,28 @@
   font-size: 14px;
   font-weight: 600;
   margin-bottom: 8px;
-  color: var(--lipa-text-secondary, #94a3b8);
+  color: #172033;
 }
 
 .brain-onboard__name-input {
   width: 100%;
   padding: 14px 16px;
   border-radius: 14px;
-  border: 2px solid rgba(255, 255, 255, 0.15);
-  background: rgba(255, 255, 255, 0.06);
-  color: var(--lipa-text);
+  border: 2px solid #d0d5dd;
+  background: #ffffff;
+  color: #172033;
   font-size: 18px;
   margin-bottom: 10px;
   box-sizing: border-box;
 }
 
+.brain-onboard__name-input::placeholder {
+  color: #98a2b3;
+}
+
 .brain-onboard__hint {
   font-size: 13px;
-  color: var(--lipa-text-secondary, #94a3b8);
+  color: #667085;
   margin: 0 0 16px;
   line-height: 1.4;
 }
@@ -170,12 +186,13 @@
 .brain-onboard__opt-text strong {
   display: block;
   font-size: 16px;
+  color: #172033;
   margin-bottom: 2px;
 }
 
 .brain-onboard__opt-text span {
   font-size: 13px;
-  color: var(--lipa-text-secondary);
+  color: #667085;
   font-weight: 400;
 }
 
@@ -198,7 +215,7 @@
 
 .brain-onboard__btn--primary {
   background: linear-gradient(135deg, #7c3aed, #a855f7);
-  color: #fff;
+  color: #ffffff;
 }
 
 .brain-onboard__btn--primary:disabled {
@@ -207,9 +224,9 @@
 }
 
 .brain-onboard__btn--ghost {
-  background: transparent;
-  color: var(--lipa-text-secondary);
-  border: 1px solid var(--lipa-border);
+  background: #ffffff;
+  color: #344054;
+  border: 1px solid #d0d5dd;
 }
 
 .brain-onboard__result-steps {
@@ -223,7 +240,7 @@
   align-items: center;
   gap: 12px;
   padding: 12px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid #e6e8ec;
 }
 
 .brain-onboard__result-step:last-child {
@@ -234,8 +251,8 @@
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: rgba(168, 85, 247, 0.25);
-  color: #e9d5ff;
+  background: #ede9fe;
+  color: #5b21b6;
   font-size: 13px;
   font-weight: 700;
   display: flex;
@@ -247,20 +264,23 @@
 .brain-onboard__result-body strong {
   display: block;
   font-size: 15px;
+  color: #172033;
 }
 
 .brain-onboard__result-body span {
   font-size: 13px;
-  color: var(--lipa-text-secondary);
+  color: #667085;
 }
 
 /* Plan card (página / hub) */
 .brain-plan-card {
-  border: 1px solid rgba(168, 85, 247, 0.35);
+  border: 1px solid #e6e8ec;
   border-radius: var(--lipa-radius-lg, 20px);
-  background: linear-gradient(145deg, rgba(124, 58, 237, 0.15), rgba(10, 10, 15, 0.9));
+  background: #ffffff;
   padding: var(--lipa-space-lg, 24px);
   margin-bottom: var(--lipa-space-lg, 24px);
+  box-shadow: 0 8px 24px rgba(23, 32, 51, 0.06);
+  color: #172033;
 }
 
 .brain-plan-card__head {
@@ -268,17 +288,17 @@
 }
 
 .brain-plan-card__title {
-  font-family: var(--lipa-font-display);
+  font-family: var(--lipa-font-display, 'Nunito', system-ui, sans-serif);
   font-size: 1.25rem;
-  font-weight: 700;
+  font-weight: 800;
   margin: 0 0 6px;
-  color: #f5f3ff;
+  color: #172033;
 }
 
 .brain-plan-card__sub {
   margin: 0;
   font-size: 14px;
-  color: var(--lipa-text-secondary);
+  color: #667085;
 }
 
 .brain-plan-steps {
@@ -301,16 +321,16 @@
   gap: 12px;
   padding: 14px 16px;
   border-radius: 14px;
-  border: 1px solid rgba(168, 85, 247, 0.3);
-  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid #e6e8ec;
+  background: #fafbfc;
   text-decoration: none;
-  color: var(--lipa-text) !important;
+  color: #172033 !important;
   transition: background 0.15s, border-color 0.15s;
 }
 
 .brain-plan-step a:hover {
-  background: rgba(168, 85, 247, 0.15);
-  border-color: #a855f7;
+  background: #f3edff;
+  border-color: #7c3aed;
 }
 
 .brain-plan-step__n {
@@ -318,7 +338,7 @@
   height: 32px;
   border-radius: 10px;
   background: linear-gradient(135deg, #7c3aed, #a855f7);
-  color: #fff;
+  color: #ffffff;
   font-weight: 700;
   font-size: 14px;
   display: flex;
@@ -334,11 +354,12 @@
 .brain-plan-step__info strong {
   display: block;
   font-size: 15px;
+  color: #172033;
 }
 
 .brain-plan-step__info span {
   font-size: 13px;
-  color: var(--lipa-text-secondary);
+  color: #667085;
 }
 
 .brain-plan-card__actions {
@@ -350,14 +371,16 @@
 .brain-plan-teaser {
   text-align: center;
   padding: var(--lipa-space-lg, 24px);
-  border: 1px dashed rgba(168, 85, 247, 0.4);
+  border: 1px dashed #d0d5dd;
   border-radius: var(--lipa-radius, 14px);
   margin-bottom: var(--lipa-space-lg, 24px);
+  background: #ffffff;
+  color: #172033;
 }
 
 .brain-plan-teaser p {
   margin: 0 0 16px;
-  color: var(--lipa-text-secondary);
+  color: #667085;
 }
 
 .brain-onboard__course-grid {
@@ -374,7 +397,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #c4b5fd;
+  color: #5b21b6;
   margin: 12px 0 4px;
 }
 
@@ -386,4 +409,47 @@
   font-size: 1.1rem;
   font-weight: 800;
   min-width: 2.5rem;
+}
+
+/* Picker de curso dentro del modal */
+.brain-onboard .lipa-course-picker--playful {
+  background: #fafbfc;
+  border-color: #e6e8ec;
+  color: #172033;
+}
+
+.brain-onboard .lipa-course-picker__panel-title,
+.brain-onboard .lipa-course-picker__stage-desc,
+.brain-onboard .lipa-course-picker__tab {
+  color: #172033;
+}
+
+.brain-onboard .lipa-course-picker__tab {
+  background: #ffffff;
+  border-color: #e6e8ec;
+}
+
+.brain-onboard .lipa-course-picker__tab.is-active {
+  color: #172033;
+}
+
+.brain-onboard .lipa-course-pick {
+  color: #172033;
+}
+
+.brain-onboard .lipa-course-pick__body strong {
+  color: #172033;
+}
+
+.brain-onboard .lipa-course-pick__body span {
+  color: #667085;
+}
+
+.brain-onboard__course-foot {
+  color: #667085;
+}
+
+.brain-onboard__course-foot a {
+  color: #7c3aed;
+  font-weight: 600;
 }
