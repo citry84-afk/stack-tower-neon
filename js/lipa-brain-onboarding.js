@@ -128,6 +128,11 @@
         '</div>';
     }
 
+    if (root) {
+      root.classList.toggle('brain-onboard--step-course', key === 'course');
+      root.classList.toggle('brain-onboard--step-welcome', key === 'welcome');
+    }
+
     panel.innerHTML =
       (key !== 'result' ? '<div class="brain-onboard__progress">' + dots + '</div>' : '') +
       '<p class="brain-onboard__kicker">' + esc(meta.kicker) + '</p>' +

@@ -1329,6 +1329,23 @@ body.lipa-brain-soft.brain-evo-page main > p a {
   text-align: center;
 }
 
+.lipa-curriculum-complete__auto {
+  text-align: center;
+  font-size: 15px;
+  font-weight: 600;
+  color: #172033;
+  margin: 0 0 12px;
+  line-height: 1.45;
+}
+
+.lipa-curriculum-complete--routine .lipa-curriculum-complete__title {
+  font-size: 1.35rem;
+}
+
+.lipa-curriculum-complete__actions--routine {
+  margin-top: 4px;
+}
+
 body.lipa-curriculum-active.game-page {
   padding-top: 0;
 }

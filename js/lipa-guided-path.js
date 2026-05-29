@@ -48,11 +48,25 @@
       startOnboarding(e);
       return;
     }
+    var btn = e && e.target ? e.target.closest('[data-guided-routine]') : null;
+    if (btn) {
+      btn.disabled = true;
+      btn.setAttribute('aria-busy', 'true');
+      var prev = btn.textContent;
+      btn.textContent = 'Abriendo primera misión…';
+      setTimeout(function () {
+        if (btn.isConnected) {
+          btn.disabled = false;
+          btn.removeAttribute('aria-busy');
+          btn.textContent = prev;
+        }
+      }, 8000);
+    }
     if (global.LipaBrain && LipaBrain.refreshProfileRoutine) {
       LipaBrain.refreshProfileRoutine();
     }
     if (global.LipaRoutineFlow && LipaRoutineFlow.beginFromProfile) {
-      LipaRoutineFlow.beginFromProfile();
+      LipaRoutineFlow.beginFromProfile({ restart: true });
       return;
     }
     var r = buildRoutine();

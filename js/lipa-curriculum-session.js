@@ -169,10 +169,28 @@
     }, 120);
   }
 
+  function routineActive() {
+    return !!(global.LipaRoutineFlow && LipaRoutineFlow.isActive && LipaRoutineFlow.isActive());
+  }
+
   function injectCompletePanel(meta, result) {
     var next = LipaCurriculum.getContinueTarget(meta.ctx.courseId);
     var nextHtml = '';
-    if (result.passed && next && next.type === 'activity' && next.href.indexOf(meta.ctx.activityId) < 0) {
+    var inRoutine = routineActive() && result.passed;
+
+    if (inRoutine && global.LipaRoutineFlow) {
+      var upcoming = LipaRoutineFlow.peekNextStep ? LipaRoutineFlow.peekNextStep() : null;
+      var nextLabel = upcoming
+        ? (upcoming.emoji ? upcoming.emoji + ' ' : '') + upcoming.name
+        : 'tu recompensa';
+      nextHtml =
+        '<p class="lipa-curriculum-complete__auto">Siguiente: <strong>' + esc(nextLabel) + '</strong> ' +
+        'en <span id="lipa-routine-countdown">3</span> s</p>' +
+        '<div class="lipa-curriculum-complete__actions lipa-curriculum-complete__actions--routine">' +
+        '<button type="button" class="lipa-btn lipa-btn--primary" id="lipa-routine-advance-now">Ir ya →</button>' +
+        '<button type="button" class="lipa-btn lipa-btn--ghost" id="lipa-routine-advance-wait">Un momento</button>' +
+        '</div>';
+    } else if (result.passed && next && next.type === 'activity' && next.href.indexOf(meta.ctx.activityId) < 0) {
       nextHtml =
         '<a href="' + esc(next.href) + '" class="lipa-btn lipa-btn--primary lipa-curriculum-complete__next">' +
         '▶ Siguiente misión: ' + esc(next.label) + ' →</a>';
@@ -189,6 +207,14 @@
       ? '<p class="lipa-curriculum-complete__xp">+' + esc(String(result.xpGain)) + ' XP · racha activa</p>'
       : '';
 
+    var footerActions = inRoutine
+      ? nextHtml
+      : '<div class="lipa-curriculum-complete__actions">' +
+        nextHtml +
+        '<a href="' + esc(unitUrl(meta.ctx)) + '" class="lipa-btn lipa-btn--secondary">Ver unidad</a>' +
+        '<a href="/curso.html?c=' + encodeURIComponent(meta.ctx.courseId) + '&empezar=1" class="lipa-btn lipa-btn--ghost">Rutina de hoy</a>' +
+        '</div>';
+
     injectPanel(
       meta,
       '<p class="lipa-curriculum-complete__title">' + esc(title) + '</p>' +
@@ -196,14 +222,32 @@
       '<p class="lipa-curriculum-complete__sub">' + esc(meta.subjectEmoji + ' ' + meta.subjectLabel) +
       ' · ' + esc(meta.title) + ' · ' + pct + '% aciertos</p>' +
       xpLine +
-      progressBlock(meta) +
-      '<div class="lipa-curriculum-complete__actions">' +
-      nextHtml +
-      '<a href="' + esc(unitUrl(meta.ctx)) + '" class="lipa-btn lipa-btn--secondary">Ver unidad</a>' +
-      '<a href="/curso.html?c=' + encodeURIComponent(meta.ctx.courseId) + '&empezar=1" class="lipa-btn lipa-btn--ghost">Rutina de hoy</a>' +
-      '</div>',
-      'lipa-curriculum-complete--ok'
+      (inRoutine ? '' : progressBlock(meta)) +
+      footerActions,
+      'lipa-curriculum-complete--ok' + (inRoutine ? ' lipa-curriculum-complete--routine' : '')
     );
+
+    if (inRoutine && global.LipaRoutineFlow && LipaRoutineFlow.scheduleAutoAdvance) {
+      var cd = document.getElementById('lipa-routine-countdown');
+      LipaRoutineFlow.scheduleAutoAdvance(3200, cd);
+      var goNow = document.getElementById('lipa-routine-advance-now');
+      var waitBtn = document.getElementById('lipa-routine-advance-wait');
+      if (goNow) {
+        goNow.addEventListener('click', function () {
+          if (LipaRoutineFlow.cancelAutoAdvance) LipaRoutineFlow.cancelAutoAdvance();
+          LipaRoutineFlow.goNext(false);
+        });
+      }
+      if (waitBtn) {
+        waitBtn.addEventListener('click', function () {
+          if (LipaRoutineFlow.cancelAutoAdvance) LipaRoutineFlow.cancelAutoAdvance();
+          var cdEl = document.getElementById('lipa-routine-countdown');
+          if (cdEl && cdEl.parentNode) {
+            cdEl.parentNode.innerHTML = 'Pulsa <strong>Ir ya</strong> cuando quieras seguir.';
+          }
+        });
+      }
+    }
 
     if (global.LipaGameFeedback) {
       try { LipaGameFeedback.confettiLite(); } catch (e) { /* ignore */ }

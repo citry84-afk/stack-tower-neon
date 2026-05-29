@@ -41,11 +41,37 @@ body.lipa-brain-soft .brain-onboard .brain-onboard__panel,
 @media (min-width: 520px) {
   .brain-onboard {
     align-items: center;
-    padding: 20px;
+    padding: 16px;
   }
   .brain-onboard__panel {
     border-radius: 24px;
+    max-width: min(540px, 96vw);
   }
+}
+
+.brain-onboard--step-course .brain-onboard__panel {
+  max-width: min(100%, 520px);
+  width: 100%;
+  max-height: min(94vh, 780px);
+  padding: 18px 14px 22px;
+  box-sizing: border-box;
+}
+
+.brain-onboard--step-course .brain-onboard__lead {
+  margin-bottom: 12px;
+}
+
+.brain-onboard--step-course .brain-onboard__course-picker {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.brain-onboard--step-course .brain-onboard__actions {
+  margin-top: 8px;
+  position: sticky;
+  bottom: 0;
+  padding-top: 10px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0), #fff 28%);
 }
 
 @keyframes onboard-slide {
@@ -460,10 +486,29 @@ body.lipa-brain-soft .brain-onboard #brain-onboard-title,
 }
 
 .brain-onboard .lipa-course-picker--onboard {
-  padding: 1rem 0.85rem 1.1rem;
+  padding: 0.65rem 0.35rem 0.85rem;
+  margin: 0;
+  width: 100%;
+  box-sizing: border-box;
   background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
   border: 2px solid #e6e8ec;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.brain-onboard .lipa-course-picker--onboard .lipa-course-picker__deco {
+  display: none;
+}
+
+.brain-onboard .lipa-course-picker__list {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.brain-onboard .lipa-course-picker__list li {
+  list-style: none !important;
+  margin: 0;
+  padding: 0;
 }
 
 .brain-onboard .lipa-course-picker--onboard .lipa-course-picker__tabs {

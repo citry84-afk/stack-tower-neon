@@ -215,6 +215,64 @@
     document.body.classList.add('lipa-routine-active');
   }
 
+  var autoAdvanceTimer = null;
+  var countdownInterval = null;
+
+  function cancelAutoAdvance() {
+    if (autoAdvanceTimer) {
+      clearTimeout(autoAdvanceTimer);
+      autoAdvanceTimer = null;
+    }
+    if (countdownInterval) {
+      clearInterval(countdownInterval);
+      countdownInterval = null;
+    }
+  }
+
+  function peekNextStep() {
+    var state = loadState();
+    if (!state || !state.steps.length) return null;
+    var idx = state.currentStep + 1;
+    if (idx >= state.steps.length) return null;
+    return state.steps[idx];
+  }
+
+  function scheduleAutoAdvance(delayMs, countdownEl) {
+    cancelAutoAdvance();
+    var ms = Math.max(1200, delayMs || 3000);
+    var ticks = Math.ceil(ms / 1000);
+    var n = ticks;
+    if (countdownEl) countdownEl.textContent = String(n);
+    countdownInterval = setInterval(function () {
+      n -= 1;
+      if (countdownEl) countdownEl.textContent = String(Math.max(0, n));
+      if (n <= 0 && countdownInterval) {
+        clearInterval(countdownInterval);
+        countdownInterval = null;
+      }
+    }, 1000);
+    autoAdvanceTimer = setTimeout(function () {
+      cancelAutoAdvance();
+      goNext(false);
+    }, ms);
+  }
+
+  function tryAutoStartGame() {
+    if (!isActive()) return;
+    var starters = [
+      'calc-start', 'tablas-start', 'lengua-start', 'peques-start', 'flash-start',
+      'clasifica-start', 'ordenar-start', 'mayor-start', 'sociales-start', 'rt-start'
+    ];
+    for (var i = 0; i < starters.length; i++) {
+      var btn = document.getElementById(starters[i]);
+      if (!btn || btn.disabled) continue;
+      setTimeout(function (b) {
+        try { b.click(); } catch (e) { /* ignore */ }
+      }, 700, btn);
+      return;
+    }
+  }
+
   function showNextReady() {
     var state = loadState();
     if (!state) state = stateFromProfile();
@@ -358,9 +416,16 @@
     global.location.href = state.steps[0].guidedUrl;
   }
 
-  function beginFromProfile() {
+  function beginFromProfile(opts) {
+    opts = opts || {};
+    if (opts.restart) clearState();
     var state = stateFromProfile();
     if (state) {
+      if (opts.restart) {
+        state.currentStep = 0;
+        state.completedSteps = [];
+        state.startedAt = new Date().toISOString();
+      }
       saveState(state);
       global.location.href = state.steps[state.currentStep].guidedUrl;
       return;
@@ -405,7 +470,14 @@
       state.completedSteps.push(state.currentStep);
     }
     saveState(state);
+
+    var params = getParams();
+    if (params && params.get('curriculum') === '1') {
+      /* El panel de misión curriculum programa el salto automático. */
+      return;
+    }
     showNextReady();
+    scheduleAutoAdvance(2800);
   }
 
   function bindDelegatedStarts() {
@@ -413,7 +485,7 @@
       var guided = e.target.closest('[data-start-guided-routine]');
       if (guided) {
         e.preventDefault();
-        beginFromProfile();
+        beginFromProfile({ restart: true });
         return;
       }
       var fixed = e.target.closest('[data-start-fixed-routine]');
@@ -466,6 +538,7 @@
     }
 
     renderBar(state, { justFinished: false });
+    tryAutoStartGame();
   }
 
   function showCompletionTeaser(container) {
@@ -512,7 +585,10 @@
     goNext: goNext,
     onStepRecorded: onStepRecorded,
     guidedUrl: guidedUrl,
-    showCompletionTeaser: showCompletionTeaser
+    showCompletionTeaser: showCompletionTeaser,
+    scheduleAutoAdvance: scheduleAutoAdvance,
+    cancelAutoAdvance: cancelAutoAdvance,
+    peekNextStep: peekNextStep
   };
 
   bindDelegatedStarts();
