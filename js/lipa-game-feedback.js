@@ -59,7 +59,15 @@
     pop(resolveArena(workEl));
     floatXp(xp || 8);
     var m = document.getElementById('lipi-game-hint');
-    if (m && global.LipaMascot) LipaMascot.render(m, 'correct');
+    if (m && global.LipaMascot) {
+      var msg = null;
+      if (global.__lipaCombo && global.__lipaCombo >= 3) {
+        msg = global.__lipaCombo >= 5
+          ? '¡Combo x' + global.__lipaCombo + '! Vas como un experto.'
+          : '¡Racha de ' + global.__lipaCombo + '! Sigue así.';
+      }
+      LipaMascot.render(m, 'correct', msg);
+    }
   }
 
   function resolveArena(el) {
@@ -75,8 +83,9 @@
     if (m && global.LipaMascot) LipaMascot.render(m, 'wrong');
   }
 
-  function onActivityComplete() {
+  function onActivityComplete(xp) {
     confettiLite();
+    if (xp) floatXp(xp);
     if (global.LipaMascot) LipaMascot.say('complete');
   }
 

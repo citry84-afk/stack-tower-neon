@@ -1271,6 +1271,52 @@ body.lipa-brain-soft.brain-evo-page main > p a {
   color: var(--brain-text-muted);
 }
 
+.lipa-curriculum-complete__stars {
+  margin: 0 0 0.5rem;
+  font-size: 1.35rem;
+  letter-spacing: 0.12em;
+  color: #f59e0b;
+}
+
+.lipa-curriculum-complete__xp {
+  margin: 0 0 0.65rem;
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: #7c3aed;
+}
+
+.lipa-curriculum-complete__progress {
+  margin: 0 0 0.85rem;
+  text-align: left;
+  font-size: 0.82rem;
+  color: var(--brain-text-muted);
+}
+
+.lipa-curriculum-complete__progress p {
+  margin: 0 0 0.35rem;
+}
+
+.lipa-curriculum-complete__bar {
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  margin-bottom: 0.35rem;
+}
+
+.lipa-curriculum-complete__bar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #2ed3a6, #22c55e);
+  transition: width 0.4s ease;
+}
+
+.lipa-curriculum-complete__course-pct {
+  margin: 0;
+  font-size: 0.8rem;
+}
+
 .lipa-curriculum-complete__actions {
   display: flex;
   flex-direction: column;

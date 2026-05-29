@@ -205,6 +205,7 @@
     if (val === ans) {
       correct++;
       combo++;
+      if (typeof window !== 'undefined') window.__lipaCombo = combo;
       if (combo > maxCombo) maxCombo = combo;
       var pts = 10 + Math.min(combo * 3, 24);
       if (level === 'medio') pts += 2;
@@ -215,6 +216,7 @@
     } else {
       wrong++;
       combo = 0;
+      if (typeof window !== 'undefined') window.__lipaCombo = 0;
       btn.classList.add('math-choice--bad');
       try { if (window.LipaGameFeedback && arenaEl) LipaGameFeedback.onWrong(arenaEl); } catch (fbErr) { /* ignore */ }
       choicesEl.querySelectorAll('.math-choice').forEach(function (b) {
@@ -257,7 +259,8 @@
         correct: correct,
         wrong: wrong,
         accuracy: total ? correct / total : 1,
-        durationSec: DURATION
+        durationSec: DURATION,
+        sessionComplete: true
       });
     } else if (window.LipaDaily && LipaDaily.recordSession) {
       LipaDaily.recordSession('neon-calculo', { score: score });

@@ -200,7 +200,8 @@
         correct: correct,
         wrong: wrong,
         accuracy: total ? correct / total : 1,
-        durationSec: DURATION
+        durationSec: DURATION,
+        sessionComplete: true
       });
     }
     refreshBrainLevel();

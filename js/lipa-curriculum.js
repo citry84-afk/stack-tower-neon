@@ -6,6 +6,20 @@
 
   var PROGRESS_KEY = 'lipa_curriculum_progress_v1';
   var CURRICULUM_MIN_ACCURACY = 0.6;
+
+  function getMinAccuracy(courseId) {
+    if (!courseId) return CURRICULUM_MIN_ACCURACY;
+    if (courseId.indexOf('infantil-') === 0) return 0.45;
+    if (courseId.indexOf('eso-') === 0) return 0.6;
+    return 0.55;
+  }
+
+  function getSoftMinAccuracy(courseId) {
+    if (!courseId) return 0.45;
+    if (courseId.indexOf('infantil-') === 0) return 0.35;
+    if (courseId.indexOf('eso-') === 0) return 0.5;
+    return 0.42;
+  }
   var COURSES = [];
   var META = {};
 
@@ -133,10 +147,12 @@
     return { firstTime: firstTime };
   }
 
-  /** Marca actividad del curso solo si accuracy >= 60 % (o sesión válida sin fallos). */
-  function tryCompleteFromGame(activityId, payload) {
+  /** Marca actividad del curso si alcanza precisión mínima (por etapa) o termina la sesión con esfuerzo razonable. */
+  function tryCompleteFromGame(activityId, payload, courseId) {
+    payload = payload || {};
     var acc = resolveAccuracy(payload);
-    var min = CURRICULUM_MIN_ACCURACY;
+    var min = getMinAccuracy(courseId);
+    var soft = getSoftMinAccuracy(courseId);
     if (acc == null) {
       return {
         passed: false,
@@ -147,7 +163,8 @@
         reason: 'no-data'
       };
     }
-    if (acc < min) {
+    var effortPass = !!(payload.sessionComplete && acc >= soft);
+    if (acc < min && !effortPass) {
       return {
         passed: false,
         marked: false,
@@ -164,7 +181,8 @@
       accuracy: acc,
       minAccuracy: min,
       firstTime: mark.firstTime,
-      reason: 'ok'
+      effortPass: effortPass && acc < min,
+      reason: effortPass && acc < min ? 'effort' : 'ok'
     };
   }
 
@@ -757,6 +775,8 @@
     tryCompleteFromGame: tryCompleteFromGame,
     resolveAccuracy: resolveAccuracy,
     CURRICULUM_MIN_ACCURACY: CURRICULUM_MIN_ACCURACY,
+    getMinAccuracy: getMinAccuracy,
+    getSoftMinAccuracy: getSoftMinAccuracy,
     isActivityComplete: isActivityComplete,
     unitProgress: unitProgress,
     subjectProgress: subjectProgress,

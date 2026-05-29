@@ -287,25 +287,48 @@
 
     var xpGain = 8 + Math.floor((payload.score || 0) / 25);
     if (acc >= 0.9) xpGain += 5;
-    addXp(xpGain);
-    bumpStreak();
 
     var curriculumResult = null;
+    var curriculumPayload = payload;
     if (global.LipaCurriculum && global.location) {
       try {
         var params = new URLSearchParams(global.location.search);
         if (params.get('curriculum') === '1' && params.get('activity')) {
-          curriculumResult = LipaCurriculum.tryCompleteFromGame(params.get('activity'), {
-            score: payload.score,
-            accuracy: acc,
-            correct: payload.correct,
-            wrong: payload.wrong,
-            gameId: activityId,
-            sessionComplete: payload.sessionComplete
-          });
+          var attempts = (payload.correct || 0) + (payload.wrong || 0);
+          var sessionComplete = payload.sessionComplete;
+          if (!sessionComplete && (attempts >= 3 || (payload.durationSec && payload.durationSec >= 12))) {
+            sessionComplete = true;
+          }
+          curriculumPayload = Object.assign({}, payload, { sessionComplete: sessionComplete });
+          var courseId = params.get('course') || '';
+          var subjectId = params.get('subject') || '';
+          var unitId = params.get('unit') || '';
+          var activityIdCur = params.get('activity') || '';
+          var actCtx = LipaCurriculum.getActivity(courseId, subjectId, unitId, activityIdCur);
+          if (actCtx && actCtx.activity && actCtx.activity.rewardXp) {
+            xpGain = actCtx.activity.rewardXp;
+            if (acc >= 0.9) xpGain += 5;
+            else if (acc >= 0.75) xpGain += 3;
+          }
+          curriculumResult = LipaCurriculum.tryCompleteFromGame(
+            activityIdCur,
+            {
+              score: curriculumPayload.score,
+              accuracy: acc,
+              correct: curriculumPayload.correct,
+              wrong: curriculumPayload.wrong,
+              gameId: activityId,
+              sessionComplete: sessionComplete
+            },
+            courseId
+          );
+          if (curriculumResult) curriculumResult.xpGain = xpGain;
         }
       } catch (e) { /* ignore */ }
     }
+    addXp(xpGain);
+    bumpStreak();
+    entry.xpGain = xpGain;
     entry.curriculumResult = curriculumResult;
 
     if (global.LipaRoutineFlow && LipaRoutineFlow.onStepRecorded) {
@@ -322,7 +345,7 @@
           celebrate = q.get('curriculum') === '1' || q.get('rutina') === '1';
         }
         if (celebrate && (!curriculumResult || curriculumResult.passed)) {
-          LipaGameFeedback.onActivityComplete();
+          LipaGameFeedback.onActivityComplete(curriculumResult && curriculumResult.xpGain);
         }
       } catch (e) { /* ignore */ }
     }

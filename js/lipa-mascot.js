@@ -13,21 +13,29 @@
     correct: [
       '¡Muy bien!',
       '¡Genial! Sigue así.',
-      '¡Lo tienes! Tu cerebro sube de nivel.'
+      '¡Lo tienes! Tu cerebro sube de nivel.',
+      '¡Bien pensado! Ese es el camino.',
+      '¡Correcto! Cada acierto suma XP.'
     ],
     wrong: [
       'Casi lo tienes. Prueba otra vez.',
       'Fíjate en la pista. Vamos juntos.',
-      'No pasa nada. Inténtalo otra vez.'
+      'No pasa nada. Inténtalo otra vez.',
+      'Los errores también enseñan. ¡Otra vez!',
+      'Respira, lee bien y toca otra vez.'
     ],
     complete: [
       '¡Entrenamiento completado! Hoy has entrenado como un campeón.',
       '¡Tu cerebro acaba de hacer ejercicio! Muy bien.',
-      '¡Misión cumplida! Vuelve mañana para tu racha.'
+      '¡Misión cumplida! Vuelve mañana para tu racha.',
+      '¡Lo has logrado! El cole puede esperar — tú ya entrenaste.',
+      '¡Gran sesión! Mañana sumas otro día a tu racha.'
     ],
     routine: [
       'Tu rutina de hoy está lista. ¿Empezamos?',
-      'Un ejercicio tras otro. ¡Tú puedes!'
+      'Un ejercicio tras otro. ¡Tú puedes!',
+      'Solo unos minutos. Tu yo del futuro te lo agradece.',
+      'Elige empezar: Lipi te lleva paso a paso.'
     ]
   };
 

@@ -405,6 +405,7 @@
 
     var nextInUnit = C.findNextActivity(courseId, { subjectId: subjectId, unitId: unitId });
     var nextActId = nextInUnit && nextInUnit.activity ? nextInUnit.activity.id : null;
+    var minPct = Math.round((C.getMinAccuracy ? C.getMinAccuracy(courseId) : 0.6) * 100);
 
     html += '<div class="curriculum-wrap"><div id="lipa-guided-mount" class="curriculum-guided-mount"></div><div id="lipi-mascot-mount"></div><header class="curriculum-hero" style="text-align:left;padding:0 0 1rem">' +
       '<h1 style="text-align:left;font-size:1.5rem">' + C.esc(ctx.unit.title) + '</h1>' +
@@ -427,7 +428,7 @@
         html += '<a href="' + C.esc(url) + '" class="' + cls + '">' +
           '<span class="curriculum-activity-card__level">' + act.difficulty + '</span>' +
           '<span class="curriculum-activity-card__body"><strong>' + C.esc(act.title) + '</strong>' +
-          '<span>' + (gameLabel ? C.esc(gameLabel) + ' · ' : '') + C.esc(diff.name) + ' · ~' + act.estimatedMinutes + ' min · meta 60% · +' + act.rewardXp + ' XP' + (done ? ' · ✓ hecho' : '') + '</span></span>' +
+          '<span>' + (gameLabel ? C.esc(gameLabel) + ' · ' : '') + C.esc(diff.name) + ' · ~' + act.estimatedMinutes + ' min · meta ' + minPct + '% · +' + act.rewardXp + ' XP' + (done ? ' · ✓ hecho' : '') + '</span></span>' +
           '<span class="curriculum-activity-card__cta">' + (isNext ? 'Siguiente →' : done ? 'Repetir' : 'Jugar') + ' →</span></a>';
       } else {
         html += '<div class="' + cls + '">' +
@@ -449,7 +450,7 @@
         'routine',
         nextActId
           ? 'La misión resaltada es la que toca ahora. Pulsa el botón morado o la tarjeta.'
-          : 'Elige una misión. Necesitas al menos 60% de aciertos para marcarla hecha.'
+          : 'Elige una misión. Termina la ronda con al menos ' + minPct + '% de aciertos (o completa la sesión con esfuerzo).'
       );
     }
     mountGuidedStrip({

@@ -36,7 +36,35 @@
     return mount;
   }
 
+  function hintFromCurriculum() {
+    if (!global.LipaCurriculum || !global.location) return null;
+    try {
+      var p = new URLSearchParams(global.location.search);
+      if (p.get('curriculum') !== '1' || !p.get('activity')) return null;
+      LipaCurriculum.init();
+      var actCtx = LipaCurriculum.getActivity(
+        p.get('course') || '',
+        p.get('subject') || '',
+        p.get('unit') || '',
+        p.get('activity') || ''
+      );
+      if (!actCtx) return null;
+      var tip = actCtx.activity.tip || '';
+      var title = actCtx.activity.title || 'Misión';
+      var min = LipaCurriculum.getMinAccuracy(p.get('course') || '');
+      return (
+        'Misión «' + title + '». ' +
+        (tip ? tip + '. ' : '') +
+        'Meta ' + Math.round(min * 100) + '% aciertos — termina la ronda y sumas XP.'
+      );
+    } catch (e) {
+      return null;
+    }
+  }
+
   function hintFromPage() {
+    var cur = hintFromCurriculum();
+    if (cur) return cur;
     var body = document.body;
     var mode = body.getAttribute('data-lengua-mode') ||
       body.getAttribute('data-naturales-mode') ||
