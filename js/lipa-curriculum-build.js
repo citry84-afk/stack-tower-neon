@@ -840,66 +840,162 @@
     );
   }
 
+  /** —— 1º ESO (LOMLOE RD 243/2022) —— */
   function eso1Math() {
-    return remapUnits(primaria6Math(), 'eso1-m', 'p6-m-', 'eso1-m-', 1);
-  }
-
-  function eso1Ingles() {
-    return remapUnits(primaria6Ingles(), 'eso1-i', 'p6-i-', 'eso1-i-', 1);
+    return [
+      unit('eso1-m-rac', 'Números racionales', 'LOMLOE · fracciones, decimales y operaciones.', [
+        liveGame('eso1-m-rac1', 'Cálculo express', 'neon-calculo', 3, 8, null, 'eso1-m-a1'),
+        liveGame('eso1-m-rac2', 'Tablas flash', 'tablas-relampago', 2, 8, null, 'eso1-m-a1'),
+        liveMates('eso1-m-rac3', 'Álgebra mental', 2, 3, 9, null, 'eso1-m-a1'),
+        liveMates('eso1-m-rac4', 'Problemas', 3, 4, 9, null, 'eso1-m-a1'),
+        soon('eso1-m-rac5', 'Misión Números racionales', 'quiz', 5)
+      ], { saberIds: ['eso1-m-a1'] }),
+      unit('eso1-m-pot', 'Potencias y raíces', 'LOMLOE · potencias y raíz cuadrada.', [
+        liveGame('eso1-m-pot1', 'Cálculo express', 'neon-calculo', 3, 8, null, 'eso1-m-a2'),
+        liveGame('eso1-m-pot2', 'Tablas flash', 'tablas-relampago', 2, 8, null, 'eso1-m-a2'),
+        liveMates('eso1-m-pot3', 'Álgebra mental', 2, 3, 9, null, 'eso1-m-a2'),
+        liveMates('eso1-m-pot4', 'Problemas', 3, 4, 9, null, 'eso1-m-a2'),
+        soon('eso1-m-pot5', 'Misión Potencias y raíces', 'quiz', 5)
+      ], { saberIds: ['eso1-m-a2'] }),
+      unit('eso1-m-ecu', 'Ecuaciones de 1º grado', 'LOMLOE · incógnitas y álgebra básica.', [
+        liveGame('eso1-m-ecu1', 'Cálculo express', 'neon-calculo', 3, 8, null, 'eso1-m-a3'),
+        liveGame('eso1-m-ecu2', 'Tablas flash', 'tablas-relampago', 2, 8, null, 'eso1-m-a3'),
+        liveMates('eso1-m-ecu3', 'Álgebra mental', 2, 3, 9, null, 'eso1-m-a3'),
+        liveMates('eso1-m-ecu4', 'Problemas', 3, 4, 9, null, 'eso1-m-a3'),
+        soon('eso1-m-ecu5', 'Misión Ecuaciones de 1º grado', 'quiz', 5)
+      ], { saberIds: ['eso1-m-a3'] }),
+      unit('eso1-m-prop', 'Proporcionalidad', 'LOMLOE · porcentajes y regla de tres.', [
+        liveGame('eso1-m-prop1', 'Cálculo express', 'neon-calculo', 3, 8, null, 'eso1-m-b1'),
+        liveGame('eso1-m-prop2', 'Tablas flash', 'tablas-relampago', 2, 8, null, 'eso1-m-b1'),
+        liveMates('eso1-m-prop3', 'Álgebra mental', 2, 3, 9, null, 'eso1-m-b1'),
+        liveMates('eso1-m-prop4', 'Problemas', 3, 4, 9, null, 'eso1-m-b1'),
+        soon('eso1-m-prop5', 'Misión Proporcionalidad', 'quiz', 5)
+      ], { saberIds: ['eso1-m-b1'] }),
+      unit('eso1-m-stat', 'Estadística', 'LOMLOE · frecuencias, media y gráficos.', [
+        liveGame('eso1-m-stat1', 'Cálculo express', 'neon-calculo', 3, 8, null, 'eso1-m-a4'),
+        liveGame('eso1-m-stat2', 'Tablas flash', 'tablas-relampago', 2, 8, null, 'eso1-m-a4'),
+        liveMates('eso1-m-stat3', 'Álgebra mental', 2, 3, 9, null, 'eso1-m-a4'),
+        liveMates('eso1-m-stat4', 'Problemas', 3, 4, 9, null, 'eso1-m-a4'),
+        soon('eso1-m-stat5', 'Misión Estadística', 'quiz', 5)
+      ], { saberIds: ['eso1-m-a4'] }),
+    ];
   }
 
   function eso1Lengua() {
-    return remapUnits(primaria6Lengua(), 'eso1-l', 'p6-l-', 'eso1-l-', 1);
+    return [
+      unit('eso1-l-lit', 'Análisis literario', 'LOMLOE · géneros, figuras y comprensión.', [
+        liveLengua('eso1-l-lit1', 'Lee y analiza', 'neon-lectura', 3, 'Comprensión', 10, 'eso1-l-c1'),
+        liveLenguaRot('eso1-l-lit2', 'Ordena y corrige', 2, 3, 'Sintaxis', 10, 'eso1-l-c1'),
+        liveLenguaRot('eso1-l-lit3', 'Completa', 1, 4, 'Ortografía', 11, 'eso1-l-c1'),
+        soon('eso1-l-lit4', 'Redacción', 'typing', 4),
+        soon('eso1-l-lit5', 'Misión lengua', 'quiz', 5)
+      ], { saberIds: ['eso1-l-c1'] }),
+      unit('eso1-l-gram', 'Gramática y sintaxis', 'LOMLOE · morfología y ortografía.', [
+        liveLengua('eso1-l-gram1', 'Lee y analiza', 'neon-lectura', 3, 'Comprensión', 10, 'eso1-l-c2'),
+        liveLenguaRot('eso1-l-gram2', 'Ordena y corrige', 2, 3, 'Sintaxis', 10, 'eso1-l-c2'),
+        liveLenguaRot('eso1-l-gram3', 'Completa', 1, 4, 'Ortografía', 11, 'eso1-l-c2'),
+        soon('eso1-l-gram4', 'Redacción', 'typing', 4),
+        soon('eso1-l-gram5', 'Misión lengua', 'quiz', 5)
+      ], { saberIds: ['eso1-l-c2'] }),
+      unit('eso1-l-esc', 'Expresión escrita', 'LOMLOE · textos argumentativos.', [
+        liveLengua('eso1-l-esc1', 'Lee y analiza', 'neon-lectura', 3, 'Comprensión', 10, 'eso1-l-c3'),
+        liveLenguaRot('eso1-l-esc2', 'Ordena y corrige', 2, 3, 'Sintaxis', 10, 'eso1-l-c3'),
+        liveLenguaRot('eso1-l-esc3', 'Completa', 1, 4, 'Ortografía', 11, 'eso1-l-c3'),
+        soon('eso1-l-esc4', 'Redacción', 'typing', 4),
+        soon('eso1-l-esc5', 'Misión lengua', 'quiz', 5)
+      ], { saberIds: ['eso1-l-c3'] }),
+    ];
+  }
+
+  function eso1Ingles() {
+    return [
+      unit('eso1-i-past', 'Past tenses', 'LOMLOE · pasado simple y continuo.', [
+        liveIngles('eso1-i-past1', 'Vocab drill', 0, 2, 8, null, 'eso1-i-e1'),
+        liveIngles('eso1-i-past2', 'Listen & tap', 1, 3, 8, null, 'eso1-i-e1'),
+        soon('eso1-i-past3', 'Fill the gap', 'typing', 3),
+        soon('eso1-i-past4', 'Grammar quiz', 'quiz', 4),
+        soon('eso1-i-past5', 'English mission', 'quiz', 5)
+      ], { saberIds: ['eso1-i-e1'] }),
+      unit('eso1-i-desc', 'Descriptions', 'LOMLOE · comparativos y superlativos.', [
+        liveIngles('eso1-i-desc1', 'Vocab drill', 0, 2, 8, null, 'eso1-i-e2'),
+        liveIngles('eso1-i-desc2', 'Listen & tap', 1, 3, 8, null, 'eso1-i-e2'),
+        soon('eso1-i-desc3', 'Fill the gap', 'typing', 3),
+        soon('eso1-i-desc4', 'Grammar quiz', 'quiz', 4),
+        soon('eso1-i-desc5', 'English mission', 'quiz', 5)
+      ], { saberIds: ['eso1-i-e2'] }),
+      unit('eso1-i-oral', 'Oral interaction', 'LOMLOE · diálogos y listening.', [
+        liveIngles('eso1-i-oral1', 'Vocab drill', 0, 2, 8, null, 'eso1-i-e3'),
+        liveIngles('eso1-i-oral2', 'Listen & tap', 1, 3, 8, null, 'eso1-i-e3'),
+        soon('eso1-i-oral3', 'Fill the gap', 'typing', 3),
+        soon('eso1-i-oral4', 'Grammar quiz', 'quiz', 4),
+        soon('eso1-i-oral5', 'English mission', 'quiz', 5)
+      ], { saberIds: ['eso1-i-e3'] }),
+    ];
   }
 
   function eso1Naturales() {
-    return primaria3Naturales().map(function (u, i) {
-      return unit(
-        'eso1-n-u' + (i + 1),
-        u.title,
-        u.description,
-        u.activities.map(function (a) {
-          var copy = {};
-          var k;
-          for (k in a) if (Object.prototype.hasOwnProperty.call(a, k)) copy[k] = a[k];
-          copy.id = (a.id || '').replace(/^p3-/, 'eso1-');
-          if (copy.brainLevel) copy.brainLevel = Math.min(12, copy.brainLevel + 2);
-          return copy;
-        })
-      );
-    });
+    return [
+      unit('eso1-n-cel', 'La célula y seres vivos', 'LOMLOE · biología: estructura celular.', [
+        liveNaturalesRot('eso1-n-cel1', 'Preguntas', 1, 3, 'Ciencia', 10, 'eso1-n-b1'),
+        liveNaturalesRot('eso1-n-cel2', 'Verdadero o falso', 2, 3, 'Lee', 10, 'eso1-n-b1'),
+        liveNaturalesRot('eso1-n-cel3', 'Clasifica', 0, 4, 'Naturales', 10, 'eso1-n-b1'),
+        liveNaturalesRot('eso1-n-cel4', 'Experimento virtual', 1, 4, 'Comprensión', 11, 'eso1-n-b1'),
+        liveNaturalesRot('eso1-n-cel5', 'Reto científico', 2, 5, 'Misión', 11, 'eso1-n-b1')
+      ], { saberIds: ['eso1-n-b1'] }),
+      unit('eso1-n-mat', 'Materia y reacciones', 'LOMLOE · física y química básica.', [
+        liveNaturalesRot('eso1-n-mat1', 'Preguntas', 1, 3, 'Ciencia', 10, 'eso1-n-b2'),
+        liveNaturalesRot('eso1-n-mat2', 'Verdadero o falso', 2, 3, 'Lee', 10, 'eso1-n-b2'),
+        liveNaturalesRot('eso1-n-mat3', 'Clasifica', 0, 4, 'Naturales', 10, 'eso1-n-b2'),
+        liveNaturalesRot('eso1-n-mat4', 'Experimento virtual', 1, 4, 'Comprensión', 11, 'eso1-n-b2'),
+        liveNaturalesRot('eso1-n-mat5', 'Reto científico', 2, 5, 'Misión', 11, 'eso1-n-b2')
+      ], { saberIds: ['eso1-n-b2'] }),
+      unit('eso1-n-tie', 'La Tierra y el universo', 'LOMLOE · geología y astronomía.', [
+        liveNaturalesRot('eso1-n-tie1', 'Preguntas', 1, 3, 'Ciencia', 10, 'eso1-n-b3'),
+        liveNaturalesRot('eso1-n-tie2', 'Verdadero o falso', 2, 3, 'Lee', 10, 'eso1-n-b3'),
+        liveNaturalesRot('eso1-n-tie3', 'Clasifica', 0, 4, 'Naturales', 10, 'eso1-n-b3'),
+        liveNaturalesRot('eso1-n-tie4', 'Experimento virtual', 1, 4, 'Comprensión', 11, 'eso1-n-b3'),
+        liveNaturalesRot('eso1-n-tie5', 'Reto científico', 2, 5, 'Misión', 11, 'eso1-n-b3')
+      ], { saberIds: ['eso1-n-b3'] }),
+    ];
   }
 
   function eso1Sociales() {
-    return primaria3Sociales().map(function (u, i) {
-      return unit(
-        'eso1-s-u' + (i + 1),
-        u.title,
-        u.description,
-        u.activities.map(function (a) {
-          var copy = {};
-          var k;
-          for (k in a) if (Object.prototype.hasOwnProperty.call(a, k)) copy[k] = a[k];
-          copy.id = (a.id || '').replace(/^p3-/, 'eso1-');
-          if (copy.brainLevel) copy.brainLevel = Math.min(12, copy.brainLevel + 2);
-          return copy;
-        })
-      );
-    });
+    return [
+      unit('eso1-s-geo', 'Geografía de España', 'LOMLOE · relieve, clima y paisaje.', [
+        liveSocialesRot('eso1-s-geo1', 'Lee y responde', 1, 3, 'Historia', 10, 'eso1-s-b1'),
+        liveSocialesRot('eso1-s-geo2', 'Mapas', 0, 3, 'Geografía', 10, 'eso1-s-b1'),
+        liveSocialesRot('eso1-s-geo3', 'Ordena', 2, 4, 'Convivencia', 10, 'eso1-s-b1'),
+        liveSocialesRot('eso1-s-geo4', 'Debate corto', 1, 4, 'Ciudadanía', 11, 'eso1-s-b1'),
+        liveSocialesRot('eso1-s-geo5', 'Misión social', 2, 5, 'Reto', 11, 'eso1-s-b1')
+      ], { saberIds: ['eso1-s-b1'] }),
+      unit('eso1-s-hist', 'Sociedades preindustriales', 'LOMLOE · Edad Antigua y Media.', [
+        liveSocialesRot('eso1-s-hist1', 'Lee y responde', 1, 3, 'Historia', 10, 'eso1-s-b2'),
+        liveSocialesRot('eso1-s-hist2', 'Mapas', 0, 3, 'Geografía', 10, 'eso1-s-b2'),
+        liveSocialesRot('eso1-s-hist3', 'Ordena', 2, 4, 'Convivencia', 10, 'eso1-s-b2'),
+        liveSocialesRot('eso1-s-hist4', 'Debate corto', 1, 4, 'Ciudadanía', 11, 'eso1-s-b2'),
+        liveSocialesRot('eso1-s-hist5', 'Misión social', 2, 5, 'Reto', 11, 'eso1-s-b2')
+      ], { saberIds: ['eso1-s-b2'] }),
+      unit('eso1-s-ciu', 'Ciudadanía y derechos', 'LOMLOE · Constitución y convivencia.', [
+        liveSocialesRot('eso1-s-ciu1', 'Lee y responde', 1, 3, 'Historia', 10, 'eso1-s-b3'),
+        liveSocialesRot('eso1-s-ciu2', 'Mapas', 0, 3, 'Geografía', 10, 'eso1-s-b3'),
+        liveSocialesRot('eso1-s-ciu3', 'Ordena', 2, 4, 'Convivencia', 10, 'eso1-s-b3'),
+        liveSocialesRot('eso1-s-ciu4', 'Debate corto', 1, 4, 'Ciudadanía', 11, 'eso1-s-b3'),
+        liveSocialesRot('eso1-s-ciu5', 'Misión social', 2, 5, 'Reto', 11, 'eso1-s-b3')
+      ], { saberIds: ['eso1-s-b3'] }),
+    ];
   }
 
   function eso1Daily() {
     return [
-      unit('eso1-d-rutina', 'Brain Gym diario', 'Mates, idiomas y reflejos para ESO.', [
-        liveGame('eso1-d1', 'Cálculo express', 'neon-calculo', 2, 9),
-        liveGame('eso1-d2', 'Tablas flash', 'tablas-relampago', 2, 9),
-        liveGame('eso1-d3', 'English drill', 'neon-palabras', 2, 9),
-        liveReflex('eso1-d4', 'Test reflejos', 'reaction-test', 2),
-        liveReflex('eso1-d5', 'Aim trainer', 'aim-trainer', 3)
-      ])
+      unit('eso1-d-rutina', 'Brain Gym diario', 'LOMLOE · mates, idiomas y reflejos para ESO.', [
+        liveGame('eso1-d1', 'Cálculo express', 'neon-calculo', 3, 8, null, 'eso1-m-a3'),
+        liveGame('eso1-d2', 'Tablas flash', 'tablas-relampago', 2, 8, null, 'eso1-m-a3'),
+        liveGame('eso1-d3', 'English drill', 'neon-palabras', 2, 8, null, 'eso1-i-e1'),
+        liveLengua('eso1-d4', 'Mini lectura', 'neon-lectura', 2, 'Comprensión', 9, 'eso1-l-c1'),
+        tagSaber(liveReflex('eso1-d5', 'Reflejos finales', 'reaction-test', 2), 'eso1-d-01')
+      ], { saberIds: ['eso1-d-01'] })
     ];
   }
-
   function remapUnits(units, unitIdPrefix, actFrom, actTo, brainBonus) {
     return units.map(function (u, i) {
       return unit(
@@ -1368,38 +1464,162 @@
   function primaria6Daily() {
     return mapDailyFromP1('p6', 5);
   }
+  /** —— 2º ESO (LOMLOE RD 243/2022) —— */
   function eso2Math() {
-    return remapUnits(primaria6Math(), 'eso2-m', 'p6-m-', 'eso2-m-', 2);
-  }
-
-  function eso2Ingles() {
-    return remapUnits(primaria6Ingles(), 'eso2-i', 'p6-i-', 'eso2-i-', 2);
+    return [
+      unit('eso2-m-lin', 'Funciones lineales', 'LOMLOE · pendiente, intercepto y gráficas.', [
+        liveGame('eso2-m-lin1', 'Cálculo express', 'neon-calculo', 3, 9, null, 'eso2-m-a1'),
+        liveGame('eso2-m-lin2', 'Tablas flash', 'tablas-relampago', 2, 9, null, 'eso2-m-a1'),
+        liveMates('eso2-m-lin3', 'Álgebra mental', 2, 3, 10, null, 'eso2-m-a1'),
+        liveMates('eso2-m-lin4', 'Problemas', 3, 4, 10, null, 'eso2-m-a1'),
+        soon('eso2-m-lin5', 'Misión Funciones lineales', 'quiz', 5)
+      ], { saberIds: ['eso2-m-a1'] }),
+      unit('eso2-m-sis', 'Sistemas de ecuaciones', 'LOMLOE · resolución algebraica y gráfica.', [
+        liveGame('eso2-m-sis1', 'Cálculo express', 'neon-calculo', 3, 9, null, 'eso2-m-a2'),
+        liveGame('eso2-m-sis2', 'Tablas flash', 'tablas-relampago', 2, 9, null, 'eso2-m-a2'),
+        liveMates('eso2-m-sis3', 'Álgebra mental', 2, 3, 10, null, 'eso2-m-a2'),
+        liveMates('eso2-m-sis4', 'Problemas', 3, 4, 10, null, 'eso2-m-a2'),
+        soon('eso2-m-sis5', 'Misión Sistemas de ecuaciones', 'quiz', 5)
+      ], { saberIds: ['eso2-m-a2'] }),
+      unit('eso2-m-pit', 'Teorema de Pitágoras', 'LOMLOE · triángulos rectángulos.', [
+        liveGame('eso2-m-pit1', 'Cálculo express', 'neon-calculo', 3, 9, null, 'eso2-m-a3'),
+        liveGame('eso2-m-pit2', 'Tablas flash', 'tablas-relampago', 2, 9, null, 'eso2-m-a3'),
+        liveMates('eso2-m-pit3', 'Álgebra mental', 2, 3, 10, null, 'eso2-m-a3'),
+        liveMates('eso2-m-pit4', 'Problemas', 3, 4, 10, null, 'eso2-m-a3'),
+        soon('eso2-m-pit5', 'Misión Teorema de Pitágoras', 'quiz', 5)
+      ], { saberIds: ['eso2-m-a3'] }),
+      unit('eso2-m-prob', 'Probabilidad', 'LOMLOE · experimentos aleatorios.', [
+        liveGame('eso2-m-prob1', 'Cálculo express', 'neon-calculo', 3, 9, null, 'eso2-m-b1'),
+        liveGame('eso2-m-prob2', 'Tablas flash', 'tablas-relampago', 2, 9, null, 'eso2-m-b1'),
+        liveMates('eso2-m-prob3', 'Álgebra mental', 2, 3, 10, null, 'eso2-m-b1'),
+        liveMates('eso2-m-prob4', 'Problemas', 3, 4, 10, null, 'eso2-m-b1'),
+        soon('eso2-m-prob5', 'Misión Probabilidad', 'quiz', 5)
+      ], { saberIds: ['eso2-m-b1'] }),
+      unit('eso2-m-real', 'Números reales', 'LOMLOE · irracionales y recta real.', [
+        liveGame('eso2-m-real1', 'Cálculo express', 'neon-calculo', 3, 9, null, 'eso2-m-a4'),
+        liveGame('eso2-m-real2', 'Tablas flash', 'tablas-relampago', 2, 9, null, 'eso2-m-a4'),
+        liveMates('eso2-m-real3', 'Álgebra mental', 2, 3, 10, null, 'eso2-m-a4'),
+        liveMates('eso2-m-real4', 'Problemas', 3, 4, 10, null, 'eso2-m-a4'),
+        soon('eso2-m-real5', 'Misión Números reales', 'quiz', 5)
+      ], { saberIds: ['eso2-m-a4'] }),
+    ];
   }
 
   function eso2Lengua() {
-    return remapUnits(primaria6Lengua(), 'eso2-l', 'p6-l-', 'eso2-l-', 2);
+    return [
+      unit('eso2-l-mov', 'Movimientos literarios', 'LOMLOE · romanticismo y realismo.', [
+        liveLengua('eso2-l-mov1', 'Lee y analiza', 'neon-lectura', 3, 'Comprensión', 11, 'eso2-l-c1'),
+        liveLenguaRot('eso2-l-mov2', 'Ordena y corrige', 2, 3, 'Sintaxis', 11, 'eso2-l-c1'),
+        liveLenguaRot('eso2-l-mov3', 'Completa', 1, 4, 'Ortografía', 12, 'eso2-l-c1'),
+        soon('eso2-l-mov4', 'Redacción', 'typing', 4),
+        soon('eso2-l-mov5', 'Misión lengua', 'quiz', 5)
+      ], { saberIds: ['eso2-l-c1'] }),
+      unit('eso2-l-sin', 'Análisis sintáctico', 'LOMLOE · oraciones compuestas.', [
+        liveLengua('eso2-l-sin1', 'Lee y analiza', 'neon-lectura', 3, 'Comprensión', 11, 'eso2-l-c2'),
+        liveLenguaRot('eso2-l-sin2', 'Ordena y corrige', 2, 3, 'Sintaxis', 11, 'eso2-l-c2'),
+        liveLenguaRot('eso2-l-sin3', 'Completa', 1, 4, 'Ortografía', 12, 'eso2-l-c2'),
+        soon('eso2-l-sin4', 'Redacción', 'typing', 4),
+        soon('eso2-l-sin5', 'Misión lengua', 'quiz', 5)
+      ], { saberIds: ['eso2-l-c2'] }),
+      unit('eso2-l-av', 'Comunicación audiovisual', 'LOMLOE · medios y opinión.', [
+        liveLengua('eso2-l-av1', 'Lee y analiza', 'neon-lectura', 3, 'Comprensión', 11, 'eso2-l-c3'),
+        liveLenguaRot('eso2-l-av2', 'Ordena y corrige', 2, 3, 'Sintaxis', 11, 'eso2-l-c3'),
+        liveLenguaRot('eso2-l-av3', 'Completa', 1, 4, 'Ortografía', 12, 'eso2-l-c3'),
+        soon('eso2-l-av4', 'Redacción', 'typing', 4),
+        soon('eso2-l-av5', 'Misión lengua', 'quiz', 5)
+      ], { saberIds: ['eso2-l-c3'] }),
+    ];
+  }
+
+  function eso2Ingles() {
+    return [
+      unit('eso2-i-rep', 'Reported speech', 'LOMLOE · estilo indirecto.', [
+        liveIngles('eso2-i-rep1', 'Vocab drill', 0, 2, 9, null, 'eso2-i-e1'),
+        liveIngles('eso2-i-rep2', 'Listen & tap', 1, 3, 9, null, 'eso2-i-e1'),
+        soon('eso2-i-rep3', 'Fill the gap', 'typing', 3),
+        soon('eso2-i-rep4', 'Grammar quiz', 'quiz', 4),
+        soon('eso2-i-rep5', 'English mission', 'quiz', 5)
+      ], { saberIds: ['eso2-i-e1'] }),
+      unit('eso2-i-rel', 'Relative clauses', 'LOMLOE · oraciones de relativo.', [
+        liveIngles('eso2-i-rel1', 'Vocab drill', 0, 2, 9, null, 'eso2-i-e2'),
+        liveIngles('eso2-i-rel2', 'Listen & tap', 1, 3, 9, null, 'eso2-i-e2'),
+        soon('eso2-i-rel3', 'Fill the gap', 'typing', 3),
+        soon('eso2-i-rel4', 'Grammar quiz', 'quiz', 4),
+        soon('eso2-i-rel5', 'English mission', 'quiz', 5)
+      ], { saberIds: ['eso2-i-e2'] }),
+      unit('eso2-i-deb', 'Debate and opinion', 'LOMLOE · argumentar en inglés.', [
+        liveIngles('eso2-i-deb1', 'Vocab drill', 0, 2, 9, null, 'eso2-i-e3'),
+        liveIngles('eso2-i-deb2', 'Listen & tap', 1, 3, 9, null, 'eso2-i-e3'),
+        soon('eso2-i-deb3', 'Fill the gap', 'typing', 3),
+        soon('eso2-i-deb4', 'Grammar quiz', 'quiz', 4),
+        soon('eso2-i-deb5', 'English mission', 'quiz', 5)
+      ], { saberIds: ['eso2-i-e3'] }),
+    ];
   }
 
   function eso2Naturales() {
-    return remapUnits(eso1Naturales(), 'eso2-n', 'eso1-', 'eso2-', 1);
+    return [
+      unit('eso2-n-gen', 'Genética y herencia', 'LOMLOE · ADN y variabilidad.', [
+        liveNaturalesRot('eso2-n-gen1', 'Preguntas', 1, 3, 'Ciencia', 11, 'eso2-n-b1'),
+        liveNaturalesRot('eso2-n-gen2', 'Verdadero o falso', 2, 3, 'Lee', 11, 'eso2-n-b1'),
+        liveNaturalesRot('eso2-n-gen3', 'Clasifica', 0, 4, 'Naturales', 11, 'eso2-n-b1'),
+        liveNaturalesRot('eso2-n-gen4', 'Experimento virtual', 1, 4, 'Comprensión', 12, 'eso2-n-b1'),
+        liveNaturalesRot('eso2-n-gen5', 'Reto científico', 2, 5, 'Misión', 12, 'eso2-n-b1')
+      ], { saberIds: ['eso2-n-b1'] }),
+      unit('eso2-n-fue', 'Fuerzas y energía', 'LOMLOE · movimiento y electricidad.', [
+        liveNaturalesRot('eso2-n-fue1', 'Preguntas', 1, 3, 'Ciencia', 11, 'eso2-n-b2'),
+        liveNaturalesRot('eso2-n-fue2', 'Verdadero o falso', 2, 3, 'Lee', 11, 'eso2-n-b2'),
+        liveNaturalesRot('eso2-n-fue3', 'Clasifica', 0, 4, 'Naturales', 11, 'eso2-n-b2'),
+        liveNaturalesRot('eso2-n-fue4', 'Experimento virtual', 1, 4, 'Comprensión', 12, 'eso2-n-b2'),
+        liveNaturalesRot('eso2-n-fue5', 'Reto científico', 2, 5, 'Misión', 12, 'eso2-n-b2')
+      ], { saberIds: ['eso2-n-b2'] }),
+      unit('eso2-n-sal', 'Salud y hábitos', 'LOMLOE · prevención adolescente.', [
+        liveNaturalesRot('eso2-n-sal1', 'Preguntas', 1, 3, 'Ciencia', 11, 'eso2-n-b3'),
+        liveNaturalesRot('eso2-n-sal2', 'Verdadero o falso', 2, 3, 'Lee', 11, 'eso2-n-b3'),
+        liveNaturalesRot('eso2-n-sal3', 'Clasifica', 0, 4, 'Naturales', 11, 'eso2-n-b3'),
+        liveNaturalesRot('eso2-n-sal4', 'Experimento virtual', 1, 4, 'Comprensión', 12, 'eso2-n-b3'),
+        liveNaturalesRot('eso2-n-sal5', 'Reto científico', 2, 5, 'Misión', 12, 'eso2-n-b3')
+      ], { saberIds: ['eso2-n-b3'] }),
+    ];
   }
 
   function eso2Sociales() {
-    return remapUnits(eso1Sociales(), 'eso2-s', 'eso1-', 'eso2-', 1);
+    return [
+      unit('eso2-s-hum', 'Geografía humana', 'LOMLOE · población y globalización.', [
+        liveSocialesRot('eso2-s-hum1', 'Lee y responde', 1, 3, 'Historia', 11, 'eso2-s-b1'),
+        liveSocialesRot('eso2-s-hum2', 'Mapas', 0, 3, 'Geografía', 11, 'eso2-s-b1'),
+        liveSocialesRot('eso2-s-hum3', 'Ordena', 2, 4, 'Convivencia', 11, 'eso2-s-b1'),
+        liveSocialesRot('eso2-s-hum4', 'Debate corto', 1, 4, 'Ciudadanía', 12, 'eso2-s-b1'),
+        liveSocialesRot('eso2-s-hum5', 'Misión social', 2, 5, 'Reto', 12, 'eso2-s-b1')
+      ], { saberIds: ['eso2-s-b1'] }),
+      unit('eso2-s-cont', 'Edad Contemporánea', 'LOMLOE · revoluciones s. XIX-XX.', [
+        liveSocialesRot('eso2-s-cont1', 'Lee y responde', 1, 3, 'Historia', 11, 'eso2-s-b2'),
+        liveSocialesRot('eso2-s-cont2', 'Mapas', 0, 3, 'Geografía', 11, 'eso2-s-b2'),
+        liveSocialesRot('eso2-s-cont3', 'Ordena', 2, 4, 'Convivencia', 11, 'eso2-s-b2'),
+        liveSocialesRot('eso2-s-cont4', 'Debate corto', 1, 4, 'Ciudadanía', 12, 'eso2-s-b2'),
+        liveSocialesRot('eso2-s-cont5', 'Misión social', 2, 5, 'Reto', 12, 'eso2-s-b2')
+      ], { saberIds: ['eso2-s-b2'] }),
+      unit('eso2-s-eco', 'Economía y consumo', 'LOMLOE · mercado y oferta.', [
+        liveSocialesRot('eso2-s-eco1', 'Lee y responde', 1, 3, 'Historia', 11, 'eso2-s-b3'),
+        liveSocialesRot('eso2-s-eco2', 'Mapas', 0, 3, 'Geografía', 11, 'eso2-s-b3'),
+        liveSocialesRot('eso2-s-eco3', 'Ordena', 2, 4, 'Convivencia', 11, 'eso2-s-b3'),
+        liveSocialesRot('eso2-s-eco4', 'Debate corto', 1, 4, 'Ciudadanía', 12, 'eso2-s-b3'),
+        liveSocialesRot('eso2-s-eco5', 'Misión social', 2, 5, 'Reto', 12, 'eso2-s-b3')
+      ], { saberIds: ['eso2-s-b3'] }),
+    ];
   }
 
   function eso2Daily() {
     return [
-      unit('eso2-d-rutina', 'Brain Gym diario', 'Rutina ESO 2º.', [
-        liveGame('eso2-d1', 'Cálculo', 'neon-calculo', 3, 10),
-        liveGame('eso2-d2', 'Tablas', 'tablas-relampago', 3, 10),
-        liveGame('eso2-d3', 'English', 'neon-palabras', 3, 10),
-        liveReflex('eso2-d4', 'Aim trainer', 'aim-trainer', 2),
-        liveReflex('eso2-d5', 'Esquiva neon', 'esquiva-neon', 3)
-      ])
+      unit('eso2-d-rutina', 'Brain Gym diario', 'LOMLOE · mates, idiomas y reflejos para ESO.', [
+        liveGame('eso2-d1', 'Cálculo express', 'neon-calculo', 3, 9, null, 'eso2-m-a2'),
+        liveGame('eso2-d2', 'Tablas flash', 'tablas-relampago', 2, 9, null, 'eso2-m-a2'),
+        liveGame('eso2-d3', 'English drill', 'neon-palabras', 2, 9, null, 'eso2-i-e1'),
+        liveLengua('eso2-d4', 'Mini lectura', 'neon-lectura', 2, 'Comprensión', 10, 'eso2-l-c1'),
+        tagSaber(liveReflex('eso2-d5', 'Reflejos finales', 'reaction-test', 2), 'eso2-d-01')
+      ], { saberIds: ['eso2-d-01'] })
     ];
   }
-
   function esoCourse(n, label, ageRange, mathFn, lenguaFn, inglesFn, dailyFn, naturalesFn, socialesFn, courseStatus) {
     var id = 'eso-' + n;
     var subStatus = courseStatus === 'live' ? 'live' : 'partial';

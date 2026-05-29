@@ -1,6 +1,6 @@
 /**
  * Referencia LOMLOE (marco estatal) — saberes básicos por curso y materia.
- * Fuentes: RD 95/2022 (Infantil), RD 157/2022 (Primaria).
+ * Fuentes: RD 95/2022 (Infantil), RD 157/2022 (Primaria), RD 243/2022 (ESO).
  * Uso: trazabilidad editorial, cobertura curricular y auditoría.
  */
 (function (global) {
@@ -8,7 +8,8 @@
 
   var FRAMEWORK = {
     infantil: { decree: 'RD 95/2022', label: 'Educación Infantil' },
-    primaria: { decree: 'RD 157/2022', label: 'Educación Primaria' }
+    primaria: { decree: 'RD 157/2022', label: 'Educación Primaria' },
+    eso: { decree: 'RD 243/2022', label: 'Educación Secundaria Obligatoria' }
   };
 
   /** Qué tipo de saber puede cubrir cada minijuego (honestidad editorial). */
@@ -326,6 +327,72 @@
       'brain-gym-diario': [
         { id: 'p6-d-01', tags: ['atencion'], title: 'Rutina diaria equilibrada', desc: 'Mates, lengua, inglés y reflejos en 7 min.' }
       ]
+    },
+    'eso-1': {
+      matematicas: [
+        { id: 'eso1-m-a1', tags: ['numeros'], title: 'Números racionales', desc: 'Fracciones, decimales y operaciones combinadas.' },
+        { id: 'eso1-m-a2', tags: ['operaciones'], title: 'Potencias y raíces', desc: 'Potencias de exponente natural y raíz cuadrada.' },
+        { id: 'eso1-m-a3', tags: ['problemas-numericos'], title: 'Ecuaciones de 1º grado', desc: 'Incógnitas y problemas algebraicos.' },
+        { id: 'eso1-m-b1', tags: ['operaciones'], title: 'Proporcionalidad y porcentajes', desc: 'Regla de tres y variación proporcional.' },
+        { id: 'eso1-m-c1', tags: ['formas'], title: 'Geometría plana', desc: 'Triángulos, ángulos y construcciones.' },
+        { id: 'eso1-m-a4', tags: ['operaciones'], title: 'Estadística básica', desc: 'Frecuencias, media y gráficos.' }
+      ],
+      lenguaje: [
+        { id: 'eso1-l-c1', tags: ['comprension'], title: 'Análisis literario', desc: 'Géneros, figuras y comprensión profunda.' },
+        { id: 'eso1-l-c2', tags: ['ortografia'], title: 'Gramática y sintaxis', desc: 'Oración, morfología y ortografía.' },
+        { id: 'eso1-l-c3', tags: ['escritura'], title: 'Expresión escrita', desc: 'Textos argumentativos y narrativos.' }
+      ],
+      ingles: [
+        { id: 'eso1-i-e1', tags: ['ingles-vocabulario'], title: 'Past tenses', desc: 'Pasado simple y continuo.' },
+        { id: 'eso1-i-e2', tags: ['ingles-vocabulario'], title: 'Descriptions', desc: 'Adjetivos, comparativos y superlativos.' },
+        { id: 'eso1-i-e3', tags: ['ingles-oral'], title: 'Oral interaction', desc: 'Diálogos y comprensión oral.' }
+      ],
+      naturales: [
+        { id: 'eso1-n-b1', tags: ['naturales-seres-vivos'], title: 'La célula y seres vivos', desc: 'Biología: estructura y funciones vitales.' },
+        { id: 'eso1-n-b2', tags: ['naturales-materia'], title: 'Materia y reacciones', desc: 'Física y química: estados y mezclas.' },
+        { id: 'eso1-n-b3', tags: ['naturales-materia'], title: 'La Tierra y el universo', desc: 'Geología y astronomía básica.' }
+      ],
+      sociales: [
+        { id: 'eso1-s-b1', tags: ['sociales-geografia'], title: 'Geografía de España', desc: 'Relieve, clima y paisaje.' },
+        { id: 'eso1-s-b2', tags: ['sociales-historia'], title: 'Sociedades preindustriales', desc: 'Edad Antigua y Edad Media.' },
+        { id: 'eso1-s-b3', tags: ['sociales-convivencia'], title: 'Ciudadanía y derechos', desc: 'Constitución y convivencia democrática.' }
+      ],
+      'brain-gym-diario': [
+        { id: 'eso1-d-01', tags: ['atencion'], title: 'Rutina diaria ESO', desc: 'Mates, lengua, inglés y reflejos en 7 min.' }
+      ],
+    },
+    'eso-2': {
+      matematicas: [
+        { id: 'eso2-m-a1', tags: ['operaciones'], title: 'Funciones lineales', desc: 'Pendiente, intercepto y gráficas.' },
+        { id: 'eso2-m-a2', tags: ['problemas-numericos'], title: 'Sistemas de ecuaciones', desc: 'Resolución algebraica y gráfica.' },
+        { id: 'eso2-m-a3', tags: ['formas'], title: 'Teorema de Pitágoras', desc: 'Triángulos rectángulos y distancias.' },
+        { id: 'eso2-m-b1', tags: ['operaciones'], title: 'Probabilidad', desc: 'Experimentos aleatorios y frecuencias.' },
+        { id: 'eso2-m-c1', tags: ['formas'], title: 'Geometría en el espacio', desc: 'Prismas, pirámides y volumen.' },
+        { id: 'eso2-m-a4', tags: ['numeros'], title: 'Números reales', desc: 'Irracionales y recta real.' }
+      ],
+      lenguaje: [
+        { id: 'eso2-l-c1', tags: ['lectura'], title: 'Movimientos literarios', desc: 'Romanticismo, realismo y generación del 98.' },
+        { id: 'eso2-l-c2', tags: ['comprension'], title: 'Análisis sintáctico', desc: 'Oraciones compuestas y subordinadas.' },
+        { id: 'eso2-l-c3', tags: ['escritura'], title: 'Comunicación audiovisual', desc: 'Medios, lenguaje y opinión.' }
+      ],
+      ingles: [
+        { id: 'eso2-i-e1', tags: ['ingles-vocabulario'], title: 'Reported speech', desc: 'Estilo indirecto y verbos de reporting.' },
+        { id: 'eso2-i-e2', tags: ['ingles-vocabulario'], title: 'Relative clauses', desc: 'Defining y non-defining clauses.' },
+        { id: 'eso2-i-e3', tags: ['ingles-oral'], title: 'Debate and opinion', desc: 'Argumentar y expresar acuerdo.' }
+      ],
+      naturales: [
+        { id: 'eso2-n-b1', tags: ['naturales-seres-vivos'], title: 'Genética y herencia', desc: 'ADN, genes y variabilidad.' },
+        { id: 'eso2-n-b2', tags: ['naturales-materia'], title: 'Fuerzas y energía', desc: 'Movimiento, trabajo y electricidad.' },
+        { id: 'eso2-n-b3', tags: ['naturales-salud'], title: 'Salud y hábitos', desc: 'Prevención y bienestar adolescente.' }
+      ],
+      sociales: [
+        { id: 'eso2-s-b1', tags: ['sociales-geografia'], title: 'Geografía humana', desc: 'Población, urbanización y globalización.' },
+        { id: 'eso2-s-b2', tags: ['sociales-historia'], title: 'Edad Contemporánea', desc: 'Revoluciones y conflictos del s. XIX-XX.' },
+        { id: 'eso2-s-b3', tags: ['sociales-convivencia'], title: 'Economía y consumo', desc: 'Mercado, oferta y demanda básica.' }
+      ],
+      'brain-gym-diario': [
+        { id: 'eso2-d-01', tags: ['atencion'], title: 'Rutina diaria ESO', desc: 'Mates, lengua, inglés y reflejos en 7 min.' }
+      ],
     },
   };
 
