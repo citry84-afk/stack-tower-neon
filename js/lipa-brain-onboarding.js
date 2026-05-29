@@ -27,7 +27,7 @@
     course: {
       kicker: 'Paso 1 de 4',
       title: '¿En qué curso estás?',
-      lead: 'Organizamos los ejercicios como en el cole.'
+      lead: 'Toca tu etapa arriba y elige tu curso. Verás un ✓ cuando lo tengas.'
     },
     time: {
       kicker: 'Paso 2 de 4',
@@ -314,8 +314,23 @@
             if (go) go.textContent = b === btn ? '✓' : '→';
           }
         });
+        if (field === 'courseId' && btn.classList.contains('lipa-course-pick')) {
+          btn.classList.add('lipa-course-pick--pop');
+          setTimeout(function () {
+            btn.classList.remove('lipa-course-pick--pop');
+          }, 420);
+          if (window.LipaBrainPlay && LipaBrainPlay.chimeCorrect) {
+            try { LipaBrainPlay.chimeCorrect(); } catch (e) { /* ignore */ }
+          }
+        }
         var next = document.getElementById('brain-onboard-next');
-        if (next) next.disabled = false;
+        if (next) {
+          next.disabled = false;
+          next.classList.add('brain-onboard__btn--ready');
+          setTimeout(function () {
+            next.classList.remove('brain-onboard__btn--ready');
+          }, 600);
+        }
       });
     });
 

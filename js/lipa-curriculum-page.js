@@ -103,19 +103,32 @@
         }
       });
 
-      panels +=
-        '<div class="lipa-course-picker__panel lipa-course-picker__panel--' + stage.id +
-        (active ? ' is-active' : '') + '" role="tabpanel" data-stage-panel="' +
-        stage.id + '" id="picker-panel-' + stage.id + '"' + (active ? '' : ' hidden') + '>' +
-        '<header class="lipa-course-picker__panel-head">' +
-        '<span class="lipa-course-picker__panel-emoji" aria-hidden="true">' + stage.emoji + '</span>' +
-        '<div><h2 class="lipa-course-picker__panel-title">' + C.esc(stage.label) + '</h2>' +
-        '<p class="lipa-course-picker__stage-desc">' + C.esc(stage.desc) + '</p></div></header>' +
-        '<ul class="lipa-course-picker__list">' + list + '</ul></div>';
+      if (mode === 'onboard') {
+        panels +=
+          '<div class="lipa-course-picker__panel lipa-course-picker__panel--' + stage.id +
+          (active ? ' is-active' : '') + '" role="tabpanel" data-stage-panel="' +
+          stage.id + '" id="picker-panel-' + stage.id + '"' + (active ? '' : ' hidden') + '>' +
+          '<p class="lipa-course-picker__stage-desc lipa-course-picker__stage-desc--onboard">' +
+          C.esc(stage.desc) + '</p>' +
+          '<ul class="lipa-course-picker__list">' + list + '</ul></div>';
+      } else {
+        panels +=
+          '<div class="lipa-course-picker__panel lipa-course-picker__panel--' + stage.id +
+          (active ? ' is-active' : '') + '" role="tabpanel" data-stage-panel="' +
+          stage.id + '" id="picker-panel-' + stage.id + '"' + (active ? '' : ' hidden') + '>' +
+          '<header class="lipa-course-picker__panel-head">' +
+          '<span class="lipa-course-picker__panel-emoji" aria-hidden="true">' + stage.emoji + '</span>' +
+          '<div><h2 class="lipa-course-picker__panel-title">' + C.esc(stage.label) + '</h2>' +
+          '<p class="lipa-course-picker__stage-desc">' + C.esc(stage.desc) + '</p></div></header>' +
+          '<ul class="lipa-course-picker__list">' + list + '</ul></div>';
+      }
     });
 
+    var pickerRootClass =
+      'lipa-course-picker lipa-course-picker--playful' + (mode === 'onboard' ? ' lipa-course-picker--onboard' : '');
+
     return (
-      '<div class="lipa-course-picker lipa-course-picker--playful">' +
+      '<div class="' + pickerRootClass + '">' +
       '<div class="lipa-course-picker__deco" aria-hidden="true">' +
       '<span class="lipa-course-picker__blob lipa-course-picker__blob--a"></span>' +
       '<span class="lipa-course-picker__blob lipa-course-picker__blob--b"></span></div>' +

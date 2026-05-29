@@ -1639,3 +1639,17 @@ body.lipa-brain-soft #lipa-brain-onboarding .brain-onboard__btn--ghost {
   color: #344054 !important;
   border: 1px solid #d0d5dd !important;
 }
+
+body.lipa-brain-soft #lipa-brain-onboarding .brain-onboard__btn--primary:disabled {
+  background: #e4e7ec !important;
+  color: #98a2b3 !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+}
+
+body.lipa-brain-soft #lipa-brain-onboarding .brain-onboard__btn--primary:not(:disabled) {
+  background: linear-gradient(135deg, #2ed3a6, #5ed4be) !important;
+  color: #0d281f !important;
+  font-weight: 800 !important;
+  box-shadow: 0 6px 20px rgba(46, 211, 166, 0.35) !important;
+}
