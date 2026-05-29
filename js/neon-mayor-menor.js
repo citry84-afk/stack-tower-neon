@@ -32,6 +32,7 @@
   function markCorrect(pts) {
     correct++;
     combo++;
+    if (window.LipaGameFeedback && LipaGameFeedback.setCombo) LipaGameFeedback.setCombo(combo);
     if (combo > maxCombo) maxCombo = combo;
     score += pts + Math.min(combo * 2, 18);
     updateHud();
@@ -41,6 +42,7 @@
   function markWrong() {
     wrong++;
     combo = 0;
+    if (window.LipaGameFeedback && LipaGameFeedback.setCombo) LipaGameFeedback.setCombo(0);
     updateHud();
     try { if (window.LipaGameFeedback) LipaGameFeedback.onWrong(workEl || arenaEl); } catch (fbErr) { /* ignore */ }
   }
@@ -103,7 +105,8 @@
         score: score,
         correct: correct,
         wrong: wrong,
-        accuracy: total ? correct / total : 1
+        accuracy: total ? correct / total : 1,
+        sessionComplete: true
       });
     }
   }

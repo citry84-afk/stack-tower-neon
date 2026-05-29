@@ -294,12 +294,18 @@
       try {
         var params = new URLSearchParams(global.location.search);
         if (params.get('curriculum') === '1' && params.get('activity')) {
-          var attempts = (payload.correct || 0) + (payload.wrong || 0);
-          var sessionComplete = payload.sessionComplete;
-          if (!sessionComplete && (attempts >= 3 || (payload.durationSec && payload.durationSec >= 12))) {
-            sessionComplete = true;
+          var sessionComplete = true;
+          if (acc == null) {
+            var attempts = (payload.correct || 0) + (payload.wrong || 0);
+            if (attempts > 0) {
+              acc = payload.correct / attempts;
+            } else if (payload.score != null) {
+              acc = Math.min(0.92, 0.5 + Math.min(payload.score, 200) / 400);
+            } else {
+              acc = 0.75;
+            }
           }
-          curriculumPayload = Object.assign({}, payload, { sessionComplete: sessionComplete });
+          curriculumPayload = Object.assign({}, payload, { sessionComplete: sessionComplete, accuracy: acc });
           var courseId = params.get('course') || '';
           var subjectId = params.get('subject') || '';
           var unitId = params.get('unit') || '';

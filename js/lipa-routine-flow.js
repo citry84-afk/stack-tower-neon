@@ -297,6 +297,7 @@
           rankName: rank.name,
           rankEmoji: rank.emoji,
           courseLabel: courseLabel,
+          xpBonus: 12 + (state.steps ? state.steps.length * 10 : 0),
           date: today()
         })
       );

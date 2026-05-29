@@ -184,6 +184,7 @@
     if (val === ans) {
       correct++;
       combo++;
+      if (window.LipaGameFeedback && LipaGameFeedback.setCombo) LipaGameFeedback.setCombo(combo);
       if (combo > maxCombo) maxCombo = combo;
       score += 10 + Math.min(combo * 3, 21);
       btn.classList.add('math-choice--ok');
@@ -191,6 +192,7 @@
     } else {
       wrong++;
       combo = 0;
+      if (window.LipaGameFeedback && LipaGameFeedback.setCombo) LipaGameFeedback.setCombo(0);
       btn.classList.add('math-choice--bad');
       choicesEl.querySelectorAll('.math-choice').forEach(function (b) {
         if (parseInt(b.getAttribute('data-val'), 10) === ans) b.classList.add('math-choice--ok');
@@ -229,7 +231,8 @@
         correct: correct,
         wrong: wrong,
         accuracy: total ? correct / total : 1,
-        durationSec: DURATION
+        durationSec: DURATION,
+        sessionComplete: true
       });
     } else if (window.LipaDaily && LipaDaily.recordSession) {
       LipaDaily.recordSession('tablas-relampago', { score: score });

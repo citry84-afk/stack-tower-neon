@@ -129,7 +129,13 @@
     board._save();
     LipaDaily.bumpStreak('lipa_grid_streak');
     if (window.LipaBrain && LipaBrain.recordActivityResult) {
-      LipaBrain.recordActivityResult('grid-reflex', { score: score, correct: score, wrong: 0 });
+      LipaBrain.recordActivityResult('grid-reflex', {
+        score: score,
+        correct: score,
+        wrong: 0,
+        accuracy: 1,
+        sessionComplete: true
+      });
     } else if (LipaDaily.recordSession) {
       LipaDaily.recordSession('grid-reflex', { score: score });
     }

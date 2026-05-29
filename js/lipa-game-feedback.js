@@ -89,6 +89,10 @@
     if (global.LipaMascot) LipaMascot.say('complete');
   }
 
+  function setCombo(n) {
+    global.__lipaCombo = typeof n === 'number' ? n : 0;
+  }
+
   global.LipaGameFeedback = {
     floatXp: floatXp,
     shake: shake,
@@ -97,6 +101,7 @@
     resolveArena: resolveArena,
     onCorrect: onCorrect,
     onWrong: onWrong,
-    onActivityComplete: onActivityComplete
+    onActivityComplete: onActivityComplete,
+    setCombo: setCombo
   };
 })(typeof window !== 'undefined' ? window : global);

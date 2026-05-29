@@ -1167,6 +1167,43 @@
     return alts[(i - 1) % alts.length];
   }
 
+  function missionTipFor(subjectId, gameId, title) {
+    var byGame = {
+      'neon-calculo': 'Resuelve antes de que acabe el tiempo. Las rachas de aciertos suman más puntos.',
+      'tablas-relampago': 'Si dudas, repite la tabla en voz alta y vuelve a intentarlo.',
+      'neon-lectura': 'Lee la consigna entera antes de elegir la respuesta.',
+      'neon-frase': 'Ordena las palabras como en un cuento del cole.',
+      'neon-palabra': 'Fíjate en las sílabas y elige la que encaja.',
+      'neon-palabras': 'Une la palabra en español con su pareja en inglés.',
+      'neon-peques': 'Mira la imagen y toca la respuesta correcta.',
+      'neon-colores': 'Observa el color o la forma y responde sin prisa.',
+      'neon-vida': 'Clasifica con calma: ¿es un ser vivo o no?',
+      'neon-cuerpo': 'Piensa en lo que has visto en ciencias del cole.',
+      'neon-planeta': 'Recuerda lo que el profesor explicó en clase.',
+      'neon-mapa': 'Ubica el lugar en el mapa con paciencia.',
+      'neon-entorno': 'Normas y convivencia: elige la opción más respetuosa.',
+      'neon-historia': 'Ordena los hechos como una línea del tiempo.',
+      'neon-ordenar': 'Toca en el orden correcto (números, palabras o frases).',
+      'neon-clasifica': 'Agrupa en la categoría que pide la consigna.',
+      'neon-mayor-menor': 'Lee si pide el número mayor o el menor.',
+      'flash-tap': 'Toca cada objetivo antes de que desaparezca.',
+      'reaction-test': 'Espera al verde. Si pulsas antes, no cuenta.',
+      'aim-trainer': 'Precisión y calma: cada diana suma.',
+      'grid-reflex': 'Memoriza la cuadrícula y repite el patrón.',
+      'stack-tower': 'Apila con ritmo; la precisión importa más que la velocidad.'
+    };
+    if (byGame[gameId]) return byGame[gameId];
+    var bySubject = {
+      matematicas: 'Cada acierto te acerca a completar la misión de mates.',
+      lenguaje: 'Lengua del cole: lee bien y no tengas miedo a equivocarte.',
+      ingles: 'Practica vocabulario en inglés como en clase.',
+      naturales: 'Ciencias con imágenes: piensa y elige.',
+      sociales: 'Historia y mapas: ordena ideas con calma.',
+      'brain-gym-diario': 'Calentamiento rápido: reflejos y atención.'
+    };
+    return bySubject[subjectId] || ('Misión: ' + (title || 'practica') + '. Termina la ronda para guardar progreso.');
+  }
+
   function promoteSoonActivities(courses) {
     courses.forEach(function (course) {
             var full = course.stage === 'infantil' || /^primaria-[1-6]$/.test(course.id) || /^eso-[12]$/.test(course.id);
@@ -1188,7 +1225,7 @@
             act.brainLevel = Math.min(12, diff + (course.stage === 'eso' ? 6 : course.stage === 'primaria' ? 1 : 0));
             act.estimatedMinutes = diff <= 2 ? 2 : 3;
             act.rewardXp = 10 + diff * 8;
-            if (!act.tip) act.tip = 'Practica con el juego «' + act.title + '»';
+            act.tip = missionTipFor(block.subjectId, gameId, act.title);
           });
         });
       });

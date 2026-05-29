@@ -280,6 +280,28 @@
   line-height: 1.5;
   margin: 0 0 1.25rem;
 }
+
+.entreno-completo__course {
+  margin: 0 0 0.75rem;
+  font-size: 0.95rem;
+}
+
+.entreno-completo__xp-bonus {
+  margin: 0 0 1rem;
+  font-weight: 700;
+  color: #7c3aed;
+  font-size: 0.95rem;
+}
+
+.entreno-completo h1 {
+  animation: entreno-pop 0.5s ease-out;
+}
+
+@keyframes entreno-pop {
+  from { transform: scale(0.92); opacity: 0.6; }
+  to { transform: scale(1); opacity: 1; }
+}
+
 .entreno-completo__stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

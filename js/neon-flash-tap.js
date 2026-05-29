@@ -165,6 +165,7 @@
     clearTarget();
     hits++;
     combo++;
+    if (window.LipaGameFeedback && LipaGameFeedback.setCombo) LipaGameFeedback.setCombo(combo);
     if (combo > maxCombo) maxCombo = combo;
     var pts = 8 + Math.min(combo * 2, 20);
     score += pts;
@@ -177,6 +178,7 @@
     if (e.target !== arena) return;
     misses++;
     combo = 0;
+    if (window.LipaGameFeedback && LipaGameFeedback.setCombo) LipaGameFeedback.setCombo(0);
     updateHud();
   }
 
@@ -208,7 +210,8 @@
         correct: hits,
         wrong: misses,
         accuracy: total ? hits / total : 1,
-        durationSec: DURATION
+        durationSec: DURATION,
+        sessionComplete: true
       });
     } else if (window.LipaDaily && LipaDaily.recordSession) {
       LipaDaily.recordSession('flash-tap', { score: score });

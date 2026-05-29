@@ -249,7 +249,13 @@
     if (getBoard()._save) getBoard()._save();
     if (window.LipaDaily && LipaDaily.bumpStreak) LipaDaily.bumpStreak('lipa_aim_streak');
     if (window.LipaBrain && LipaBrain.recordActivityResult) {
-      LipaBrain.recordActivityResult('aim-trainer', { score: score, accuracy: hits / Math.max(1, hits + misses) });
+      LipaBrain.recordActivityResult('aim-trainer', {
+        score: score,
+        correct: hits,
+        wrong: misses,
+        accuracy: hits / Math.max(1, hits + misses),
+        sessionComplete: true
+      });
     } else if (window.LipaDaily && LipaDaily.recordSession) {
       LipaDaily.recordSession('aim-trainer', { score: score });
     }

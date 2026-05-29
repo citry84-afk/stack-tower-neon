@@ -201,7 +201,13 @@
     var name = window.prompt('Nombre para el ranking (opcional):', '') || 'Jugador';
     board.submit(name, score, { dodged: dodged });
     if (window.LipaBrain && LipaBrain.recordActivityResult) {
-      LipaBrain.recordActivityResult('esquiva-neon', { score: score, correct: dodged, wrong: 0 });
+      LipaBrain.recordActivityResult('esquiva-neon', {
+        score: score,
+        correct: dodged,
+        wrong: 0,
+        accuracy: 0.8,
+        sessionComplete: true
+      });
     } else if (window.LipaDaily && LipaDaily.recordSession) {
       LipaDaily.recordSession('esquiva-neon', { score: score });
     }

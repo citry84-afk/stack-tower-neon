@@ -63,6 +63,7 @@
   function markCorrect(pts) {
     correct++;
     combo++;
+    if (window.LipaGameFeedback && LipaGameFeedback.setCombo) LipaGameFeedback.setCombo(combo);
     if (combo > maxCombo) maxCombo = combo;
     score += pts + Math.min(combo * 2, 16);
     updateHud();
@@ -72,6 +73,7 @@
   function markWrong() {
     wrong++;
     combo = 0;
+    if (window.LipaGameFeedback && LipaGameFeedback.setCombo) LipaGameFeedback.setCombo(0);
     updateHud();
     try { if (window.LipaGameFeedback) LipaGameFeedback.onWrong(workEl || arenaEl); } catch (fbErr) { /* ignore */ }
   }

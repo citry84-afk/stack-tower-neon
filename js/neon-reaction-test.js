@@ -107,6 +107,7 @@
         correct: results.length,
         wrong: 0,
         accuracy: 1,
+        sessionComplete: true,
         extra: { best: best }
       });
     } else if (window.LipaDaily.recordSession) {
