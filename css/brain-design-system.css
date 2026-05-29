@@ -352,25 +352,91 @@ body.lipa-brain-soft .peques-arena::before {
 
 body.lipa-brain-soft.game-page .math-question,
 body.lipa-brain-soft.game-page .lengua-prompt,
-body.lipa-brain-soft.game-page .peques-prompt {
+body.lipa-brain-soft.game-page .peques-prompt,
+body.lipa-brain-soft.game-page .naturales-prompt,
+body.lipa-brain-soft.game-page .sociales-prompt,
+body.lipa-brain-soft.game-page .naturales-name,
+body.lipa-brain-soft.game-page .lengua-big-word,
+body.lipa-brain-soft.game-page .lengua-read-text,
+body.lipa-brain-soft.game-page .lengua-read-q,
+body.lipa-brain-soft.game-page .lang-prompt,
+body.lipa-brain-soft.game-page [id$='-prompt'],
+body.lipa-brain-soft.game-page [id$='-question'] {
   color: var(--brain-text-main) !important;
   text-shadow: none !important;
+}
+
+body.lipa-brain-soft.game-page .lengua-hint-word,
+body.lipa-brain-soft.game-page .lang-direction {
+  color: var(--brain-text-muted) !important;
+}
+
+body.lipa-brain-soft.game-page .math-timer-ring {
+  color: var(--brain-text-main) !important;
+  border-color: var(--brain-border-soft) !important;
+  border-top-color: var(--brain-primary) !important;
+}
+
+body.lipa-brain-soft.game-page.game-page--brain .stats .stat strong,
+body.lipa-brain-soft.game-page .stats .stat strong {
+  color: var(--brain-text-main) !important;
 }
 
 body.lipa-brain-soft.game-page .math-choice,
 body.lipa-brain-soft.game-page .lengua-choice,
 body.lipa-brain-soft.game-page .peques-choice,
 body.lipa-brain-soft.game-page .naturales-choice,
+body.lipa-brain-soft.game-page .sociales-choice,
+body.lipa-brain-soft.game-page .lengua-chip,
+body.lipa-brain-soft.game-page .lengua-slot {
+  background: #fff !important;
+  border: 2px solid var(--brain-border-soft) !important;
+  color: var(--brain-text-main) !important;
+  backdrop-filter: none !important;
+}
+
+body.lipa-brain-soft.game-page .lengua-slot {
+  border-color: rgba(236, 72, 153, 0.35) !important;
+}
+
+body.lipa-brain-soft.game-page .lengua-chip {
+  border-color: rgba(236, 72, 153, 0.4) !important;
+}
+
+body.lipa-brain-soft.game-page .peques-choice {
+  border-color: rgba(251, 191, 36, 0.55) !important;
+  background: #fffbeb !important;
+}
+
+body.lipa-brain-soft.game-page .naturales-choice {
+  border-color: rgba(46, 211, 166, 0.45) !important;
+  background: #f0fdf9 !important;
+}
+
 body.lipa-brain-soft.game-page .sociales-choice {
-  background: #fff;
-  border: 2px solid var(--brain-border-soft);
-  color: var(--brain-text-main);
+  border-color: rgba(56, 189, 248, 0.45) !important;
+  background: #eff6ff !important;
 }
 
 body.lipa-brain-soft.game-page .math-choice:hover,
-body.lipa-brain-soft.game-page .lengua-choice:hover {
-  border-color: var(--brain-primary);
-  background: #f0fdf9;
+body.lipa-brain-soft.game-page .lengua-choice:hover,
+body.lipa-brain-soft.game-page .peques-choice:hover:not(:disabled),
+body.lipa-brain-soft.game-page .lengua-chip:hover:not(:disabled) {
+  border-color: var(--brain-primary) !important;
+  background: #f0fdf9 !important;
+}
+
+body.lipa-brain-soft.game-page .game-overlay,
+body.lipa-brain-soft.game-page .game-overlay p,
+body.lipa-brain-soft.game-page .game-overlay h2,
+body.lipa-brain-soft.game-page .game-overlay strong,
+body.lipa-brain-soft.game-page .game-overlay span {
+  color: var(--brain-text-main);
+}
+
+body.lipa-brain-soft.game-page .game-overlay {
+  background: #fff;
+  border-color: var(--brain-border-soft);
 }
 
 body.lipa-brain-soft .calc-level {
