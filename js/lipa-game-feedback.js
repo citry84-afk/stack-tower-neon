@@ -58,6 +58,9 @@
   function onCorrect(workEl, xp) {
     pop(resolveArena(workEl));
     floatXp(xp || 8);
+    if (global.LipaBrainPlay && LipaBrainPlay.chimeCorrect) {
+      try { LipaBrainPlay.chimeCorrect(); } catch (e) { /* ignore */ }
+    }
     var m = document.getElementById('lipi-game-hint');
     if (m && global.LipaMascot) {
       var msg = null;
@@ -79,6 +82,9 @@
 
   function onWrong(workEl) {
     shake(resolveArena(workEl));
+    if (global.LipaBrainPlay && LipaBrainPlay.chimeWrong) {
+      try { LipaBrainPlay.chimeWrong(); } catch (e) { /* ignore */ }
+    }
     var m = document.getElementById('lipi-game-hint');
     if (m && global.LipaMascot) LipaMascot.render(m, 'wrong');
   }

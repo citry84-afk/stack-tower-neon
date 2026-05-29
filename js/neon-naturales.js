@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  var DURATION = 30;
+  var DURATION = (window.LipaBrainPlay && LipaBrainPlay.roundDurationSec) ? LipaBrainPlay.roundDurationSec() : 30;
   var mode = 'clasifica';
   var activityId = 'neon-vida';
   var running = false;
@@ -260,6 +260,9 @@
     wrong = 0;
     combo = 0;
     maxCombo = 0;
+    if (window.LipaBrainPlay && LipaBrainPlay.syncRoundDuration) {
+      DURATION = LipaBrainPlay.syncRoundDuration();
+    }
     timeLeft = DURATION;
     lastKey = '';
     running = true;

@@ -4,7 +4,7 @@
 (function () {
   'use strict';
 
-  var DURATION = 30;
+  var DURATION = (window.LipaBrainPlay && LipaBrainPlay.roundDurationSec) ? LipaBrainPlay.roundDurationSec() : 30;
   var board = null;
   var timerEl, scoreEl, accEl, comboEl, overlay, btnStart, btnShare, lbEl;
   var questionEl, choicesEl, arenaEl, streakEl, streakNEl;
@@ -251,6 +251,9 @@
     wrong = 0;
     combo = 0;
     maxCombo = 0;
+    if (window.LipaBrainPlay && LipaBrainPlay.syncRoundDuration) {
+      DURATION = LipaBrainPlay.syncRoundDuration();
+    }
     timeLeft = DURATION;
     running = true;
     if (overlay) overlay.hidden = true;

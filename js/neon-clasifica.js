@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  var DURATION = 30;
+  var DURATION = (window.LipaBrainPlay && LipaBrainPlay.roundDurationSec) ? LipaBrainPlay.roundDurationSec() : 30;
   var mode = 'figuras';
   var activityId = 'neon-clasifica';
   var running = false;
@@ -130,7 +130,10 @@
 
   function startGame() {
     running = true;
-    timeLeft = DURATION;
+        if (window.LipaBrainPlay && LipaBrainPlay.syncRoundDuration) {
+      DURATION = LipaBrainPlay.syncRoundDuration();
+    }
+timeLeft = DURATION;
     score = 0;
     correct = 0;
     wrong = 0;

@@ -370,6 +370,16 @@
   margin-bottom: 2px;
 }
 
+.curriculum-activity-card__hook {
+  display: block;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 1.35;
+  color: #5b21b6;
+  margin: 2px 0 6px;
+}
+
 .curriculum-activity-card__body span {
   font-size: 13px;
   color: var(--lipa-text-secondary);

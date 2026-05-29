@@ -4,7 +4,7 @@
 (function () {
   'use strict';
 
-  var DURATION = 30;
+  var DURATION = (window.LipaBrainPlay && LipaBrainPlay.roundDurationSec) ? LipaBrainPlay.roundDurationSec() : 30;
   var SPAWN_RETRIES = 24;
   var board = null;
   var arena, timerEl, scoreEl, accEl, comboEl, overlay, btnStart, btnShare, lbEl;
@@ -269,7 +269,10 @@
     if (overlay) overlay.hidden = true;
     if (btnStart) btnStart.hidden = true;
     running = true;
-    timeLeft = DURATION;
+        if (window.LipaBrainPlay && LipaBrainPlay.syncRoundDuration) {
+      DURATION = LipaBrainPlay.syncRoundDuration();
+    }
+timeLeft = DURATION;
     score = 0;
     hits = 0;
     misses = 0;

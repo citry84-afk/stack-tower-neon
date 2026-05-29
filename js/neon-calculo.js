@@ -4,7 +4,7 @@
 (function () {
   'use strict';
 
-  var DURATION = 30;
+  var DURATION = (window.LipaBrainPlay && LipaBrainPlay.roundDurationSec) ? LipaBrainPlay.roundDurationSec() : 30;
   var board = null;
   var timerEl, scoreEl, accEl, comboEl, overlay, btnStart, btnShare, lbEl;
   var questionEl, choicesEl, levelBtns, arenaEl, streakEl, streakNEl;
@@ -275,6 +275,9 @@
     if (running) return;
     if (window.LipaAnalytics && LipaAnalytics.trackGameStart) {
       LipaAnalytics.trackGameStart('neon-calculo');
+    }
+    if (window.LipaBrainPlay && LipaBrainPlay.syncRoundDuration) {
+      DURATION = LipaBrainPlay.syncRoundDuration();
     }
     score = 0;
     correct = 0;

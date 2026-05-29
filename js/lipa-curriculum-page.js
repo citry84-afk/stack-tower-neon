@@ -425,9 +425,16 @@
       var gameLabel = gameMeta ? (gameMeta.short || gameMeta.name) : '';
 
       if (isLive) {
+        var hook = (global.LipaBrainPlay && LipaBrainPlay.missionCardLine)
+          ? LipaBrainPlay.missionCardLine(act)
+          : (act.tip || '');
+        var hookHtml = hook
+          ? '<em class="curriculum-activity-card__hook">' + C.esc(hook) + '</em>'
+          : '';
         html += '<a href="' + C.esc(url) + '" class="' + cls + '">' +
           '<span class="curriculum-activity-card__level">' + act.difficulty + '</span>' +
           '<span class="curriculum-activity-card__body"><strong>' + C.esc(act.title) + '</strong>' +
+          hookHtml +
           '<span>' + (gameLabel ? C.esc(gameLabel) + ' · ' : '') + C.esc(diff.name) + ' · ~' + act.estimatedMinutes + ' min · meta ' + minPct + '% · +' + act.rewardXp + ' XP' + (done ? ' · ✓ hecho' : '') + '</span></span>' +
           '<span class="curriculum-activity-card__cta">' + (isNext ? 'Siguiente →' : done ? 'Repetir' : 'Jugar') + ' →</span></a>';
       } else {

@@ -52,10 +52,13 @@
       var tip = actCtx.activity.tip || '';
       var title = actCtx.activity.title || 'Misión';
       var min = LipaCurriculum.getMinAccuracy(p.get('course') || '');
+      var sec = (global.LipaBrainPlay && LipaBrainPlay.roundDurationSec)
+        ? LipaBrainPlay.roundDurationSec()
+        : 30;
       return (
         'Misión «' + title + '». ' +
         (tip ? tip + '. ' : '') +
-        'Meta ' + Math.round(min * 100) + '% aciertos — termina la ronda y sumas XP.'
+        'Ronda de ' + sec + ' s · meta ' + Math.round(min * 100) + '% aciertos.'
       );
     } catch (e) {
       return null;
