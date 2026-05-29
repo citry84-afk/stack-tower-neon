@@ -787,6 +787,38 @@
     return rows;
   }
 
+  function collectLiveActivitiesForCourse(course) {
+    var live = [];
+    if (!course) return live;
+    course.subjects.forEach(function (block) {
+      (block.units || []).forEach(function (unit) {
+        (unit.activities || []).forEach(function (act) {
+          if (act.status === 'live' && act.gameId) {
+            live.push(Object.assign({ subjectId: block.subjectId, unitId: unit.id }, act));
+          }
+        });
+      });
+    });
+    return live;
+  }
+
+  function getLomloeCoverage(courseId) {
+    init();
+    if (!global.LipaLomloeRef || !LipaLomloeRef.BY_COURSE[courseId]) return null;
+    var course = getCourse(courseId);
+    if (!course) return null;
+    return LipaLomloeRef.coverageForCourse(courseId, collectLiveActivitiesForCourse(course));
+  }
+
+  function lomloeUnitHtml(unit) {
+    if (!unit || !unit.skills || !unit.skills.length) return '';
+    if (!global.LipaLomloeRef) return '';
+    var labels = LipaLomloeRef.saberLabels(unit.skills);
+    if (!labels.length) return '';
+    return '<p class="curriculum-lomloe"><span class="curriculum-lomloe__label">LOMLOE</span> ' +
+      esc(labels.join(' · ')) + '</p>';
+  }
+
   init();
 
   global.LipaCurriculum = {
@@ -828,6 +860,8 @@
     subjectFooterLabel: subjectFooterLabel,
     getContinueTarget: getContinueTarget,
     findNextActivity: findNextActivity,
+    getLomloeCoverage: getLomloeCoverage,
+    lomloeUnitHtml: lomloeUnitHtml,
     weekCompletionsBySubject: weekCompletionsBySubject,
     esc: esc,
     COURSES: COURSES

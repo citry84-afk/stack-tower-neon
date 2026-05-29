@@ -3,7 +3,7 @@
  * PWA Optimization & Offline Functionality
  */
 
-const CACHE_NAME = 'lipa-brain-gym-v3.22.7-routine-mix-difficulty';
+const CACHE_NAME = 'lipa-brain-gym-v3.23.1-lomloe-p2-p3';
 const CACHE_VERSION = '2.0.0';
 
 // Essential files to cache for offline play
@@ -23,6 +23,7 @@ const STATIC_CACHE_URLS = [
     '/materia.html',
     '/unidad.html',
     '/js/lipa-curriculum-meta.js',
+    '/js/lipa-lomloe-ref.js',
     '/js/lipa-curriculum-build.js',
     '/js/lipa-curriculum-data.js',
     '/js/lipa-curriculum.js',
@@ -88,6 +89,7 @@ const STATIC_CACHE_URLS = [
     '/js/lipa-home-lipi.js',
     '/js/lipa-routine-subjects.js',
     '/js/lipa-curriculum-meta.js',
+    '/js/lipa-lomloe-ref.js',
     '/js/lipa-curriculum-build.js',
     '/js/lipa-curriculum-data.js',
     '/assets/lipi.svg',

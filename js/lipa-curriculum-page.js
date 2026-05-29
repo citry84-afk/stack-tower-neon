@@ -375,6 +375,7 @@
       html += '<li><a href="' + unitHref + '" class="curriculum-unit-card' + (isNextUnit ? ' curriculum-unit-card--next' : '') + '">' +
         '<h3>Unidad ' + (idx + 1) + ': ' + C.esc(unit.title) + '</h3>' +
         '<p>' + C.esc(unit.description) + '</p>' +
+        (C.lomloeUnitHtml ? C.lomloeUnitHtml(unit) : '') +
         progressBar(up.percent, up.hasLive ? up.done + '/' + up.total + ' completadas' : 'Próximamente') +
         '</a></li>';
     });
@@ -422,7 +423,9 @@
 
     html += '<div class="curriculum-wrap"><div id="lipa-guided-mount" class="curriculum-guided-mount"></div><div id="lipi-mascot-mount"></div><header class="curriculum-hero" style="text-align:left;padding:0 0 1rem">' +
       '<h1 style="text-align:left;font-size:1.5rem">' + C.esc(ctx.unit.title) + '</h1>' +
-      '<p style="text-align:left">' + C.esc(ctx.unit.description) + '</p></header>' +
+      '<p style="text-align:left">' + C.esc(ctx.unit.description) + '</p>' +
+      (C.lomloeUnitHtml ? C.lomloeUnitHtml(ctx.unit) : '') +
+      '</header>' +
       '<div class="curriculum-activity-grid">';
 
     var catalogGames = (global.LipaBrainCatalog && global.LipaBrainCatalog.GAMES) || {};

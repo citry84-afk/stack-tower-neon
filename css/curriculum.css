@@ -313,6 +313,26 @@
   line-height: 1.4;
 }
 
+.curriculum-lomloe {
+  margin: 0 0 10px;
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--lipa-text-secondary);
+}
+
+.curriculum-lomloe__label {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #1a7f5a;
+  background: #e9fff7;
+  border-radius: 4px;
+  padding: 2px 6px;
+  margin-right: 6px;
+}
+
 .curriculum-activity-grid {
   display: grid;
   gap: 0.75rem;
