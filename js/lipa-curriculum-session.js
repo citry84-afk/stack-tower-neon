@@ -173,24 +173,65 @@
     return !!(global.LipaRoutineFlow && LipaRoutineFlow.isActive && LipaRoutineFlow.isActive());
   }
 
+  function activityChoiceHtml(meta) {
+    var inRoutine = routineActive();
+    var upcoming = inRoutine && global.LipaRoutineFlow && LipaRoutineFlow.peekNextStep
+      ? LipaRoutineFlow.peekNextStep()
+      : null;
+    var nextCur = !inRoutine && global.LipaCurriculum
+      ? LipaCurriculum.getContinueTarget(meta.ctx.courseId)
+      : null;
+
+    var nextLabel = 'Siguiente ejercicio →';
+    if (upcoming) {
+      nextLabel = 'Siguiente: ' + (upcoming.emoji ? upcoming.emoji + ' ' : '') + upcoming.name + ' →';
+    } else if (inRoutine) {
+      nextLabel = 'Ver mi recompensa →';
+    } else if (nextCur && nextCur.type === 'activity' && nextCur.href.indexOf(meta.ctx.activityId) < 0) {
+      nextLabel = 'Siguiente: ' + nextCur.label + ' →';
+    }
+
+    return (
+      '<p class="lipa-curriculum-complete__prompt">¿Quieres repetir o pasar al siguiente?</p>' +
+      '<div class="lipa-curriculum-complete__actions lipa-curriculum-complete__actions--choice">' +
+      '<button type="button" class="lipa-btn lipa-btn--primary" id="lipa-activity-next">' + esc(nextLabel) + '</button>' +
+      '<button type="button" class="lipa-btn lipa-btn--secondary" id="lipa-activity-repeat">Repetir actividad</button>' +
+      '</div>'
+    );
+  }
+
+  function wireActivityChoiceHandlers(meta) {
+    var repeat = document.getElementById('lipa-activity-repeat');
+    var nextBtn = document.getElementById('lipa-activity-next');
+    if (repeat) {
+      repeat.addEventListener('click', function () {
+        global.location.reload();
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function () {
+        if (routineActive() && global.LipaRoutineFlow && LipaRoutineFlow.goNext) {
+          LipaRoutineFlow.goNext(false);
+          return;
+        }
+        var next = global.LipaCurriculum
+          ? LipaCurriculum.getContinueTarget(meta.ctx.courseId)
+          : null;
+        if (next && next.href) {
+          global.location.href = next.href;
+        }
+      });
+    }
+  }
+
   function injectCompletePanel(meta, result) {
+    var inRoutine = routineActive();
+    var showChoice = inRoutine || isActive();
+    var choiceHtml = showChoice ? activityChoiceHtml(meta) : '';
     var next = LipaCurriculum.getContinueTarget(meta.ctx.courseId);
     var nextHtml = '';
-    var inRoutine = routineActive() && result.passed;
 
-    if (inRoutine && global.LipaRoutineFlow) {
-      var upcoming = LipaRoutineFlow.peekNextStep ? LipaRoutineFlow.peekNextStep() : null;
-      var nextLabel = upcoming
-        ? (upcoming.emoji ? upcoming.emoji + ' ' : '') + upcoming.name
-        : 'tu recompensa';
-      nextHtml =
-        '<p class="lipa-curriculum-complete__auto">Siguiente: <strong>' + esc(nextLabel) + '</strong> ' +
-        'en <span id="lipa-routine-countdown">3</span> s</p>' +
-        '<div class="lipa-curriculum-complete__actions lipa-curriculum-complete__actions--routine">' +
-        '<button type="button" class="lipa-btn lipa-btn--primary" id="lipa-routine-advance-now">Ir ya →</button>' +
-        '<button type="button" class="lipa-btn lipa-btn--ghost" id="lipa-routine-advance-wait">Un momento</button>' +
-        '</div>';
-    } else if (result.passed && next && next.type === 'activity' && next.href.indexOf(meta.ctx.activityId) < 0) {
+    if (!showChoice && result.passed && next && next.type === 'activity' && next.href.indexOf(meta.ctx.activityId) < 0) {
       nextHtml =
         '<a href="' + esc(next.href) + '" class="lipa-btn lipa-btn--primary lipa-curriculum-complete__next">' +
         '▶ Siguiente misión: ' + esc(next.label) + ' →</a>';
@@ -207,8 +248,8 @@
       ? '<p class="lipa-curriculum-complete__xp">+' + esc(String(result.xpGain)) + ' XP · racha activa</p>'
       : '';
 
-    var footerActions = inRoutine
-      ? nextHtml
+    var footerActions = showChoice
+      ? choiceHtml
       : '<div class="lipa-curriculum-complete__actions">' +
         nextHtml +
         '<a href="' + esc(unitUrl(meta.ctx)) + '" class="lipa-btn lipa-btn--secondary">Ver unidad</a>' +
@@ -222,38 +263,20 @@
       '<p class="lipa-curriculum-complete__sub">' + esc(meta.subjectEmoji + ' ' + meta.subjectLabel) +
       ' · ' + esc(meta.title) + ' · ' + pct + '% aciertos</p>' +
       xpLine +
-      (inRoutine ? '' : progressBlock(meta)) +
+      (showChoice ? '' : progressBlock(meta)) +
       footerActions,
-      'lipa-curriculum-complete--ok' + (inRoutine ? ' lipa-curriculum-complete--routine' : '')
+      'lipa-curriculum-complete--ok' + (showChoice ? ' lipa-curriculum-complete--choice' : '')
     );
 
-    if (inRoutine && global.LipaRoutineFlow && LipaRoutineFlow.scheduleAutoAdvance) {
-      var cd = document.getElementById('lipa-routine-countdown');
-      LipaRoutineFlow.scheduleAutoAdvance(3200, cd);
-      var goNow = document.getElementById('lipa-routine-advance-now');
-      var waitBtn = document.getElementById('lipa-routine-advance-wait');
-      if (goNow) {
-        goNow.addEventListener('click', function () {
-          if (LipaRoutineFlow.cancelAutoAdvance) LipaRoutineFlow.cancelAutoAdvance();
-          LipaRoutineFlow.goNext(false);
-        });
-      }
-      if (waitBtn) {
-        waitBtn.addEventListener('click', function () {
-          if (LipaRoutineFlow.cancelAutoAdvance) LipaRoutineFlow.cancelAutoAdvance();
-          var cdEl = document.getElementById('lipa-routine-countdown');
-          if (cdEl && cdEl.parentNode) {
-            cdEl.parentNode.innerHTML = 'Pulsa <strong>Ir ya</strong> cuando quieras seguir.';
-          }
-        });
-      }
-    }
+    if (showChoice) wireActivityChoiceHandlers(meta);
 
     if (global.LipaGameFeedback) {
       try { LipaGameFeedback.confettiLite(); } catch (e) { /* ignore */ }
     }
 
-    if (result.effortPass) {
+    if (showChoice) {
+      lipiSay('¿Otra ronda para subir estrellas o pasamos al siguiente ejercicio? Tú eliges.');
+    } else if (result.effortPass) {
       lipiSay('Has terminado la ronda. Repite cuando quieras subir estrellas — ¡cada intento cuenta!');
     } else if (result.firstTime) {
       lipiSay('¡Misión nueva desbloqueada en tu curso! La siguiente te espera cuando quieras.');
@@ -270,6 +293,13 @@
         ? LipaCurriculum.getSoftMinAccuracy(meta.ctx.courseId)
         : 0.45) * 100
     );
+    var inRoutine = routineActive();
+    var actionsHtml = inRoutine
+      ? activityChoiceHtml(meta)
+      : '<div class="lipa-curriculum-complete__actions">' +
+        '<button type="button" class="lipa-btn lipa-btn--primary" id="lipa-curriculum-retry">Repetir actividad</button>' +
+        '<a href="' + esc(unitUrl(meta.ctx)) + '" class="lipa-btn lipa-btn--secondary">Volver a la unidad</a>' +
+        '</div>';
 
     injectPanel(
       meta,
@@ -277,21 +307,24 @@
       '💪 Casi — apunta a ' + min + '% (o ' + soft + '% si completas la ronda)</p>' +
       '<p class="lipa-curriculum-complete__sub">Tu precisión fue <strong>' + pct + '%</strong>. ' +
       'Tu XP de Brain Gym sí se guardó. Una ronda más y lo tienes.</p>' +
-      '<div class="lipa-curriculum-complete__actions">' +
-      '<button type="button" class="lipa-btn lipa-btn--primary" id="lipa-curriculum-retry">Repetir actividad</button>' +
-      '<a href="' + esc(unitUrl(meta.ctx)) + '" class="lipa-btn lipa-btn--secondary">Volver a la unidad</a>' +
-      '</div>',
-      'lipa-curriculum-complete--retry'
+      actionsHtml,
+      'lipa-curriculum-complete--retry' + (inRoutine ? ' lipa-curriculum-complete--choice' : '')
     );
 
-    var retry = document.getElementById('lipa-curriculum-retry');
-    if (retry) {
-      retry.addEventListener('click', function () {
-        global.location.reload();
-      });
+    if (inRoutine) {
+      wireActivityChoiceHandlers(meta);
+    } else {
+      var retry = document.getElementById('lipa-curriculum-retry');
+      if (retry) {
+        retry.addEventListener('click', function () {
+          global.location.reload();
+        });
+      }
     }
 
-    lipiSay('No pasa nada. Lee la pista de Lipi y prueba otra ronda — ¡tú puedes!');
+    lipiSay(inRoutine
+      ? '¿Repites para mejorar o pasamos al siguiente ejercicio?'
+      : 'No pasa nada. Lee la pista de Lipi y prueba otra ronda — ¡tú puedes!');
   }
 
   function lipiSay(text) {

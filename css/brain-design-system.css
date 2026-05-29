@@ -1338,12 +1338,21 @@ body.lipa-brain-soft.brain-evo-page main > p a {
   line-height: 1.45;
 }
 
-.lipa-curriculum-complete--routine .lipa-curriculum-complete__title {
-  font-size: 1.35rem;
+.lipa-curriculum-complete__prompt {
+  text-align: center;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #172033;
+  margin: 0.75rem 0 0.85rem;
+  line-height: 1.35;
 }
 
-.lipa-curriculum-complete__actions--routine {
-  margin-top: 4px;
+.lipa-curriculum-complete__actions--choice {
+  margin-top: 0.25rem;
+}
+
+.lipa-curriculum-complete--choice .lipa-curriculum-complete__title {
+  font-size: 1.35rem;
 }
 
 body.lipa-curriculum-active.game-page {

@@ -166,9 +166,16 @@
 
       var nextUrl = '/retos-rapidos.html';
       if (courseId) nextUrl += '?c=' + encodeURIComponent(courseId);
-      var routineBtn = '';
+      var routineBtns = '';
       if (routine && global.LipaRoutineFlow && LipaRoutineFlow.goNext) {
-        routineBtn = '<button type="button" class="lipa-btn lipa-btn--primary" id="qt-routine-next">Seguir rutina →</button>';
+        var upcoming = LipaRoutineFlow.peekNextStep ? LipaRoutineFlow.peekNextStep() : null;
+        var nextLbl = upcoming
+          ? 'Siguiente: ' + upcoming.name + ' →'
+          : 'Ver mi recompensa →';
+        routineBtns =
+          '<p class="lipa-curriculum-complete__prompt">¿Quieres repetir o pasar al siguiente?</p>' +
+          '<button type="button" class="lipa-btn lipa-btn--primary" id="qt-routine-next">' + QT.esc(nextLbl) + '</button>' +
+          '<button type="button" class="lipa-btn lipa-btn--secondary" id="qt-routine-repeat">Repetir reto</button>';
       }
 
       root.innerHTML = sanitize(
@@ -178,15 +185,21 @@
         '<p class="qt-result__lead">Hoy has practicado <strong>' + QT.esc(skillLine) + '</strong>. ' +
         state.correct + ' de ' + total + ' aciertos · +' + (rec.xp || 0) + ' XP</p>' +
         '<div class="qt-result__actions">' +
-        routineBtn +
+        routineBtns +
         '<a href="' + nextUrl + '" class="lipa-btn lipa-btn--secondary">Más retos</a>' +
         '<a href="/" class="lipa-btn lipa-btn--ghost">Inicio</a></div></div>'
       );
 
       var rn = document.getElementById('qt-routine-next');
+      var rr = document.getElementById('qt-routine-repeat');
       if (rn) {
         rn.addEventListener('click', function () {
           LipaRoutineFlow.goNext(false);
+        });
+      }
+      if (rr) {
+        rr.addEventListener('click', function () {
+          global.location.reload();
         });
       }
 

@@ -175,13 +175,21 @@
       ? step.missionTag + ' · ' + (step.missionSubject || '') + (step.missionDur ? ' · ' + step.missionDur : '')
       : 'Paso ' + (idx + 1) + ' / ' + total;
 
-    var nextLabel = 'Siguiente misión';
+    var nextLabel = 'Siguiente ejercicio';
     if (opts.justFinished && idx >= total - 1) {
       nextLabel = 'Ver mi recompensa';
     } else if (opts.justFinished && idx < total - 1) {
       var next = state.steps[idx + 1];
       nextLabel = 'Siguiente: ' + (next.emoji ? next.emoji + ' ' : '') + next.name;
     }
+
+    var finishedActions = opts.justFinished
+      ? '<p class="lipa-routine-bar__prompt">¿Repetir o seguir?</p>' +
+        '<button type="button" class="lipa-routine-bar__repeat" id="lipa-routine-repeat">Repetir actividad</button>' +
+        '<button type="button" class="lipa-routine-bar__next lipa-routine-bar__next--pulse" id="lipa-routine-next">' +
+        esc(nextLabel) + ' →</button>'
+      : '<button type="button" class="lipa-routine-bar__next" id="lipa-routine-next" hidden>' +
+        esc(nextLabel) + ' →</button>';
 
     bar.innerHTML =
       '<div class="lipa-routine-bar__inner">' +
@@ -193,17 +201,22 @@
       '<p class="lipa-routine-bar__title">' + esc(step.emoji + ' ' + step.name) + '</p>' +
       '<p class="lipa-routine-bar__sub">' + esc(state.title) + (done ? ' · ' + done + ' completados' : '') + '</p>' +
       '<div class="lipa-routine-bar__actions">' +
-      '<button type="button" class="lipa-routine-bar__next' + (opts.justFinished ? ' lipa-routine-bar__next--pulse' : '') + '" id="lipa-routine-next"' +
-      (opts.justFinished ? '' : ' hidden') + '>' + esc(nextLabel) + ' →</button>' +
+      finishedActions +
       '<button type="button" class="lipa-routine-bar__skip" id="lipa-routine-skip">Saltar paso</button>' +
       '<a href="/mi-rutina-cerebro.html" class="lipa-routine-bar__quit">Salir</a>' +
       '</div></div>';
 
     var nextBtn = document.getElementById('lipa-routine-next');
+    var repeatBtn = document.getElementById('lipa-routine-repeat');
     var skipBtn = document.getElementById('lipa-routine-skip');
     if (nextBtn) {
       nextBtn.addEventListener('click', function () {
         goNext();
+      });
+    }
+    if (repeatBtn) {
+      repeatBtn.addEventListener('click', function () {
+        global.location.reload();
       });
     }
     if (skipBtn) {
@@ -473,11 +486,10 @@
 
     var params = getParams();
     if (params && params.get('curriculum') === '1') {
-      /* El panel de misión curriculum programa el salto automático. */
+      /* El panel de misión pregunta repetir o siguiente. */
       return;
     }
     showNextReady();
-    scheduleAutoAdvance(2800);
   }
 
   function bindDelegatedStarts() {

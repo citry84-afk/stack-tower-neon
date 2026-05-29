@@ -835,6 +835,32 @@
   align-items: center;
 }
 
+.lipa-routine-bar__prompt {
+  width: 100%;
+  margin: 0 0 4px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #e9d5ff;
+  text-align: center;
+}
+
+.lipa-routine-bar__repeat {
+  flex: 1 1 auto;
+  min-height: 40px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.lipa-routine-bar__repeat:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
 .lipa-routine-bar__next {
   flex: 1 1 auto;
   min-width: 140px;
