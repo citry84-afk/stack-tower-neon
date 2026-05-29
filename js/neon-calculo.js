@@ -22,7 +22,10 @@
   var lockChoice = false;
 
   function refreshBrainLevel() {
-    if (window.LipaBrain) {
+    if (window.LipaBrain && LipaBrain.resolveBrainLevel) {
+      brainLevel = LipaBrain.resolveBrainLevel({ gameId: 'neon-calculo' });
+      calcConfig = LipaBrain.getCalcConfig(brainLevel);
+    } else if (window.LipaBrain) {
       brainLevel = LipaBrain.getActivityLevel('neon-calculo');
       calcConfig = LipaBrain.getCalcConfig(brainLevel);
     }

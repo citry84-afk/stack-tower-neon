@@ -301,6 +301,10 @@
   function getRoutineSubjectIds(profile, course) {
     if (!profile) return null;
     if (profile.routineSubjects && profile.routineSubjects.length) {
+      if (profile.focus === 'all' && profile.routineSubjects.length === 1 && course) {
+        var live = listLiveSubjects(course);
+        if (live.length >= 2) return null;
+      }
       return profile.routineSubjects.slice();
     }
     return focusToSubjectIds(profile.focus);
@@ -405,32 +409,56 @@
   }
 
   function annotateDailyMissions(steps) {
-    var roleLabels = ['Matemáticas', 'Lenguaje', 'Inglés', 'Naturales / Sociales', 'Reto rápido'];
-    var roleDur = ['~2 min', '~2 min', '~1 min', '~1 min', '~1 min'];
     steps.forEach(function (s, i) {
       s.missionIndex = i + 1;
       s.missionTag = 'Misión ' + (i + 1);
-      s.missionSubject = s.subjectLabel || roleLabels[i] || s.name;
-      s.missionDur = roleDur[i] || '~1 min';
+      s.missionSubject = s.subjectLabel || s.name;
+      s.missionDur = (s.minutes ? '~' + s.minutes + ' min' : '~1 min');
     });
     return steps;
   }
 
-  /** Brain Gym diario: 5 misiones (mates, lengua, inglés, ciencias, reto) ~7 min. */
-  function buildStructuredSevenMinSteps(profile, course, pool, rng, diffLabels) {
-    var math = pickOneFromSubject(pool, 'matematicas', 'neon-calculo', rng);
-    var lang = pickOneFromSubject(pool, 'lenguaje', 'neon-lectura', rng) ||
-      pickOneFromSubject(pool, 'lenguaje', null, rng);
-    var eng = pickOneFromSubject(pool, 'ingles', 'neon-palabras', rng) ||
-      pickOneFromSubject(pool, 'ingles', null, rng);
-    var sci = pickOneFromSubject(pool, 'naturales', null, rng) ||
-      pickOneFromSubject(pool, 'sociales', null, rng);
+  function subjectsInPool(pool) {
+    var order = META.SUBJECT_ORDER || [];
+    var seen = {};
+    var ids = [];
+    pool.forEach(function (item) {
+      var sid = item.subject.subjectId;
+      if (!seen[sid]) {
+        seen[sid] = true;
+        ids.push(sid);
+      }
+    });
+    ids.sort(function (a, b) {
+      var ia = order.indexOf(a);
+      var ib = order.indexOf(b);
+      if (ia < 0) ia = 99;
+      if (ib < 0) ib = 99;
+      return ia - ib;
+    });
+    return ids;
+  }
 
+  /** Rutina diaria: una misión por materia viva (mates, lengua, inglés, naturales, sociales, reflejos…). */
+  function buildStructuredSevenMinSteps(profile, course, pool, rng, diffLabels) {
+    var minutes = Math.max(5, parseInt(profile.minutes, 10) || 7);
+    var subjectIds = subjectsInPool(pool);
+    var maxSteps = minutes >= 10
+      ? Math.min(subjectIds.length, 7)
+      : minutes >= 7
+        ? Math.min(subjectIds.length, 6)
+        : Math.min(subjectIds.length, 4);
     var picked = [];
-    if (math) picked.push(math);
-    if (lang) picked.push(lang);
-    if (eng) picked.push(eng);
-    if (sci) picked.push(sci);
+    var used = {};
+
+    subjectIds.forEach(function (sid) {
+      if (picked.length >= maxSteps) return;
+      var item = pickOneFromSubject(pool, sid, null, rng);
+      if (item && !used[item.activity.id]) {
+        picked.push(item);
+        used[item.activity.id] = true;
+      }
+    });
 
     if (picked.length < 3) return null;
 
@@ -438,7 +466,7 @@
       return activityToRoutineStep(item, i + 1, course, diffLabels);
     });
 
-    if (global.LipaQuickTests && LipaQuickTests.buildRoutineQuickStep) {
+    if (minutes >= 7 && global.LipaQuickTests && LipaQuickTests.buildRoutineQuickStep) {
       var qt = LipaQuickTests.buildRoutineQuickStep(profile, steps.length + 1, rng);
       if (qt) {
         qt.order = steps.length + 1;
@@ -515,24 +543,25 @@
       : function () { return Math.random(); };
 
     var diffLabels = META.DIFFICULTY_LABELS || {};
+    var poolSubjects = subjectsInPool(pool);
     var broadFocus =
       !subjectIds ||
-      subjectIds.length >= 3 ||
+      subjectIds.length >= 2 ||
       focus === 'all' ||
       focus === 'both' ||
       focus === 'balanced' ||
       !focus;
 
-    var useStructured = minutes >= 5 && broadFocus && pool.length >= 3;
+    var useStructured = minutes >= 5 && pool.length >= 3 && poolSubjects.length >= 2 && broadFocus;
 
     var steps = useStructured
       ? buildStructuredSevenMinSteps(profile, course, pool, rng, diffLabels)
       : null;
 
     if (!steps || !steps.length) {
-      var stepCount = Math.max(3, Math.min(8, Math.round(minutes / 2) || 3));
-      var useBalanced = !subjectIds || subjectIds.length >= 2 ||
-        focus === 'all' || focus === 'both' || focus === 'balanced';
+      var nSubjects = subjectIds && subjectIds.length ? subjectIds.length : poolSubjects.length;
+      var stepCount = Math.max(3, Math.min(8, nSubjects, Math.round(minutes / 1.5) || 3));
+      var useBalanced = poolSubjects.length >= 2 && broadFocus;
       var picked = useBalanced
         ? pickBalancedAcrossSubjects(pool, Math.min(stepCount, pool.length), rng)
         : shuffle(pool, rng).slice(0, Math.min(stepCount, pool.length));

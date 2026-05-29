@@ -44,7 +44,9 @@
   }
 
   function refreshBrainLevel() {
-    if (window.LipaBrain) {
+    if (window.LipaBrain && LipaBrain.resolveBrainLevel) {
+      brainLevel = LipaBrain.resolveBrainLevel({ gameId: 'neon-palabras' });
+    } else if (window.LipaBrain) {
       brainLevel = LipaBrain.getActivityLevel('neon-palabras');
     }
     if (window.LipaVocabBank) {

@@ -22,8 +22,12 @@
   var brainLevel = 1;
 
   function refreshBrainLevel() {
-    if (window.LipaBrain) {
+    if (window.LipaBrain && LipaBrain.resolveBrainLevel) {
+      brainLevel = LipaBrain.resolveBrainLevel({ gameId: 'tablas-relampago' });
+    } else if (window.LipaBrain) {
       brainLevel = LipaBrain.getActivityLevel('tablas-relampago');
+    }
+    if (window.LipaBrain) {
       var range = LipaBrain.getTablasRange(brainLevel);
       tableMin = range.min;
       tableMax = range.max;

@@ -100,15 +100,42 @@
     if (!entry) {
       var profile = getProfile();
       var start = 1;
-      if (profile && profile.ageBand === '6-9') start = 1;
+      if (profile && profile.courseId) {
+        if (profile.courseId.indexOf('eso-2') === 0) start = 8;
+        else if (profile.courseId.indexOf('eso-') === 0) start = 6;
+        else if (/^primaria-[56]$/.test(profile.courseId)) start = 4;
+        else if (/^primaria-[34]$/.test(profile.courseId)) start = 3;
+      } else if (profile && profile.ageBand === '6-9') start = 1;
       else if (profile && profile.ageBand === '10-12') start = 2;
-      else if (profile && profile.ageBand === '13-17') start = 3;
+      else if (profile && profile.ageBand === '13-17') start = 6;
       else if (profile) start = 3;
       entry = { level: start, plays: 0, best: null };
       levels[activityId] = entry;
       saveLevels(levels);
     }
     return entry.level || 1;
+  }
+
+  /** Nivel efectivo en juego: URL ?brainLevel=, actividad curriculum, suelo por curso. */
+  function resolveBrainLevel(opts) {
+    opts = opts || {};
+    var gameId = opts.gameId || opts.activityId || 'neon-calculo';
+    var level = getActivityLevel(gameId);
+    try {
+      var params = new URLSearchParams(global.location.search);
+      var fromUrl = parseInt(params.get('brainLevel'), 10);
+      if (fromUrl >= 1 && fromUrl <= 12) level = fromUrl;
+      var courseId = params.get('course') || '';
+      if (!courseId) {
+        var prof = getProfile();
+        if (prof && prof.courseId) courseId = prof.courseId;
+      }
+      if (courseId.indexOf('eso-2') === 0) level = Math.max(level, 8);
+      else if (courseId.indexOf('eso-') === 0) level = Math.max(level, 6);
+      else if (/^primaria-6$/.test(courseId)) level = Math.max(level, 5);
+      else if (/^primaria-5$/.test(courseId)) level = Math.max(level, 4);
+    } catch (e) { /* ignore */ }
+    return Math.max(1, Math.min(12, level));
   }
 
   function setActivityLevel(activityId, level) {
@@ -709,7 +736,13 @@
     var p = getProfile();
     if (!p) return null;
     var t = today();
-    if (!p.routine || p.routine.date !== t) {
+    var need = !p.routine || p.routine.date !== t || p.routine.courseId !== p.courseId;
+    if (!need && p.routine) {
+      var a = (p.routineSubjects || []).slice().sort().join(',');
+      var b = (p.routine.routineSubjects || []).slice().sort().join(',');
+      if (a !== b) need = true;
+    }
+    if (need) {
       p.routine = buildRoutine(p);
       saveProfile(p);
     }
@@ -728,6 +761,7 @@
     buildRoutine: buildRoutine,
     recordActivityResult: recordActivityResult,
     getActivityLevel: getActivityLevel,
+    resolveBrainLevel: resolveBrainLevel,
     setActivityLevel: setActivityLevel,
     getCalcConfig: getCalcConfig,
     getTablasRange: getTablasRange,
