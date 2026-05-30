@@ -728,6 +728,57 @@ body.lipa-brain-soft .game-overlay {
   font-size: 1rem;
 }
 
+.dictado-hero {
+  display: block;
+  font-size: 3.5rem;
+  text-align: center;
+  margin: 0 0 0.75rem;
+}
+
+.dictado-play {
+  display: block;
+  margin: 0 auto 1rem;
+}
+
+.dictado-choices {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(120px, 1fr));
+  gap: 10px;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.dictado-choice {
+  min-height: 52px;
+  font-weight: 800;
+}
+
+.empareja-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.empareja-left {
+  font-size: 2.25rem;
+  min-width: 64px;
+  min-height: 64px;
+  padding: 8px;
+}
+
+.empareja-right {
+  min-width: 100px;
+  min-height: 48px;
+  font-weight: 800;
+}
+
+.empareja-pick {
+  outline: 3px solid var(--brain-accent, #2ed3a6);
+  outline-offset: 2px;
+}
+
 /* —— Contraste tema claro (carteles, badges, textos) —— */
 body.lipa-brain-soft.curriculum-page .curriculum-hero h1 {
   font-family: 'Nunito', system-ui, sans-serif;

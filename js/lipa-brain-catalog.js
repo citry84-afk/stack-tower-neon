@@ -342,6 +342,32 @@
       higherIsBetter: true,
       metricLabel: 'pts',
       ageMin: 3
+    },
+    'neon-dictado': {
+      id: 'neon-dictado',
+      name: 'Neon Dictado',
+      short: 'Dictado',
+      emoji: '🔊',
+      url: '/neon-dictado.html',
+      pillar: 'language',
+      cat: 'lengua',
+      desc: 'Escucha y elige la palabra',
+      higherIsBetter: true,
+      metricLabel: 'pts',
+      ageMin: 3
+    },
+    'neon-empareja': {
+      id: 'neon-empareja',
+      name: 'Neon Empareja',
+      short: 'Empareja',
+      emoji: '🧩',
+      url: '/neon-empareja.html',
+      pillar: 'infantil',
+      cat: 'peques',
+      desc: 'Une dibujo y palabra',
+      higherIsBetter: true,
+      metricLabel: 'pts',
+      ageMin: 3
     }
   };
 

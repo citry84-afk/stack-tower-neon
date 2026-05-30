@@ -66,7 +66,7 @@
   var ROT_INFANTIL_EN = ['neon-peques', 'neon-colores', 'flash-tap'];
   var ROT_NATURALES = ['neon-vida', 'neon-cuerpo', 'neon-planeta'];
   var ROT_SOCIALES = ['neon-mapa', 'neon-entorno', 'neon-historia'];
-  var ROT_LENGUA = ['neon-lectura', 'neon-silabas', 'neon-palabra', 'neon-frase'];
+  var ROT_LENGUA = ['neon-lectura', 'neon-silabas', 'neon-palabra', 'neon-frase', 'neon-dictado'];
 
   function tagSaber(act, saberIds) {
     if (!act || !saberIds) return act;
@@ -97,6 +97,18 @@
 
   function wrapInfantil(id, title, slot, difficulty, tip, brainLevel, saberIds) {
     return tagSaber(liveInfantil(id, title, slot, difficulty, tip, brainLevel), saberIds);
+  }
+
+  function wrapInfGame(id, title, gameId, difficulty, tip, brainLevel, saberIds) {
+    return tagSaber(liveGame(id, title, gameId, difficulty, brainLevel, tip || 'Infantil', saberIds), saberIds);
+  }
+
+  function infD(tier) {
+    return tier === 0 ? 1 : 2;
+  }
+
+  function infRx(tier) {
+    return tier === 0 ? 1 : 2;
   }
 
   function liveLenguaRot(id, title, slot, difficulty, tip, brainLevel, saberIds) {
@@ -146,23 +158,24 @@
   function infantilSubjects(id, tier) {
     tier = tier == null ? 1 : tier;
     var bl = tier === 0 ? 1 : tier === 1 ? 3 : 5;
-    var extraLive = tier >= 1;
     var countTip = tier === 0 ? 'hasta 3' : tier === 1 ? 'hasta 5' : 'hasta 10';
+    var d = infD(tier);
+    var rx = infRx(tier);
     return [
       subject('matematicas', [
         unit(id + '-m-colores', 'Cantidad, color y forma', 'LOMLOE · dimensión lógico-matemática.', [
           wrapInfantil(id + '-m-c1', '¿Qué color?', 0, 1, 'Toca el color', bl, infSid(tier, 'm', 2)),
           wrapInfantil(id + '-m-c2', '¿Cuántos hay?', 1, 1, 'Cuenta ' + countTip, bl, infSid(tier, 'm', 1)),
-          extraLive ? wrapInfantil(id + '-m-c3', 'Toca rápido', 3, 2, 'Atención', bl, infSid(tier, 'l', 3)) : soon(id + '-m-c3', 'Grande o pequeño', 'multiple-choice', 2),
-          tier >= 1 ? wrapInfantil(id + '-m-c4', 'Formas', 2, 2, 'Igual o diferente', bl, infSid(tier, 'm', 3)) : soon(id + '-m-c4', 'Formas', 'matching', 2),
-          tier >= 2 ? tagSaber(liveReflex(id + '-m-c5', 'Reto visual', 'flash-tap', 2), infSid(tier, 'm', 4)) : soon(id + '-m-c5', 'Reto visual', 'quiz', 3)
+          wrapInfantil(id + '-m-c3', tier >= 1 ? 'Toca rápido' : 'Grande o pequeño', 3, d, tier >= 1 ? 'Atención' : 'Elige', bl, infSid(tier, 'l', 3)),
+          wrapInfGame(id + '-m-c4', 'Formas', 'neon-empareja', d, 'Igual o diferente', bl, infSid(tier, 'm', 3)),
+          tagSaber(liveReflex(id + '-m-c5', 'Reto visual', 'flash-tap', rx), infSid(tier, 'm', 4))
         ], { saberIds: [infSid(tier, 'm', 1), infSid(tier, 'm', 2), infSid(tier, 'm', 3)] }),
         unit(id + '-m-formas', 'Clasificar y reconocer', 'Agrupar por color, forma o tamaño.', [
           wrapInfantil(id + '-m-f1', '¿Qué forma es?', 0, 1, 'Círculo, cuadrado…', bl, infSid(tier, 'm', 3)),
           tagSaber(wrapInfantil(id + '-m-f2', 'Colores mix', 0, 2, 'Repaso', bl, infSid(tier, 'm', 2)), infSid(tier, 'm', 4)),
-          extraLive ? wrapInfantil(id + '-m-f3', 'Cuenta y toca', 1, 2, 'Números', bl, infSid(tier, 'm', 1)) : soon(id + '-m-f3', 'Igual o diferente', 'matching', 2),
-          tier >= 1 ? wrapInfantil(id + '-m-f4', 'Seriaciones', 3, 2, 'Ordena', bl, infSid(tier, 'm', 4)) : soon(id + '-m-f4', 'Seriaciones', 'ordering', 3),
-          tier >= 1 ? tagSaber(liveReflex(id + '-m-f5', 'Misión formas', 'flash-tap', 3), infSid(tier, 'm', 4)) : soon(id + '-m-f5', 'Misión formas', 'quiz', 4)
+          wrapInfantil(id + '-m-f3', tier >= 1 ? 'Cuenta y toca' : 'Igual o diferente', 1, d, 'Números', bl, infSid(tier, 'm', 1)),
+          wrapInfGame(id + '-m-f4', 'Seriaciones', 'neon-ordenar', d, 'Ordena', bl, infSid(tier, 'm', 4)),
+          tagSaber(liveReflex(id + '-m-f5', 'Misión formas', 'flash-tap', rx + 1), infSid(tier, 'm', 4))
         ], { saberIds: [infSid(tier, 'm', 3), infSid(tier, 'm', 4)] })
       ], 'live'),
       subject('lenguaje', [
@@ -171,66 +184,68 @@
           wrapInfantil(id + '-l-v2', '¿Qué es esto?', 1, 2, 'Imagen y palabra', bl, infSid(tier, 'l', 1)),
           tier === 0
             ? wrapInfantil(id + '-l-v3', 'Sigue la consigna', 0, 1, 'Toca lo que pide', bl, infSid(tier, 'l', 2))
-            : extraLive
-              ? tagSaber(wrapInfantil(id + '-l-v3', 'Colores y palabras', 0, 2, 'Repaso', bl, infSid(tier, 'l', 1)), infSid(tier, 'l', 2))
-              : soon(id + '-l-v3', 'Rimas', 'listening', 2),
-          tier >= 1 ? wrapInfantil(id + '-l-v4', 'Sonidos iniciales', 3, 2, 'Primera letra', bl, infSid(tier, 'l', 2)) : soon(id + '-l-v4', 'Sonidos iniciales', 'matching', 3),
-          tier >= 1 ? wrapInfantil(id + '-l-v5', 'Cuento corto', 4, 2, 'Palabras', bl, infSid(tier, 'l', 1)) : soon(id + '-l-v5', 'Cuento corto', 'reading', 4)
+            : tagSaber(wrapInfantil(id + '-l-v3', 'Colores y palabras', 0, 2, 'Repaso', bl, infSid(tier, 'l', 1)), infSid(tier, 'l', 2)),
+          wrapInfGame(id + '-l-v4', 'Sonidos iniciales', 'neon-empareja', d, 'Primera letra', bl, infSid(tier, 'l', 2)),
+          wrapInfGame(id + '-l-v5', 'Cuento corto', 'neon-dictado', d, 'Escucha', bl, infSid(tier, 'l', 1))
         ], { saberIds: [infSid(tier, 'l', 1), infSid(tier, 'l', 2)] }),
         unit(id + '-l-sonidos', 'Atención y lenguaje', 'Discriminación visual y auditiva suave.', [
           wrapInfantil(id + '-l-s1', 'Palabras', 2, 1, 'Escucha con los ojos', bl, infSid(tier, 'l', 3)),
-          extraLive ? wrapInfantil(id + '-l-s2', 'Cuenta sonidos', 1, 2, 'Atención', bl, infSid(tier, 'l', 3)) : soon(id + '-l-s2', 'Sílabas con palmas', 'listening', 2),
-          tier >= 1 ? wrapInfantil(id + '-l-s3', 'Empieza por…', 2, 2, 'Sonidos', bl, infSid(tier, 'l', 3)) : soon(id + '-l-s3', 'Empieza por…', 'multiple-choice', 2),
-          tier >= 2 ? wrapInfantil(id + '-l-s4', 'Canción', 3, 2, 'Ritmo', bl, infSid(tier, 'l', 3)) : soon(id + '-l-s4', 'Canción', 'listening', 3),
-          tier >= 1 ? wrapInfantil(id + '-l-s5', 'Reto sonidos', 4, 2, 'Palabras', bl, infSid(tier, 'l', 3)) : soon(id + '-l-s5', 'Reto sonidos', 'quiz', 4)
+          wrapInfGame(id + '-l-s2', 'Sílabas con palmas', 'neon-dictado', d, 'Escucha', bl, infSid(tier, 'l', 3)),
+          wrapInfGame(id + '-l-s3', 'Empieza por…', 'neon-dictado', d, 'Sonidos', bl, infSid(tier, 'l', 3)),
+          wrapInfGame(id + '-l-s4', 'Canción', 'neon-dictado', d, 'Ritmo', bl, infSid(tier, 'l', 3)),
+          wrapInfGame(id + '-l-s5', 'Reto sonidos', 'neon-dictado', d + 1, 'Palabras', bl, infSid(tier, 'l', 3))
         ], { saberIds: [infSid(tier, 'l', 3)] })
       ], 'live'),
       subject('ingles', [
         unit(id + '-i-hola', 'Hello — primeras palabras', 'Comprensión oral inicial de vocabulario.', [
           wrapInfantil(id + '-i-h1', 'Animals EN', 0, 1, 'Dog, cat…', bl, infSid(tier, 'i', 1)),
           wrapInfantil(id + '-i-h2', 'Colours EN', 1, 2, 'Red, blue…', bl, infSid(tier, 'i', 1)),
-          extraLive ? tagSaber(liveReflex(id + '-i-h3', 'Point and tap', 'flash-tap', 2), infSid(tier, 'i', 2)) : soon(id + '-i-h3', 'Hello song', 'listening', 2),
-          tier >= 1 ? tagSaber(liveReflex(id + '-i-h4', 'Point and say', 'flash-tap', 2), infSid(tier, 'i', 2)) : soon(id + '-i-h4', 'Point and say', 'mini-game', 3),
-          tier >= 1 ? tagSaber(liveReflex(id + '-i-h5', 'Mini quiz', 'flash-tap', 2), infSid(tier, 'i', 2)) : soon(id + '-i-h5', 'Mini quiz', 'quiz', 4)
+          tagSaber(liveGame(id + '-i-h3', 'Hello song', 'neon-dictado', d, bl, 'Listening EN', infSid(tier, 'i', 2)), infSid(tier, 'i', 2)),
+          tagSaber(liveReflex(id + '-i-h4', 'Point and say', 'flash-tap', rx), infSid(tier, 'i', 2)),
+          tagSaber(liveReflex(id + '-i-h5', 'Mini quiz', 'flash-tap', rx), infSid(tier, 'i', 2))
         ], { saberIds: [infSid(tier, 'i', 1), infSid(tier, 'i', 2)] }),
         unit(id + '-i-play', 'Body and actions', 'Órdenes sencillas en inglés con apoyo visual.', [
           wrapInfantil(id + '-i-p1', 'Body EN', 2, 1, 'Head, hand…', bl, infSid(tier, 'i', 1)),
           wrapInfantil(id + '-i-p2', 'Actions EN', 0, 2, 'Jump, clap…', bl, infSid(tier, 'i', 2)),
-          extraLive ? wrapInfantil(id + '-i-p3', 'Listen & tap', 1, 2, 'Inglés oral', bl, infSid(tier, 'i', 2)) : soon(id + '-i-p3', 'I like…', 'typing', 2),
-          tier >= 1 ? wrapInfantil(id + '-i-p4', 'Picture match', 3, 2, 'Empareja', bl, infSid(tier, 'i', 1)) : soon(id + '-i-p4', 'Picture match', 'matching', 3),
-          tier >= 1 ? tagSaber(liveReflex(id + '-i-p5', 'English mission', 'flash-tap', 2), infSid(tier, 'i', 2)) : soon(id + '-i-p5', 'English mission', 'quiz', 4)
+          wrapInfantil(id + '-i-p3', 'Listen & tap', 1, d, 'Inglés oral', bl, infSid(tier, 'i', 2)),
+          wrapInfGame(id + '-i-p4', 'Picture match', 'neon-empareja', d, 'Empareja', bl, infSid(tier, 'i', 1)),
+          tagSaber(liveReflex(id + '-i-p5', 'English mission', 'flash-tap', rx), infSid(tier, 'i', 2))
         ], { saberIds: [infSid(tier, 'i', 1), infSid(tier, 'i', 2)] })
       ], 'live'),
       subject('naturales', [
         unit(id + '-n-animales', 'Seres vivos', 'Explorar plantas, animales y el entorno.', [
           wrapInfantil(id + '-n-a1', 'Animal o cosa', 0, 1, 'Seres vivos', bl, infSid(tier, 'n', 1)),
           wrapInfantil(id + '-n-a2', 'Colores naturaleza', 1, 2, 'Planta, sol…', bl, infSid(tier, 'n', 3)),
-          extraLive ? wrapInfantil(id + '-n-a3', '¿Cuántos?', 2, 2, 'Contar', bl, infSid(tier, 'n', 1)) : soon(id + '-n-a3', 'Partes de la planta', 'matching', 2),
-          tier >= 1 ? wrapInfantil(id + '-n-a4', 'Estaciones', 3, 2, 'Ordena', bl, infSid(tier, 'n', 3)) : soon(id + '-n-a4', 'Estaciones', 'ordering', 3),
-          tier >= 1 ? wrapInfantil(id + '-n-a5', 'Reto naturaleza', 4, 2, 'Naturaleza', bl, infSid(tier, 'n', 3)) : soon(id + '-n-a5', 'Reto naturaleza', 'quiz', 4)
+          wrapInfantil(id + '-n-a3', tier >= 1 ? '¿Cuántos?' : 'Partes de la planta', 2, d, tier >= 1 ? 'Contar' : 'Nombra', bl, infSid(tier, 'n', 1)),
+          wrapInfGame(id + '-n-a4', 'Estaciones', 'neon-ordenar', d, 'Ordena', bl, infSid(tier, 'n', 3)),
+          wrapInfGame(id + '-n-a5', 'Reto naturaleza', 'neon-clasifica', d, 'Clasifica', bl, infSid(tier, 'n', 3))
         ], { saberIds: [infSid(tier, 'n', 1), infSid(tier, 'n', 3)] }),
         unit(id + '-n-cuerpo', 'Cuerpo y clima', 'Cuerpo, sentidos y fenómenos simples.', [
           wrapInfantil(id + '-n-c1', 'Partes del cuerpo', 0, 1, 'Cabeza, pies…', bl, infSid(tier, 'n', 2)),
           wrapInfantil(id + '-n-c2', 'Sol y lluvia', 1, 2, 'Clima', bl, infSid(tier, 'n', 3)),
-          extraLive ? wrapInfantil(id + '-n-c3', 'Fruta sana', 2, 2, 'Alimentación', bl, infSid(tier, 'n', 2)) : soon(id + '-n-c3', 'Día y noche', 'ordering', 2),
-          tier >= 1 ? wrapInfantil(id + '-n-c4', 'Animales del bosque', 3, 2, 'Nombres', bl, infSid(tier, 'n', 1)) : soon(id + '-n-c4', 'Animales del bosque', 'matching', 3),
-          tier >= 1 ? wrapInfantil(id + '-n-c5', 'Misión naturaleza', 4, 2, 'Cuerpo', bl, infSid(tier, 'n', 2)) : soon(id + '-n-c5', 'Misión naturaleza', 'quiz', 4)
+          tier >= 1
+            ? wrapInfantil(id + '-n-c3', 'Fruta sana', 2, d, 'Alimentación', bl, infSid(tier, 'n', 2))
+            : wrapInfGame(id + '-n-c3', 'Día y noche', 'neon-ordenar', d, 'Ordena', bl, infSid(tier, 'n', 2)),
+          wrapInfGame(id + '-n-c4', 'Animales del bosque', 'neon-empareja', d, 'Nombres', bl, infSid(tier, 'n', 1)),
+          wrapInfGame(id + '-n-c5', 'Misión naturaleza', 'neon-clasifica', d, 'Seres vivos', bl, infSid(tier, 'n', 2))
         ], { saberIds: [infSid(tier, 'n', 2), infSid(tier, 'n', 3)] })
       ], 'live'),
       subject('sociales', [
         unit(id + '-s-emos', 'Emociones y convivencia', 'Familia, emociones y normas del aula.', [
           wrapInfantil(id + '-s-e1', 'Familia', 0, 1, 'Mamá, papá…', bl, infSid(tier, 's', 1)),
           wrapInfantil(id + '-s-e2', 'En el cole', 1, 2, 'Colegio, amigos', bl, infSid(tier, 's', 2)),
-          extraLive ? wrapInfantil(id + '-s-e3', 'Turnos y colores', 2, 2, 'Convivencia', bl, infSid(tier, 's', 2)) : soon(id + '-s-e3', 'Caras felices', 'matching', 2),
-          tier >= 1 ? wrapInfantil(id + '-s-e4', 'Turnos', 2, 2, 'Espera tu turno', bl, infSid(tier, 's', 2)) : soon(id + '-s-e4', 'Turnos', 'ordering', 2),
-          tier >= 1 ? wrapInfantil(id + '-s-e5', 'Misión emociones', 4, 2, 'Emociones', bl, infSid(tier, 's', 2)) : soon(id + '-s-e5', 'Misión emociones', 'quiz', 4)
+          wrapInfantil(id + '-s-e3', tier >= 1 ? 'Turnos y colores' : 'Caras felices', 2, d, 'Convivencia', bl, infSid(tier, 's', 2)),
+          wrapInfGame(id + '-s-e4', 'Turnos', 'neon-ordenar', d, 'Espera tu turno', bl, infSid(tier, 's', 2)),
+          wrapInfGame(id + '-s-e5', 'Misión emociones', 'neon-clasifica', d, 'Emociones', bl, infSid(tier, 's', 2))
         ], { saberIds: [infSid(tier, 's', 1), infSid(tier, 's', 2)] }),
         unit(id + '-s-cole', 'Mi entorno', 'Cole, calle y lugares cercanos.', [
           wrapInfantil(id + '-s-c1', 'Mi clase', 0, 1, 'Mesa, patio…', bl, infSid(tier, 's', 3)),
           wrapInfantil(id + '-s-c2', 'Señales', 1, 2, 'Pare, ceda…', bl, infSid(tier, 's', 3)),
-          extraLive ? wrapInfantil(id + '-s-c3', 'Ayudar al compi', 2, 2, 'Convivencia', bl, infSid(tier, 's', 2)) : soon(id + '-s-c3', 'Ordena el día', 'ordering', 2),
-          tier >= 1 ? wrapInfantil(id + '-s-c4', 'Profesiones', 3, 2, 'Quién es', bl, infSid(tier, 's', 3)) : soon(id + '-s-c4', 'Profesiones', 'matching', 3),
-          tier >= 1 ? wrapInfantil(id + '-s-c5', 'Misión ciudadana', 4, 2, 'Entorno', bl, infSid(tier, 's', 3)) : soon(id + '-s-c5', 'Misión ciudadana', 'quiz', 4)
+          tier >= 1
+            ? wrapInfantil(id + '-s-c3', 'Ayudar al compi', 2, d, 'Convivencia', bl, infSid(tier, 's', 2))
+            : wrapInfGame(id + '-s-c3', 'Ordena el día', 'neon-ordenar', d, 'Rutina', bl, infSid(tier, 's', 2)),
+          wrapInfGame(id + '-s-c4', 'Profesiones', 'neon-empareja', d, 'Quién es', bl, infSid(tier, 's', 3)),
+          wrapInfGame(id + '-s-c5', 'Misión ciudadana', 'neon-empareja', d + 1, 'Entorno', bl, infSid(tier, 's', 3))
         ], { saberIds: [infSid(tier, 's', 2), infSid(tier, 's', 3)] })
       ], 'live'),
       subject('brain-gym-diario', [
@@ -518,7 +533,7 @@
         liveLengua('p2-l-o1', 'Completa la palabra', 'neon-palabra', 2, 'Elige la sílaba correcta', 4, 'p2-l-c2'),
         liveLengua('p2-l-o2', 'Completa con m o n', 'neon-palabra', 3, 'Ortografía', 4, 'p2-l-c2'),
         liveLengua('p2-l-o3', 'Detecta el error', 'neon-lectura', 3, 'Lee con atención', 4, 'p2-l-c2'),
-        liveLengua('p2-l-o4', 'Dictado corto', 'neon-silabas', 4, 'Forma palabras', 4, 'p2-l-c2'),
+        liveLengua('p2-l-o4', 'Dictado corto', 'neon-dictado', 4, 'Escucha', 4, 'p2-l-c2'),
         liveLenguaRot('p2-l-o5', 'Reto ortográfico', 1, 4, 'Reto final', 4, 'p2-l-c2')
       ], { saberIds: ['p2-l-c2'] }),
       unit('p2-l-gramatica', 'Nombre, verbo y adjetivo', 'LOMLOE · primeras categorías gramaticales.', [
@@ -667,7 +682,7 @@
         liveLenguaRot('p3-l-o1', 'Completa la palabra', 2, 2, 'Sílabas trabadas', 8, 'p3-l-c2'),
         liveLenguaRot('p3-l-o2', 'Ordena sílabas', 1, 3, 'Palabras largas', 8, 'p3-l-c2'),
         liveLenguaRot('p3-l-o3', 'Lee y corrige', 0, 3, 'Comprensión', 8, 'p3-l-c2'),
-        liveLenguaRot('p3-l-o4', 'Dictado', 1, 4, 'Sílabas', 8, 'p3-l-c2'),
+        liveLengua('p3-l-o4', 'Dictado', 'neon-dictado', 4, 'Escucha', 8, 'p3-l-c2'),
         liveLenguaRot('p3-l-o5', 'Reto ortografía', 1, 4, 'Reto final', 8, 'p3-l-c2')
       ], { saberIds: ['p3-l-c2'] }),
       unit('p3-l-literatura', 'Cuento, poesía y fábula', 'LOMLOE · géneros literarios básicos.', [
@@ -1083,21 +1098,21 @@
         liveLengua('p4-l-textos1', 'Lee y responde', 'neon-lectura', 2, 'Comprensión', 9, 'p4-l-c1'),
         liveLenguaRot('p4-l-textos2', 'Ordena la frase', 2, 2, 'Sintaxis', 9, 'p4-l-c1'),
         liveLenguaRot('p4-l-textos3', 'Completa', 1, 3, 'Ortografía', 9, 'p4-l-c1'),
-        liveLenguaRot('p4-l-textos4', 'Dictado', 0, 4, 'Sílabas', 9, 'p4-l-c1'),
+        liveLengua('p4-l-textos4', 'Dictado', 'neon-dictado', 4, 'Escucha', 9, 'p4-l-c1'),
         liveLenguaRot('p4-l-textos5', 'Misión lengua', 0, 4, 'Reto final', 9, 'p4-l-c1')
       ], { saberIds: ['p4-l-c1'] }),
       unit('p4-l-orto', 'Ortografía', 'LOMLOE · reglas ortográficas de 4º.', [
         liveLengua('p4-l-orto1', 'Lee y responde', 'neon-lectura', 2, 'Comprensión', 9, 'p4-l-c2'),
         liveLenguaRot('p4-l-orto2', 'Ordena la frase', 2, 2, 'Sintaxis', 9, 'p4-l-c2'),
         liveLenguaRot('p4-l-orto3', 'Completa', 1, 3, 'Ortografía', 9, 'p4-l-c2'),
-        liveLenguaRot('p4-l-orto4', 'Dictado', 0, 4, 'Sílabas', 9, 'p4-l-c2'),
+        liveLengua('p4-l-orto4', 'Dictado', 'neon-dictado', 4, 'Escucha', 9, 'p4-l-c2'),
         liveLenguaRot('p4-l-orto5', 'Misión lengua', 0, 4, 'Reto final', 9, 'p4-l-c2')
       ], { saberIds: ['p4-l-c2'] }),
       unit('p4-l-gram', 'Sintaxis y literatura', 'LOMLOE · gramática y géneros literarios.', [
         liveLengua('p4-l-gram1', 'Lee y responde', 'neon-lectura', 2, 'Comprensión', 9, 'p4-l-c3'),
         liveLenguaRot('p4-l-gram2', 'Ordena la frase', 2, 2, 'Sintaxis', 9, 'p4-l-c3'),
         liveLenguaRot('p4-l-gram3', 'Completa', 1, 3, 'Ortografía', 9, 'p4-l-c3'),
-        liveLenguaRot('p4-l-gram4', 'Dictado', 0, 4, 'Sílabas', 9, 'p4-l-c3'),
+        liveLengua('p4-l-gram4', 'Dictado', 'neon-dictado', 4, 'Escucha', 9, 'p4-l-c3'),
         liveLenguaRot('p4-l-gram5', 'Misión lengua', 0, 4, 'Reto final', 9, 'p4-l-c3')
       ], { saberIds: ['p4-l-c3'] }),
     ];
@@ -1239,21 +1254,21 @@
         liveLengua('p5-l-arg1', 'Lee y responde', 'neon-lectura', 2, 'Comprensión', 10, 'p5-l-c1'),
         liveLenguaRot('p5-l-arg2', 'Ordena la frase', 2, 2, 'Sintaxis', 10, 'p5-l-c1'),
         liveLenguaRot('p5-l-arg3', 'Completa', 1, 3, 'Ortografía', 10, 'p5-l-c1'),
-        liveLenguaRot('p5-l-arg4', 'Dictado', 0, 4, 'Sílabas', 10, 'p5-l-c1'),
+        liveLengua('p5-l-arg4', 'Dictado', 'neon-dictado', 4, 'Escucha', 10, 'p5-l-c1'),
         liveLenguaRot('p5-l-arg5', 'Misión lengua', 0, 4, 'Reto final', 10, 'p5-l-c1')
       ], { saberIds: ['p5-l-c1'] }),
       unit('p5-l-orto', 'Ortografía', 'LOMLOE · reglas ortográficas de 5º.', [
         liveLengua('p5-l-orto1', 'Lee y responde', 'neon-lectura', 2, 'Comprensión', 10, 'p5-l-c2'),
         liveLenguaRot('p5-l-orto2', 'Ordena la frase', 2, 2, 'Sintaxis', 10, 'p5-l-c2'),
         liveLenguaRot('p5-l-orto3', 'Completa', 1, 3, 'Ortografía', 10, 'p5-l-c2'),
-        liveLenguaRot('p5-l-orto4', 'Dictado', 0, 4, 'Sílabas', 10, 'p5-l-c2'),
+        liveLengua('p5-l-orto4', 'Dictado', 'neon-dictado', 4, 'Escucha', 10, 'p5-l-c2'),
         liveLenguaRot('p5-l-orto5', 'Misión lengua', 0, 4, 'Reto final', 10, 'p5-l-c2')
       ], { saberIds: ['p5-l-c2'] }),
       unit('p5-l-gram', 'Gramática avanzada', 'LOMLOE · oración compuesta.', [
         liveLengua('p5-l-gram1', 'Lee y responde', 'neon-lectura', 2, 'Comprensión', 10, 'p5-l-c3'),
         liveLenguaRot('p5-l-gram2', 'Ordena la frase', 2, 2, 'Sintaxis', 10, 'p5-l-c3'),
         liveLenguaRot('p5-l-gram3', 'Completa', 1, 3, 'Ortografía', 10, 'p5-l-c3'),
-        liveLenguaRot('p5-l-gram4', 'Dictado', 0, 4, 'Sílabas', 10, 'p5-l-c3'),
+        liveLengua('p5-l-gram4', 'Dictado', 'neon-dictado', 4, 'Escucha', 10, 'p5-l-c3'),
         liveLenguaRot('p5-l-gram5', 'Misión lengua', 0, 4, 'Reto final', 10, 'p5-l-c3')
       ], { saberIds: ['p5-l-c3'] }),
     ];
@@ -1395,21 +1410,21 @@
         liveLengua('p6-l-anal1', 'Lee y responde', 'neon-lectura', 2, 'Comprensión', 11, 'p6-l-c1'),
         liveLenguaRot('p6-l-anal2', 'Ordena la frase', 2, 2, 'Sintaxis', 11, 'p6-l-c1'),
         liveLenguaRot('p6-l-anal3', 'Completa', 1, 3, 'Ortografía', 11, 'p6-l-c1'),
-        liveLenguaRot('p6-l-anal4', 'Dictado', 0, 4, 'Sílabas', 11, 'p6-l-c1'),
+        liveLengua('p6-l-anal4', 'Dictado', 'neon-dictado', 4, 'Escucha', 11, 'p6-l-c1'),
         liveLenguaRot('p6-l-anal5', 'Misión lengua', 0, 4, 'Reto final', 11, 'p6-l-c1')
       ], { saberIds: ['p6-l-c1'] }),
       unit('p6-l-red', 'Ortografía y redacción', 'LOMLOE · textos formales.', [
         liveLengua('p6-l-red1', 'Lee y responde', 'neon-lectura', 2, 'Comprensión', 11, 'p6-l-c2'),
         liveLenguaRot('p6-l-red2', 'Ordena la frase', 2, 2, 'Sintaxis', 11, 'p6-l-c2'),
         liveLenguaRot('p6-l-red3', 'Completa', 1, 3, 'Ortografía', 11, 'p6-l-c2'),
-        liveLenguaRot('p6-l-red4', 'Dictado', 0, 4, 'Sílabas', 11, 'p6-l-c2'),
+        liveLengua('p6-l-red4', 'Dictado', 'neon-dictado', 4, 'Escucha', 11, 'p6-l-c2'),
         liveLenguaRot('p6-l-red5', 'Misión lengua', 0, 4, 'Reto final', 11, 'p6-l-c2')
       ], { saberIds: ['p6-l-c2'] }),
       unit('p6-l-lit', 'Literatura española', 'LOMLOE · autores y géneros.', [
         liveLengua('p6-l-lit1', 'Lee y responde', 'neon-lectura', 2, 'Comprensión', 11, 'p6-l-c3'),
         liveLenguaRot('p6-l-lit2', 'Ordena la frase', 2, 2, 'Sintaxis', 11, 'p6-l-c3'),
         liveLenguaRot('p6-l-lit3', 'Completa', 1, 3, 'Ortografía', 11, 'p6-l-c3'),
-        liveLenguaRot('p6-l-lit4', 'Dictado', 0, 4, 'Sílabas', 11, 'p6-l-c3'),
+        liveLengua('p6-l-lit4', 'Dictado', 'neon-dictado', 4, 'Escucha', 11, 'p6-l-c3'),
         liveLenguaRot('p6-l-lit5', 'Misión lengua', 0, 4, 'Reto final', 11, 'p6-l-c3')
       ], { saberIds: ['p6-l-c3'] }),
     ];
