@@ -67,14 +67,28 @@
   </url>
   <url>
     <loc>https://lipastudios.com/gym-cerebro.html</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-05-30</lastmod>
     <priority>0.94</priority>
     <changefreq>weekly</changefreq>
     <mobile:mobile/>
   </url>
   <url>
+    <loc>https://lipastudios.com/neon-fracciones.html</loc>
+    <lastmod>2026-05-30</lastmod>
+    <priority>0.86</priority>
+    <changefreq>monthly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://lipastudios.com/neon-clasifica.html</loc>
+    <lastmod>2026-05-30</lastmod>
+    <priority>0.84</priority>
+    <changefreq>monthly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
     <loc>https://lipastudios.com/cursos.html</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-05-30</lastmod>
     <priority>0.93</priority>
     <changefreq>weekly</changefreq>
     <mobile:mobile/>

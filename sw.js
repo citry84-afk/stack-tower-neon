@@ -3,7 +3,7 @@
  * PWA Optimization & Offline Functionality
  */
 
-const CACHE_NAME = 'lipa-brain-gym-v3.28.0-fracciones-p456';
+const CACHE_NAME = 'lipa-brain-gym-v3.29.0-analytics';
 const CACHE_VERSION = '2.0.0';
 
 // Essential files to cache for offline play
@@ -22,6 +22,8 @@ const STATIC_CACHE_URLS = [
     '/curso.html',
     '/materia.html',
     '/unidad.html',
+    '/consent.js',
+    '/js/lipa-analytics.js',
     '/js/lipa-curriculum-meta.js',
     '/js/lipa-lomloe-ref.js',
     '/js/lipa-curriculum-build.js',

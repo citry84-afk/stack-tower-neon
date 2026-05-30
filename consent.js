@@ -2,6 +2,10 @@
   window.dataLayer = window.dataLayer || [];
   window.gtag = window.gtag || function(){ dataLayer.push(arguments); };
 
+  const CHOICE_KEY = 'lipa_consent_v3';
+  const ADSENSE_CLIENT = 'ca-pub-4837743291717475';
+  const GA_ID = 'G-5XL1W8RNTP';
+
   gtag('consent', 'default', {
     ad_storage: 'denied',
     analytics_storage: 'denied',
@@ -9,8 +13,33 @@
     ad_personalization: 'denied'
   });
 
-  const CHOICE_KEY = 'lipa_consent_v3';
-  const ADSENSE_CLIENT = 'ca-pub-4837743291717475';
+  function loadGoogleAnalytics() {
+    if (window.__lipaGaInit) return;
+    window.__lipaGaInit = true;
+    if (document.querySelector('script[src*="googletagmanager.com/gtag/js"]')) return;
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+    document.head.appendChild(s);
+    gtag('js', new Date());
+    gtag('config', GA_ID, { anonymize_ip: true });
+  }
+
+  function loadLipaAnalytics() {
+    if (document.querySelector('script[src*="lipa-analytics.js"]')) return;
+    var s = document.createElement('script');
+    s.src = '/js/lipa-analytics.js';
+    s.defer = true;
+    document.head.appendChild(s);
+  }
+
+  loadGoogleAnalytics();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadLipaAnalytics);
+  } else {
+    loadLipaAnalytics();
+  }
+
   const saved = (function(){ try { return JSON.parse(localStorage.getItem(CHOICE_KEY)||'null'); } catch(e){ return null; } })();
 
   function fillAdSlots() {
