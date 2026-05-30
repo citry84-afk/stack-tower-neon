@@ -85,7 +85,11 @@
   ];
 
   /** Cursos con más contenido curado (MVP PDF fase 1). */
-  var MVP_COURSE_IDS = ['primaria-1', 'primaria-2', 'primaria-3'];
+  var MVP_COURSE_IDS = [
+    'primaria-1', 'primaria-2', 'primaria-3',
+    'primaria-4', 'primaria-5', 'primaria-6',
+    'eso-1', 'eso-2'
+  ];
 
   /** Materias del cole (sin Brain Gym diario ni retos rápidos). */
   var SCHOOL_SUBJECT_IDS = ['matematicas', 'lenguaje', 'ingles', 'naturales', 'sociales'];

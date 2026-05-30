@@ -361,8 +361,8 @@
         soon('p1-l-f5', 'Misión del cuento', 'quiz', 5)
       ], { saberIds: ['p1-l-c2', 'p1-l-c3'] }),
       unit('p1-l-vocab', 'Vocabulario cotidiano', 'LOMLOE · léxico de casa, colegio y familia.', [
-        soon('p1-l-v1', 'Imagen y palabra', 'matching', 1),
-        soon('p1-l-v2', 'Clasifica palabras', 'drag-drop', 2),
+        liveLengua('p1-l-v1', 'Palabras de casa', 'neon-palabra', 1, 'Forma la palabra', 1, 'p1-l-c4'),
+        liveLengua('p1-l-v2', 'Lee y elige', 'neon-lectura', 2, 'Vocabulario', 1, 'p1-l-c4'),
         soon('p1-l-v3', 'Sinónimos sencillos', 'multiple-choice', 3),
         soon('p1-l-v4', 'Escucha y elige', 'listening', 2),
         soon('p1-l-v5', 'Reto del diccionario', 'quiz', 4)
@@ -878,6 +878,13 @@
         liveMates('eso1-m-stat4', 'Problemas', 3, 4, 9, null, 'eso1-m-a4'),
         soon('eso1-m-stat5', 'Misión Estadística', 'quiz', 5)
       ], { saberIds: ['eso1-m-a4'] }),
+      unit('eso1-m-geo', 'Geometría plana', 'LOMLOE · triángulos, ángulos y construcciones.', [
+        liveGame('eso1-m-geo1', 'Clasifica figuras', 'neon-clasifica', 3, 9, 'Formas', 'eso1-m-c1'),
+        liveGame('eso1-m-geo2', 'Ángulos y lados', 'neon-clasifica', 3, 9, 'Geometría', 'eso1-m-c1'),
+        soon('eso1-m-geo3', 'Teorema visual', 'mini-game', 4),
+        soon('eso1-m-geo4', 'Construcciones', 'drag-drop', 4),
+        soon('eso1-m-geo5', 'Misión geometría', 'quiz', 5)
+      ], { saberIds: ['eso1-m-c1'] }),
     ];
   }
 
@@ -1056,6 +1063,13 @@
         liveMates('p4-m-prob4', 'Dos pasos', 2, 3, 6, null, 'p4-m-a4'),
         soon('p4-m-prob5', 'Misión Problemas multiplicativos', 'quiz', 5)
       ], { saberIds: ['p4-m-a4'] }),
+      unit('p4-m-geo', 'Ángulos y simetría', 'LOMLOE · figuras, ángulos y ejes de simetría.', [
+        liveGame('p4-m-geo1', 'Clasifica figuras', 'neon-clasifica', 2, 5, 'Formas', 'p4-m-c1'),
+        liveGame('p4-m-geo2', 'Simetría visual', 'neon-clasifica', 3, 5, 'Geometría', 'p4-m-c1'),
+        soon('p4-m-geo3', 'Medir ángulos', 'mini-game', 4),
+        soon('p4-m-geo4', 'Eje de simetría', 'drag-drop', 4),
+        soon('p4-m-geo5', 'Misión geometría', 'quiz', 5)
+      ], { saberIds: ['p4-m-c1'] }),
     ];
   }
 
@@ -1205,6 +1219,13 @@
         liveMates('p5-m-prop4', 'Dos pasos', 2, 3, 7, null, 'p5-m-a4'),
         soon('p5-m-prop5', 'Misión Problemas de proporción', 'quiz', 5)
       ], { saberIds: ['p5-m-a4'] }),
+      unit('p5-m-geo', 'Coordenadas y figuras', 'LOMLOE · plano cartesiano y transformaciones.', [
+        liveGame('p5-m-geo1', 'Clasifica figuras', 'neon-clasifica', 2, 6, 'Formas', 'p5-m-c1'),
+        liveGame('p5-m-geo2', 'Figuras en el plano', 'neon-clasifica', 3, 6, 'Geometría', 'p5-m-c1'),
+        soon('p5-m-geo3', 'Coordenadas', 'mini-game', 4),
+        soon('p5-m-geo4', 'Simetría y giro', 'drag-drop', 4),
+        soon('p5-m-geo5', 'Misión geometría', 'quiz', 5)
+      ], { saberIds: ['p5-m-c1'] }),
     ];
   }
 
@@ -1354,6 +1375,13 @@
         liveMates('p6-m-alg4', 'Dos pasos', 2, 3, 8, null, 'p6-m-a4'),
         soon('p6-m-alg5', 'Misión Álgebra inicial', 'quiz', 5)
       ], { saberIds: ['p6-m-a4'] }),
+      unit('p6-m-geo', 'Geometría avanzada', 'LOMLOE · circunferencia, área y volumen.', [
+        liveGame('p6-m-geo1', 'Clasifica figuras', 'neon-clasifica', 2, 7, 'Formas', 'p6-m-c1'),
+        liveGame('p6-m-geo2', 'Área y perímetro', 'neon-clasifica', 3, 7, 'Geometría', 'p6-m-c1'),
+        soon('p6-m-geo3', 'Circunferencia', 'mini-game', 4),
+        soon('p6-m-geo4', 'Volumen', 'drag-drop', 4),
+        soon('p6-m-geo5', 'Misión geometría', 'quiz', 5)
+      ], { saberIds: ['p6-m-c1'] }),
     ];
   }
 
@@ -1502,6 +1530,13 @@
         liveMates('eso2-m-real4', 'Problemas', 3, 4, 10, null, 'eso2-m-a4'),
         soon('eso2-m-real5', 'Misión Números reales', 'quiz', 5)
       ], { saberIds: ['eso2-m-a4'] }),
+      unit('eso2-m-geo', 'Geometría en el espacio', 'LOMLOE · prismas, pirámides y volumen.', [
+        liveGame('eso2-m-geo1', 'Clasifica sólidos', 'neon-clasifica', 3, 10, 'Formas', 'eso2-m-c1'),
+        liveGame('eso2-m-geo2', 'Volumen visual', 'neon-clasifica', 3, 10, 'Geometría', 'eso2-m-c1'),
+        soon('eso2-m-geo3', 'Prismas y pirámides', 'mini-game', 4),
+        soon('eso2-m-geo4', 'Cuerpos en 3D', 'drag-drop', 4),
+        soon('eso2-m-geo5', 'Misión geometría', 'quiz', 5)
+      ], { saberIds: ['eso2-m-c1'] }),
     ];
   }
 
