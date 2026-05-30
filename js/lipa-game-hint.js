@@ -101,6 +101,12 @@
     if (document.body.getAttribute('data-ordenar-mode') === 'palabras') {
       return 'Ordena las palabras para formar la frase.';
     }
+    if (location.pathname.indexOf('neon-arrastra') >= 0) {
+      var am = document.body.getAttribute('data-arrastra-mode');
+      if (am === 'figuras') return 'Arrastra el dibujo al grupo correcto.';
+      if (am === 'numeros') return 'Coloca los números de menor a mayor.';
+      return 'Arrastra las sílabas a los huecos en orden.';
+    }
     if (location.pathname.indexOf('neon-calculo') >= 0) {
       return 'Resuelve antes de que acabe el tiempo. ¡Cada acierto suma combo!';
     }
