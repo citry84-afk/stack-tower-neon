@@ -486,3 +486,40 @@ body.game-page {
   color: var(--lipa-text);
   font-size: 15px;
 }
+
+.frac-bar {
+  display: flex;
+  width: min(300px, 92vw);
+  height: 52px;
+  border: 2px solid var(--brain-accent, #2ed3a6);
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 0 auto var(--lipa-space-md, 16px);
+}
+
+.frac-part {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.06);
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.frac-part:last-child {
+  border-right: 0;
+}
+
+.frac-part.is-filled {
+  background: linear-gradient(135deg, #2ed3a6, #1a9fd4);
+}
+
+.frac-choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.frac-choice {
+  min-width: 72px;
+  font-size: 1.125rem;
+  font-weight: 600;
+}

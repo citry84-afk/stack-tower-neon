@@ -3,7 +3,7 @@
  * PWA Optimization & Offline Functionality
  */
 
-const CACHE_NAME = 'lipa-brain-gym-v3.26.0-lomloe-geo';
+const CACHE_NAME = 'lipa-brain-gym-v3.27.0-fracciones';
 const CACHE_VERSION = '2.0.0';
 
 // Essential files to cache for offline play
@@ -102,6 +102,8 @@ const STATIC_CACHE_URLS = [
     '/js/neon-mayor-menor.js',
     '/neon-clasifica.html',
     '/js/neon-clasifica.js',
+    '/neon-fracciones.html',
+    '/js/neon-fracciones.js',
     '/css/brain-evolution.css',
     '/css/mini-games.css',
     '/js/lipa-daily.js',

@@ -44,6 +44,19 @@
       metricLabel: 'pts',
       ageMin: 5
     },
+    'neon-fracciones': {
+      id: 'neon-fracciones',
+      name: 'Neon Fracciones',
+      short: 'Fracciones',
+      emoji: '🍕',
+      url: '/neon-fracciones.html',
+      pillar: 'math',
+      cat: 'math',
+      desc: 'Medios, tercios y cuartos con barra visual',
+      higherIsBetter: true,
+      metricLabel: 'pts',
+      ageMin: 8
+    },
     'neon-mayor-menor': {
       id: 'neon-mayor-menor',
       name: 'Mayor o menor',

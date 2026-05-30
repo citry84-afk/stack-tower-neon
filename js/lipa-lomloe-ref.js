@@ -14,7 +14,7 @@
 
   /** Qué tipo de saber puede cubrir cada minijuego (honestidad editorial). */
   var GAME_AFFORDANCES = {
-    'neon-peques': ['visual', 'vocabulario', 'conteo-pequeno', 'colores', 'formas', 'atencion', 'naturales-seres-vivos', 'naturales-cuerpo', 'naturales-materia', 'sociales-convivencia', 'sociales-geografia', 'ingles-vocabulario', 'ingles-oral', 'operaciones'],
+    'neon-peques': ['visual', 'vocabulario', 'conteo-pequeno', 'colores', 'formas', 'atencion', 'comprension', 'naturales-seres-vivos', 'naturales-cuerpo', 'naturales-materia', 'sociales-convivencia', 'sociales-geografia', 'ingles-vocabulario', 'ingles-oral', 'operaciones'],
     'neon-colores': ['colores', 'conteo-pequeno', 'visual', 'clasificacion', 'naturales-materia', 'vocabulario', 'ingles-vocabulario'],
     'neon-numeros': ['conteo-pequeno', 'numeros', 'visual', 'formas'],
     'flash-tap': ['atencion', 'reflejos', 'ingles-oral', 'clasificacion'],
@@ -22,6 +22,7 @@
     'neon-ordenar': ['numeros', 'ordenacion', 'conteo', 'operaciones'],
     'neon-mayor-menor': ['numeros', 'comparacion', 'ordenacion'],
     'neon-clasifica': ['clasificacion', 'formas', 'visual'],
+    'neon-fracciones': ['operaciones', 'formas', 'visual', 'numeros'],
     'neon-silabas': ['lectura', 'silabas', 'ortografia'],
     'neon-palabra': ['lectura', 'silabas', 'ortografia', 'vocabulario'],
     'neon-lectura': ['lectura', 'comprension', 'vocabulario'],

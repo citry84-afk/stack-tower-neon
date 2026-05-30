@@ -60,7 +60,7 @@
     return a;
   }
 
-  var ROT_MATES = ['neon-calculo', 'neon-ordenar', 'neon-mayor-menor', 'neon-clasifica'];
+  var ROT_MATES = ['neon-calculo', 'neon-ordenar', 'neon-mayor-menor', 'neon-clasifica', 'neon-fracciones'];
   var ROT_INGLES = ['neon-palabras', 'flash-tap'];
   var ROT_INFANTIL = ['neon-peques', 'neon-colores', 'neon-numeros', 'flash-tap'];
   var ROT_INFANTIL_EN = ['neon-peques', 'neon-colores', 'flash-tap'];
@@ -169,7 +169,11 @@
         unit(id + '-l-vocab', 'Vocabulario y comprensión', 'LOMLOE · comunicación y representación.', [
           wrapInfantil(id + '-l-v1', 'Nombres', 0, 1, 'Toca la palabra', bl, infSid(tier, 'l', 1)),
           wrapInfantil(id + '-l-v2', '¿Qué es esto?', 1, 2, 'Imagen y palabra', bl, infSid(tier, 'l', 1)),
-          extraLive ? tagSaber(wrapInfantil(id + '-l-v3', 'Colores y palabras', 0, 2, 'Repaso', bl, infSid(tier, 'l', 1)), infSid(tier, 'l', 2)) : soon(id + '-l-v3', 'Rimas', 'listening', 2),
+          tier === 0
+            ? wrapInfantil(id + '-l-v3', 'Sigue la consigna', 0, 1, 'Toca lo que pide', bl, infSid(tier, 'l', 2))
+            : extraLive
+              ? tagSaber(wrapInfantil(id + '-l-v3', 'Colores y palabras', 0, 2, 'Repaso', bl, infSid(tier, 'l', 1)), infSid(tier, 'l', 2))
+              : soon(id + '-l-v3', 'Rimas', 'listening', 2),
           soon(id + '-l-v4', 'Sonidos iniciales', 'matching', 3),
           soon(id + '-l-v5', 'Cuento corto', 'reading', 4)
         ], { saberIds: [infSid(tier, 'l', 1), infSid(tier, 'l', 2)] }),
@@ -626,12 +630,12 @@
         soon('p3-m-d4', 'Problemas dos pasos', 'multiple-choice', 4),
         soon('p3-m-d5', 'Misión división', 'quiz', 5)
       ], { saberIds: ['p3-m-a2'] }),
-      unit('p3-m-frac', 'Fracciones básicas', 'LOMLOE · medios, tercios y cuartos (repaso numérico).', [
-        soon('p3-m-f1', 'Mitad y doble', 'matching', 2),
-        soon('p3-m-f2', 'Colorea la fracción', 'drag-drop', 2),
-        liveGame('p3-m-f3', 'Cálculo numérico', 'neon-calculo', 2, 4, null, 'p3-m-a3'),
+      unit('p3-m-frac', 'Fracciones básicas', 'LOMLOE · medios, tercios y cuartos con barra visual.', [
+        liveGame('p3-m-f1', 'Pizza: medios y cuartos', 'neon-fracciones', 1, 3, '¿Qué fracción es?', 'p3-m-a3'),
+        liveGame('p3-m-f2', 'Tercios y cuartos', 'neon-fracciones', 2, 3, 'Compara visual', 'p3-m-a3'),
+        liveGame('p3-m-f3', 'Mix fracciones', 'neon-fracciones', 2, 4, 'Velocidad', 'p3-m-a3'),
         soon('p3-m-f4', 'Compara fracciones', 'multiple-choice', 3),
-        soon('p3-m-f5', 'Reto pizza', 'mini-game', 5)
+        soon('p3-m-f5', 'Reto pizza', 'quiz', 5)
       ], { saberIds: ['p3-m-a3'] }),
       unit('p3-m-medidas', 'Medidas y perímetro', 'LOMLOE · longitud y contorno.', [
         soon('p3-m-e1', 'Centímetros', 'mini-game', 2),
@@ -1687,7 +1691,7 @@
       'multiple-choice': subjectId === 'matematicas' ? 'neon-mayor-menor' : (infantil ? 'neon-peques' : 'neon-lectura'),
       quiz: infantil ? 'neon-numeros' : (subjectId === 'ingles' ? 'neon-palabras' : 'neon-calculo'),
       listening: 'neon-palabras',
-      'drag-drop': infantil ? 'neon-colores' : 'neon-vida',
+      'drag-drop': infantil ? 'neon-colores' : 'neon-fracciones',
       'mini-game': 'flash-tap',
       reading: infantil ? 'neon-peques' : 'neon-lectura',
       typing: infantil ? 'neon-peques' : 'neon-palabra',
@@ -1763,6 +1767,7 @@
       'neon-historia': 'Ordena los hechos como una línea del tiempo.',
       'neon-ordenar': 'Toca en el orden correcto (números, palabras o frases).',
       'neon-clasifica': 'Agrupa en la categoría que pide la consigna.',
+      'neon-fracciones': 'Mira la barra coloreada y elige la fracción correcta.',
       'neon-mayor-menor': 'Lee si pide el número mayor o el menor.',
       'flash-tap': 'Toca cada objetivo antes de que desaparezca.',
       'reaction-test': 'Espera al verde. Si pulsas antes, no cuenta.',
