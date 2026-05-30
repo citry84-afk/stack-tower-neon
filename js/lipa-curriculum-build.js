@@ -162,7 +162,7 @@
           tagSaber(wrapInfantil(id + '-m-f2', 'Colores mix', 0, 2, 'Repaso', bl, infSid(tier, 'm', 2)), infSid(tier, 'm', 4)),
           extraLive ? wrapInfantil(id + '-m-f3', 'Cuenta y toca', 1, 2, 'Números', bl, infSid(tier, 'm', 1)) : soon(id + '-m-f3', 'Igual o diferente', 'matching', 2),
           tier >= 1 ? wrapInfantil(id + '-m-f4', 'Seriaciones', 3, 2, 'Ordena', bl, infSid(tier, 'm', 4)) : soon(id + '-m-f4', 'Seriaciones', 'ordering', 3),
-          soon(id + '-m-f5', 'Misión formas', 'quiz', 4)
+          tier >= 1 ? tagSaber(liveReflex(id + '-m-f5', 'Misión formas', 'flash-tap', 3), infSid(tier, 'm', 4)) : soon(id + '-m-f5', 'Misión formas', 'quiz', 4)
         ], { saberIds: [infSid(tier, 'm', 3), infSid(tier, 'm', 4)] })
       ], 'live'),
       subject('lenguaje', [
@@ -182,7 +182,7 @@
           extraLive ? wrapInfantil(id + '-l-s2', 'Cuenta sonidos', 1, 2, 'Atención', bl, infSid(tier, 'l', 3)) : soon(id + '-l-s2', 'Sílabas con palmas', 'listening', 2),
           tier >= 1 ? wrapInfantil(id + '-l-s3', 'Empieza por…', 2, 2, 'Sonidos', bl, infSid(tier, 'l', 3)) : soon(id + '-l-s3', 'Empieza por…', 'multiple-choice', 2),
           tier >= 2 ? wrapInfantil(id + '-l-s4', 'Canción', 3, 2, 'Ritmo', bl, infSid(tier, 'l', 3)) : soon(id + '-l-s4', 'Canción', 'listening', 3),
-          soon(id + '-l-s5', 'Reto sonidos', 'quiz', 4)
+          tier >= 1 ? wrapInfantil(id + '-l-s5', 'Reto sonidos', 4, 2, 'Palabras', bl, infSid(tier, 'l', 3)) : soon(id + '-l-s5', 'Reto sonidos', 'quiz', 4)
         ], { saberIds: [infSid(tier, 'l', 3)] })
       ], 'live'),
       subject('ingles', [
@@ -191,14 +191,14 @@
           wrapInfantil(id + '-i-h2', 'Colours EN', 1, 2, 'Red, blue…', bl, infSid(tier, 'i', 1)),
           extraLive ? tagSaber(liveReflex(id + '-i-h3', 'Point and tap', 'flash-tap', 2), infSid(tier, 'i', 2)) : soon(id + '-i-h3', 'Hello song', 'listening', 2),
           tier >= 1 ? tagSaber(liveReflex(id + '-i-h4', 'Point and say', 'flash-tap', 2), infSid(tier, 'i', 2)) : soon(id + '-i-h4', 'Point and say', 'mini-game', 3),
-          soon(id + '-i-h5', 'Mini quiz', 'quiz', 4)
+          tier >= 1 ? tagSaber(liveReflex(id + '-i-h5', 'Mini quiz', 'flash-tap', 2), infSid(tier, 'i', 2)) : soon(id + '-i-h5', 'Mini quiz', 'quiz', 4)
         ], { saberIds: [infSid(tier, 'i', 1), infSid(tier, 'i', 2)] }),
         unit(id + '-i-play', 'Body and actions', 'Órdenes sencillas en inglés con apoyo visual.', [
           wrapInfantil(id + '-i-p1', 'Body EN', 2, 1, 'Head, hand…', bl, infSid(tier, 'i', 1)),
           wrapInfantil(id + '-i-p2', 'Actions EN', 0, 2, 'Jump, clap…', bl, infSid(tier, 'i', 2)),
           extraLive ? wrapInfantil(id + '-i-p3', 'Listen & tap', 1, 2, 'Inglés oral', bl, infSid(tier, 'i', 2)) : soon(id + '-i-p3', 'I like…', 'typing', 2),
           tier >= 1 ? wrapInfantil(id + '-i-p4', 'Picture match', 3, 2, 'Empareja', bl, infSid(tier, 'i', 1)) : soon(id + '-i-p4', 'Picture match', 'matching', 3),
-          soon(id + '-i-p5', 'English mission', 'quiz', 4)
+          tier >= 1 ? tagSaber(liveReflex(id + '-i-p5', 'English mission', 'flash-tap', 2), infSid(tier, 'i', 2)) : soon(id + '-i-p5', 'English mission', 'quiz', 4)
         ], { saberIds: [infSid(tier, 'i', 1), infSid(tier, 'i', 2)] })
       ], 'live'),
       subject('naturales', [
@@ -207,14 +207,14 @@
           wrapInfantil(id + '-n-a2', 'Colores naturaleza', 1, 2, 'Planta, sol…', bl, infSid(tier, 'n', 3)),
           extraLive ? wrapInfantil(id + '-n-a3', '¿Cuántos?', 2, 2, 'Contar', bl, infSid(tier, 'n', 1)) : soon(id + '-n-a3', 'Partes de la planta', 'matching', 2),
           tier >= 1 ? wrapInfantil(id + '-n-a4', 'Estaciones', 3, 2, 'Ordena', bl, infSid(tier, 'n', 3)) : soon(id + '-n-a4', 'Estaciones', 'ordering', 3),
-          soon(id + '-n-a5', 'Reto naturaleza', 'quiz', 4)
+          tier >= 1 ? wrapInfantil(id + '-n-a5', 'Reto naturaleza', 4, 2, 'Naturaleza', bl, infSid(tier, 'n', 3)) : soon(id + '-n-a5', 'Reto naturaleza', 'quiz', 4)
         ], { saberIds: [infSid(tier, 'n', 1), infSid(tier, 'n', 3)] }),
         unit(id + '-n-cuerpo', 'Cuerpo y clima', 'Cuerpo, sentidos y fenómenos simples.', [
           wrapInfantil(id + '-n-c1', 'Partes del cuerpo', 0, 1, 'Cabeza, pies…', bl, infSid(tier, 'n', 2)),
           wrapInfantil(id + '-n-c2', 'Sol y lluvia', 1, 2, 'Clima', bl, infSid(tier, 'n', 3)),
           extraLive ? wrapInfantil(id + '-n-c3', 'Fruta sana', 2, 2, 'Alimentación', bl, infSid(tier, 'n', 2)) : soon(id + '-n-c3', 'Día y noche', 'ordering', 2),
           tier >= 1 ? wrapInfantil(id + '-n-c4', 'Animales del bosque', 3, 2, 'Nombres', bl, infSid(tier, 'n', 1)) : soon(id + '-n-c4', 'Animales del bosque', 'matching', 3),
-          soon(id + '-n-c5', 'Misión naturaleza', 'quiz', 4)
+          tier >= 1 ? wrapInfantil(id + '-n-c5', 'Misión naturaleza', 4, 2, 'Cuerpo', bl, infSid(tier, 'n', 2)) : soon(id + '-n-c5', 'Misión naturaleza', 'quiz', 4)
         ], { saberIds: [infSid(tier, 'n', 2), infSid(tier, 'n', 3)] })
       ], 'live'),
       subject('sociales', [
@@ -223,14 +223,14 @@
           wrapInfantil(id + '-s-e2', 'En el cole', 1, 2, 'Colegio, amigos', bl, infSid(tier, 's', 2)),
           extraLive ? wrapInfantil(id + '-s-e3', 'Turnos y colores', 2, 2, 'Convivencia', bl, infSid(tier, 's', 2)) : soon(id + '-s-e3', 'Caras felices', 'matching', 2),
           tier >= 1 ? wrapInfantil(id + '-s-e4', 'Turnos', 2, 2, 'Espera tu turno', bl, infSid(tier, 's', 2)) : soon(id + '-s-e4', 'Turnos', 'ordering', 2),
-          soon(id + '-s-e5', 'Misión emociones', 'quiz', 4)
+          tier >= 1 ? wrapInfantil(id + '-s-e5', 'Misión emociones', 4, 2, 'Emociones', bl, infSid(tier, 's', 2)) : soon(id + '-s-e5', 'Misión emociones', 'quiz', 4)
         ], { saberIds: [infSid(tier, 's', 1), infSid(tier, 's', 2)] }),
         unit(id + '-s-cole', 'Mi entorno', 'Cole, calle y lugares cercanos.', [
           wrapInfantil(id + '-s-c1', 'Mi clase', 0, 1, 'Mesa, patio…', bl, infSid(tier, 's', 3)),
           wrapInfantil(id + '-s-c2', 'Señales', 1, 2, 'Pare, ceda…', bl, infSid(tier, 's', 3)),
           extraLive ? wrapInfantil(id + '-s-c3', 'Ayudar al compi', 2, 2, 'Convivencia', bl, infSid(tier, 's', 2)) : soon(id + '-s-c3', 'Ordena el día', 'ordering', 2),
           tier >= 1 ? wrapInfantil(id + '-s-c4', 'Profesiones', 3, 2, 'Quién es', bl, infSid(tier, 's', 3)) : soon(id + '-s-c4', 'Profesiones', 'matching', 3),
-          soon(id + '-s-c5', 'Misión ciudadana', 'quiz', 4)
+          tier >= 1 ? wrapInfantil(id + '-s-c5', 'Misión ciudadana', 4, 2, 'Entorno', bl, infSid(tier, 's', 3)) : soon(id + '-s-c5', 'Misión ciudadana', 'quiz', 4)
         ], { saberIds: [infSid(tier, 's', 2), infSid(tier, 's', 3)] })
       ], 'live'),
       subject('brain-gym-diario', [
@@ -315,7 +315,7 @@
           liveMates('p1-m-p2-t', 'Problemas numéricos', 1, 2, 2, null, 'p1-m-a5'),
           liveLengua('p1-m-p3-h', 'Historias cortas', 'neon-lectura', 2, 'Lee el problema', 2, 'p1-m-a5'),
           liveGame('p1-m-p4-d', 'Elige la operación', 'neon-mayor-menor', 2, 2, null, 'p1-m-a5'),
-          soon('p1-m-p5-m', 'Mini test del mercado', 'quiz', 5)
+          liveMates('p1-m-p5-m', 'Mini test del mercado', 4, 4, 3, 'Repaso final', 'p1-m-a5')
         ],
         { saberIds: ['p1-m-a5'] }
       ),
@@ -328,7 +328,7 @@
           tagSaber(liveReflex('p1-m-e2-r', 'Reloj en punto', 'flash-tap', 2), 'p1-m-b1'),
           liveGame('p1-m-e3-n', 'Números del calendario', 'neon-calculo', 2, 2, null, 'p1-m-b1'),
           liveGame('p1-m-e4-l', 'Compara longitudes', 'neon-mayor-menor', 2, 2, null, 'p1-m-b1'),
-          soon('p1-m-e5-m', 'Misión del calendario', 'quiz', 4)
+          tagSaber(liveReflex('p1-m-e5-m', 'Misión del calendario', 'flash-tap', 3), 'p1-m-b1')
         ],
         { saberIds: ['p1-m-b1'] }
       ),
@@ -341,7 +341,7 @@
           liveGame('p1-m-f2-c', 'Clasifica formas', 'neon-clasifica', 2, 2, null, 'p1-m-c1'),
           tagSaber(liveGame('p1-m-f3-a', 'Atención visual', 'flash-tap', 2, null), 'p1-m-c1'),
           liveGame('p1-m-f4-p', 'Ordena patrones', 'neon-ordenar', 3, 2, null, 'p1-m-c1'),
-          soon('p1-m-f5-m', 'Reto geométrico', 'quiz', 4)
+          liveGame('p1-m-f5-m', 'Reto geométrico', 'neon-clasifica', 4, 3, 'Formas', 'p1-m-c1')
         ],
         { saberIds: ['p1-m-c1'] }
       )
@@ -355,21 +355,21 @@
         liveLengua('p1-l-s2', 'Completa la palabra', 'neon-palabra', 2, 'Elige la sílaba', 1, 'p1-l-c1'),
         liveLengua('p1-l-s4', 'Lectura guiada', 'neon-lectura', 3, 'Comprensión literal', 1, 'p1-l-c2'),
         liveLengua('p1-l-s1', 'Une sílaba e imagen', 'neon-silabas', 1, 'Forma palabras', 1, 'p1-l-c1'),
-        soon('p1-l-s5', 'Mini dictado', 'listening', 4)
+        liveLengua('p1-l-s5', 'Mini dictado', 'neon-silabas', 4, 'Forma palabras', 2, 'p1-l-c1')
       ], { saberIds: ['p1-l-c1', 'p1-l-c2'] }),
       unit('p1-l-frases', 'Frases simples', 'LOMLOE · comprensión y frases con mayúscula y punto.', [
         liveLengua('p1-l-f1', 'Ordena la frase', 'neon-frase', 1, 'Toca las palabras en orden', 1, 'p1-l-c3'),
         liveLengua('p1-l-f2', '¿Qué pasó?', 'neon-lectura', 2, 'Lee y responde', 1, 'p1-l-c2'),
         liveLengua('p1-l-f3', 'Ordena la oración', 'neon-frase', 2, 'Mayúscula y punto', 1, 'p1-l-c3'),
         liveLengua('p1-l-f4', 'Completa la frase', 'neon-palabra', 3, 'Escribe', 2, 'p1-l-c3'),
-        soon('p1-l-f5', 'Misión del cuento', 'quiz', 5)
+        liveLenguaRot('p1-l-f5', 'Misión del cuento', 3, 4, 'Reto final', 2, 'p1-l-c3')
       ], { saberIds: ['p1-l-c2', 'p1-l-c3'] }),
       unit('p1-l-vocab', 'Vocabulario cotidiano', 'LOMLOE · léxico de casa, colegio y familia.', [
         liveLengua('p1-l-v1', 'Palabras de casa', 'neon-palabra', 1, 'Forma la palabra', 1, 'p1-l-c4'),
         liveLengua('p1-l-v2', 'Lee y elige', 'neon-lectura', 2, 'Vocabulario', 1, 'p1-l-c4'),
         liveLengua('p1-l-v3', 'Sinónimos sencillos', 'neon-lectura', 3, 'Elige', 2, 'p1-l-c4'),
         liveIngles('p1-l-v4', 'Escucha y elige', 'neon-palabras', 2, 'Vocabulario EN', 1, 'p1-l-c4'),
-        soon('p1-l-v5', 'Reto del diccionario', 'quiz', 4)
+        liveLengua('p1-l-v5', 'Reto del diccionario', 'neon-lectura', 4, 'Vocabulario', 2, 'p1-l-c4')
       ], { saberIds: ['p1-l-c4'] })
     ];
   }
@@ -381,14 +381,14 @@
         liveIngles('p1-i-h2', 'My name is…', 1, 2, 1, null, 'p1-i-e1'),
         liveIngles('p1-i-h3', 'Escucha y repite', 2, 1, 1, 'Listening', 'p1-i-e1'),
         liveIngles('p1-i-h4', 'Roleplay mini', 3, 2, 2, 'Diálogo', 'p1-i-e1'),
-        soon('p1-i-h5', 'Misión del saludo', 'quiz', 4)
+        tagSaber(liveReflex('p1-i-h5', 'Misión del saludo', 'flash-tap', 2), 'p1-i-e1')
       ], { saberIds: ['p1-i-e1'] }),
       unit('p1-i-numbers', 'Numbers 1–20', 'LOMLOE · numbers and colours in context.', [
         liveIngles('p1-i-n1', 'Numbers 1–10', 0, 1, 1, null, 'p1-i-e2'),
         liveIngles('p1-i-n2', 'Numbers 11–20', 1, 2, 2, null, 'p1-i-e2'),
         liveGame('p1-i-n3', 'Ordena números', 'neon-ordenar', 2, 2, '1–20', 'p1-i-e2'),
         liveIngles('p1-i-n4', 'Listening numbers', 2, 2, 2, 'Escucha', 'p1-i-e2'),
-        soon('p1-i-n5', 'Number challenge', 'quiz', 4)
+        liveIngles('p1-i-n5', 'Number challenge', 3, 3, 2, 'Boss round', 'p1-i-e2')
       ], { saberIds: ['p1-i-e2'] }),
       unit('p1-i-colours', 'Colours y animals', 'LOMLOE · classroom objects, colours and animals.', [
         liveIngles('p1-i-c1', 'Colours', 0, 1, 1, null, 'p1-i-e2'),
@@ -472,14 +472,14 @@
         liveMates('p2-m-n2', 'Restas con ayuda', 1, 2, 2, null, 'p2-m-a1'),
         liveMates('p2-m-n3', 'Reto 0–99', 2, 3, 3, null, 'p2-m-a1'),
         liveGame('p2-m-n4', 'Ordena centenas', 'neon-ordenar', 3, 2, null, 'p2-m-a1'),
-        soon('p2-m-n5', 'Misión numérica', 'quiz', 4)
+        liveMates('p2-m-n5', 'Misión numérica', 4, 4, 3, 'Repaso final', 'p2-m-a1')
       ], { saberIds: ['p2-m-a1'] }),
       unit('p2-m-llevadas', 'Sumas y restas con llevadas', 'LOMLOE · cálculo mental con llevadas.', [
         liveMates('p2-m-l1', 'Calentamiento', 0, 1, 2, null, 'p2-m-a2'),
         liveMates('p2-m-l2', 'Operaciones mixtas', 1, 2, 3, null, 'p2-m-a2'),
         liveMates('p2-m-l3', 'Combo 60 s', 2, 3, 3, null, 'p2-m-a2'),
         liveGame('p2-m-l4', 'Problemas dos pasos', 'neon-calculo', 3, 3, null, 'p2-m-a2'),
-        soon('p2-m-l5', 'Misión del banco', 'quiz', 5)
+        liveMates('p2-m-l5', 'Misión del banco', 4, 4, 3, 'Repaso final', 'p2-m-a2')
       ], { saberIds: ['p2-m-a2'] }),
       unit('p2-m-tablas', 'Tablas del 2, 5 y 10', 'LOMLOE · multiplicación como suma repetida.', [
         liveGame('p2-m-t1', 'Tablas del 2', 'tablas-relampago', 1, 2, null, 'p2-m-a3'),
@@ -493,14 +493,14 @@
         liveGame('p2-m-d2', 'La caja registradora', 'neon-calculo', 3, 3, 'Suma euros', 'p2-m-b1'),
         liveGame('p2-m-d3', 'Cálculo con euros', 'neon-calculo', 2, 3, null, 'p2-m-b1'),
         liveGame('p2-m-d4', 'Media hora', 'neon-ordenar', 3, 2, 'Ordena horas', 'p2-m-b1'),
-        soon('p2-m-d5', 'Misión del reloj', 'quiz', 4)
+        liveGame('p2-m-d5', 'Misión del reloj', 'neon-ordenar', 4, 3, 'Tiempo', 'p2-m-b1')
       ], { saberIds: ['p2-m-b1'] }),
       unit('p2-m-figuras', 'Polígonos sencillos', 'LOMLOE · lados, vértices y simetría básica.', [
         liveGame('p2-m-f1', 'Polígonos', 'neon-clasifica', 2, 2, 'Formas', 'p2-m-c1'),
         tagSaber(liveReflex('p2-m-f2', 'Atención geométrica', 'flash-tap', 2), 'p2-m-c1'),
         liveGame('p2-m-f3', 'Simetría', 'neon-clasifica', 3, 2, 'Parejas', 'p2-m-c1'),
         liveGame('p2-m-f4', 'Perímetro con cuadrícula', 'neon-calculo', 4, 3, 'Suma lados', 'p2-m-c1'),
-        soon('p2-m-f5', 'Reto figuras', 'quiz', 4)
+        liveGame('p2-m-f5', 'Reto figuras', 'neon-clasifica', 4, 3, 'Geometría', 'p2-m-c1')
       ], { saberIds: ['p2-m-c1'] })
     ];
   }
@@ -512,21 +512,21 @@
         liveLengua('p2-l-r2', 'Ordena sílabas', 'neon-silabas', 2, 'Palabras del cole', 4, 'p2-l-c1'),
         liveLengua('p2-l-r3', 'Idea principal', 'neon-lectura', 3, 'Comprensión', 4, 'p2-l-c1'),
         liveLengua('p2-l-r4', 'Escribe un final', 'neon-frase', 3, 'Ordena palabras', 4, 'p2-l-c1'),
-        soon('p2-l-r5', 'Misión lectora', 'quiz', 5)
+        liveLenguaRot('p2-l-r5', 'Misión lectora', 0, 4, 'Reto final', 4, 'p2-l-c1')
       ], { saberIds: ['p2-l-c1'] }),
       unit('p2-l-ortografia', 'Ortografía básica', 'LOMLOE · ca/co/cu, que/qui, m antes de p/b.', [
         liveLengua('p2-l-o1', 'Completa la palabra', 'neon-palabra', 2, 'Elige la sílaba correcta', 4, 'p2-l-c2'),
         liveLengua('p2-l-o2', 'Completa con m o n', 'neon-palabra', 3, 'Ortografía', 4, 'p2-l-c2'),
         liveLengua('p2-l-o3', 'Detecta el error', 'neon-lectura', 3, 'Lee con atención', 4, 'p2-l-c2'),
         liveLengua('p2-l-o4', 'Dictado corto', 'neon-silabas', 4, 'Forma palabras', 4, 'p2-l-c2'),
-        soon('p2-l-o5', 'Reto ortográfico', 'quiz', 5)
+        liveLenguaRot('p2-l-o5', 'Reto ortográfico', 1, 4, 'Reto final', 4, 'p2-l-c2')
       ], { saberIds: ['p2-l-c2'] }),
       unit('p2-l-gramatica', 'Nombre, verbo y adjetivo', 'LOMLOE · primeras categorías gramaticales.', [
         liveLengua('p2-l-g1', '¿Qué es?', 'neon-lectura', 2, 'Categorías', 4, 'p2-l-c3'),
         liveLengua('p2-l-g2', 'Sinónimos y antónimos', 'neon-lectura', 2, 'Elige', 4, 'p2-l-c3'),
         liveLengua('p2-l-g3', 'Ordena la frase', 'neon-frase', 2, 'Orden sintáctico', 4, 'p2-l-c3'),
         liveLengua('p2-l-g4', 'Subraya el verbo', 'neon-frase', 3, 'Identifica', 4, 'p2-l-c3'),
-        soon('p2-l-g5', 'Misión gramatical', 'quiz', 4)
+        liveLenguaRot('p2-l-g5', 'Misión gramatical', 2, 4, 'Reto final', 4, 'p2-l-c3')
       ], { saberIds: ['p2-l-c3'] })
     ];
   }
@@ -538,21 +538,21 @@
         liveIngles('p2-i-f2', 'Body parts', 1, 2, 2, null, 'p2-i-e1'),
         liveIngles('p2-i-f3', 'I have got…', 2, 2, 2, 'Frases', 'p2-i-e1'),
         liveIngles('p2-i-f4', 'Listening family', 3, 2, 2, 'Escucha', 'p2-i-e1'),
-        soon('p2-i-f5', 'Family quiz', 'quiz', 4)
+        liveIngles('p2-i-f5', 'Family quiz', 3, 3, 3, 'Boss round', 'p2-i-e1')
       ], { saberIds: ['p2-i-e1'] }),
       unit('p2-i-food', 'Food y actions', 'LOMLOE · comida y verbos de acción.', [
         liveIngles('p2-i-o1', 'Food', 0, 1, 2, null, 'p2-i-e2'),
         liveIngles('p2-i-o2', 'Actions', 1, 2, 3, null, 'p2-i-e2'),
         liveIngles('p2-i-o3', 'I like / don\'t like', 2, 2, 2, 'Elige', 'p2-i-e2'),
         liveIngles('p2-i-o4', 'Mini diálogo', 3, 2, 3, 'Roleplay', 'p2-i-e2'),
-        soon('p2-i-o5', 'Food mission', 'quiz', 4)
+        tagSaber(liveReflex('p2-i-o5', 'Food mission', 'flash-tap', 3), 'p2-i-e2')
       ], { saberIds: ['p2-i-e2'] }),
       unit('p2-i-numbers', 'Numbers 1–50', 'LOMLOE · contar y comparar en inglés.', [
         liveIngles('p2-i-n1', 'Numbers 1–20', 0, 1, 2, null, 'p2-i-e3'),
         liveIngles('p2-i-n2', 'Numbers 21–50', 1, 2, 3, null, 'p2-i-e3'),
         liveIngles('p2-i-n3', 'Comparatives easy', 2, 3, 3, 'Compare', 'p2-i-e3'),
         liveIngles('p2-i-n4', 'Listen and write', 3, 3, 3, 'Numbers', 'p2-i-e3'),
-        soon('p2-i-n5', 'Number boss', 'quiz', 5)
+        liveIngles('p2-i-n5', 'Number boss', 3, 4, 3, 'Boss round', 'p2-i-e3')
       ], { saberIds: ['p2-i-e3'] })
     ];
   }
@@ -628,28 +628,28 @@
         liveMates('p3-m-d2', 'Reparto mental', 2, 2, 3, null, 'p3-m-a2'),
         liveMates('p3-m-d3', 'Operaciones mixtas', 0, 3, 4, null, 'p3-m-a2'),
         liveGame('p3-m-d4', 'Problemas dos pasos', 'neon-calculo', 4, 4, null, 'p3-m-a2'),
-        soon('p3-m-d5', 'Misión división', 'quiz', 5)
+        liveMates('p3-m-d5', 'Misión división', 4, 4, 4, 'Repaso final', 'p3-m-a2')
       ], { saberIds: ['p3-m-a2'] }),
       unit('p3-m-frac', 'Fracciones básicas', 'LOMLOE · medios, tercios y cuartos con barra visual.', [
         liveGame('p3-m-f1', 'Pizza: medios y cuartos', 'neon-fracciones', 1, 3, '¿Qué fracción es?', 'p3-m-a3'),
         liveGame('p3-m-f2', 'Tercios y cuartos', 'neon-fracciones', 2, 3, 'Compara visual', 'p3-m-a3'),
         liveGame('p3-m-f3', 'Mix fracciones', 'neon-fracciones', 2, 4, 'Velocidad', 'p3-m-a3'),
         liveGame('p3-m-f4', 'Compara fracciones', 'neon-fracciones', 3, 4, '¿Cuál es mayor?', 'p3-m-a3'),
-        soon('p3-m-f5', 'Reto pizza', 'quiz', 5)
+        liveGame('p3-m-f5', 'Reto pizza', 'neon-fracciones', 4, 4, 'Velocidad', 'p3-m-a3')
       ], { saberIds: ['p3-m-a3'] }),
       unit('p3-m-medidas', 'Medidas y perímetro', 'LOMLOE · longitud y contorno.', [
         liveGame('p3-m-e1', 'Centímetros', 'neon-mayor-menor', 2, 3, 'Compara', 'p3-m-b1'),
         liveGame('p3-m-e2', 'Cálculo de medidas', 'neon-calculo', 2, 4, null, 'p3-m-b1'),
         liveGame('p3-m-e3', 'Perímetro en cuadrícula', 'neon-calculo', 3, 4, 'Suma lados', 'p3-m-b1'),
         liveGame('p3-m-e4', 'Conversión simple', 'neon-mayor-menor', 4, 4, 'm y cm', 'p3-m-b1'),
-        soon('p3-m-e5', 'Misión metro', 'quiz', 5)
+        liveGame('p3-m-e5', 'Misión metro', 'neon-calculo', 4, 4, 'Medidas', 'p3-m-b1')
       ], { saberIds: ['p3-m-b1'] }),
       unit('p3-m-problemas', 'Problemas de dos pasos', 'LOMLOE · planificar antes de calcular.', [
         liveMates('p3-m-p1', 'Calentamiento', 0, 1, 3, null, 'p3-m-a2'),
         liveMates('p3-m-p2', 'Dos operaciones', 1, 3, 4, null, 'p3-m-a4'),
         liveGame('p3-m-p3', 'Tablas en problemas', 'tablas-relampago', 2, 4, null, 'p3-m-a4'),
         liveGame('p3-m-p4', 'Elige el plan', 'neon-lectura', 4, 4, 'Lee el problema', 'p3-m-a4'),
-        soon('p3-m-p5', 'Misión detective', 'quiz', 5)
+        liveMates('p3-m-p5', 'Misión detective', 4, 4, 4, 'Repaso final', 'p3-m-a4')
       ], { saberIds: ['p3-m-a4'] })
     ];
   }
@@ -661,21 +661,21 @@
         liveLengua('p3-l-t2', 'Ordena la frase', 'neon-frase', 3, 'Sintaxis', 8, 'p3-l-c1'),
         liveLengua('p3-l-t3', 'Descripción', 'neon-palabra', 3, 'Completa', 8, 'p3-l-c1'),
         liveLengua('p3-l-t4', 'Carta corta', 'neon-frase', 3, 'Ordena', 8, 'p3-l-c1'),
-        soon('p3-l-t5', 'Misión redactor', 'quiz', 5)
+        liveLenguaRot('p3-l-t5', 'Misión redactor', 0, 4, 'Reto final', 8, 'p3-l-c1')
       ], { saberIds: ['p3-l-c1'] }),
       unit('p3-l-ortografia', 'b/v, g/j, r/rr', 'LOMLOE · ortografía frecuente en 3º.', [
         liveLenguaRot('p3-l-o1', 'Completa la palabra', 2, 2, 'Sílabas trabadas', 8, 'p3-l-c2'),
         liveLenguaRot('p3-l-o2', 'Ordena sílabas', 1, 3, 'Palabras largas', 8, 'p3-l-c2'),
         liveLenguaRot('p3-l-o3', 'Lee y corrige', 0, 3, 'Comprensión', 8, 'p3-l-c2'),
         liveLenguaRot('p3-l-o4', 'Dictado', 1, 4, 'Sílabas', 8, 'p3-l-c2'),
-        soon('p3-l-o5', 'Reto ortografía', 'quiz', 5)
+        liveLenguaRot('p3-l-o5', 'Reto ortografía', 1, 4, 'Reto final', 8, 'p3-l-c2')
       ], { saberIds: ['p3-l-c2'] }),
       unit('p3-l-literatura', 'Cuento, poesía y fábula', 'LOMLOE · géneros literarios básicos.', [
         liveGame('p3-l-i1', '¿Qué género es?', 'neon-clasifica', 2, 3, 'Clasifica', 'p3-l-c3'),
         liveLengua('p3-l-i2', 'Rima en poesía', 'neon-palabras', 2, 'Escucha y elige', 8, 'p3-l-c3'),
         liveLengua('p3-l-i3', 'Moral de la fábula', 'neon-lectura', 3, 'Lee y responde', 8, 'p3-l-c3'),
         liveLengua('p3-l-i4', 'Ordena el cuento', 'neon-frase', 3, 'Secuencia', 8, 'p3-l-c3'),
-        soon('p3-l-i5', 'Misión literaria', 'quiz', 4)
+        liveLengua('p3-l-i5', 'Misión literaria', 'neon-lectura', 4, 'Literatura', 8, 'p3-l-c3')
       ], { saberIds: ['p3-l-c3'] })
     ];
   }
@@ -687,21 +687,21 @@
         liveIngles('p3-i-p2', 'School words', 1, 2, 3, null, 'p3-i-e1'),
         liveIngles('p3-i-p3', 'Fill the gap', 2, 3, 3, 'Grammar', 'p3-i-e1'),
         liveIngles('p3-i-p4', 'Listening routines', 3, 3, 3, 'Escucha', 'p3-i-e1'),
-        soon('p3-i-p5', 'Grammar quiz', 'quiz', 5)
+        liveIngles('p3-i-p5', 'Grammar quiz', 3, 4, 3, 'Grammar', 'p3-i-e1')
       ], { saberIds: ['p3-i-e1'] }),
       unit('p3-i-can', "Can / can't · there is/are", 'LOMLOE · habilidad y descripción.', [
         liveIngles('p3-i-c1', 'Places vocab', 0, 2, 3, null, 'p3-i-e2'),
         liveIngles('p3-i-c2', 'Listen & tap', 1, 2, 3, null, 'p3-i-e2'),
         liveIngles('p3-i-c3', 'There is / are', 2, 3, 3, 'Elige', 'p3-i-e2'),
         liveIngles('p3-i-c4', 'Describe a room', 3, 3, 3, 'Vocabulario', 'p3-i-e2'),
-        soon('p3-i-c5', 'City mission', 'quiz', 4)
+        tagSaber(liveReflex('p3-i-c5', 'City mission', 'flash-tap', 3), 'p3-i-e2')
       ], { saberIds: ['p3-i-e2'] }),
       unit('p3-i-listen', 'Listening e instrucciones', 'LOMLOE · seguir órdenes en inglés.', [
         tagSaber(liveReflex('p3-i-l1', 'Listen & tap', 'flash-tap', 1), 'p3-i-e3'),
         liveIngles('p3-i-l2', 'School objects', 0, 2, 3, null, 'p3-i-e3'),
         liveIngles('p3-i-l3', 'Follow directions', 1, 3, 3, 'Listening', 'p3-i-e3'),
         tagSaber(liveReflex('p3-i-l4', 'Classroom game', 'flash-tap', 2), 'p3-i-e3'),
-        soon('p3-i-l5', 'Listening test', 'quiz', 5)
+        liveIngles('p3-i-l5', 'Listening test', 3, 4, 3, 'Listening', 'p3-i-e3')
       ], { saberIds: ['p3-i-e3'] })
     ];
   }
@@ -852,42 +852,42 @@
         liveGame('eso1-m-rac2', 'Compara racionales', 'neon-fracciones', 3, 9, 'Comparación', 'eso1-m-a1'),
         liveGame('eso1-m-rac3', 'Cálculo express', 'neon-calculo', 3, 8, null, 'eso1-m-a1'),
         liveMates('eso1-m-rac4', 'Problemas', 3, 4, 9, null, 'eso1-m-a1'),
-        soon('eso1-m-rac5', 'Misión Números racionales', 'quiz', 5)
+        liveGame('eso1-m-rac5', 'Misión Números racionales', 'neon-fracciones', 4, 9, 'Reto final', 'eso1-m-a1')
       ], { saberIds: ['eso1-m-a1'] }),
       unit('eso1-m-pot', 'Potencias y raíces', 'LOMLOE · potencias y raíz cuadrada.', [
         liveGame('eso1-m-pot1', 'Cálculo express', 'neon-calculo', 3, 8, null, 'eso1-m-a2'),
         liveGame('eso1-m-pot2', 'Tablas flash', 'tablas-relampago', 2, 8, null, 'eso1-m-a2'),
         liveMates('eso1-m-pot3', 'Álgebra mental', 2, 3, 9, null, 'eso1-m-a2'),
         liveMates('eso1-m-pot4', 'Problemas', 3, 4, 9, null, 'eso1-m-a2'),
-        soon('eso1-m-pot5', 'Misión Potencias y raíces', 'quiz', 5)
+        liveMates('eso1-m-pot5', 'Misión Potencias y raíces', 4, 4, 9, 'Repaso final', 'eso1-m-a2')
       ], { saberIds: ['eso1-m-a2'] }),
       unit('eso1-m-ecu', 'Ecuaciones de 1º grado', 'LOMLOE · incógnitas y álgebra básica.', [
         liveGame('eso1-m-ecu1', 'Cálculo express', 'neon-calculo', 3, 8, null, 'eso1-m-a3'),
         liveGame('eso1-m-ecu2', 'Tablas flash', 'tablas-relampago', 2, 8, null, 'eso1-m-a3'),
         liveMates('eso1-m-ecu3', 'Álgebra mental', 2, 3, 9, null, 'eso1-m-a3'),
         liveMates('eso1-m-ecu4', 'Problemas', 3, 4, 9, null, 'eso1-m-a3'),
-        soon('eso1-m-ecu5', 'Misión Ecuaciones de 1º grado', 'quiz', 5)
+        liveMates('eso1-m-ecu5', 'Misión Ecuaciones de 1º grado', 4, 4, 9, 'Repaso final', 'eso1-m-a3')
       ], { saberIds: ['eso1-m-a3'] }),
       unit('eso1-m-prop', 'Proporcionalidad', 'LOMLOE · porcentajes y regla de tres.', [
         liveGame('eso1-m-prop1', 'Cálculo express', 'neon-calculo', 3, 8, null, 'eso1-m-b1'),
         liveGame('eso1-m-prop2', 'Tablas flash', 'tablas-relampago', 2, 8, null, 'eso1-m-b1'),
         liveMates('eso1-m-prop3', 'Álgebra mental', 2, 3, 9, null, 'eso1-m-b1'),
         liveMates('eso1-m-prop4', 'Problemas', 3, 4, 9, null, 'eso1-m-b1'),
-        soon('eso1-m-prop5', 'Misión Proporcionalidad', 'quiz', 5)
+        liveMates('eso1-m-prop5', 'Misión Proporcionalidad', 4, 4, 9, 'Repaso final', 'eso1-m-b1')
       ], { saberIds: ['eso1-m-b1'] }),
       unit('eso1-m-stat', 'Estadística', 'LOMLOE · frecuencias, media y gráficos.', [
         liveGame('eso1-m-stat1', 'Cálculo express', 'neon-calculo', 3, 8, null, 'eso1-m-a4'),
         liveGame('eso1-m-stat2', 'Tablas flash', 'tablas-relampago', 2, 8, null, 'eso1-m-a4'),
         liveMates('eso1-m-stat3', 'Álgebra mental', 2, 3, 9, null, 'eso1-m-a4'),
         liveMates('eso1-m-stat4', 'Problemas', 3, 4, 9, null, 'eso1-m-a4'),
-        soon('eso1-m-stat5', 'Misión Estadística', 'quiz', 5)
+        liveMates('eso1-m-stat5', 'Misión Estadística', 4, 4, 9, 'Repaso final', 'eso1-m-a4')
       ], { saberIds: ['eso1-m-a4'] }),
       unit('eso1-m-geo', 'Geometría plana', 'LOMLOE · triángulos, ángulos y construcciones.', [
         liveGame('eso1-m-geo1', 'Clasifica figuras', 'neon-clasifica', 3, 9, 'Formas', 'eso1-m-c1'),
         liveGame('eso1-m-geo2', 'Ángulos y lados', 'neon-clasifica', 3, 9, 'Geometría', 'eso1-m-c1'),
-        soon('eso1-m-geo3', 'Teorema visual', 'mini-game', 4),
-        soon('eso1-m-geo4', 'Construcciones', 'drag-drop', 4),
-        soon('eso1-m-geo5', 'Misión geometría', 'quiz', 5)
+        liveGame('eso1-m-geo3', 'Teorema visual', 'neon-clasifica', 4, 9, 'Triángulos', 'eso1-m-c1'),
+        liveGame('eso1-m-geo4', 'Construcciones', 'neon-ordenar', 4, 9, 'Secuencia', 'eso1-m-c1'),
+        liveGame('eso1-m-geo5', 'Misión geometría', 'neon-clasifica', 4, 9, 'Reto final', 'eso1-m-c1')
       ], { saberIds: ['eso1-m-c1'] }),
     ];
   }
@@ -898,22 +898,22 @@
         liveLengua('eso1-l-lit1', 'Lee y analiza', 'neon-lectura', 3, 'Comprensión', 10, 'eso1-l-c1'),
         liveLenguaRot('eso1-l-lit2', 'Ordena y corrige', 2, 3, 'Sintaxis', 10, 'eso1-l-c1'),
         liveLenguaRot('eso1-l-lit3', 'Completa', 1, 4, 'Ortografía', 11, 'eso1-l-c1'),
-        soon('eso1-l-lit4', 'Redacción', 'typing', 4),
-        soon('eso1-l-lit5', 'Misión lengua', 'quiz', 5)
+        liveLenguaRot('eso1-l-lit4', 'Redacción', 3, 4, 'Escribe', 11, 'eso1-l-c1'),
+        liveLenguaRot('eso1-l-lit5', 'Misión lengua', 0, 4, 'Reto final', 11, 'eso1-l-c1')
       ], { saberIds: ['eso1-l-c1'] }),
       unit('eso1-l-gram', 'Gramática y sintaxis', 'LOMLOE · morfología y ortografía.', [
         liveLengua('eso1-l-gram1', 'Lee y analiza', 'neon-lectura', 3, 'Comprensión', 10, 'eso1-l-c2'),
         liveLenguaRot('eso1-l-gram2', 'Ordena y corrige', 2, 3, 'Sintaxis', 10, 'eso1-l-c2'),
         liveLenguaRot('eso1-l-gram3', 'Completa', 1, 4, 'Ortografía', 11, 'eso1-l-c2'),
-        soon('eso1-l-gram4', 'Redacción', 'typing', 4),
-        soon('eso1-l-gram5', 'Misión lengua', 'quiz', 5)
+        liveLenguaRot('eso1-l-gram4', 'Redacción', 3, 4, 'Escribe', 11, 'eso1-l-c2'),
+        liveLenguaRot('eso1-l-gram5', 'Misión lengua', 0, 4, 'Reto final', 11, 'eso1-l-c2')
       ], { saberIds: ['eso1-l-c2'] }),
       unit('eso1-l-esc', 'Expresión escrita', 'LOMLOE · textos argumentativos.', [
         liveLengua('eso1-l-esc1', 'Lee y analiza', 'neon-lectura', 3, 'Comprensión', 10, 'eso1-l-c3'),
         liveLenguaRot('eso1-l-esc2', 'Ordena y corrige', 2, 3, 'Sintaxis', 10, 'eso1-l-c3'),
         liveLenguaRot('eso1-l-esc3', 'Completa', 1, 4, 'Ortografía', 11, 'eso1-l-c3'),
-        soon('eso1-l-esc4', 'Redacción', 'typing', 4),
-        soon('eso1-l-esc5', 'Misión lengua', 'quiz', 5)
+        liveLenguaRot('eso1-l-esc4', 'Redacción', 3, 4, 'Escribe', 11, 'eso1-l-c3'),
+        liveLenguaRot('eso1-l-esc5', 'Misión lengua', 0, 4, 'Reto final', 11, 'eso1-l-c3')
       ], { saberIds: ['eso1-l-c3'] }),
     ];
   }
@@ -923,23 +923,23 @@
       unit('eso1-i-past', 'Past tenses', 'LOMLOE · pasado simple y continuo.', [
         liveIngles('eso1-i-past1', 'Vocab drill', 0, 2, 8, null, 'eso1-i-e1'),
         liveIngles('eso1-i-past2', 'Listen & tap', 1, 3, 8, null, 'eso1-i-e1'),
-        soon('eso1-i-past3', 'Fill the gap', 'typing', 3),
-        soon('eso1-i-past4', 'Grammar quiz', 'quiz', 4),
-        soon('eso1-i-past5', 'English mission', 'quiz', 5)
+        liveIngles('eso1-i-past3', 'Fill the gap', 2, 3, 8, 'Past tense', 'eso1-i-e1'),
+        liveIngles('eso1-i-past4', 'Grammar quiz', 3, 3, 8, 'Grammar', 'eso1-i-e1'),
+        tagSaber(liveReflex('eso1-i-past5', 'English mission', 'flash-tap', 3), 'eso1-i-e1')
       ], { saberIds: ['eso1-i-e1'] }),
       unit('eso1-i-desc', 'Descriptions', 'LOMLOE · comparativos y superlativos.', [
         liveIngles('eso1-i-desc1', 'Vocab drill', 0, 2, 8, null, 'eso1-i-e2'),
         liveIngles('eso1-i-desc2', 'Listen & tap', 1, 3, 8, null, 'eso1-i-e2'),
-        soon('eso1-i-desc3', 'Fill the gap', 'typing', 3),
-        soon('eso1-i-desc4', 'Grammar quiz', 'quiz', 4),
-        soon('eso1-i-desc5', 'English mission', 'quiz', 5)
+        liveIngles('eso1-i-desc3', 'Fill the gap', 2, 3, 8, 'Comparatives', 'eso1-i-e2'),
+        liveIngles('eso1-i-desc4', 'Grammar quiz', 3, 3, 8, 'Grammar', 'eso1-i-e2'),
+        tagSaber(liveReflex('eso1-i-desc5', 'English mission', 'flash-tap', 3), 'eso1-i-e2')
       ], { saberIds: ['eso1-i-e2'] }),
       unit('eso1-i-oral', 'Oral interaction', 'LOMLOE · diálogos y listening.', [
         liveIngles('eso1-i-oral1', 'Vocab drill', 0, 2, 8, null, 'eso1-i-e3'),
         liveIngles('eso1-i-oral2', 'Listen & tap', 1, 3, 8, null, 'eso1-i-e3'),
-        soon('eso1-i-oral3', 'Fill the gap', 'typing', 3),
-        soon('eso1-i-oral4', 'Grammar quiz', 'quiz', 4),
-        soon('eso1-i-oral5', 'English mission', 'quiz', 5)
+        liveIngles('eso1-i-oral3', 'Fill the gap', 2, 3, 8, 'Dialogue', 'eso1-i-e3'),
+        liveIngles('eso1-i-oral4', 'Grammar quiz', 3, 3, 8, 'Grammar', 'eso1-i-e3'),
+        tagSaber(liveReflex('eso1-i-oral5', 'English mission', 'flash-tap', 3), 'eso1-i-e3')
       ], { saberIds: ['eso1-i-e3'] }),
     ];
   }
@@ -1037,42 +1037,42 @@
         liveMates('p4-m-num2', 'Cálculo mental', 1, 2, 5, null, 'p4-m-a1'),
         liveGame('p4-m-num3', 'Mix operaciones', 'neon-calculo', 3, 5, null, 'p4-m-a1'),
         liveMates('p4-m-num4', 'Dos pasos', 2, 3, 6, null, 'p4-m-a1'),
-        soon('p4-m-num5', 'Misión Números hasta 10.000', 'quiz', 5)
+        liveMates('p4-m-num5', 'Misión Números hasta 10.000', 4, 4, 6, 'Repaso final', 'p4-m-a1')
       ], { saberIds: ['p4-m-a1'] }),
       unit('p4-m-ops', 'Multiplicación y división', 'LOMLOE · productos y repartos con números mayores.', [
         liveGame('p4-m-ops1', 'Tablas express', 'tablas-relampago', 2, 4, null, 'p4-m-a2'),
         liveMates('p4-m-ops2', 'Cálculo mental', 1, 2, 5, null, 'p4-m-a2'),
         liveGame('p4-m-ops3', 'Mix operaciones', 'neon-calculo', 3, 5, null, 'p4-m-a2'),
         liveMates('p4-m-ops4', 'Dos pasos', 2, 3, 6, null, 'p4-m-a2'),
-        soon('p4-m-ops5', 'Misión Multiplicación y división', 'quiz', 5)
+        liveMates('p4-m-ops5', 'Misión Multiplicación y división', 4, 4, 6, 'Repaso final', 'p4-m-a2')
       ], { saberIds: ['p4-m-a2'] }),
       unit('p4-m-frac', 'Fracciones equivalentes', 'LOMLOE · comparar y simplificar fracciones.', [
         liveGame('p4-m-frac1', 'Fracciones equivalentes', 'neon-fracciones', 2, 5, 'Equivalencias', 'p4-m-a3'),
         liveGame('p4-m-frac2', 'Compara barras', 'neon-fracciones', 2, 5, 'Mayor o menor', 'p4-m-a3'),
         liveGame('p4-m-frac3', 'Mix fracciones', 'neon-fracciones', 3, 6, 'Velocidad', 'p4-m-a3'),
         liveMates('p4-m-frac4', 'Cálculo apoyo', 1, 2, 5, null, 'p4-m-a3'),
-        soon('p4-m-frac5', 'Misión Fracciones equivalentes', 'quiz', 5)
+        liveGame('p4-m-frac5', 'Misión Fracciones equivalentes', 'neon-fracciones', 4, 6, 'Velocidad', 'p4-m-a3')
       ], { saberIds: ['p4-m-a3'] }),
       unit('p4-m-dec', 'Decimales', 'LOMLOE · décimas, centésimas y cálculo.', [
         liveGame('p4-m-dec1', 'Tablas express', 'tablas-relampago', 2, 4, null, 'p4-m-b1'),
         liveMates('p4-m-dec2', 'Cálculo mental', 1, 2, 5, null, 'p4-m-b1'),
         liveGame('p4-m-dec3', 'Mix operaciones', 'neon-calculo', 3, 5, null, 'p4-m-b1'),
         liveMates('p4-m-dec4', 'Dos pasos', 2, 3, 6, null, 'p4-m-b1'),
-        soon('p4-m-dec5', 'Misión Decimales', 'quiz', 5)
+        liveMates('p4-m-dec5', 'Misión Decimales', 4, 4, 6, 'Repaso final', 'p4-m-b1')
       ], { saberIds: ['p4-m-b1'] }),
       unit('p4-m-prob', 'Problemas multiplicativos', 'LOMLOE · planificar operaciones combinadas.', [
         liveGame('p4-m-prob1', 'Tablas express', 'tablas-relampago', 2, 4, null, 'p4-m-a4'),
         liveMates('p4-m-prob2', 'Cálculo mental', 1, 2, 5, null, 'p4-m-a4'),
         liveGame('p4-m-prob3', 'Mix operaciones', 'neon-calculo', 3, 5, null, 'p4-m-a4'),
         liveMates('p4-m-prob4', 'Dos pasos', 2, 3, 6, null, 'p4-m-a4'),
-        soon('p4-m-prob5', 'Misión Problemas multiplicativos', 'quiz', 5)
+        liveMates('p4-m-prob5', 'Misión Problemas multiplicativos', 4, 4, 6, 'Repaso final', 'p4-m-a4')
       ], { saberIds: ['p4-m-a4'] }),
       unit('p4-m-geo', 'Ángulos y simetría', 'LOMLOE · figuras, ángulos y ejes de simetría.', [
         liveGame('p4-m-geo1', 'Clasifica figuras', 'neon-clasifica', 2, 5, 'Formas', 'p4-m-c1'),
         liveGame('p4-m-geo2', 'Simetría visual', 'neon-clasifica', 3, 5, 'Geometría', 'p4-m-c1'),
         liveGame('p4-m-geo3', 'Medir ángulos', 'neon-mayor-menor', 4, 5, 'Compara', 'p4-m-c1'),
         liveGame('p4-m-geo4', 'Eje de simetría', 'neon-clasifica', 4, 5, 'Parejas', 'p4-m-c1'),
-        soon('p4-m-geo5', 'Misión geometría', 'quiz', 5)
+        liveGame('p4-m-geo5', 'Misión geometría', 'neon-clasifica', 4, 5, 'Reto final', 'p4-m-c1')
       ], { saberIds: ['p4-m-c1'] }),
     ];
   }
@@ -1084,21 +1084,21 @@
         liveLenguaRot('p4-l-textos2', 'Ordena la frase', 2, 2, 'Sintaxis', 9, 'p4-l-c1'),
         liveLenguaRot('p4-l-textos3', 'Completa', 1, 3, 'Ortografía', 9, 'p4-l-c1'),
         liveLenguaRot('p4-l-textos4', 'Dictado', 0, 4, 'Sílabas', 9, 'p4-l-c1'),
-        soon('p4-l-textos5', 'Misión lengua', 'quiz', 5)
+        liveLenguaRot('p4-l-textos5', 'Misión lengua', 0, 4, 'Reto final', 9, 'p4-l-c1')
       ], { saberIds: ['p4-l-c1'] }),
       unit('p4-l-orto', 'Ortografía', 'LOMLOE · reglas ortográficas de 4º.', [
         liveLengua('p4-l-orto1', 'Lee y responde', 'neon-lectura', 2, 'Comprensión', 9, 'p4-l-c2'),
         liveLenguaRot('p4-l-orto2', 'Ordena la frase', 2, 2, 'Sintaxis', 9, 'p4-l-c2'),
         liveLenguaRot('p4-l-orto3', 'Completa', 1, 3, 'Ortografía', 9, 'p4-l-c2'),
         liveLenguaRot('p4-l-orto4', 'Dictado', 0, 4, 'Sílabas', 9, 'p4-l-c2'),
-        soon('p4-l-orto5', 'Misión lengua', 'quiz', 5)
+        liveLenguaRot('p4-l-orto5', 'Misión lengua', 0, 4, 'Reto final', 9, 'p4-l-c2')
       ], { saberIds: ['p4-l-c2'] }),
       unit('p4-l-gram', 'Sintaxis y literatura', 'LOMLOE · gramática y géneros literarios.', [
         liveLengua('p4-l-gram1', 'Lee y responde', 'neon-lectura', 2, 'Comprensión', 9, 'p4-l-c3'),
         liveLenguaRot('p4-l-gram2', 'Ordena la frase', 2, 2, 'Sintaxis', 9, 'p4-l-c3'),
         liveLenguaRot('p4-l-gram3', 'Completa', 1, 3, 'Ortografía', 9, 'p4-l-c3'),
         liveLenguaRot('p4-l-gram4', 'Dictado', 0, 4, 'Sílabas', 9, 'p4-l-c3'),
-        soon('p4-l-gram5', 'Misión lengua', 'quiz', 5)
+        liveLenguaRot('p4-l-gram5', 'Misión lengua', 0, 4, 'Reto final', 9, 'p4-l-c3')
       ], { saberIds: ['p4-l-c3'] }),
     ];
   }
@@ -1109,22 +1109,22 @@
         liveIngles('p4-i-past1', 'Vocab drill', 0, 1, 4, null, 'p4-i-e1'),
         liveIngles('p4-i-past2', 'Listen & tap', 1, 2, 4, null, 'p4-i-e1'),
         liveIngles('p4-i-past3', 'Fill the gap', 2, 3, 4, 'Grammar', 'p4-i-e1'),
-        soon('p4-i-past4', 'Grammar quiz', 'quiz', 4),
-        soon('p4-i-past5', 'English mission', 'quiz', 5)
+        liveIngles('p4-i-past4', 'Grammar quiz', 3, 3, 4, 'Grammar', 'p4-i-e1'),
+        tagSaber(liveReflex('p4-i-past5', 'English mission', 'flash-tap', 3), 'p4-i-e1')
       ], { saberIds: ['p4-i-e1'] }),
       unit('p4-i-comp', 'Comparatives', 'LOMLOE · comparar en inglés.', [
         liveIngles('p4-i-comp1', 'Vocab drill', 0, 1, 4, null, 'p4-i-e2'),
         liveIngles('p4-i-comp2', 'Listen & tap', 1, 2, 4, null, 'p4-i-e2'),
         liveIngles('p4-i-comp3', 'Fill the gap', 2, 3, 4, 'Compare', 'p4-i-e2'),
-        soon('p4-i-comp4', 'Grammar quiz', 'quiz', 4),
-        soon('p4-i-comp5', 'English mission', 'quiz', 5)
+        liveIngles('p4-i-comp4', 'Grammar quiz', 3, 3, 4, 'Grammar', 'p4-i-e2'),
+        tagSaber(liveReflex('p4-i-comp5', 'English mission', 'flash-tap', 3), 'p4-i-e2')
       ], { saberIds: ['p4-i-e2'] }),
       unit('p4-i-read', 'Reading comprehension', 'LOMLOE · leer y responder.', [
         liveIngles('p4-i-read1', 'Vocab drill', 0, 1, 4, null, 'p4-i-e3'),
         liveIngles('p4-i-read2', 'Listen & tap', 1, 2, 4, null, 'p4-i-e3'),
         liveIngles('p4-i-read3', 'Fill the gap', 2, 3, 4, 'Reading', 'p4-i-e3'),
-        soon('p4-i-read4', 'Grammar quiz', 'quiz', 4),
-        soon('p4-i-read5', 'English mission', 'quiz', 5)
+        liveIngles('p4-i-read4', 'Grammar quiz', 3, 3, 4, 'Grammar', 'p4-i-e3'),
+        tagSaber(liveReflex('p4-i-read5', 'English mission', 'flash-tap', 3), 'p4-i-e3')
       ], { saberIds: ['p4-i-e3'] }),
     ];
   }
@@ -1193,42 +1193,42 @@
         liveMates('p5-m-dec2', 'Cálculo mental', 1, 2, 6, null, 'p5-m-a1'),
         liveGame('p5-m-dec3', 'Mix operaciones', 'neon-calculo', 3, 6, null, 'p5-m-a1'),
         liveMates('p5-m-dec4', 'Dos pasos', 2, 3, 7, null, 'p5-m-a1'),
-        soon('p5-m-dec5', 'Misión Operaciones con decimales', 'quiz', 5)
+        liveMates('p5-m-dec5', 'Misión Operaciones con decimales', 4, 4, 7, 'Repaso final', 'p5-m-a1')
       ], { saberIds: ['p5-m-a1'] }),
       unit('p5-m-frac', 'Fracciones y decimales', 'LOMLOE · equivalencias y comparación.', [
         liveGame('p5-m-frac1', 'Equivalencias', 'neon-fracciones', 2, 6, 'Fracciones iguales', 'p5-m-a2'),
         liveGame('p5-m-frac2', 'Compara fracciones', 'neon-fracciones', 3, 6, 'Mayor o menor', 'p5-m-a2'),
         liveGame('p5-m-frac3', 'Mix visual', 'neon-fracciones', 3, 7, 'Velocidad', 'p5-m-a2'),
         liveGame('p5-m-frac4', 'Cálculo apoyo', 'neon-calculo', 2, 6, null, 'p5-m-a2'),
-        soon('p5-m-frac5', 'Misión Fracciones y decimales', 'quiz', 5)
+        liveGame('p5-m-frac5', 'Misión Fracciones y decimales', 'neon-fracciones', 4, 7, 'Velocidad', 'p5-m-a2')
       ], { saberIds: ['p5-m-a2'] }),
       unit('p5-m-pct', 'Porcentajes básicos', 'LOMLOE · descuentos y partes de un todo.', [
         liveGame('p5-m-pct1', 'Tablas express', 'tablas-relampago', 2, 5, null, 'p5-m-a3'),
         liveMates('p5-m-pct2', 'Cálculo mental', 1, 2, 6, null, 'p5-m-a3'),
         liveGame('p5-m-pct3', 'Mix operaciones', 'neon-calculo', 3, 6, null, 'p5-m-a3'),
         liveMates('p5-m-pct4', 'Dos pasos', 2, 3, 7, null, 'p5-m-a3'),
-        soon('p5-m-pct5', 'Misión Porcentajes básicos', 'quiz', 5)
+        liveMates('p5-m-pct5', 'Misión Porcentajes básicos', 4, 4, 7, 'Repaso final', 'p5-m-a3')
       ], { saberIds: ['p5-m-a3'] }),
       unit('p5-m-med', 'Área y volumen', 'LOMLOE · medidas, perímetro y volumen.', [
         liveGame('p5-m-med1', 'Tablas express', 'tablas-relampago', 2, 5, null, 'p5-m-b1'),
         liveMates('p5-m-med2', 'Cálculo mental', 1, 2, 6, null, 'p5-m-b1'),
         liveGame('p5-m-med3', 'Mix operaciones', 'neon-calculo', 3, 6, null, 'p5-m-b1'),
         liveMates('p5-m-med4', 'Dos pasos', 2, 3, 7, null, 'p5-m-b1'),
-        soon('p5-m-med5', 'Misión Área y volumen', 'quiz', 5)
+        liveGame('p5-m-med5', 'Misión Área y volumen', 'neon-calculo', 4, 7, 'Geometría', 'p5-m-b1')
       ], { saberIds: ['p5-m-b1'] }),
       unit('p5-m-prop', 'Problemas de proporción', 'LOMLOE · escalas y repartos proporcionales.', [
         liveGame('p5-m-prop1', 'Tablas express', 'tablas-relampago', 2, 5, null, 'p5-m-a4'),
         liveMates('p5-m-prop2', 'Cálculo mental', 1, 2, 6, null, 'p5-m-a4'),
         liveGame('p5-m-prop3', 'Mix operaciones', 'neon-calculo', 3, 6, null, 'p5-m-a4'),
         liveMates('p5-m-prop4', 'Dos pasos', 2, 3, 7, null, 'p5-m-a4'),
-        soon('p5-m-prop5', 'Misión Problemas de proporción', 'quiz', 5)
+        liveMates('p5-m-prop5', 'Misión Problemas de proporción', 4, 4, 7, 'Repaso final', 'p5-m-a4')
       ], { saberIds: ['p5-m-a4'] }),
       unit('p5-m-geo', 'Coordenadas y figuras', 'LOMLOE · plano cartesiano y transformaciones.', [
         liveGame('p5-m-geo1', 'Clasifica figuras', 'neon-clasifica', 2, 6, 'Formas', 'p5-m-c1'),
         liveGame('p5-m-geo2', 'Figuras en el plano', 'neon-clasifica', 3, 6, 'Geometría', 'p5-m-c1'),
         liveGame('p5-m-geo3', 'Coordenadas', 'neon-ordenar', 4, 6, 'Posición', 'p5-m-c1'),
         liveGame('p5-m-geo4', 'Simetría y giro', 'neon-clasifica', 4, 6, 'Transforma', 'p5-m-c1'),
-        soon('p5-m-geo5', 'Misión geometría', 'quiz', 5)
+        liveGame('p5-m-geo5', 'Misión geometría', 'neon-clasifica', 4, 6, 'Reto final', 'p5-m-c1')
       ], { saberIds: ['p5-m-c1'] }),
     ];
   }
@@ -1240,21 +1240,21 @@
         liveLenguaRot('p5-l-arg2', 'Ordena la frase', 2, 2, 'Sintaxis', 10, 'p5-l-c1'),
         liveLenguaRot('p5-l-arg3', 'Completa', 1, 3, 'Ortografía', 10, 'p5-l-c1'),
         liveLenguaRot('p5-l-arg4', 'Dictado', 0, 4, 'Sílabas', 10, 'p5-l-c1'),
-        soon('p5-l-arg5', 'Misión lengua', 'quiz', 5)
+        liveLenguaRot('p5-l-arg5', 'Misión lengua', 0, 4, 'Reto final', 10, 'p5-l-c1')
       ], { saberIds: ['p5-l-c1'] }),
       unit('p5-l-orto', 'Ortografía', 'LOMLOE · reglas ortográficas de 5º.', [
         liveLengua('p5-l-orto1', 'Lee y responde', 'neon-lectura', 2, 'Comprensión', 10, 'p5-l-c2'),
         liveLenguaRot('p5-l-orto2', 'Ordena la frase', 2, 2, 'Sintaxis', 10, 'p5-l-c2'),
         liveLenguaRot('p5-l-orto3', 'Completa', 1, 3, 'Ortografía', 10, 'p5-l-c2'),
         liveLenguaRot('p5-l-orto4', 'Dictado', 0, 4, 'Sílabas', 10, 'p5-l-c2'),
-        soon('p5-l-orto5', 'Misión lengua', 'quiz', 5)
+        liveLenguaRot('p5-l-orto5', 'Misión lengua', 0, 4, 'Reto final', 10, 'p5-l-c2')
       ], { saberIds: ['p5-l-c2'] }),
       unit('p5-l-gram', 'Gramática avanzada', 'LOMLOE · oración compuesta.', [
         liveLengua('p5-l-gram1', 'Lee y responde', 'neon-lectura', 2, 'Comprensión', 10, 'p5-l-c3'),
         liveLenguaRot('p5-l-gram2', 'Ordena la frase', 2, 2, 'Sintaxis', 10, 'p5-l-c3'),
         liveLenguaRot('p5-l-gram3', 'Completa', 1, 3, 'Ortografía', 10, 'p5-l-c3'),
         liveLenguaRot('p5-l-gram4', 'Dictado', 0, 4, 'Sílabas', 10, 'p5-l-c3'),
-        soon('p5-l-gram5', 'Misión lengua', 'quiz', 5)
+        liveLenguaRot('p5-l-gram5', 'Misión lengua', 0, 4, 'Reto final', 10, 'p5-l-c3')
       ], { saberIds: ['p5-l-c3'] }),
     ];
   }
@@ -1265,22 +1265,22 @@
         liveIngles('p5-i-perf1', 'Vocab drill', 0, 1, 5, null, 'p5-i-e1'),
         liveIngles('p5-i-perf2', 'Listen & tap', 1, 2, 5, null, 'p5-i-e1'),
         liveIngles('p5-i-perf3', 'Fill the gap', 2, 3, 5, 'Grammar', 'p5-i-e1'),
-        soon('p5-i-perf4', 'Grammar quiz', 'quiz', 4),
-        soon('p5-i-perf5', 'English mission', 'quiz', 5)
+        liveIngles('p5-i-perf4', 'Grammar quiz', 3, 3, 5, 'Grammar', 'p5-i-e1'),
+        tagSaber(liveReflex('p5-i-perf5', 'English mission', 'flash-tap', 3), 'p5-i-e1')
       ], { saberIds: ['p5-i-e1'] }),
       unit('p5-i-fut', 'Future forms', 'LOMLOE · will y going to.', [
         liveIngles('p5-i-fut1', 'Vocab drill', 0, 1, 5, null, 'p5-i-e2'),
         liveIngles('p5-i-fut2', 'Listen & tap', 1, 2, 5, null, 'p5-i-e2'),
         liveIngles('p5-i-fut3', 'Fill the gap', 2, 3, 5, 'Future', 'p5-i-e2'),
-        soon('p5-i-fut4', 'Grammar quiz', 'quiz', 4),
-        soon('p5-i-fut5', 'English mission', 'quiz', 5)
+        liveIngles('p5-i-fut4', 'Grammar quiz', 3, 3, 5, 'Grammar', 'p5-i-e2'),
+        tagSaber(liveReflex('p5-i-fut5', 'English mission', 'flash-tap', 3), 'p5-i-e2')
       ], { saberIds: ['p5-i-e2'] }),
       unit('p5-i-oral', 'Oral presentations', 'LOMLOE · exponer ideas.', [
         liveIngles('p5-i-oral1', 'Vocab drill', 0, 1, 5, null, 'p5-i-e3'),
         liveIngles('p5-i-oral2', 'Listen & tap', 1, 2, 5, null, 'p5-i-e3'),
         liveIngles('p5-i-oral3', 'Fill the gap', 2, 3, 5, 'Speaking', 'p5-i-e3'),
-        soon('p5-i-oral4', 'Grammar quiz', 'quiz', 4),
-        soon('p5-i-oral5', 'English mission', 'quiz', 5)
+        liveIngles('p5-i-oral4', 'Grammar quiz', 3, 3, 5, 'Grammar', 'p5-i-e3'),
+        tagSaber(liveReflex('p5-i-oral5', 'English mission', 'flash-tap', 3), 'p5-i-e3')
       ], { saberIds: ['p5-i-e3'] }),
     ];
   }
@@ -1349,42 +1349,42 @@
         liveMates('p6-m-prop2', 'Cálculo mental', 1, 2, 7, null, 'p6-m-a1'),
         liveGame('p6-m-prop3', 'Mix operaciones', 'neon-calculo', 3, 7, null, 'p6-m-a1'),
         liveMates('p6-m-prop4', 'Dos pasos', 2, 3, 8, null, 'p6-m-a1'),
-        soon('p6-m-prop5', 'Misión Proporcionalidad', 'quiz', 5)
+        liveMates('p6-m-prop5', 'Misión Proporcionalidad', 4, 4, 8, 'Repaso final', 'p6-m-a1')
       ], { saberIds: ['p6-m-a1'] }),
       unit('p6-m-int', 'Números enteros', 'LOMLOE · positivos, negativos y recta numérica.', [
         liveGame('p6-m-int1', 'Tablas express', 'tablas-relampago', 2, 6, null, 'p6-m-a2'),
         liveMates('p6-m-int2', 'Cálculo mental', 1, 2, 7, null, 'p6-m-a2'),
         liveGame('p6-m-int3', 'Mix operaciones', 'neon-calculo', 3, 7, null, 'p6-m-a2'),
         liveMates('p6-m-int4', 'Dos pasos', 2, 3, 8, null, 'p6-m-a2'),
-        soon('p6-m-int5', 'Misión Números enteros', 'quiz', 5)
+        liveMates('p6-m-int5', 'Misión Números enteros', 4, 4, 8, 'Repaso final', 'p6-m-a2')
       ], { saberIds: ['p6-m-a2'] }),
       unit('p6-m-frac', 'Fracciones avanzadas', 'LOMLOE · operaciones combinadas.', [
         liveGame('p6-m-frac1', 'Equivalencias avanzadas', 'neon-fracciones', 3, 7, 'Simplificar', 'p6-m-a3'),
         liveGame('p6-m-frac2', 'Compara y ordena', 'neon-fracciones', 3, 7, 'Comparación', 'p6-m-a3'),
         liveGame('p6-m-frac3', 'Mix fracciones', 'neon-fracciones', 3, 8, 'Velocidad', 'p6-m-a3'),
         liveGame('p6-m-frac4', 'Cálculo apoyo', 'neon-calculo', 2, 7, null, 'p6-m-a3'),
-        soon('p6-m-frac5', 'Misión Fracciones avanzadas', 'quiz', 5)
+        liveGame('p6-m-frac5', 'Misión Fracciones avanzadas', 'neon-fracciones', 4, 8, 'Reto final', 'p6-m-a3')
       ], { saberIds: ['p6-m-a3'] }),
       unit('p6-m-stat', 'Estadística básica', 'LOMLOE · media, moda y gráficos.', [
         liveGame('p6-m-stat1', 'Tablas express', 'tablas-relampago', 2, 6, null, 'p6-m-b1'),
         liveMates('p6-m-stat2', 'Cálculo mental', 1, 2, 7, null, 'p6-m-b1'),
         liveGame('p6-m-stat3', 'Mix operaciones', 'neon-calculo', 3, 7, null, 'p6-m-b1'),
         liveMates('p6-m-stat4', 'Dos pasos', 2, 3, 8, null, 'p6-m-b1'),
-        soon('p6-m-stat5', 'Misión Estadística básica', 'quiz', 5)
+        liveMates('p6-m-stat5', 'Misión Estadística básica', 4, 4, 8, 'Repaso final', 'p6-m-b1')
       ], { saberIds: ['p6-m-b1'] }),
       unit('p6-m-alg', 'Álgebra inicial', 'LOMLOE · incógnitas y problemas complejos.', [
         liveGame('p6-m-alg1', 'Tablas express', 'tablas-relampago', 2, 6, null, 'p6-m-a4'),
         liveMates('p6-m-alg2', 'Cálculo mental', 1, 2, 7, null, 'p6-m-a4'),
         liveGame('p6-m-alg3', 'Mix operaciones', 'neon-calculo', 3, 7, null, 'p6-m-a4'),
         liveMates('p6-m-alg4', 'Dos pasos', 2, 3, 8, null, 'p6-m-a4'),
-        soon('p6-m-alg5', 'Misión Álgebra inicial', 'quiz', 5)
+        liveMates('p6-m-alg5', 'Misión Álgebra inicial', 4, 4, 8, 'Repaso final', 'p6-m-a4')
       ], { saberIds: ['p6-m-a4'] }),
       unit('p6-m-geo', 'Geometría avanzada', 'LOMLOE · circunferencia, área y volumen.', [
         liveGame('p6-m-geo1', 'Clasifica figuras', 'neon-clasifica', 2, 7, 'Formas', 'p6-m-c1'),
         liveGame('p6-m-geo2', 'Área y perímetro', 'neon-clasifica', 3, 7, 'Geometría', 'p6-m-c1'),
         liveGame('p6-m-geo3', 'Circunferencia', 'neon-calculo', 4, 7, 'π y radio', 'p6-m-c1'),
         liveGame('p6-m-geo4', 'Volumen', 'neon-calculo', 4, 7, 'Prismas', 'p6-m-c1'),
-        soon('p6-m-geo5', 'Misión geometría', 'quiz', 5)
+        liveGame('p6-m-geo5', 'Misión geometría', 'neon-calculo', 4, 7, 'Reto final', 'p6-m-c1')
       ], { saberIds: ['p6-m-c1'] }),
     ];
   }
@@ -1396,21 +1396,21 @@
         liveLenguaRot('p6-l-anal2', 'Ordena la frase', 2, 2, 'Sintaxis', 11, 'p6-l-c1'),
         liveLenguaRot('p6-l-anal3', 'Completa', 1, 3, 'Ortografía', 11, 'p6-l-c1'),
         liveLenguaRot('p6-l-anal4', 'Dictado', 0, 4, 'Sílabas', 11, 'p6-l-c1'),
-        soon('p6-l-anal5', 'Misión lengua', 'quiz', 5)
+        liveLenguaRot('p6-l-anal5', 'Misión lengua', 0, 4, 'Reto final', 11, 'p6-l-c1')
       ], { saberIds: ['p6-l-c1'] }),
       unit('p6-l-red', 'Ortografía y redacción', 'LOMLOE · textos formales.', [
         liveLengua('p6-l-red1', 'Lee y responde', 'neon-lectura', 2, 'Comprensión', 11, 'p6-l-c2'),
         liveLenguaRot('p6-l-red2', 'Ordena la frase', 2, 2, 'Sintaxis', 11, 'p6-l-c2'),
         liveLenguaRot('p6-l-red3', 'Completa', 1, 3, 'Ortografía', 11, 'p6-l-c2'),
         liveLenguaRot('p6-l-red4', 'Dictado', 0, 4, 'Sílabas', 11, 'p6-l-c2'),
-        soon('p6-l-red5', 'Misión lengua', 'quiz', 5)
+        liveLenguaRot('p6-l-red5', 'Misión lengua', 0, 4, 'Reto final', 11, 'p6-l-c2')
       ], { saberIds: ['p6-l-c2'] }),
       unit('p6-l-lit', 'Literatura española', 'LOMLOE · autores y géneros.', [
         liveLengua('p6-l-lit1', 'Lee y responde', 'neon-lectura', 2, 'Comprensión', 11, 'p6-l-c3'),
         liveLenguaRot('p6-l-lit2', 'Ordena la frase', 2, 2, 'Sintaxis', 11, 'p6-l-c3'),
         liveLenguaRot('p6-l-lit3', 'Completa', 1, 3, 'Ortografía', 11, 'p6-l-c3'),
         liveLenguaRot('p6-l-lit4', 'Dictado', 0, 4, 'Sílabas', 11, 'p6-l-c3'),
-        soon('p6-l-lit5', 'Misión lengua', 'quiz', 5)
+        liveLenguaRot('p6-l-lit5', 'Misión lengua', 0, 4, 'Reto final', 11, 'p6-l-c3')
       ], { saberIds: ['p6-l-c3'] }),
     ];
   }
@@ -1421,22 +1421,22 @@
         liveIngles('p6-i-cond1', 'Vocab drill', 0, 1, 6, null, 'p6-i-e1'),
         liveIngles('p6-i-cond2', 'Listen & tap', 1, 2, 6, null, 'p6-i-e1'),
         liveIngles('p6-i-cond3', 'Fill the gap', 2, 3, 6, 'Modals', 'p6-i-e1'),
-        soon('p6-i-cond4', 'Grammar quiz', 'quiz', 4),
-        soon('p6-i-cond5', 'English mission', 'quiz', 5)
+        liveIngles('p6-i-cond4', 'Grammar quiz', 3, 3, 6, 'Grammar', 'p6-i-e1'),
+        tagSaber(liveReflex('p6-i-cond5', 'English mission', 'flash-tap', 3), 'p6-i-e1')
       ], { saberIds: ['p6-i-e1'] }),
       unit('p6-i-pass', 'Passive voice', 'LOMLOE · transformaciones.', [
         liveIngles('p6-i-pass1', 'Vocab drill', 0, 1, 6, null, 'p6-i-e2'),
         liveIngles('p6-i-pass2', 'Listen & tap', 1, 2, 6, null, 'p6-i-e2'),
         liveIngles('p6-i-pass3', 'Fill the gap', 2, 3, 6, 'Passive', 'p6-i-e2'),
-        soon('p6-i-pass4', 'Grammar quiz', 'quiz', 4),
-        soon('p6-i-pass5', 'English mission', 'quiz', 5)
+        liveIngles('p6-i-pass4', 'Grammar quiz', 3, 3, 6, 'Grammar', 'p6-i-e2'),
+        tagSaber(liveReflex('p6-i-pass5', 'English mission', 'flash-tap', 3), 'p6-i-e2')
       ], { saberIds: ['p6-i-e2'] }),
       unit('p6-i-proj', 'Project language', 'LOMLOE · vocabulario académico.', [
         liveIngles('p6-i-proj1', 'Vocab drill', 0, 1, 6, null, 'p6-i-e3'),
         liveIngles('p6-i-proj2', 'Listen & tap', 1, 2, 6, null, 'p6-i-e3'),
         liveIngles('p6-i-proj3', 'Fill the gap', 2, 3, 6, 'Academic', 'p6-i-e3'),
-        soon('p6-i-proj4', 'Grammar quiz', 'quiz', 4),
-        soon('p6-i-proj5', 'English mission', 'quiz', 5)
+        liveIngles('p6-i-proj4', 'Grammar quiz', 3, 3, 6, 'Grammar', 'p6-i-e3'),
+        tagSaber(liveReflex('p6-i-proj5', 'English mission', 'flash-tap', 3), 'p6-i-e3')
       ], { saberIds: ['p6-i-e3'] }),
     ];
   }
@@ -1504,42 +1504,42 @@
         liveGame('eso2-m-lin2', 'Tablas flash', 'tablas-relampago', 2, 9, null, 'eso2-m-a1'),
         liveMates('eso2-m-lin3', 'Álgebra mental', 2, 3, 10, null, 'eso2-m-a1'),
         liveMates('eso2-m-lin4', 'Problemas', 3, 4, 10, null, 'eso2-m-a1'),
-        soon('eso2-m-lin5', 'Misión Funciones lineales', 'quiz', 5)
+        liveMates('eso2-m-lin5', 'Misión Funciones lineales', 4, 4, 10, 'Repaso final', 'eso2-m-a1')
       ], { saberIds: ['eso2-m-a1'] }),
       unit('eso2-m-sis', 'Sistemas de ecuaciones', 'LOMLOE · resolución algebraica y gráfica.', [
         liveGame('eso2-m-sis1', 'Cálculo express', 'neon-calculo', 3, 9, null, 'eso2-m-a2'),
         liveGame('eso2-m-sis2', 'Tablas flash', 'tablas-relampago', 2, 9, null, 'eso2-m-a2'),
         liveMates('eso2-m-sis3', 'Álgebra mental', 2, 3, 10, null, 'eso2-m-a2'),
         liveMates('eso2-m-sis4', 'Problemas', 3, 4, 10, null, 'eso2-m-a2'),
-        soon('eso2-m-sis5', 'Misión Sistemas de ecuaciones', 'quiz', 5)
+        liveMates('eso2-m-sis5', 'Misión Sistemas de ecuaciones', 4, 4, 10, 'Repaso final', 'eso2-m-a2')
       ], { saberIds: ['eso2-m-a2'] }),
       unit('eso2-m-pit', 'Teorema de Pitágoras', 'LOMLOE · triángulos rectángulos.', [
         liveGame('eso2-m-pit1', 'Cálculo express', 'neon-calculo', 3, 9, null, 'eso2-m-a3'),
         liveGame('eso2-m-pit2', 'Tablas flash', 'tablas-relampago', 2, 9, null, 'eso2-m-a3'),
         liveMates('eso2-m-pit3', 'Álgebra mental', 2, 3, 10, null, 'eso2-m-a3'),
         liveMates('eso2-m-pit4', 'Problemas', 3, 4, 10, null, 'eso2-m-a3'),
-        soon('eso2-m-pit5', 'Misión Teorema de Pitágoras', 'quiz', 5)
+        liveGame('eso2-m-pit5', 'Misión Teorema de Pitágoras', 'neon-calculo', 4, 10, 'Reto final', 'eso2-m-a3')
       ], { saberIds: ['eso2-m-a3'] }),
       unit('eso2-m-prob', 'Probabilidad', 'LOMLOE · experimentos aleatorios.', [
         liveGame('eso2-m-prob1', 'Cálculo express', 'neon-calculo', 3, 9, null, 'eso2-m-b1'),
         liveGame('eso2-m-prob2', 'Tablas flash', 'tablas-relampago', 2, 9, null, 'eso2-m-b1'),
         liveMates('eso2-m-prob3', 'Álgebra mental', 2, 3, 10, null, 'eso2-m-b1'),
         liveMates('eso2-m-prob4', 'Problemas', 3, 4, 10, null, 'eso2-m-b1'),
-        soon('eso2-m-prob5', 'Misión Probabilidad', 'quiz', 5)
+        liveMates('eso2-m-prob5', 'Misión Probabilidad', 4, 4, 10, 'Repaso final', 'eso2-m-b1')
       ], { saberIds: ['eso2-m-b1'] }),
       unit('eso2-m-real', 'Números reales', 'LOMLOE · irracionales y recta real.', [
         liveGame('eso2-m-real1', 'Cálculo express', 'neon-calculo', 3, 9, null, 'eso2-m-a4'),
         liveGame('eso2-m-real2', 'Tablas flash', 'tablas-relampago', 2, 9, null, 'eso2-m-a4'),
         liveMates('eso2-m-real3', 'Álgebra mental', 2, 3, 10, null, 'eso2-m-a4'),
         liveMates('eso2-m-real4', 'Problemas', 3, 4, 10, null, 'eso2-m-a4'),
-        soon('eso2-m-real5', 'Misión Números reales', 'quiz', 5)
+        liveMates('eso2-m-real5', 'Misión Números reales', 4, 4, 10, 'Repaso final', 'eso2-m-a4')
       ], { saberIds: ['eso2-m-a4'] }),
       unit('eso2-m-geo', 'Geometría en el espacio', 'LOMLOE · prismas, pirámides y volumen.', [
         liveGame('eso2-m-geo1', 'Clasifica sólidos', 'neon-clasifica', 3, 10, 'Formas', 'eso2-m-c1'),
         liveGame('eso2-m-geo2', 'Volumen visual', 'neon-clasifica', 3, 10, 'Geometría', 'eso2-m-c1'),
-        soon('eso2-m-geo3', 'Prismas y pirámides', 'mini-game', 4),
-        soon('eso2-m-geo4', 'Cuerpos en 3D', 'drag-drop', 4),
-        soon('eso2-m-geo5', 'Misión geometría', 'quiz', 5)
+        liveGame('eso2-m-geo3', 'Prismas y pirámides', 'neon-clasifica', 4, 10, 'Sólidos', 'eso2-m-c1'),
+        liveGame('eso2-m-geo4', 'Cuerpos en 3D', 'neon-calculo', 4, 10, 'Volumen', 'eso2-m-c1'),
+        liveGame('eso2-m-geo5', 'Misión geometría', 'neon-clasifica', 4, 10, 'Reto final', 'eso2-m-c1')
       ], { saberIds: ['eso2-m-c1'] }),
     ];
   }
@@ -1550,22 +1550,22 @@
         liveLengua('eso2-l-mov1', 'Lee y analiza', 'neon-lectura', 3, 'Comprensión', 11, 'eso2-l-c1'),
         liveLenguaRot('eso2-l-mov2', 'Ordena y corrige', 2, 3, 'Sintaxis', 11, 'eso2-l-c1'),
         liveLenguaRot('eso2-l-mov3', 'Completa', 1, 4, 'Ortografía', 12, 'eso2-l-c1'),
-        soon('eso2-l-mov4', 'Redacción', 'typing', 4),
-        soon('eso2-l-mov5', 'Misión lengua', 'quiz', 5)
+        liveLenguaRot('eso2-l-mov4', 'Redacción', 3, 4, 'Escribe', 12, 'eso2-l-c1'),
+        liveLenguaRot('eso2-l-mov5', 'Misión lengua', 0, 4, 'Reto final', 12, 'eso2-l-c1')
       ], { saberIds: ['eso2-l-c1'] }),
       unit('eso2-l-sin', 'Análisis sintáctico', 'LOMLOE · oraciones compuestas.', [
         liveLengua('eso2-l-sin1', 'Lee y analiza', 'neon-lectura', 3, 'Comprensión', 11, 'eso2-l-c2'),
         liveLenguaRot('eso2-l-sin2', 'Ordena y corrige', 2, 3, 'Sintaxis', 11, 'eso2-l-c2'),
         liveLenguaRot('eso2-l-sin3', 'Completa', 1, 4, 'Ortografía', 12, 'eso2-l-c2'),
-        soon('eso2-l-sin4', 'Redacción', 'typing', 4),
-        soon('eso2-l-sin5', 'Misión lengua', 'quiz', 5)
+        liveLenguaRot('eso2-l-sin4', 'Redacción', 3, 4, 'Escribe', 12, 'eso2-l-c2'),
+        liveLenguaRot('eso2-l-sin5', 'Misión lengua', 0, 4, 'Reto final', 12, 'eso2-l-c2')
       ], { saberIds: ['eso2-l-c2'] }),
       unit('eso2-l-av', 'Comunicación audiovisual', 'LOMLOE · medios y opinión.', [
         liveLengua('eso2-l-av1', 'Lee y analiza', 'neon-lectura', 3, 'Comprensión', 11, 'eso2-l-c3'),
         liveLenguaRot('eso2-l-av2', 'Ordena y corrige', 2, 3, 'Sintaxis', 11, 'eso2-l-c3'),
         liveLenguaRot('eso2-l-av3', 'Completa', 1, 4, 'Ortografía', 12, 'eso2-l-c3'),
-        soon('eso2-l-av4', 'Redacción', 'typing', 4),
-        soon('eso2-l-av5', 'Misión lengua', 'quiz', 5)
+        liveLenguaRot('eso2-l-av4', 'Redacción', 3, 4, 'Escribe', 12, 'eso2-l-c3'),
+        liveLenguaRot('eso2-l-av5', 'Misión lengua', 0, 4, 'Reto final', 12, 'eso2-l-c3')
       ], { saberIds: ['eso2-l-c3'] }),
     ];
   }
@@ -1575,23 +1575,23 @@
       unit('eso2-i-rep', 'Reported speech', 'LOMLOE · estilo indirecto.', [
         liveIngles('eso2-i-rep1', 'Vocab drill', 0, 2, 9, null, 'eso2-i-e1'),
         liveIngles('eso2-i-rep2', 'Listen & tap', 1, 3, 9, null, 'eso2-i-e1'),
-        soon('eso2-i-rep3', 'Fill the gap', 'typing', 3),
-        soon('eso2-i-rep4', 'Grammar quiz', 'quiz', 4),
-        soon('eso2-i-rep5', 'English mission', 'quiz', 5)
+        liveIngles('eso2-i-rep3', 'Fill the gap', 2, 3, 9, 'Reported', 'eso2-i-e1'),
+        liveIngles('eso2-i-rep4', 'Grammar quiz', 3, 3, 9, 'Grammar', 'eso2-i-e1'),
+        tagSaber(liveReflex('eso2-i-rep5', 'English mission', 'flash-tap', 3), 'eso2-i-e1')
       ], { saberIds: ['eso2-i-e1'] }),
       unit('eso2-i-rel', 'Relative clauses', 'LOMLOE · oraciones de relativo.', [
         liveIngles('eso2-i-rel1', 'Vocab drill', 0, 2, 9, null, 'eso2-i-e2'),
         liveIngles('eso2-i-rel2', 'Listen & tap', 1, 3, 9, null, 'eso2-i-e2'),
-        soon('eso2-i-rel3', 'Fill the gap', 'typing', 3),
-        soon('eso2-i-rel4', 'Grammar quiz', 'quiz', 4),
-        soon('eso2-i-rel5', 'English mission', 'quiz', 5)
+        liveIngles('eso2-i-rel3', 'Fill the gap', 2, 3, 9, 'Relatives', 'eso2-i-e2'),
+        liveIngles('eso2-i-rel4', 'Grammar quiz', 3, 3, 9, 'Grammar', 'eso2-i-e2'),
+        tagSaber(liveReflex('eso2-i-rel5', 'English mission', 'flash-tap', 3), 'eso2-i-e2')
       ], { saberIds: ['eso2-i-e2'] }),
       unit('eso2-i-deb', 'Debate and opinion', 'LOMLOE · argumentar en inglés.', [
         liveIngles('eso2-i-deb1', 'Vocab drill', 0, 2, 9, null, 'eso2-i-e3'),
         liveIngles('eso2-i-deb2', 'Listen & tap', 1, 3, 9, null, 'eso2-i-e3'),
-        soon('eso2-i-deb3', 'Fill the gap', 'typing', 3),
-        soon('eso2-i-deb4', 'Grammar quiz', 'quiz', 4),
-        soon('eso2-i-deb5', 'English mission', 'quiz', 5)
+        liveIngles('eso2-i-deb3', 'Fill the gap', 2, 3, 9, 'Debate', 'eso2-i-e3'),
+        liveIngles('eso2-i-deb4', 'Grammar quiz', 3, 3, 9, 'Grammar', 'eso2-i-e3'),
+        tagSaber(liveReflex('eso2-i-deb5', 'English mission', 'flash-tap', 3), 'eso2-i-e3')
       ], { saberIds: ['eso2-i-e3'] }),
     ];
   }
