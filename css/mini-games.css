@@ -523,3 +523,28 @@ body.game-page {
   font-size: 1.125rem;
   font-weight: 600;
 }
+
+.frac-compare {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: var(--lipa-space-md, 16px);
+}
+
+.frac-compare__col {
+  flex: 0 1 auto;
+}
+
+.frac-compare__label {
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin: 0 0 6px;
+  color: var(--lipa-text-secondary);
+}
+
+.frac-compare .frac-bar {
+  width: min(140px, 40vw);
+  margin: 0;
+}

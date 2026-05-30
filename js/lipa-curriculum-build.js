@@ -634,7 +634,7 @@
         liveGame('p3-m-f1', 'Pizza: medios y cuartos', 'neon-fracciones', 1, 3, '¿Qué fracción es?', 'p3-m-a3'),
         liveGame('p3-m-f2', 'Tercios y cuartos', 'neon-fracciones', 2, 3, 'Compara visual', 'p3-m-a3'),
         liveGame('p3-m-f3', 'Mix fracciones', 'neon-fracciones', 2, 4, 'Velocidad', 'p3-m-a3'),
-        soon('p3-m-f4', 'Compara fracciones', 'multiple-choice', 3),
+        liveGame('p3-m-f4', 'Compara fracciones', 'neon-fracciones', 3, 4, '¿Cuál es mayor?', 'p3-m-a3'),
         soon('p3-m-f5', 'Reto pizza', 'quiz', 5)
       ], { saberIds: ['p3-m-a3'] }),
       unit('p3-m-medidas', 'Medidas y perímetro', 'LOMLOE · longitud y contorno.', [
@@ -848,9 +848,9 @@
   function eso1Math() {
     return [
       unit('eso1-m-rac', 'Números racionales', 'LOMLOE · fracciones, decimales y operaciones.', [
-        liveGame('eso1-m-rac1', 'Cálculo express', 'neon-calculo', 3, 8, null, 'eso1-m-a1'),
-        liveGame('eso1-m-rac2', 'Tablas flash', 'tablas-relampago', 2, 8, null, 'eso1-m-a1'),
-        liveMates('eso1-m-rac3', 'Álgebra mental', 2, 3, 9, null, 'eso1-m-a1'),
+        liveGame('eso1-m-rac1', 'Fracciones racionales', 'neon-fracciones', 3, 8, 'Equivalencias', 'eso1-m-a1'),
+        liveGame('eso1-m-rac2', 'Compara racionales', 'neon-fracciones', 3, 9, 'Comparación', 'eso1-m-a1'),
+        liveGame('eso1-m-rac3', 'Cálculo express', 'neon-calculo', 3, 8, null, 'eso1-m-a1'),
         liveMates('eso1-m-rac4', 'Problemas', 3, 4, 9, null, 'eso1-m-a1'),
         soon('eso1-m-rac5', 'Misión Números racionales', 'quiz', 5)
       ], { saberIds: ['eso1-m-a1'] }),
@@ -1047,10 +1047,10 @@
         soon('p4-m-ops5', 'Misión Multiplicación y división', 'quiz', 5)
       ], { saberIds: ['p4-m-a2'] }),
       unit('p4-m-frac', 'Fracciones equivalentes', 'LOMLOE · comparar y simplificar fracciones.', [
-        liveGame('p4-m-frac1', 'Tablas express', 'tablas-relampago', 2, 4, null, 'p4-m-a3'),
-        liveMates('p4-m-frac2', 'Cálculo mental', 1, 2, 5, null, 'p4-m-a3'),
-        liveGame('p4-m-frac3', 'Mix operaciones', 'neon-calculo', 3, 5, null, 'p4-m-a3'),
-        liveMates('p4-m-frac4', 'Dos pasos', 2, 3, 6, null, 'p4-m-a3'),
+        liveGame('p4-m-frac1', 'Fracciones equivalentes', 'neon-fracciones', 2, 5, 'Equivalencias', 'p4-m-a3'),
+        liveGame('p4-m-frac2', 'Compara barras', 'neon-fracciones', 2, 5, 'Mayor o menor', 'p4-m-a3'),
+        liveGame('p4-m-frac3', 'Mix fracciones', 'neon-fracciones', 3, 6, 'Velocidad', 'p4-m-a3'),
+        liveMates('p4-m-frac4', 'Cálculo apoyo', 1, 2, 5, null, 'p4-m-a3'),
         soon('p4-m-frac5', 'Misión Fracciones equivalentes', 'quiz', 5)
       ], { saberIds: ['p4-m-a3'] }),
       unit('p4-m-dec', 'Decimales', 'LOMLOE · décimas, centésimas y cálculo.', [
@@ -1196,10 +1196,10 @@
         soon('p5-m-dec5', 'Misión Operaciones con decimales', 'quiz', 5)
       ], { saberIds: ['p5-m-a1'] }),
       unit('p5-m-frac', 'Fracciones y decimales', 'LOMLOE · equivalencias y comparación.', [
-        liveGame('p5-m-frac1', 'Tablas express', 'tablas-relampago', 2, 5, null, 'p5-m-a2'),
-        liveMates('p5-m-frac2', 'Cálculo mental', 1, 2, 6, null, 'p5-m-a2'),
-        liveGame('p5-m-frac3', 'Mix operaciones', 'neon-calculo', 3, 6, null, 'p5-m-a2'),
-        liveMates('p5-m-frac4', 'Dos pasos', 2, 3, 7, null, 'p5-m-a2'),
+        liveGame('p5-m-frac1', 'Equivalencias', 'neon-fracciones', 2, 6, 'Fracciones iguales', 'p5-m-a2'),
+        liveGame('p5-m-frac2', 'Compara fracciones', 'neon-fracciones', 3, 6, 'Mayor o menor', 'p5-m-a2'),
+        liveGame('p5-m-frac3', 'Mix visual', 'neon-fracciones', 3, 7, 'Velocidad', 'p5-m-a2'),
+        liveGame('p5-m-frac4', 'Cálculo apoyo', 'neon-calculo', 2, 6, null, 'p5-m-a2'),
         soon('p5-m-frac5', 'Misión Fracciones y decimales', 'quiz', 5)
       ], { saberIds: ['p5-m-a2'] }),
       unit('p5-m-pct', 'Porcentajes básicos', 'LOMLOE · descuentos y partes de un todo.', [
@@ -1359,10 +1359,10 @@
         soon('p6-m-int5', 'Misión Números enteros', 'quiz', 5)
       ], { saberIds: ['p6-m-a2'] }),
       unit('p6-m-frac', 'Fracciones avanzadas', 'LOMLOE · operaciones combinadas.', [
-        liveGame('p6-m-frac1', 'Tablas express', 'tablas-relampago', 2, 6, null, 'p6-m-a3'),
-        liveMates('p6-m-frac2', 'Cálculo mental', 1, 2, 7, null, 'p6-m-a3'),
-        liveGame('p6-m-frac3', 'Mix operaciones', 'neon-calculo', 3, 7, null, 'p6-m-a3'),
-        liveMates('p6-m-frac4', 'Dos pasos', 2, 3, 8, null, 'p6-m-a3'),
+        liveGame('p6-m-frac1', 'Equivalencias avanzadas', 'neon-fracciones', 3, 7, 'Simplificar', 'p6-m-a3'),
+        liveGame('p6-m-frac2', 'Compara y ordena', 'neon-fracciones', 3, 7, 'Comparación', 'p6-m-a3'),
+        liveGame('p6-m-frac3', 'Mix fracciones', 'neon-fracciones', 3, 8, 'Velocidad', 'p6-m-a3'),
+        liveGame('p6-m-frac4', 'Cálculo apoyo', 'neon-calculo', 2, 7, null, 'p6-m-a3'),
         soon('p6-m-frac5', 'Misión Fracciones avanzadas', 'quiz', 5)
       ], { saberIds: ['p6-m-a3'] }),
       unit('p6-m-stat', 'Estadística básica', 'LOMLOE · media, moda y gráficos.', [
@@ -1685,9 +1685,9 @@
     var infantil = course.stage === 'infantil';
     var byType = {
       ordering: subjectId === 'matematicas' ? 'neon-ordenar' : (infantil ? 'neon-peques' : 'neon-frase'),
-      matching: subjectId === 'matematicas' || subjectId === 'naturales' || subjectId === 'sociales'
+      matching: subjectId === 'matematicas' ? 'neon-fracciones' : (subjectId === 'naturales' || subjectId === 'sociales'
         ? 'neon-clasifica'
-        : (infantil ? 'neon-peques' : 'neon-silabas'),
+        : (infantil ? 'neon-peques' : 'neon-silabas')),
       'multiple-choice': subjectId === 'matematicas' ? 'neon-mayor-menor' : (infantil ? 'neon-peques' : 'neon-lectura'),
       quiz: infantil ? 'neon-numeros' : (subjectId === 'ingles' ? 'neon-palabras' : 'neon-calculo'),
       listening: 'neon-palabras',

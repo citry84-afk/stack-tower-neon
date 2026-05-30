@@ -72,17 +72,71 @@
     return out;
   }
 
+  function buildEquivalentRound() {
+    var pairs = [[1, 2, 2, 4], [1, 3, 2, 6], [2, 3, 4, 6], [1, 4, 2, 8], [2, 4, 1, 2]];
+    var p = pick(pairs);
+    var showNum = p[0];
+    var showDen = p[1];
+    var eqNum = p[2];
+    var eqDen = p[3];
+    var correctLabel = fracLabel(eqNum, eqDen);
+    var wrong = wrongFractions(eqNum, eqDen).filter(function (w) {
+      return w !== correctLabel && w !== fracLabel(showNum, showDen);
+    });
+    while (wrong.length < 2) wrong.push(fracLabel(1, showDen + 1));
+    return {
+      prompt: 'Esta barra es ' + fracLabel(showNum, showDen) + '. ¿Qué fracción es igual?',
+      answer: correctLabel,
+      choices: shuffle([correctLabel].concat(wrong.slice(0, 2))),
+      visual: renderBar(showNum, showDen)
+    };
+  }
+
+  function buildCompareRound() {
+    var d1 = pick(denominatorsForLevel());
+    var n1 = 1 + Math.floor(Math.random() * (d1 - 1));
+    var d2 = pick(denominatorsForLevel());
+    var n2 = 1 + Math.floor(Math.random() * (d2 - 1));
+    var v1 = n1 / d1;
+    var v2 = n2 / d2;
+    var tries = 0;
+    while (Math.abs(v1 - v2) < 0.05 && tries < 12) {
+      d2 = pick(denominatorsForLevel());
+      n2 = 1 + Math.floor(Math.random() * (d2 - 1));
+      v2 = n2 / d2;
+      tries++;
+    }
+    var answer = v1 >= v2 ? 'A' : 'B';
+    return {
+      prompt: '¿Qué barra tiene MÁS partes coloreadas?',
+      answer: answer,
+      choices: shuffle(['A', 'B']),
+      visual:
+        '<div class="frac-compare">' +
+        '<div class="frac-compare__col"><p class="frac-compare__label">A · ' + fracLabel(n1, d1) + '</p>' + renderBar(n1, d1) + '</div>' +
+        '<div class="frac-compare__col"><p class="frac-compare__label">B · ' + fracLabel(n2, d2) + '</p>' + renderBar(n2, d2) + '</div>' +
+        '</div>'
+    };
+  }
+
+  function modesForLevel() {
+    var modes = ['identify', 'parts'];
+    if (brainLevel >= 3) modes.push('equivalent');
+    if (brainLevel >= 4) modes.push('compare');
+    return modes;
+  }
+
   function buildRound() {
+    var mode = pick(modesForLevel());
+    if (mode === 'equivalent') return buildEquivalentRound();
+    if (mode === 'compare') return buildCompareRound();
+
     var den = pick(denominatorsForLevel());
     var num = 1 + Math.floor(Math.random() * (den - 1));
     var correctLabel = fracLabel(num, den);
-    var mode = pick(['identify', 'parts']);
 
     if (mode === 'parts') {
       return {
-        mode: 'parts',
-        num: num,
-        den: den,
         prompt: '¿Cuántas partes iguales tiene la barra?',
         answer: String(den),
         choices: shuffle([String(den), String(Math.max(2, den - 1)), String(den + 1)]),
@@ -91,9 +145,6 @@
     }
 
     return {
-      mode: 'identify',
-      num: num,
-      den: den,
       prompt: '¿Qué fracción está coloreada?',
       answer: correctLabel,
       choices: shuffle([correctLabel].concat(wrongFractions(num, den))),
