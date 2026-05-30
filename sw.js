@@ -3,7 +3,7 @@
  * PWA Optimization & Offline Functionality
  */
 
-const CACHE_NAME = 'lipa-brain-gym-v3.32.0-dictado-empareja';
+const CACHE_NAME = 'lipa-brain-gym-v3.33.0-arrastra';
 const CACHE_VERSION = '2.0.0';
 
 // Essential files to cache for offline play
@@ -110,6 +110,8 @@ const STATIC_CACHE_URLS = [
     '/js/neon-dictado.js',
     '/neon-empareja.html',
     '/js/neon-empareja.js',
+    '/neon-arrastra.html',
+    '/js/neon-arrastra.js',
     '/css/brain-evolution.css',
     '/css/mini-games.css',
     '/js/lipa-daily.js',

@@ -368,6 +368,19 @@
       higherIsBetter: true,
       metricLabel: 'pts',
       ageMin: 3
+    },
+    'neon-arrastra': {
+      id: 'neon-arrastra',
+      name: 'Neon Arrastra',
+      short: 'Arrastra',
+      emoji: '✋',
+      url: '/neon-arrastra.html',
+      pillar: 'language',
+      cat: 'lengua',
+      desc: 'Arrastra sílabas y figuras a su sitio',
+      higherIsBetter: true,
+      metricLabel: 'pts',
+      ageMin: 3
     }
   };
 

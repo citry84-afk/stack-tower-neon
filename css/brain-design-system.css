@@ -779,6 +779,116 @@ body.lipa-brain-soft .game-overlay {
   outline-offset: 2px;
 }
 
+.arrastra-slots {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.arrastra-slot {
+  min-width: 56px;
+  min-height: 52px;
+  border: 2px dashed rgba(46, 211, 166, 0.55);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.1rem;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.arrastra-slot-n {
+  font-size: 0.75rem;
+  color: var(--brain-text-muted);
+  font-weight: 700;
+}
+
+.arrastra-zone--ok {
+  border-style: solid;
+  border-color: #2ed3a6;
+  background: rgba(46, 211, 166, 0.12);
+}
+
+.arrastra-zone--hot {
+  border-color: #7af0d4;
+  box-shadow: 0 0 0 2px rgba(46, 211, 166, 0.35);
+}
+
+.arrastra-pool {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.arrastra-pool--solo {
+  margin-bottom: 1rem;
+}
+
+.arrastra-chip {
+  min-width: 52px;
+  min-height: 48px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.08);
+  font-weight: 800;
+  font-size: 1rem;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+
+.arrastra-chip--emoji {
+  font-size: 2.5rem;
+  min-width: 72px;
+  min-height: 72px;
+}
+
+.arrastra-chip--pick {
+  outline: 3px solid var(--brain-accent, #2ed3a6);
+  outline-offset: 2px;
+}
+
+.arrastra-ghost {
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.92;
+  margin: 0;
+}
+
+.arrastra-bins {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.arrastra-bin {
+  min-width: 120px;
+  min-height: 64px;
+  font-weight: 800;
+}
+
+.arrastra-drag-item {
+  font-size: 3rem;
+  text-align: center;
+  margin: 0 0 0.5rem;
+}
+
+.arrastra-word-hint {
+  text-align: center;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  margin: 0 0 0.75rem;
+  opacity: 0.85;
+}
+
 /* —— Contraste tema claro (carteles, badges, textos) —— */
 body.lipa-brain-soft.curriculum-page .curriculum-hero h1 {
   font-family: 'Nunito', system-ui, sans-serif;

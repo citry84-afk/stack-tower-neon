@@ -66,7 +66,7 @@
   var ROT_INFANTIL_EN = ['neon-peques', 'neon-colores', 'flash-tap'];
   var ROT_NATURALES = ['neon-vida', 'neon-cuerpo', 'neon-planeta'];
   var ROT_SOCIALES = ['neon-mapa', 'neon-entorno', 'neon-historia'];
-  var ROT_LENGUA = ['neon-lectura', 'neon-silabas', 'neon-palabra', 'neon-frase', 'neon-dictado'];
+  var ROT_LENGUA = ['neon-lectura', 'neon-silabas', 'neon-palabra', 'neon-frase', 'neon-dictado', 'neon-arrastra'];
 
   function tagSaber(act, saberIds) {
     if (!act || !saberIds) return act;
@@ -174,7 +174,7 @@
           wrapInfantil(id + '-m-f1', '¿Qué forma es?', 0, 1, 'Círculo, cuadrado…', bl, infSid(tier, 'm', 3)),
           tagSaber(wrapInfantil(id + '-m-f2', 'Colores mix', 0, 2, 'Repaso', bl, infSid(tier, 'm', 2)), infSid(tier, 'm', 4)),
           wrapInfantil(id + '-m-f3', tier >= 1 ? 'Cuenta y toca' : 'Igual o diferente', 1, d, 'Números', bl, infSid(tier, 'm', 1)),
-          wrapInfGame(id + '-m-f4', 'Seriaciones', 'neon-ordenar', d, 'Ordena', bl, infSid(tier, 'm', 4)),
+          wrapInfGame(id + '-m-f4', 'Seriaciones', 'neon-arrastra', d, 'Arrastra', bl, infSid(tier, 'm', 4)),
           tagSaber(liveReflex(id + '-m-f5', 'Misión formas', 'flash-tap', rx + 1), infSid(tier, 'm', 4))
         ], { saberIds: [infSid(tier, 'm', 3), infSid(tier, 'm', 4)] })
       ], 'live'),
@@ -366,7 +366,7 @@
   function primaria1Lengua() {
     return [
       unit('p1-l-silabas', 'Sílabas y palabras', 'LOMLOE · grafema-fonema y sílabas directas.', [
-        liveLengua('p1-l-s3', 'Ordena sílabas', 'neon-silabas', 1, 'Forma la palabra', 1, 'p1-l-c1'),
+        liveLengua('p1-l-s3', 'Ordena sílabas', 'neon-arrastra', 1, 'Arrastra', 1, 'p1-l-c1'),
         liveLengua('p1-l-s2', 'Completa la palabra', 'neon-palabra', 2, 'Elige la sílaba', 1, 'p1-l-c1'),
         liveLengua('p1-l-s4', 'Lectura guiada', 'neon-lectura', 3, 'Comprensión literal', 1, 'p1-l-c2'),
         liveLengua('p1-l-s1', 'Une sílaba e imagen', 'neon-silabas', 1, 'Forma palabras', 1, 'p1-l-c1'),
@@ -513,7 +513,7 @@
       unit('p2-m-figuras', 'Polígonos sencillos', 'LOMLOE · lados, vértices y simetría básica.', [
         liveGame('p2-m-f1', 'Polígonos', 'neon-clasifica', 2, 2, 'Formas', 'p2-m-c1'),
         tagSaber(liveReflex('p2-m-f2', 'Atención geométrica', 'flash-tap', 2), 'p2-m-c1'),
-        liveGame('p2-m-f3', 'Simetría', 'neon-clasifica', 3, 2, 'Parejas', 'p2-m-c1'),
+        liveGame('p2-m-f3', 'Simetría', 'neon-arrastra', 3, 2, 'Arrastra', 'p2-m-c1'),
         liveGame('p2-m-f4', 'Perímetro con cuadrícula', 'neon-calculo', 4, 3, 'Suma lados', 'p2-m-c1'),
         liveGame('p2-m-f5', 'Reto figuras', 'neon-clasifica', 4, 3, 'Geometría', 'p2-m-c1')
       ], { saberIds: ['p2-m-c1'] })
@@ -689,7 +689,7 @@
         liveGame('p3-l-i1', '¿Qué género es?', 'neon-clasifica', 2, 3, 'Clasifica', 'p3-l-c3'),
         liveLengua('p3-l-i2', 'Rima en poesía', 'neon-palabras', 2, 'Escucha y elige', 8, 'p3-l-c3'),
         liveLengua('p3-l-i3', 'Moral de la fábula', 'neon-lectura', 3, 'Lee y responde', 8, 'p3-l-c3'),
-        liveLengua('p3-l-i4', 'Ordena el cuento', 'neon-frase', 3, 'Secuencia', 8, 'p3-l-c3'),
+        liveLengua('p3-l-i4', 'Ordena el cuento', 'neon-arrastra', 3, 'Arrastra', 8, 'p3-l-c3'),
         liveLengua('p3-l-i5', 'Misión literaria', 'neon-lectura', 4, 'Literatura', 8, 'p3-l-c3')
       ], { saberIds: ['p3-l-c3'] })
     ];
@@ -901,7 +901,7 @@
         liveGame('eso1-m-geo1', 'Clasifica figuras', 'neon-clasifica', 3, 9, 'Formas', 'eso1-m-c1'),
         liveGame('eso1-m-geo2', 'Ángulos y lados', 'neon-clasifica', 3, 9, 'Geometría', 'eso1-m-c1'),
         liveGame('eso1-m-geo3', 'Teorema visual', 'neon-clasifica', 4, 9, 'Triángulos', 'eso1-m-c1'),
-        liveGame('eso1-m-geo4', 'Construcciones', 'neon-ordenar', 4, 9, 'Secuencia', 'eso1-m-c1'),
+        liveGame('eso1-m-geo4', 'Construcciones', 'neon-arrastra', 4, 9, 'Arrastra', 'eso1-m-c1'),
         liveGame('eso1-m-geo5', 'Misión geometría', 'neon-clasifica', 4, 9, 'Reto final', 'eso1-m-c1')
       ], { saberIds: ['eso1-m-c1'] }),
     ];
@@ -1553,7 +1553,7 @@
         liveGame('eso2-m-geo1', 'Clasifica sólidos', 'neon-clasifica', 3, 10, 'Formas', 'eso2-m-c1'),
         liveGame('eso2-m-geo2', 'Volumen visual', 'neon-clasifica', 3, 10, 'Geometría', 'eso2-m-c1'),
         liveGame('eso2-m-geo3', 'Prismas y pirámides', 'neon-clasifica', 4, 10, 'Sólidos', 'eso2-m-c1'),
-        liveGame('eso2-m-geo4', 'Cuerpos en 3D', 'neon-calculo', 4, 10, 'Volumen', 'eso2-m-c1'),
+        liveGame('eso2-m-geo4', 'Cuerpos en 3D', 'neon-arrastra', 4, 10, 'Arrastra', 'eso2-m-c1'),
         liveGame('eso2-m-geo5', 'Misión geometría', 'neon-clasifica', 4, 10, 'Reto final', 'eso2-m-c1')
       ], { saberIds: ['eso2-m-c1'] }),
     ];
@@ -1706,7 +1706,7 @@
       'multiple-choice': subjectId === 'matematicas' ? 'neon-mayor-menor' : (infantil ? 'neon-peques' : 'neon-lectura'),
       quiz: infantil ? 'neon-numeros' : (subjectId === 'ingles' ? 'neon-palabras' : 'neon-calculo'),
       listening: 'neon-palabras',
-      'drag-drop': infantil ? 'neon-colores' : 'neon-fracciones',
+      'drag-drop': 'neon-arrastra',
       'mini-game': 'flash-tap',
       reading: infantil ? 'neon-peques' : 'neon-lectura',
       typing: infantil ? 'neon-peques' : 'neon-palabra',
