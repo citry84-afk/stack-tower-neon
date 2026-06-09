@@ -52,7 +52,7 @@
 .brain-profile-chip__add {
   background: #fff;
   border: 2px dashed var(--brain-border-soft, #d0d5dd);
-  color: var(--brain-primary-dark, #18a77f);
+  color: var(--brain-primary-dark, #128163);
 }
 
 .brain-profile-modal {

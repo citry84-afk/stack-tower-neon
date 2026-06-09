@@ -37,15 +37,21 @@
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" as="style">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap">
     <link rel="stylesheet" href="/css/lipa-ui.css?v=2">
     <link rel="stylesheet" href="/css/site-nav.css">
     <link rel="stylesheet" href="/css/arcade-hub.css">
     <link rel="stylesheet" href="/css/brain-gym.css?v=3">
-    <link rel="stylesheet" href="/css/brain-design-system.css?v=5">
+    <link rel="stylesheet" href="/css/brain-design-system.css?v=6">
     <link rel="stylesheet" href="/css/brain-profiles.css">
     <link rel="stylesheet" href="/css/curriculum.css?v=5">
-    <link rel="stylesheet" href="/css/brain-onboarding.css?v=4">
-    <link rel="stylesheet" href="/css/lipa-guided-path.css?v=1">
+    <!-- CSS de UI inyectada por JS (modales/onboarding): no bloquea el primer render -->
+    <link rel="stylesheet" href="/css/brain-onboarding.css?v=4" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="/css/lipa-guided-path.css?v=1" media="print" onload="this.media='all'">
+    <noscript>
+      <link rel="stylesheet" href="/css/brain-onboarding.css?v=4">
+      <link rel="stylesheet" href="/css/lipa-guided-path.css?v=1">
+    </noscript>
     <link rel="stylesheet" href="/css/home-brain-gym.css?v=1">
     
     <!-- PWA and Mobile -->
@@ -60,7 +66,7 @@
     
     <!-- Google Analytics 4 -->
 <!-- Google Consent Mode v2 - Banner de Consentimiento -->
-    <script src="/consent.js"></script>
+    <script src="/consent.js" defer></script>
     
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -135,8 +141,6 @@
     </script>
     
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
-        
         * {
             margin: 0;
             padding: 0;
@@ -169,17 +173,17 @@
             margin-bottom: 28px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
         }
-        .seo-article h1 {
+        body.lipa-page .seo-article h1 {
             font-family: 'Orbitron', monospace;
-            color: #00ffff;
+            color: #00ffff !important;
             font-size: clamp(1.5rem, 4vw, 2.25rem);
             margin-bottom: 16px;
             line-height: 1.2;
             text-shadow: 0 0 14px rgba(0, 255, 255, 0.35);
         }
-        .seo-article h2 {
+        body.lipa-page .seo-article h2 {
             font-family: 'Orbitron', monospace;
-            color: #39ff14;
+            color: #7dff66 !important;
             font-size: clamp(1.15rem, 2.5vw, 1.5rem);
             margin-top: 28px;
             margin-bottom: 12px;
@@ -190,10 +194,14 @@
             line-height: 1.75;
             margin-bottom: 16px;
         }
-        .seo-article p, .seo-article li {
+        body.lipa-page .seo-article p, body.lipa-page .seo-article li {
             color: #d4e8f0;
             line-height: 1.75;
             font-size: 1rem;
+        }
+        body.lipa-page .seo-article a {
+            color: #ede9fe;
+            text-decoration: underline;
         }
         .seo-article ul, .seo-article ol {
             margin-left: 1.25rem;
@@ -603,7 +611,7 @@
             <a href="/toque-flash-neon.html" class="home-recreo-neon__game"><span>✨</span>Flash Tap</a>
             <a href="/esquiva-neon.html" class="home-recreo-neon__game"><span>🔀</span>Esquiva</a>
         </div>
-        <a href="/recreo-neon.html" class="btn-hero-secondary" style="border-color:rgba(0,255,255,.35);color:#a5f3fc!important;background:rgba(0,255,255,.08);">Ir al Recreo Neon completo</a>
+        <a href="/recreo-neon.html" class="btn-hero-secondary" style="border-color:#0e7490!important;color:#0e7490!important;background:rgba(14,116,144,.06)!important;">Ir al Recreo Neon completo</a>
         <p class="home-recreo-neon__note" style="margin-top:1rem;">¿Buscas todos los ejercicios del cole? <a href="/gym-cerebro.html">Catálogo Brain Gym</a></p>
     </section>
 
@@ -617,7 +625,7 @@
                     Crea una rutina diaria de cálculo mental, tablas, idiomas y reflejos en sesiones de 5 a 15 minutos.
                     Sin registro: tu progreso se guarda en el dispositivo. <strong>Recreo Neon</strong> (Stack Tower y arcade) es la recompensa después del entreno escolar.
                 </p>
-                <p><a href="/cursos.html" style="color:#c4b5fd;">Elegir curso</a> · <a href="/para-padres.html" style="color:#c4b5fd;">Para padres</a> · <a href="/blog/refuerzo-escolar-7-minutos-brain-gym.html" style="color:#c4b5fd;">Guía refuerzo 7 min</a> · <a href="/recreo-neon.html" style="color:#67e8f9;">Recreo Neon</a></p>
+                <p><a href="/cursos.html" style="color:#ede9fe;">Elegir curso</a> · <a href="/para-padres.html" style="color:#ede9fe;">Para padres</a> · <a href="/blog/refuerzo-escolar-7-minutos-brain-gym.html" style="color:#ede9fe;">Guía refuerzo 7 min</a> · <a href="/recreo-neon.html" style="color:#a5f3fc;">Recreo Neon</a></p>
             </div>
             </article>
             <details class="seo-fold" open>
@@ -627,17 +635,17 @@
                 <h2 style="color: #39FF14; font-size: 1.5rem; margin-top: 0;">Refuerzo escolar gratis en el navegador</h2>
                 <p>LIPA Brain Gym es el producto principal de LIPA Studios: <strong>mates, lengua, inglés, naturales y sociales</strong> repartidos en sesiones de unos 7 minutos, con la mascota Lipi guiando misión a misión. Está pensado para familias en España que quieren repasar el cole sin otra app de pago ni registro del menor.</p>
                 <h2 style="color: #39FF14; font-size: 1.35rem; margin-top: 24px;">Cursos disponibles (Infantil, Primaria, ESO)</h2>
-                <p>En la página <a href="/cursos.html" style="color:#c4b5fd;">Cursos</a> eliges la etapa. Cada curso tiene una <strong>guía propia</strong> con contenidos del currículo, rutina semanal de ejemplo y preguntas frecuentes:</p>
+                <p>En la página <a href="/cursos.html" style="color:#ede9fe;">Cursos</a> eliges la etapa. Cada curso tiene una <strong>guía propia</strong> con contenidos del currículo, rutina semanal de ejemplo y preguntas frecuentes:</p>
                 <ul style="margin-left: 1.25rem; margin-bottom: 16px;">
-                    <li><a href="/infantil/3-anos" style="color:#67e8f9;">1º Infantil (3 años)</a> · <a href="/infantil/4-anos" style="color:#67e8f9;">2º</a> · <a href="/infantil/5-anos" style="color:#67e8f9;">3º</a></li>
-                    <li><a href="/primaria/1-primaria" style="color:#67e8f9;">1º Primaria</a> · <a href="/primaria/2-primaria" style="color:#67e8f9;">2º</a> · <a href="/primaria/3-primaria" style="color:#67e8f9;">3º</a> · <a href="/primaria/4-primaria" style="color:#67e8f9;">4º</a> · <a href="/primaria/5-primaria" style="color:#67e8f9;">5º</a> · <a href="/primaria/6-primaria" style="color:#67e8f9;">6º</a></li>
-                    <li><a href="/eso/1-eso" style="color:#67e8f9;">1º ESO</a> · <a href="/eso/2-eso" style="color:#67e8f9;">2º ESO</a></li>
+                    <li><a href="/infantil/3-anos" style="color:#a5f3fc;">1º Infantil (3 años)</a> · <a href="/infantil/4-anos" style="color:#a5f3fc;">2º</a> · <a href="/infantil/5-anos" style="color:#a5f3fc;">3º</a></li>
+                    <li><a href="/primaria/1-primaria" style="color:#a5f3fc;">1º Primaria</a> · <a href="/primaria/2-primaria" style="color:#a5f3fc;">2º</a> · <a href="/primaria/3-primaria" style="color:#a5f3fc;">3º</a> · <a href="/primaria/4-primaria" style="color:#a5f3fc;">4º</a> · <a href="/primaria/5-primaria" style="color:#a5f3fc;">5º</a> · <a href="/primaria/6-primaria" style="color:#a5f3fc;">6º</a></li>
+                    <li><a href="/eso/1-eso" style="color:#a5f3fc;">1º ESO</a> · <a href="/eso/2-eso" style="color:#a5f3fc;">2º ESO</a></li>
                 </ul>
-                <p>Herramientas del funnel: <a href="/mi-rutina-cerebro.html" style="color:#c4b5fd;">personalizar mi rutina</a>, <a href="/entrenador-cerebro.html" style="color:#c4b5fd;">rutina genérica 5 min</a>, <a href="/retos-rapidos.html" style="color:#c4b5fd;">retos rápidos</a>, <a href="/unidad.html" style="color:#c4b5fd;">práctica por unidad</a> y <a href="/gym-cerebro.html" style="color:#c4b5fd;">catálogo de ejercicios</a>.</p>
-                <p>Artículo largo con metodología: <a href="/blog/refuerzo-escolar-7-minutos-brain-gym.html" style="color:#c4b5fd;">refuerzo escolar en 7 minutos</a>. Transparencia: <a href="/editorial.html" style="color:#c4b5fd;">política editorial</a>, <a href="/about.html" style="color:#c4b5fd;">sobre nosotros</a>, <a href="/privacy.html" style="color:#c4b5fd;">privacidad</a>.</p>
+                <p>Herramientas del funnel: <a href="/mi-rutina-cerebro.html" style="color:#ede9fe;">personalizar mi rutina</a>, <a href="/entrenador-cerebro.html" style="color:#ede9fe;">rutina genérica 5 min</a>, <a href="/retos-rapidos.html" style="color:#ede9fe;">retos rápidos</a>, <a href="/unidad.html" style="color:#ede9fe;">práctica por unidad</a> y <a href="/gym-cerebro.html" style="color:#ede9fe;">catálogo de ejercicios</a>.</p>
+                <p>Artículo largo con metodología: <a href="/blog/refuerzo-escolar-7-minutos-brain-gym.html" style="color:#ede9fe;">refuerzo escolar en 7 minutos</a>. Transparencia: <a href="/editorial.html" style="color:#ede9fe;">política editorial</a>, <a href="/about.html" style="color:#ede9fe;">sobre nosotros</a>, <a href="/privacy.html" style="color:#ede9fe;">privacidad</a>.</p>
                 <h2 style="color: #39FF14; font-size: 1.35rem; margin-top: 24px;">Informe para padres y datos locales</h2>
-                <p>El progreso (días entrenados, materias, rachas) se guarda en el navegador. El resumen semanal está en <a href="/para-padres.html" style="color:#c4b5fd;">Para padres</a>. No sustituimos al profesorado del centro: complementamos con micro-actividades y refuerzo distribuido.</p>
-                <p>Tras completar el entreno del día, opcionalmente se desbloquea <a href="/recreo-neon.html" style="color:#67e8f9;">Recreo Neon</a> (arcade y Stack Tower) como recompensa, no como contenido principal del estudio.</p>
+                <p>El progreso (días entrenados, materias, rachas) se guarda en el navegador. El resumen semanal está en <a href="/para-padres.html" style="color:#ede9fe;">Para padres</a>. No sustituimos al profesorado del centro: complementamos con micro-actividades y refuerzo distribuido.</p>
+                <p>Tras completar el entreno del día, opcionalmente se desbloquea <a href="/recreo-neon.html" style="color:#a5f3fc;">Recreo Neon</a> (arcade y Stack Tower) como recompensa, no como contenido principal del estudio.</p>
             </div>
             </article>
             </details>

@@ -10,7 +10,7 @@
   --brain-text-main: #172033;
   --brain-text-muted: #667085;
   --brain-primary: #2ed3a6;
-  --brain-primary-dark: #18a77f;
+  --brain-primary-dark: #128163; /* AA 4.83:1 sobre blanco */
   --brain-blue: #4f8cff;
   --brain-yellow: #ffd166;
   --brain-coral: #ff6b6b;
@@ -65,6 +65,14 @@ body.lipa-brain-soft .site-nav {
 body.lipa-brain-soft .site-nav__brand,
 body.lipa-brain-soft .nav-links a {
   color: var(--brain-text-main) !important;
+}
+
+/* Drawer móvil: el panel oscuro por defecto sería ilegible con texto oscuro */
+@media (max-width: 900px) {
+  body.lipa-brain-soft .nav-links {
+    background: rgba(255, 255, 255, 0.98);
+    border-left: 1px solid var(--brain-border-soft);
+  }
 }
 
 body.lipa-brain-soft .nav-links a[aria-current='page'] {
@@ -537,6 +545,17 @@ body.lipa-brain-soft .game-overlay {
   display: none;
 }
 
+/* En los heros la mascota siempre se inyecta por JS: reservamos su hueco para evitar CLS */
+.landing-hero #lipi-mascot-mount,
+.arcade-hero #lipi-mascot-mount {
+  min-height: 96px;
+}
+
+.landing-hero #lipi-mascot-mount:empty,
+.arcade-hero #lipi-mascot-mount:empty {
+  display: block;
+}
+
 .lipi-mascot__avatar img {
   width: 48px;
   height: 48px;
@@ -972,7 +991,7 @@ body.lipa-brain-soft.curriculum-page .curriculum-course-card__badge--soon {
 }
 
 body.lipa-brain-soft.curriculum-page .curriculum-progress-ring strong {
-  color: #0d9488;
+  color: #0f766e;
 }
 
 body.lipa-brain-soft.curriculum-page .curriculum-activity-card__level {
@@ -1070,7 +1089,7 @@ body.lipa-brain-soft .brain-card__body p {
 }
 
 body.lipa-brain-soft .brain-card__cta {
-  color: #0d9488;
+  color: #0f766e;
   font-weight: 700;
 }
 
@@ -1168,8 +1187,13 @@ body.lipa-brain-soft .btn-hero-secondary {
 }
 
 body.lipa-brain-soft .lipa-footer,
-body.lipa-brain-soft .lipa-footer a {
+body.lipa-brain-soft .lipa-footer a,
+body.lipa-brain-soft .lipa-footer .lipa-footer__copy {
   color: var(--brain-text-muted);
+}
+
+body.lipa-brain-soft .home-quick-tests__more a {
+  color: var(--brain-primary-dark) !important;
 }
 
 body.lipa-brain-soft .lipa-footer a:hover {
@@ -1275,7 +1299,7 @@ body.lipa-brain-soft.brain-hub-page .arcade-card__body p {
 }
 
 body.lipa-brain-soft.brain-hub-page .arcade-card__cta {
-  color: #0d9488;
+  color: #0f766e;
   font-weight: 700;
 }
 
@@ -1393,7 +1417,7 @@ body.lipa-brain-soft.brain-evo-page .brain-evo-backup {
 }
 
 body.lipa-brain-soft.brain-evo-page .brain-evo-backup code {
-  color: #0d9488;
+  color: #0f766e;
 }
 
 body.lipa-brain-soft.brain-evo-page .brain-evo-section h2 {
@@ -1448,7 +1472,7 @@ body.lipa-brain-soft.brain-evo-page main > p a {
   width: 100%;
   font-size: 12px;
   font-weight: 600;
-  color: #0d9488;
+  color: #0f766e;
   background: #ecfdf5;
   padding: 4px 10px;
   border-radius: 999px;

@@ -112,7 +112,7 @@
     '<div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">' +
     '<button id="lipa-accept" style="background:linear-gradient(135deg,#00ffff,#00cccc);color:#000;padding:10px 18px;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 0 15px rgba(0,255,255,.4);transition:all .3s;">✓ Aceptar todas</button>' +
     '<button id="lipa-reject" style="background:rgba(80,80,80,.8);color:#e8f6ff;padding:10px 18px;border:1px solid #555;border-radius:8px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .3s;">Solo esenciales</button>' +
-    '<a href="/privacy.html#cookies" id="lipa-more" style="background:transparent;color:#00ffee;padding:10px 18px;border:1px solid #00ffff;border-radius:8px;font-weight:600;cursor:pointer;font-family:inherit;text-decoration:none;font-size:0.9rem;">Más información</a>' +
+    '<a href="/privacy.html#cookies" id="lipa-more" style="background:transparent;color:#00ffee;padding:10px 18px;border:1px solid #00ffff;border-radius:8px;font-weight:600;cursor:pointer;font-family:inherit;text-decoration:none;font-size:0.9rem;">Política de cookies</a>' +
     '</div>' +
     '</div></div>';
 
