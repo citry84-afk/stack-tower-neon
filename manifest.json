@@ -54,7 +54,7 @@
     {
       "name": "Arcade",
       "short_name": "Jugar",
-      "url": "/jugar.html",
+      "url": "/recreo-neon.html",
       "icons": [{ "src": "/favicon-192.png", "sizes": "192x192" }]
     },
     {
