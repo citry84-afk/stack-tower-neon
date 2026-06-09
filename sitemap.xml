@@ -87,6 +87,27 @@
     <mobile:mobile/>
   </url>
   <url>
+    <loc>https://lipastudios.com/neon-dictado.html</loc>
+    <lastmod>2026-06-09</lastmod>
+    <priority>0.85</priority>
+    <changefreq>monthly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://lipastudios.com/neon-empareja.html</loc>
+    <lastmod>2026-06-09</lastmod>
+    <priority>0.85</priority>
+    <changefreq>monthly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://lipastudios.com/neon-arrastra.html</loc>
+    <lastmod>2026-06-09</lastmod>
+    <priority>0.85</priority>
+    <changefreq>monthly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
     <loc>https://lipastudios.com/cursos.html</loc>
     <lastmod>2026-05-30</lastmod>
     <priority>0.93</priority>
@@ -609,3 +630,4 @@
     <priority>0.70</priority>
     <changefreq>monthly</changefreq>
   </url>
+</urlset>
