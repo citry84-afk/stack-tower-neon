@@ -3,7 +3,7 @@
  * PWA Optimization & Offline Functionality
  */
 
-const CACHE_NAME = 'lipa-brain-gym-v3.42.0-reflejos-seo';
+const CACHE_NAME = 'lipa-brain-gym-v3.43.0-movil-gaming-seo';
 const CACHE_VERSION = '2.0.0';
 
 // Essential files to cache for offline play
