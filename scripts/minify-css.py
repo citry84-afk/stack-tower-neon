@@ -11,6 +11,9 @@ TARGETS = [
     'curriculum.css',
     'arcade-hub.css',
     'site-nav.css',
+    'home-brain-gym.css',
+    'brain-profiles.css',
+    'mini-games.css',
 ]
 
 
