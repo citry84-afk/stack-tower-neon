@@ -109,7 +109,6 @@ def main() -> None:
         "entrenador-reflejos.html",
         "guia-reflejos.html",
         "moviles-gaming-baratos.html",
-        "moviles-gamers-baratos.html",
         "about.html",
         "contact.html",
         "news.html",

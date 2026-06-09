@@ -32,8 +32,8 @@ http://www.stacktowerneon.com/*  https://stacktowerneon.com/:splat  301!
 /top-juegos-reflejos.html /top-juegos-reflejos.html 200
 /guia-reflejos.html  /guia-reflejos.html  200
 /moviles-gaming-baratos.html  /moviles-gaming-baratos.html  200
-/moviles-gamers-baratos.html  /moviles-gaming-baratos.html  301
-/moviles-gamers-baratos      /moviles-gaming-baratos.html  301
+/moviles-gamers-baratos.html  /moviles-gaming-baratos.html  301!
+/moviles-gamers-baratos      /moviles-gaming-baratos.html  301!
 /entrenador-reflejos.html  /entrenador-reflejos.html  200
 /recreo-neon.html         /recreo-neon.html         200
 /recreo-neon              /recreo-neon.html         200
