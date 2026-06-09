@@ -3,7 +3,7 @@
  * PWA Optimization & Offline Functionality
  */
 
-const CACHE_NAME = 'lipa-brain-gym-v3.40.0-seo-queries';
+const CACHE_NAME = 'lipa-brain-gym-v3.41.0-blog-mincss';
 const CACHE_VERSION = '2.0.0';
 
 // Essential files to cache for offline play
@@ -20,7 +20,7 @@ const STATIC_CACHE_URLS = [
     '/recreo-neon.html',
     '/entreno-completo.html',
     '/js/lipa-routine-complete.js',
-    '/css/home-brain-gym.css',
+    '/css/home-brain-gym.css?v=1',
     '/retos-rapidos.html',
     '/reto-rapido.html',
     '/para-padres.html',
@@ -49,7 +49,7 @@ const STATIC_CACHE_URLS = [
     '/js/lipa-home-quick-tests.js',
     '/js/lipa-parent-dashboard.js',
     '/css/brain-parent-dashboard.css',
-    '/css/curriculum.css',
+    '/css/curriculum.min.css?v=1',
     '/neon-silabas.html',
     '/neon-palabra.html',
     '/neon-lectura.html',
@@ -85,9 +85,9 @@ const STATIC_CACHE_URLS = [
     '/help.html',
     '/blog.html',
     '/entrenador-reflejos.html',
-    '/css/lipa-ui.css',
-    '/css/brain-gym.css',
-    '/css/brain-design-system.css',
+    '/css/lipa-ui.min.css?v=1',
+    '/css/brain-gym.min.css?v=1',
+    '/css/brain-design-system.min.css?v=1',
     '/js/lipa-mascot.js',
     '/js/lipa-game-feedback.js',
     '/js/lipa-home-dashboard.js',
