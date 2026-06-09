@@ -3,7 +3,7 @@
  * PWA Optimization & Offline Functionality
  */
 
-const CACHE_NAME = 'lipa-brain-gym-v3.34.0-hub-links';
+const CACHE_NAME = 'lipa-brain-gym-v3.35.0-juegos-landing';
 const CACHE_VERSION = '2.0.0';
 
 // Essential files to cache for offline play
@@ -11,6 +11,7 @@ const STATIC_CACHE_URLS = [
     '/',
     '/index.html',
     '/gym-cerebro.html',
+    '/juegos-educativos.html',
     '/cursos.html',
     '/recreo-neon.html',
     '/entreno-completo.html',

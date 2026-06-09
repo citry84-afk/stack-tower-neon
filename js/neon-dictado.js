@@ -122,9 +122,10 @@
       promptEl.textContent = mode === 'ingles' ? 'Listen and choose' : 'Escucha y elige la palabra';
     }
     if (!workEl) return;
-    var hero = round.answer.emoji
+    // El emoji delataría la respuesta: solo se muestra como apoyo en modo infantil
+    var hero = (mode === 'infantil' && round.answer.emoji)
       ? '<span class="dictado-hero" aria-hidden="true">' + round.answer.emoji + '</span>'
-      : '';
+      : '<span class="dictado-hero" aria-hidden="true">🎧</span>';
     workEl.innerHTML =
       hero +
       '<button type="button" class="btn btn--ghost dictado-play" id="dictado-replay">🔊 Escuchar</button>' +

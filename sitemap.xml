@@ -73,6 +73,13 @@
     <mobile:mobile/>
   </url>
   <url>
+    <loc>https://lipastudios.com/juegos-educativos.html</loc>
+    <lastmod>2026-06-09</lastmod>
+    <priority>0.92</priority>
+    <changefreq>weekly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
     <loc>https://lipastudios.com/neon-fracciones.html</loc>
     <lastmod>2026-05-30</lastmod>
     <priority>0.86</priority>
