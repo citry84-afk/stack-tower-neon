@@ -59,6 +59,10 @@ http://www.stacktowerneon.com/*  https://stacktowerneon.com/:splat  301!
 /extraescolar-19h         /blog/tarde-extraescolar-19h.html 301!
 /baja-enfermedad          /blog/baja-enfermedad-refuerzo-suave.html 301!
 /viernes-recreo           /blog/viernes-recreo-neon-premio.html 301!
+/guias-situacionales      /guias-situacionales.html 200
+/situaciones              /guias-situacionales.html 301!
+/septiembre-cole          /blog/septiembre-primeros-dias-cole.html 301!
+/teletrabajo-casa         /blog/teletrabajo-casa-brain-gym.html 301!
 /tablas-multiplicar          /tablas-relampago.html        301!
 /tablas-multiplicar-juego    /blog/tablas-multiplicar-juego.html  301!
 /calculo-mental              /neon-calculo.html            301!

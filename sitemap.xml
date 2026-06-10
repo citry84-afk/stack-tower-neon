@@ -45,6 +45,13 @@
     <mobile:mobile/>
   </url>
   <url>
+    <loc>https://lipastudios.com/guias-situacionales.html</loc>
+    <lastmod>2026-06-09</lastmod>
+    <priority>0.88</priority>
+    <changefreq>weekly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
     <loc>https://lipastudios.com/refuerzo-primaria.html</loc>
     <lastmod>2026-06-09</lastmod>
     <priority>0.92</priority>
@@ -615,6 +622,20 @@
   </url>
   <url>
     <loc>https://lipastudios.com/blog/viernes-recreo-neon-premio.html</loc>
+    <lastmod>2026-06-09</lastmod>
+    <priority>0.78</priority>
+    <changefreq>monthly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://lipastudios.com/blog/septiembre-primeros-dias-cole.html</loc>
+    <lastmod>2026-06-09</lastmod>
+    <priority>0.80</priority>
+    <changefreq>monthly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://lipastudios.com/blog/teletrabajo-casa-brain-gym.html</loc>
     <lastmod>2026-06-09</lastmod>
     <priority>0.78</priority>
     <changefreq>monthly</changefreq>
