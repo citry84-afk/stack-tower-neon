@@ -3,7 +3,7 @@
  * PWA Optimization & Offline Functionality
  */
 
-const CACHE_NAME = 'lipa-brain-gym-v3.54.0-miercoles-extraescolar';
+const CACHE_NAME = 'lipa-brain-gym-v3.55.0-enfermedad-viernes';
 const CACHE_VERSION = '2.0.0';
 
 // Essential files to cache for offline play
