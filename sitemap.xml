@@ -280,7 +280,7 @@
 
   <url>
     <loc>https://lipastudios.com/eso/1-eso</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <priority>0.88</priority>
     <changefreq>weekly</changefreq>
     <mobile:mobile/>
@@ -288,7 +288,7 @@
 
   <url>
     <loc>https://lipastudios.com/eso/2-eso</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <priority>0.88</priority>
     <changefreq>weekly</changefreq>
     <mobile:mobile/>
@@ -519,6 +519,20 @@
     <loc>https://lipastudios.com/blog/vocabulario-ingles-juego-neon-palabras.html</loc>
     <lastmod>2026-06-09</lastmod>
     <priority>0.75</priority>
+    <changefreq>monthly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://lipastudios.com/blog/de-primaria-a-eso-adaptarse-7-min.html</loc>
+    <lastmod>2026-06-09</lastmod>
+    <priority>0.80</priority>
+    <changefreq>monthly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://lipastudios.com/blog/rutina-visual-ciencias-casa.html</loc>
+    <lastmod>2026-06-09</lastmod>
+    <priority>0.80</priority>
     <changefreq>monthly</changefreq>
     <mobile:mobile/>
   </url>
