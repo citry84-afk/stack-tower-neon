@@ -17,6 +17,20 @@
     <mobile:mobile/>
   </url>
   <url>
+    <loc>https://lipastudios.com/refuerzo-primaria-mates.html</loc>
+    <lastmod>2026-06-09</lastmod>
+    <priority>0.90</priority>
+    <changefreq>weekly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://lipastudios.com/refuerzo-primaria-lengua.html</loc>
+    <lastmod>2026-06-09</lastmod>
+    <priority>0.90</priority>
+    <changefreq>weekly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
     <loc>https://lipastudios.com/refuerzo-primaria.html</loc>
     <lastmod>2026-06-09</lastmod>
     <priority>0.92</priority>

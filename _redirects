@@ -36,6 +36,10 @@ http://www.stacktowerneon.com/*  https://stacktowerneon.com/:splat  301!
 /moviles-gamers-baratos      /moviles-gaming-baratos.html  301!
 /refuerzo-primaria           /refuerzo-primaria.html       200
 /refuerzo-primaria.html      /refuerzo-primaria.html       200
+/refuerzo-primaria-mates     /refuerzo-primaria-mates.html 200
+/refuerzo-primaria-mates.html /refuerzo-primaria-mates.html 200
+/refuerzo-primaria-lengua    /refuerzo-primaria-lengua.html 200
+/refuerzo-primaria-lengua.html /refuerzo-primaria-lengua.html 200
 /tablas-multiplicar          /tablas-relampago.html        301!
 /tablas-multiplicar-juego    /blog/tablas-multiplicar-juego.html  301!
 /calculo-mental              /neon-calculo.html            301!
