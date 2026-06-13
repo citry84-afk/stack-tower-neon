@@ -118,8 +118,20 @@
       ],
       fillWords: [
         { word: 'LIBRO', parts: ['LI', 'BRO'], missing: 0, options: ['LI', 'LE', 'LA', 'LO'] },
+        { word: 'LIBRO', parts: ['LI', 'BRO'], missing: 1, options: ['BRO', 'BRA', 'BRE', 'BRI'] },
+        { word: 'CLASE', parts: ['CLA', 'SE'], missing: 0, options: ['CLA', 'CLE', 'CLI', 'CLO'] },
         { word: 'CLASE', parts: ['CLA', 'SE'], missing: 1, options: ['SE', 'SA', 'SI', 'SO'] },
-        { word: 'VERDE', parts: ['VER', 'DE'], missing: 0, options: ['VER', 'VAR', 'VIR', 'VOR'] }
+        { word: 'VERDE', parts: ['VER', 'DE'], missing: 0, options: ['VER', 'VAR', 'VIR', 'VOR'] },
+        { word: 'VERDE', parts: ['VER', 'DE'], missing: 1, options: ['DE', 'DA', 'DI', 'DO'] },
+        { word: 'PLATO', parts: ['PLA', 'TO'], missing: 0, options: ['PLA', 'PLE', 'PLI', 'PLO'] },
+        { word: 'PLATO', parts: ['PLA', 'TO'], missing: 1, options: ['TO', 'TA', 'TE', 'TI'] },
+        { word: 'FRESA', parts: ['FRE', 'SA'], missing: 0, options: ['FRE', 'FRA', 'FRI', 'FRO'] },
+        { word: 'FRESA', parts: ['FRE', 'SA'], missing: 1, options: ['SA', 'SE', 'SI', 'SO'] },
+        { word: 'CAMPO', parts: ['CAM', 'PO'], missing: 0, options: ['CAM', 'CEM', 'CIM', 'COM'] },
+        { word: 'CAMPO', parts: ['CAM', 'PO'], missing: 1, options: ['PO', 'PA', 'PE', 'PI'] },
+        { word: 'PUENTE', parts: ['PUEN', 'TE'], missing: 0, options: ['PUEN', 'PUAN', 'PUIN', 'PUON'] },
+        { word: 'PUENTE', parts: ['PUEN', 'TE'], missing: 1, options: ['TE', 'TA', 'TI', 'TO'] },
+        { word: 'FLOR', parts: ['FLOR'], missing: 0, options: ['FLOR', 'FLAR', 'FLER', 'FLIR'] }
       ],
       readings: [
         {
@@ -180,10 +192,32 @@
       label: '3º Primaria',
       syllableWords: [
         { word: 'BIBLIOTECA', syllables: ['BI', 'BLIO', 'TE', 'CA'], emoji: '📚' },
-        { word: 'MONTAÑA', syllables: ['MON', 'TA', 'ÑA'], emoji: '⛰️' }
+        { word: 'MONTAÑA', syllables: ['MON', 'TA', 'ÑA'], emoji: '⛰️' },
+        { word: 'PLANETA', syllables: ['PLA', 'NE', 'TA'], emoji: '🪐' },
+        { word: 'DEPORTE', syllables: ['DE', 'POR', 'TE'], emoji: '⚽' },
+        { word: 'CULTURA', syllables: ['CUL', 'TU', 'RA'], emoji: '🎭' },
+        { word: 'UNIVERSO', syllables: ['U', 'NI', 'VER', 'SO'], emoji: '🌌' },
+        { word: 'FAMILIA', syllables: ['FA', 'MI', 'LIA'], emoji: '👨‍👩‍👧' },
+        { word: 'VERANO', syllables: ['VE', 'RA', 'NO'], emoji: '☀️' }
       ],
       fillWords: [
-        { word: 'HISTORIA', parts: ['HIS', 'TO', 'RIA'], missing: 1, options: ['TO', 'TA', 'TE', 'TI'] }
+        { word: 'HISTORIA', parts: ['HIS', 'TO', 'RIA'], missing: 0, options: ['HIS', 'HAS', 'HES', 'HOS'] },
+        { word: 'HISTORIA', parts: ['HIS', 'TO', 'RIA'], missing: 1, options: ['TO', 'TA', 'TE', 'TI'] },
+        { word: 'HISTORIA', parts: ['HIS', 'TO', 'RIA'], missing: 2, options: ['RIA', 'REA', 'ROA', 'RUA'] },
+        { word: 'BIBLIOTECA', parts: ['BI', 'BLIO', 'TE', 'CA'], missing: 0, options: ['BI', 'BE', 'BA', 'BO'] },
+        { word: 'BIBLIOTECA', parts: ['BI', 'BLIO', 'TE', 'CA'], missing: 2, options: ['TE', 'TA', 'TI', 'TO'] },
+        { word: 'MONTAÑA', parts: ['MON', 'TA', 'ÑA'], missing: 0, options: ['MON', 'MAN', 'MIN', 'MUN'] },
+        { word: 'MONTAÑA', parts: ['MON', 'TA', 'ÑA'], missing: 1, options: ['TA', 'TE', 'TI', 'TO'] },
+        { word: 'PLANETA', parts: ['PLA', 'NE', 'TA'], missing: 0, options: ['PLA', 'PLE', 'PLI', 'PLO'] },
+        { word: 'PLANETA', parts: ['PLA', 'NE', 'TA'], missing: 1, options: ['NE', 'NA', 'NI', 'NO'] },
+        { word: 'DEPORTE', parts: ['DE', 'POR', 'TE'], missing: 1, options: ['POR', 'PAR', 'PER', 'PUR'] },
+        { word: 'DEPORTE', parts: ['DE', 'POR', 'TE'], missing: 2, options: ['TE', 'TA', 'TI', 'TO'] },
+        { word: 'CULTURA', parts: ['CUL', 'TU', 'RA'], missing: 0, options: ['CUL', 'CAL', 'COL', 'CIL'] },
+        { word: 'CULTURA', parts: ['CUL', 'TU', 'RA'], missing: 2, options: ['RA', 'RE', 'RI', 'RO'] },
+        { word: 'UNIVERSO', parts: ['U', 'NI', 'VER', 'SO'], missing: 1, options: ['NI', 'NA', 'NE', 'NO'] },
+        { word: 'FAMILIA', parts: ['FA', 'MI', 'LIA'], missing: 1, options: ['MI', 'MA', 'ME', 'MO'] },
+        { word: 'VERANO', parts: ['VE', 'RA', 'NO'], missing: 0, options: ['VE', 'VA', 'VI', 'VO'] },
+        { word: 'VERANO', parts: ['VE', 'RA', 'NO'], missing: 2, options: ['NO', 'NA', 'NE', 'NI'] }
       ],
       readings: [
         {
@@ -263,16 +297,27 @@
     return a;
   }
 
+  function itemKey(item) {
+    if (!item) return '';
+    if (item.word != null && item.missing != null) return item.word + '@' + item.missing;
+    return item.word || item.text || (item.words ? item.words.join(' ') : '');
+  }
+
   function pickRandom(pool, excludeKey) {
     if (!pool || !pool.length) return null;
+    var shuffled = shuffle(pool);
+    for (var i = 0; i < shuffled.length; i++) {
+      var key = itemKey(shuffled[i]);
+      if (!excludeKey || key !== excludeKey) return shuffled[i];
+    }
     var tries = 0;
     while (tries < 30) {
       var item = pool[Math.floor(Math.random() * pool.length)];
-      var key = item.word || item.text || JSON.stringify(item.words);
-      if (!excludeKey || key !== excludeKey) return item;
+      var k = itemKey(item);
+      if (!excludeKey || k !== excludeKey) return item;
       tries++;
     }
-    return pool[0];
+    return shuffled[Math.floor(Math.random() * shuffled.length)] || pool[0];
   }
 
   function buildSyllableRound(brainLevel, lastKey) {
@@ -288,13 +333,18 @@
   }
 
   function buildFillRound(brainLevel, lastKey) {
-    var tier = getTier(brainLevel);
-    var item = pickRandom(tier.fillWords, lastKey);
+    var tierIdx = tierIndex(brainLevel);
+    var pool = [];
+    for (var t = 0; t <= tierIdx; t++) {
+      pool = pool.concat(TIERS[t].fillWords || []);
+    }
+    if (!pool.length) pool = TIERS[0].fillWords.slice();
+    var item = pickRandom(pool, lastKey);
     var display = item.parts.map(function (p, i) {
       return i === item.missing ? '___' : p;
     }).join(' ');
     return {
-      key: item.word,
+      key: itemKey(item),
       emoji: '',
       display: display,
       answer: item.parts[item.missing],
