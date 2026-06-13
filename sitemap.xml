@@ -46,7 +46,7 @@
   </url>
   <url>
     <loc>https://lipastudios.com/guias-situacionales.html</loc>
-    <lastmod>2026-06-09</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <priority>0.88</priority>
     <changefreq>weekly</changefreq>
     <mobile:mobile/>
@@ -344,7 +344,7 @@
   </url>
   <url>
     <loc>https://lipastudios.com/about.html</loc>
-    <lastmod>2026-06-09</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <priority>0.90</priority>
     <changefreq>weekly</changefreq>
     <mobile:mobile/>
@@ -384,7 +384,7 @@
   </url>
   <url>
     <loc>https://lipastudios.com/help.html</loc>
-    <lastmod>2026-02-01T17:35:00+00:00</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <priority>0.85</priority>
     <changefreq>monthly</changefreq>
     <mobile:mobile/>
@@ -432,25 +432,13 @@
     <priority>0.70</priority>
     <changefreq>monthly</changefreq>
   </url>
-  <url>
-    <loc>https://lipastudios.com/blog/ejercicios-reflejos-gamers.html</loc>
-    <lastmod>2026-02-01T21:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
+<url>
     <loc>https://lipastudios.com/blog/reflejos-fps-aim.html</loc>
     <lastmod>2026-02-01T21:00:00+00:00</lastmod>
     <priority>0.70</priority>
     <changefreq>monthly</changefreq>
   </url>
-  <url>
-    <loc>https://lipastudios.com/blog/coordination-ojo-mano.html</loc>
-    <lastmod>2026-02-01T21:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
+<url>
     <loc>https://lipastudios.com/blog/mejorar-reflejos-guia-completa.html</loc>
     <lastmod>2026-06-09</lastmod>
     <priority>0.70</priority>
@@ -510,13 +498,7 @@
     <priority>0.70</priority>
     <changefreq>monthly</changefreq>
   </url>
-  <url>
-    <loc>https://lipastudios.com/blog/reflejos-deportes.html</loc>
-    <lastmod>2026-02-01T19:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
+<url>
     <loc>https://lipastudios.com/blog/reflejos-5-minutos.html</loc>
     <lastmod>2026-02-01T19:00:00+00:00</lastmod>
     <priority>0.70</priority>
@@ -677,61 +659,19 @@
     <priority>0.75</priority>
     <changefreq>monthly</changefreq>
   </url>
-  <url>
-    <loc>https://lipastudios.com/blog/reflejos-movil-juegos-rapidos.html</loc>
-    <lastmod>2026-02-01T19:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
+<url>
     <loc>https://lipastudios.com/blog/tiempo-reaccion-promedio.html</loc>
     <lastmod>2026-02-23T10:00:00+00:00</lastmod>
     <priority>0.70</priority>
     <changefreq>monthly</changefreq>
   </url>
-  <url>
-    <loc>https://lipastudios.com/blog/mejorar-reflejos-adultos.html</loc>
-    <lastmod>2026-02-23T10:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
-    <loc>https://lipastudios.com/blog/entrenamiento-reflejos-casa.html</loc>
-    <lastmod>2026-02-23T10:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
+<url>
     <loc>https://lipastudios.com/blog/mejorar-reflejos-videojuegos.html</loc>
     <lastmod>2026-02-23T16:00:00+00:00</lastmod>
     <priority>0.70</priority>
     <changefreq>monthly</changefreq>
   </url>
-  <url>
-    <loc>https://lipastudios.com/blog/ejercicios-reflejos-rapidos.html</loc>
-    <lastmod>2026-02-23T16:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
-    <loc>https://lipastudios.com/blog/mejorar-precision-gaming.html</loc>
-    <lastmod>2026-02-23T16:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
-    <loc>https://lipastudios.com/blog/ejercicios-reaccion-visual.html</loc>
-    <lastmod>2026-02-24T10:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
-    <loc>https://lipastudios.com/blog/reflejos-conducir.html</loc>
-    <lastmod>2026-02-24T10:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
+<url>
     <loc>https://lipastudios.com/blog/tiempo-reaccion-movil.html</loc>
     <lastmod>2026-02-24T18:00:00+00:00</lastmod>
     <priority>0.70</priority>
@@ -749,31 +689,7 @@
     <priority>0.70</priority>
     <changefreq>monthly</changefreq>
   </url>
-  <url>
-    <loc>https://lipastudios.com/blog/entrenamiento-reflejos-10-min.html</loc>
-    <lastmod>2026-02-25T10:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
-    <loc>https://lipastudios.com/blog/calentamiento-reflejos-5-min.html</loc>
-    <lastmod>2026-02-27T10:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
-    <loc>https://lipastudios.com/blog/sueno-reflejos-mejorar.html</loc>
-    <lastmod>2026-02-27T10:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
-    <loc>https://lipastudios.com/blog/alimentacion-reflejos.html</loc>
-    <lastmod>2026-02-28T10:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
+<url>
     <loc>https://lipastudios.com/blog/pausas-activas-reflejos.html</loc>
     <lastmod>2026-02-28T10:00:00+00:00</lastmod>
     <priority>0.70</priority>
@@ -788,18 +704,6 @@
   <url>
     <loc>https://lipastudios.com/blog/postura-reflejos.html</loc>
     <lastmod>2026-02-28T10:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
-    <loc>https://lipastudios.com/blog/test-rapido-reaccion.html</loc>
-    <lastmod>2026-02-26T10:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
-    <loc>https://lipastudios.com/blog/ejercicios-reflejos-sin-equipo.html</loc>
-    <lastmod>2026-06-09</lastmod>
     <priority>0.70</priority>
     <changefreq>monthly</changefreq>
   </url>
