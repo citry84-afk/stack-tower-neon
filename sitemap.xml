@@ -87,29 +87,8 @@
     <mobile:mobile/>
   </url>
   <url>
-    <loc>https://lipastudios.com/curso.html</loc>
-    <lastmod>2026-05-19</lastmod>
-    <priority>0.88</priority>
-    <changefreq>weekly</changefreq>
-    <mobile:mobile/>
-  </url>
-  <url>
-    <loc>https://lipastudios.com/materia.html</loc>
-    <lastmod>2026-05-19</lastmod>
-    <priority>0.85</priority>
-    <changefreq>weekly</changefreq>
-    <mobile:mobile/>
-  </url>
-  <url>
-    <loc>https://lipastudios.com/unidad.html</loc>
-    <lastmod>2026-05-19</lastmod>
-    <priority>0.84</priority>
-    <changefreq>weekly</changefreq>
-    <mobile:mobile/>
-  </url>
-  <url>
     <loc>https://lipastudios.com/retos-rapidos.html</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <priority>0.86</priority>
     <changefreq>weekly</changefreq>
     <mobile:mobile/>
@@ -213,20 +192,6 @@
     <loc>https://lipastudios.com/eso/2-eso</loc>
     <lastmod>2026-06-13</lastmod>
     <priority>0.88</priority>
-    <changefreq>weekly</changefreq>
-    <mobile:mobile/>
-  </url>
-  <url>
-    <loc>https://lipastudios.com/mi-rutina-cerebro.html</loc>
-    <lastmod>2026-05-19</lastmod>
-    <priority>0.92</priority>
-    <changefreq>weekly</changefreq>
-    <mobile:mobile/>
-  </url>
-  <url>
-    <loc>https://lipastudios.com/mi-evolucion.html</loc>
-    <lastmod>2026-05-19</lastmod>
-    <priority>0.91</priority>
     <changefreq>weekly</changefreq>
     <mobile:mobile/>
   </url>
