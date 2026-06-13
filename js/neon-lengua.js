@@ -40,14 +40,51 @@
   }
 
   function refreshBrainLevel() {
-    if (window.LipaBrain) brainLevel = LipaBrain.getActivityLevel(activityId);
+    if (window.LipaBrain) {
+      if (LipaBrain.resolveBrainLevel) {
+        brainLevel = LipaBrain.resolveBrainLevel({ gameId: activityId, activityId: activityId });
+      } else {
+        brainLevel = LipaBrain.getActivityLevel(activityId);
+      }
+    }
     try {
       var params = new URLSearchParams(window.location.search);
       var fromUrl = parseInt(params.get('brainLevel'), 10);
       if (fromUrl >= 1 && fromUrl <= 12) brainLevel = fromUrl;
     } catch (e) { /* ignore */ }
     var bl = document.getElementById('lengua-brain-level');
-    if (bl) bl.textContent = 'Nivel Brain ' + brainLevel;
+    if (bl) {
+      var courseTxt = '';
+      if (window.LipaBrain) {
+        var p = LipaBrain.getProfile();
+        if (p && p.courseId && window.LipaCurriculum) {
+          LipaCurriculum.init();
+          var c = LipaCurriculum.getCourse(p.courseId);
+          if (c) courseTxt = ' · ' + c.label;
+        }
+      }
+      bl.textContent = 'Nivel Brain ' + brainLevel + courseTxt;
+    }
+    if (window.LipaGameOnboard && LipaGameOnboard.refreshBanner) {
+      LipaGameOnboard.refreshBanner();
+    }
+  }
+
+  function ensureCourseBeforePlay(thenStart) {
+    if (!window.LipaGameOnboard || !LipaGameOnboard.needsCourse()) {
+      thenStart();
+      return;
+    }
+    if (window.LipaBrainOnboarding) {
+      LipaBrainOnboarding.openGameCourse({
+        onComplete: function () {
+          refreshBrainLevel();
+          thenStart();
+        }
+      });
+    } else {
+      window.location.href = '/cursos.html?empezar=1';
+    }
   }
 
   function updateHud() {
@@ -354,6 +391,11 @@
 
   function startGame() {
     if (running) return;
+    ensureCourseBeforePlay(startGameNow);
+  }
+
+  function startGameNow() {
+    if (running) return;
     if (window.LipaAnalytics && LipaAnalytics.trackGameStart) {
       LipaAnalytics.trackGameStart(activityId);
     }
@@ -402,6 +444,7 @@
     renderBoard();
 
     if (btnStart) btnStart.addEventListener('click', startGame);
+    window.addEventListener('lipa-profile-changed', refreshBrainLevel);
     var share = document.getElementById('lengua-share');
     if (share) {
       share.addEventListener('click', function () {

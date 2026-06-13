@@ -17,6 +17,13 @@
   };
 
   var root, panel, onComplete;
+  var gameQuick = false;
+
+  var GAME_QUICK_META = {
+    kicker: 'Primera vez aquí',
+    title: '¿En qué curso estás?',
+    lead: 'Así ajustamos las palabras a tu edad. Un toque y a jugar — sin registro.'
+  };
 
   var STEP_META = {
     welcome: {
@@ -55,6 +62,47 @@
     return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
   }
 
+  function saveProfileFromState() {
+    ensureSubjectSelection();
+    if (!state.courseId || !window.LipaBrainPlan) return null;
+    var profile = {
+      displayName: state.displayName || (window.LipaBrainProfiles && LipaBrainProfiles.getActiveMeta()
+        ? LipaBrainProfiles.getActiveMeta().name
+        : 'Explorador'),
+      courseId: state.courseId,
+      ageBand: window.LipaCurriculum
+        ? LipaCurriculum.courseToAgeBand(state.courseId)
+        : state.ageBand,
+      minutes: parseInt(state.minutes, 10) || 7,
+      focus: state.focus || 'all',
+      routineSubjects: state.routineSubjects,
+      goal: state.goal || 'study'
+    };
+    var allSubs = LipaCurriculum.listLiveSubjects(LipaCurriculum.getCourse(state.courseId));
+    if (profile.routineSubjects && profile.routineSubjects.length >= allSubs.length) {
+      profile.focus = 'all';
+    } else if (profile.routineSubjects && profile.routineSubjects.length) {
+      profile.focus = 'custom';
+    }
+    var routine = LipaBrainPlan.buildRoutine(profile);
+    profile.routine = routine;
+    LipaBrainPlan.saveProfile(profile);
+    try {
+      window.dispatchEvent(new Event('lipa-profile-changed'));
+    } catch (e) { /* ignore */ }
+    return profile;
+  }
+
+  function finishGameQuick() {
+    var profile = saveProfileFromState();
+    if (!profile) return;
+    if (window.LipaBrainPlay && LipaBrainPlay.chimeCorrect) {
+      try { LipaBrainPlay.chimeCorrect(); } catch (e) { /* ignore */ }
+    }
+    close();
+    if (onComplete) onComplete(profile);
+  }
+
   function ensureRoot() {
     if (root) return root;
     root = document.getElementById('lipa-brain-onboarding');
@@ -80,33 +128,41 @@
   function open(opts) {
     opts = opts || {};
     ensureRoot();
-    state.step = opts.reset ? 0 : 0;
-    state.courseId = null;
+    gameQuick = !!opts.gameQuick;
+    state.step = gameQuick ? STEPS.indexOf('course') : 0;
+    state.displayName = opts.displayName || state.displayName || '';
+    state.courseId = opts.courseId || null;
     state.ageBand = null;
-    state.minutes = null;
+    state.minutes = opts.minutes || null;
     state.focus = 'all';
     state.routineSubjects = null;
-    state.goal = null;
+    state.goal = opts.goal || null;
     onComplete = opts.onComplete;
     root.hidden = false;
     document.body.style.overflow = 'hidden';
     render();
     if (window.LipaAnalytics && LipaAnalytics.trackGameStart) {
-      LipaAnalytics.trackGameStart('brain-onboarding');
+      LipaAnalytics.trackGameStart(gameQuick ? 'brain-onboarding-game' : 'brain-onboarding');
     }
   }
 
   function close() {
     if (root) root.hidden = true;
     document.body.style.overflow = '';
+    gameQuick = false;
   }
 
   function render() {
     var key = STEPS[state.step];
-    var meta = STEP_META[key];
-    var dots = STEPS.slice(0, -1).map(function (_, i) {
-      return '<span class="brain-onboard__dot' + (i === state.step ? ' brain-onboard__dot--on' : '') + '"></span>';
-    }).join('');
+    var meta = gameQuick && key === 'course' ? GAME_QUICK_META : STEP_META[key];
+    var dots = '';
+    if (!gameQuick && key !== 'result') {
+      dots = STEPS.slice(0, -1).map(function (_, i) {
+        return '<span class="brain-onboard__dot' + (i === state.step ? ' brain-onboard__dot--on' : '') + '"></span>';
+      }).join('');
+    } else if (gameQuick && key === 'course') {
+      dots = '<span class="brain-onboard__dot brain-onboard__dot--on"></span>';
+    }
 
     var body = '';
     if (key === 'welcome') {
@@ -120,6 +176,12 @@
         '</div>';
     } else if (key === 'result') {
       body = renderResult();
+    } else if (key === 'course' && gameQuick) {
+      body = renderCourseOptions() +
+        '<p class="brain-onboard__hint">Al elegir curso guardamos tu edad en este dispositivo. Cambia en <a href="/cursos.html">Cursos</a>.</p>' +
+        '<div class="brain-onboard__actions">' +
+        '<button type="button" class="brain-onboard__btn brain-onboard__btn--ghost" data-skip>Nivel fácil sin elegir</button>' +
+        '</div>';
     } else {
       body = renderOptions(key) +
         '<div class="brain-onboard__actions">' +
@@ -262,28 +324,13 @@
   }
 
   function renderResult() {
-    var profile = {
-      displayName: state.displayName || (window.LipaBrainProfiles && LipaBrainProfiles.getActiveMeta()
-        ? LipaBrainProfiles.getActiveMeta().name
-        : 'Explorador'),
-      courseId: state.courseId,
-      ageBand: state.courseId && window.LipaCurriculum
-        ? LipaCurriculum.courseToAgeBand(state.courseId)
-        : state.ageBand,
-      minutes: parseInt(state.minutes, 10),
-      focus: state.focus,
-      routineSubjects: state.routineSubjects,
-      goal: state.goal
-    };
-    var allSubs = LipaCurriculum.listLiveSubjects(LipaCurriculum.getCourse(state.courseId));
-    if (profile.routineSubjects && profile.routineSubjects.length >= allSubs.length) {
-      profile.focus = 'all';
-    } else {
-      profile.focus = 'custom';
+    state.minutes = state.minutes || 7;
+    state.goal = state.goal || 'study';
+    var profile = saveProfileFromState();
+    if (!profile || !profile.routine) {
+      return '<p class="brain-onboard__lead">Elige un curso para continuar.</p>';
     }
-    var routine = window.LipaBrainPlan.buildRoutine(profile);
-    profile.routine = routine;
-    LipaBrainPlan.saveProfile(profile);
+    var routine = profile.routine;
 
     var list = routine.steps.map(function (s) {
       return '<li class="brain-onboard__result-step">' +
@@ -306,11 +353,14 @@
         var field = btn.getAttribute('data-field');
         var val = btn.getAttribute('data-value');
         if (field === 'minutes') state.minutes = parseInt(val, 10);
-        else if (field === 'courseId') {
+        if (field === 'courseId') {
           state.courseId = val;
           state.routineSubjects = null;
-        }
-        else state[field] = val;
+          if (gameQuick) {
+            finishGameQuick();
+            return;
+          }
+        } else state[field] = val;
         panel.querySelectorAll('[data-field="' + field + '"]').forEach(function (b) {
           b.classList.toggle('brain-onboard__opt--picked', b === btn);
           b.classList.toggle('is-picked', b === btn);
@@ -509,6 +559,9 @@
 
   window.LipaBrainOnboarding = {
     open: open,
+    openGameCourse: function (opts) {
+      open(Object.assign({ gameQuick: true }, opts || {}));
+    },
     close: close,
     renderPlanCard: renderPlanCard,
     autoOpenIfNeeded: autoOpenIfNeeded

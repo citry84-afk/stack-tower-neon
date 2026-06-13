@@ -3,7 +3,7 @@
  * PWA Optimization & Offline Functionality
  */
 
-const CACHE_NAME = 'lipa-brain-gym-v3.71.0-palabra-rotate';
+const CACHE_NAME = 'lipa-brain-gym-v3.72.0-game-course-pick';
 const CACHE_VERSION = '2.0.0';
 
 // Essential files to cache for offline play
@@ -121,6 +121,7 @@ const STATIC_CACHE_URLS = [
     '/css/mini-games.min.css?v=1',
     '/js/lipa-daily.js',
     '/js/lipa-verano.js',
+    '/js/lipa-game-onboard.js',
     '/css/verano-neon.css',
     '/desafio-verano-neon.html',
     '/js/lipa-mascot.js',
