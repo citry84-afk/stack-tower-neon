@@ -3,7 +3,7 @@
  * PWA Optimization & Offline Functionality
  */
 
-const CACHE_NAME = 'lipa-brain-gym-v3.65.0-arcade-poda';
+const CACHE_NAME = 'lipa-brain-gym-v3.66.0-juegos-edu-poda';
 const CACHE_VERSION = '2.0.0';
 
 // Essential files to cache for offline play

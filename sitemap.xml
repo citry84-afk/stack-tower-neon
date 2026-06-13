@@ -74,44 +74,9 @@
   </url>
   <url>
     <loc>https://lipastudios.com/juegos-educativos.html</loc>
-    <lastmod>2026-06-09</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <priority>0.92</priority>
     <changefreq>weekly</changefreq>
-    <mobile:mobile/>
-  </url>
-  <url>
-    <loc>https://lipastudios.com/neon-fracciones.html</loc>
-    <lastmod>2026-05-30</lastmod>
-    <priority>0.86</priority>
-    <changefreq>monthly</changefreq>
-    <mobile:mobile/>
-  </url>
-  <url>
-    <loc>https://lipastudios.com/neon-clasifica.html</loc>
-    <lastmod>2026-05-30</lastmod>
-    <priority>0.84</priority>
-    <changefreq>monthly</changefreq>
-    <mobile:mobile/>
-  </url>
-  <url>
-    <loc>https://lipastudios.com/neon-dictado.html</loc>
-    <lastmod>2026-06-09</lastmod>
-    <priority>0.85</priority>
-    <changefreq>monthly</changefreq>
-    <mobile:mobile/>
-  </url>
-  <url>
-    <loc>https://lipastudios.com/neon-empareja.html</loc>
-    <lastmod>2026-06-09</lastmod>
-    <priority>0.85</priority>
-    <changefreq>monthly</changefreq>
-    <mobile:mobile/>
-  </url>
-  <url>
-    <loc>https://lipastudios.com/neon-arrastra.html</loc>
-    <lastmod>2026-06-09</lastmod>
-    <priority>0.85</priority>
-    <changefreq>monthly</changefreq>
     <mobile:mobile/>
   </url>
   <url>
@@ -262,34 +227,6 @@
     <loc>https://lipastudios.com/mi-evolucion.html</loc>
     <lastmod>2026-05-19</lastmod>
     <priority>0.91</priority>
-    <changefreq>weekly</changefreq>
-    <mobile:mobile/>
-  </url>
-  <url>
-    <loc>https://lipastudios.com/entrenador-cerebro.html</loc>
-    <lastmod>2026-05-19</lastmod>
-    <priority>0.90</priority>
-    <changefreq>monthly</changefreq>
-    <mobile:mobile/>
-  </url>
-  <url>
-    <loc>https://lipastudios.com/neon-calculo.html</loc>
-    <lastmod>2026-06-09</lastmod>
-    <priority>0.88</priority>
-    <changefreq>weekly</changefreq>
-    <mobile:mobile/>
-  </url>
-  <url>
-    <loc>https://lipastudios.com/neon-palabras.html</loc>
-    <lastmod>2026-06-09</lastmod>
-    <priority>0.88</priority>
-    <changefreq>weekly</changefreq>
-    <mobile:mobile/>
-  </url>
-  <url>
-    <loc>https://lipastudios.com/tablas-relampago.html</loc>
-    <lastmod>2026-06-09</lastmod>
-    <priority>0.88</priority>
     <changefreq>weekly</changefreq>
     <mobile:mobile/>
   </url>
