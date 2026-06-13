@@ -66,34 +66,6 @@
     <mobile:mobile/>
   </url>
   <url>
-    <loc>https://lipastudios.com/aim-trainer-neon.html</loc>
-    <lastmod>2026-05-16T12:00:00+00:00</lastmod>
-    <priority>0.90</priority>
-    <changefreq>weekly</changefreq>
-    <mobile:mobile/>
-  </url>
-  <url>
-    <loc>https://lipastudios.com/grid-reflejos-neon.html</loc>
-    <lastmod>2026-05-16T12:00:00+00:00</lastmod>
-    <priority>0.90</priority>
-    <changefreq>weekly</changefreq>
-    <mobile:mobile/>
-  </url>
-  <url>
-    <loc>https://lipastudios.com/toque-flash-neon.html</loc>
-    <lastmod>2026-05-16T12:00:00+00:00</lastmod>
-    <priority>0.88</priority>
-    <changefreq>weekly</changefreq>
-    <mobile:mobile/>
-  </url>
-  <url>
-    <loc>https://lipastudios.com/esquiva-neon.html</loc>
-    <lastmod>2026-05-16T12:00:00+00:00</lastmod>
-    <priority>0.85</priority>
-    <changefreq>monthly</changefreq>
-    <mobile:mobile/>
-  </url>
-  <url>
     <loc>https://lipastudios.com/gym-cerebro.html</loc>
     <lastmod>2026-06-13</lastmod>
     <priority>0.94</priority>
@@ -186,7 +158,7 @@
   </url>
   <url>
     <loc>https://lipastudios.com/recreo-neon.html</loc>
-    <lastmod>2026-06-09</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <priority>0.88</priority>
     <changefreq>weekly</changefreq>
     <mobile:mobile/>
@@ -386,43 +358,13 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://lipastudios.com/blog/mejores-juegos-reflejos-gratis.html</loc>
-    <lastmod>2026-02-01T21:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
-    <loc>https://lipastudios.com/blog/entrenamiento-reflejos-gamers.html</loc>
-    <lastmod>2026-02-01T21:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
     <loc>https://lipastudios.com/blog/gaming-movil-optimizacion-dispositivos.html</loc>
     <lastmod>2026-06-09</lastmod>
     <priority>0.70</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://lipastudios.com/blog/juegos-neon-evolucion-gaming-arcade.html</loc>
-    <lastmod>2026-02-01T21:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
     <loc>https://lipastudios.com/blog/moviles-gaming-baratos-vs-gama-alta.html</loc>
-    <lastmod>2026-02-01T21:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
-    <loc>https://lipastudios.com/blog/reflejos-rapidos-tecnicas-cientificas.html</loc>
-    <lastmod>2026-02-01T21:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
-    <loc>https://lipastudios.com/blog/stack-tower-neon-estrategias-avanzadas.html</loc>
     <lastmod>2026-02-01T21:00:00+00:00</lastmod>
     <priority>0.70</priority>
     <changefreq>monthly</changefreq>
