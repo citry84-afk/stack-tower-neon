@@ -1,0 +1,216 @@
+/* Desafío Verano Neon — gamificación infantil */
+.verano-level-bar {
+  background: #fff;
+  border-radius: 16px;
+  padding: 1rem 1.15rem;
+  border: 2px solid #fde68a;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+.verano-level-bar__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+.verano-level-bar__rank {
+  font-weight: 800;
+  font-size: 1rem;
+  color: #c2410c;
+}
+.verano-level-bar__xp {
+  font-size: 0.8rem;
+  color: #78716c;
+  font-weight: 700;
+}
+.verano-level-bar__track {
+  height: 12px;
+  border-radius: 999px;
+  background: #fef3c7;
+  overflow: hidden;
+}
+.verano-level-bar__fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #f59e0b, #ea580c);
+  transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.verano-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.verano-stat {
+  background: #fff;
+  border-radius: 14px;
+  padding: 0.65rem 0.4rem;
+  text-align: center;
+  border: 1px solid #fed7aa;
+}
+.verano-stat__val {
+  display: block;
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: #ea580c;
+  line-height: 1.1;
+}
+.verano-stat__lbl {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #a8a29e;
+}
+.verano-calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.35rem;
+  margin: 0.75rem 0;
+}
+.verano-cal-day {
+  padding: 0.45rem 0.2rem;
+  border-radius: 10px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  background: #fafaf9;
+  border: 1px solid #e7e5e4;
+  color: #78716c;
+}
+.verano-cal-day--today {
+  border-color: #fb923c;
+  box-shadow: 0 0 0 2px rgba(251, 146, 60, 0.25);
+}
+.verano-cal-day--done {
+  background: #ecfdf5;
+  border-color: #2dd4bf;
+  color: #047857;
+}
+.verano-cal-day__emoji {
+  display: block;
+  font-size: 1rem;
+  line-height: 1.2;
+}
+.verano-badges {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(4.5rem, 1fr));
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+.verano-badge {
+  padding: 0.5rem 0.35rem;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 0.65rem;
+  font-weight: 700;
+  line-height: 1.25;
+  border: 2px solid #e7e5e4;
+  background: #f5f5f4;
+  color: #a8a29e;
+  filter: grayscale(1);
+  opacity: 0.65;
+}
+.verano-badge--unlocked {
+  filter: none;
+  opacity: 1;
+  background: #fff7ed;
+  border-color: #fdba74;
+  color: #9a3412;
+  animation: verano-badge-pop 0.5s ease-out;
+}
+.verano-badge__icon {
+  display: block;
+  font-size: 1.5rem;
+  margin-bottom: 0.15rem;
+}
+@keyframes verano-badge-pop {
+  0% { transform: scale(0.85); }
+  60% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+.verano-sticker-wall {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+.verano-sticker {
+  font-size: 1.75rem;
+  line-height: 1;
+  animation: verano-sticker-in 0.4s ease-out;
+}
+@keyframes verano-sticker-in {
+  from { transform: scale(0) rotate(-20deg); opacity: 0; }
+  to { transform: scale(1) rotate(0); opacity: 1; }
+}
+.verano-ticket {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 16px;
+  background: linear-gradient(165deg, #0a0a12, #1a0a2e);
+  border: 2px dashed #67e8f9;
+  color: #e2e8f0;
+}
+.verano-ticket__label {
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #67e8f9;
+  margin: 0 0 0.35rem;
+}
+.verano-ticket a {
+  display: inline-block;
+  margin-top: 0.65rem;
+  padding: 0.65rem 1.25rem;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #06b6d4, #0891b2);
+  color: #fff !important;
+  font-weight: 800;
+  text-decoration: none !important;
+}
+.verano-toast {
+  position: fixed;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(120%);
+  z-index: 9999;
+  max-width: 90vw;
+  padding: 0.85rem 1.25rem;
+  border-radius: 14px;
+  background: #fff;
+  border: 2px solid #fb923c;
+  box-shadow: 0 12px 40px rgba(234, 88, 12, 0.25);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #9a3412;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-align: center;
+}
+.verano-toast--show {
+  transform: translateX(-50%) translateY(0);
+}
+.verano-stamp {
+  display: inline-block;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.verano-stamp--pop {
+  animation: verano-stamp-pop 0.55s ease-out;
+}
+@keyframes verano-stamp-pop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.45) rotate(8deg); }
+  100% { transform: scale(1); }
+}
+.verano-card--badges { text-align: left; }
+.verano-card--badges h3 { text-align: center; }
+.verano-lipi-mount {
+  margin: 0 auto 1rem;
+  max-width: 420px;
+}
+.verano-confetti-summer .brain-confetti-lite span {
+  font-size: 1.25rem;
+}

@@ -25,17 +25,19 @@
   <link rel="stylesheet" href="/css/site-nav.min.css?v=1">
   <link rel="stylesheet" href="/css/lipa-ui.min.css?v=1">
   <link rel="stylesheet" href="/css/brain-gym.min.css?v=1">
+  <link rel="stylesheet" href="/css/brain-design-system.css">
   <link rel="stylesheet" href="/css/course-landing.css">
+  <link rel="stylesheet" href="/css/verano-neon.css">
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <style>
     body.lipa-page { background: linear-gradient(165deg, #fff7ed 0%, #fef3c7 35%, #e0f2fe 70%, #ecfdf5 100%); min-height: 100vh; }
     .verano-wrap { max-width: 720px; margin: 0 auto; padding: 1.5rem 1.25rem 3rem; }
-    .verano-hero { text-align: center; margin-bottom: 1.5rem; }
+    .verano-hero { text-align: center; margin-bottom: 1rem; }
     .verano-hero h1 { font-family: var(--lipa-font-display, 'Nunito', sans-serif); font-size: clamp(1.6rem, 4.5vw, 2.2rem); color: #c2410c; margin: 0.5rem 0; line-height: 1.2; }
     .verano-hero p { color: #57534e; line-height: 1.6; max-width: 36rem; margin: 0 auto; }
     .verano-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin: 1rem 0; }
     .verano-chip { font-size: 0.75rem; font-weight: 700; padding: 0.35rem 0.75rem; border-radius: 999px; background: #fff; border: 1px solid #fed7aa; color: #9a3412; }
-    #verano-challenge-mount { display: grid; gap: 1rem; margin: 1.5rem 0; }
+    #verano-challenge-mount { display: grid; gap: 1rem; margin: 1rem 0 1.5rem; }
     .verano-card { background: #fff; border-radius: 20px; padding: 1.35rem 1.25rem; border: 2px solid #fde68a; box-shadow: 0 8px 28px rgba(234, 88, 12, 0.1); text-align: center; }
     .verano-card--mission { border-color: #fb923c; background: linear-gradient(180deg, #fff 0%, #fff7ed 100%); }
     .verano-card__eyebrow { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: #ea580c; margin: 0 0 0.5rem; }
@@ -51,8 +53,6 @@
     .verano-week__goal { font-size: 0.9rem; color: #57534e; margin: 0 0 0.75rem; }
     .verano-stamps { display: flex; gap: 0.75rem; justify-content: center; font-size: 2rem; margin: 0.5rem 0; }
     .verano-stamp--on { filter: drop-shadow(0 2px 4px rgba(251, 191, 36, 0.5)); }
-    .verano-week__win { background: #ecfdf5; border-radius: 12px; padding: 0.75rem; font-size: 0.9rem; color: #047857; margin: 0.75rem 0 0; }
-    .verano-week__win a { color: #0d9488; font-weight: 700; }
     .verano-week__count { font-size: 0.8rem; color: #a8a29e; margin: 0.5rem 0 0; }
   </style>
 </head>
@@ -79,11 +79,13 @@
     <header class="verano-hero">
       <p class="brain-eyebrow">Julio–agosto 2026 · sin culpa</p>
       <h1>Desafío Verano Neon</h1>
-      <p>Una misión divertida al día (opcional), <strong>3 sellos por semana</strong> y premio arcade. Repaso de mates, lengua e inglés sin cuaderno infinito — el niño aprende jugando sin darse cuenta.</p>
+      <div id="lipi-mascot-mount" class="verano-lipi-mount"></div>
+      <p>Gana <strong>XP veraniega</strong>, sube de rango, colecciona <strong>10 insignias</strong> y llena tu álbum de stickers. Misión sorpresa al día + ticket arcade si completas la semana.</p>
       <div class="verano-chips" role="list">
         <span class="verano-chip" role="listitem">☀️ 7 min máx</span>
-        <span class="verano-chip" role="listitem">⭐ Sellos</span>
-        <span class="verano-chip" role="listitem">🎮 Recreo premio</span>
+        <span class="verano-chip" role="listitem">⚡ XP y niveles</span>
+        <span class="verano-chip" role="listitem">🏅 Insignias</span>
+        <span class="verano-chip" role="listitem">🎮 Ticket Recreo</span>
         <span class="verano-chip" role="listitem">100 % gratis</span>
       </div>
     </header>
@@ -95,10 +97,13 @@
       <ol>
         <li><strong>Abre la misión del día</strong> — cambia cada mañana (mates, lengua, inglés…).</li>
         <li><strong>Jugad ~7 minutos</strong> — un solo juego o la misión del curso en <a href="/cursos.html">Cursos</a>.</li>
-        <li><strong>Pulsad «Marcar como hecho»</strong> — suma un sello ⭐ en la semana.</li>
-        <li><strong>3 sellos = semana ganada</strong> — premio opcional en <a href="/recreo-neon.html">Recreo Neon</a> (arcade).</li>
+        <li><strong>Pulsad «Marcar como hecho»</strong> — confeti, +25 XP veraniega y sello ⭐ en el calendario.</li>
+        <li><strong>3 sellos = semana ganada</strong> — +50 XP extra y ticket para <a href="/recreo-neon.html">Recreo Neon</a>.</li>
       </ol>
-      <p>No hace falma todos los días. Cuatro días libres sin culpa. Si hay campamento o playa sin Wi‑Fi, retomáis la semana siguiente. Guía larga: <a href="/blog/verano-sin-cole-refuerzo.html">verano sin cole 3×7</a>.</p>
+      <p>Los niños ven su rango (Explorador → Leyenda Lipi), racha de días e insignias desbloqueadas. Todo en el navegador, sin cuenta. Cuatro días libres sin culpa. Guía larga: <a href="/blog/verano-sin-cole-refuerzo.html">verano sin cole 3×7</a>.</p>
+
+      <h2>Insignias y niveles (motivación sin presión)</h2>
+      <p>Hay 10 insignias coleccionables (primer sello, racha 3 días, semana ganada, 100 XP…). Subir de nivel es progreso visual, no competición con otros. Si el niño solo quiere el ticket arcade, basta con 3 sellos en la semana — el resto es opcional.</p>
 
       <h2>Por qué funciona con niños</h2>
       <p>Los sellos visuales, la misión sorpresa y el premio arcade convierten el repaso en <strong>reto</strong>, no en deber. Lipi habla en frases cortas; los juegos duran 30 s–7 min. Mezclad contextos: sombra en la playa, viaje en coche, casa de los abuelos (<a href="/blog/fin-de-semana-casa-abuelos.html">guía abuelos</a>).</p>
@@ -129,6 +134,8 @@
   <footer class="lipa-footer" style="margin-top:2rem;text-align:center;">
     <p class="lipa-footer__copy">&copy; 2024–2026 LIPA Studios · <a href="/refuerzo-primaria.html">Refuerzo primaria</a></p>
   </footer>
+  <script src="/js/lipa-mascot.js" defer></script>
+  <script src="/js/lipa-game-feedback.js" defer></script>
   <script src="/js/lipa-verano.js" defer></script>
 </body>
 </html>
