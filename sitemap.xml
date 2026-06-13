@@ -10,13 +10,6 @@
     <mobile:mobile/>
   </url>
   <url>
-    <loc>https://lipastudios.com/juegos-de-reflejos.html</loc>
-    <lastmod>2026-05-15T12:00:00+00:00</lastmod>
-    <priority>0.95</priority>
-    <changefreq>weekly</changefreq>
-    <mobile:mobile/>
-  </url>
-  <url>
     <loc>https://lipastudios.com/refuerzo-infantil.html</loc>
     <lastmod>2026-06-13</lastmod>
     <priority>0.91</priority>
@@ -70,13 +63,6 @@
     <lastmod>2026-06-09</lastmod>
     <priority>0.90</priority>
     <changefreq>monthly</changefreq>
-    <mobile:mobile/>
-  </url>
-  <url>
-    <loc>https://lipastudios.com/test-reflejos.html</loc>
-    <lastmod>2026-05-16T12:00:00+00:00</lastmod>
-    <priority>0.92</priority>
-    <changefreq>weekly</changefreq>
     <mobile:mobile/>
   </url>
   <url>
@@ -158,7 +144,7 @@
   </url>
   <url>
     <loc>https://lipastudios.com/cursos.html</loc>
-    <lastmod>2026-06-09</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <priority>0.93</priority>
     <changefreq>weekly</changefreq>
     <mobile:mobile/>
@@ -208,7 +194,7 @@
 <!-- BRAIN_GYM_LANDINGS -->
   <url>
     <loc>https://lipastudios.com/infantil/3-anos</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <priority>0.88</priority>
     <changefreq>weekly</changefreq>
     <mobile:mobile/>
@@ -216,7 +202,7 @@
 
   <url>
     <loc>https://lipastudios.com/infantil/4-anos</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <priority>0.88</priority>
     <changefreq>weekly</changefreq>
     <mobile:mobile/>
@@ -224,7 +210,7 @@
 
   <url>
     <loc>https://lipastudios.com/infantil/5-anos</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <priority>0.88</priority>
     <changefreq>weekly</changefreq>
     <mobile:mobile/>
@@ -232,7 +218,7 @@
 
   <url>
     <loc>https://lipastudios.com/primaria/1-primaria</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <priority>0.88</priority>
     <changefreq>weekly</changefreq>
     <mobile:mobile/>
@@ -240,7 +226,7 @@
 
   <url>
     <loc>https://lipastudios.com/primaria/2-primaria</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <priority>0.88</priority>
     <changefreq>weekly</changefreq>
     <mobile:mobile/>
@@ -248,7 +234,7 @@
 
   <url>
     <loc>https://lipastudios.com/primaria/3-primaria</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <priority>0.88</priority>
     <changefreq>weekly</changefreq>
     <mobile:mobile/>
@@ -256,7 +242,7 @@
 
   <url>
     <loc>https://lipastudios.com/primaria/4-primaria</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <priority>0.88</priority>
     <changefreq>weekly</changefreq>
     <mobile:mobile/>
@@ -264,7 +250,7 @@
 
   <url>
     <loc>https://lipastudios.com/primaria/5-primaria</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <priority>0.88</priority>
     <changefreq>weekly</changefreq>
     <mobile:mobile/>
@@ -272,7 +258,7 @@
 
   <url>
     <loc>https://lipastudios.com/primaria/6-primaria</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <priority>0.88</priority>
     <changefreq>weekly</changefreq>
     <mobile:mobile/>
@@ -280,7 +266,7 @@
 
   <url>
     <loc>https://lipastudios.com/eso/1-eso</loc>
-    <lastmod>2026-06-09</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <priority>0.88</priority>
     <changefreq>weekly</changefreq>
     <mobile:mobile/>
@@ -288,7 +274,7 @@
 
   <url>
     <loc>https://lipastudios.com/eso/2-eso</loc>
-    <lastmod>2026-06-09</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <priority>0.88</priority>
     <changefreq>weekly</changefreq>
     <mobile:mobile/>
@@ -338,20 +324,6 @@
   <url>
     <loc>https://lipastudios.com/about.html</loc>
     <lastmod>2026-06-13</lastmod>
-    <priority>0.90</priority>
-    <changefreq>weekly</changefreq>
-    <mobile:mobile/>
-  </url>
-  <url>
-    <loc>https://lipastudios.com/guia-reflejos.html</loc>
-    <lastmod>2026-06-09</lastmod>
-    <priority>0.90</priority>
-    <changefreq>weekly</changefreq>
-    <mobile:mobile/>
-  </url>
-  <url>
-    <loc>https://lipastudios.com/top-juegos-reflejos.html</loc>
-    <lastmod>2026-05-15T12:00:00+00:00</lastmod>
     <priority>0.90</priority>
     <changefreq>weekly</changefreq>
     <mobile:mobile/>
@@ -415,12 +387,6 @@
   </url>
   <url>
     <loc>https://lipastudios.com/blog/mejores-juegos-reflejos-gratis.html</loc>
-    <lastmod>2026-02-01T21:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
-    <loc>https://lipastudios.com/blog/elegir-mejor-entrenador-reflejos-online.html</loc>
     <lastmod>2026-02-01T21:00:00+00:00</lastmod>
     <priority>0.70</priority>
     <changefreq>monthly</changefreq>
