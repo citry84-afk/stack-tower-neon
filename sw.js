@@ -3,7 +3,7 @@
  * PWA Optimization & Offline Functionality
  */
 
-const CACHE_NAME = 'lipa-brain-gym-v3.68.0-gsc-ctr';
+const CACHE_NAME = 'lipa-brain-gym-v3.69.0-desafio-verano';
 const CACHE_VERSION = '2.0.0';
 
 // Essential files to cache for offline play
@@ -120,6 +120,8 @@ const STATIC_CACHE_URLS = [
     '/css/brain-evolution.css',
     '/css/mini-games.min.css?v=1',
     '/js/lipa-daily.js',
+    '/js/lipa-verano.js',
+    '/desafio-verano-neon.html',
     '/js/lipa-brain-catalog.js',
     '/js/lipa-brain-core.js',
     '/js/lipa-pwa.js',
