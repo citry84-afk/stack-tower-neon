@@ -18,7 +18,7 @@
   </url>
   <url>
     <loc>https://lipastudios.com/refuerzo-infantil.html</loc>
-    <lastmod>2026-06-09</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <priority>0.91</priority>
     <changefreq>weekly</changefreq>
     <mobile:mobile/>
@@ -109,7 +109,7 @@
   </url>
   <url>
     <loc>https://lipastudios.com/gym-cerebro.html</loc>
-    <lastmod>2026-06-09</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <priority>0.94</priority>
     <changefreq>weekly</changefreq>
     <mobile:mobile/>
@@ -203,13 +203,6 @@
     <lastmod>2026-06-09</lastmod>
     <priority>0.88</priority>
     <changefreq>weekly</changefreq>
-    <mobile:mobile/>
-  </url>
-  <url>
-    <loc>https://lipastudios.com/entreno-completo.html</loc>
-    <lastmod>2026-05-15T12:00:00+00:00</lastmod>
-    <priority>0.85</priority>
-    <changefreq>monthly</changefreq>
     <mobile:mobile/>
   </url>
 <!-- BRAIN_GYM_LANDINGS -->
@@ -365,7 +358,7 @@
   </url>
   <url>
     <loc>https://lipastudios.com/editorial.html</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <priority>0.50</priority>
     <changefreq>yearly</changefreq>
   </url>
