@@ -55,8 +55,10 @@
     var bl = document.getElementById('palabras-brain-level');
     if (bl) {
       var tier = LipaVocabBank ? LipaVocabBank.tierForLevel(brainLevel) + 1 : 1;
-      bl.textContent = 'Nivel Brain ' + brainLevel + ' · vocabulario nivel ' + tier;
+      var suf = (window.LipaGameOnboard && LipaGameOnboard.courseSuffix) ? LipaGameOnboard.courseSuffix() : '';
+      bl.textContent = 'Nivel Brain ' + brainLevel + ' · vocabulario nivel ' + tier + suf;
     }
+    if (window.LipaGameOnboard && LipaGameOnboard.refreshBanner) LipaGameOnboard.refreshBanner();
   }
 
   function pickMode() {
@@ -128,6 +130,7 @@
     refreshBrainLevel();
     getBoard();
     renderBoard();
+    window.addEventListener('lipa-profile-changed', refreshBrainLevel);
   }
 
   function esc(s) {
@@ -248,6 +251,15 @@
   }
 
   function startGame() {
+    if (running) return;
+    if (window.LipaGameOnboard && LipaGameOnboard.ensureCourseBeforePlay) {
+      LipaGameOnboard.ensureCourseBeforePlay(startGameNow);
+      return;
+    }
+    startGameNow();
+  }
+
+  function startGameNow() {
     if (running) return;
     if (window.LipaAnalytics && LipaAnalytics.trackGameStart) {
       LipaAnalytics.trackGameStart('neon-palabras');

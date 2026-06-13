@@ -185,8 +185,33 @@
     }
   }
 
+  function refreshDictadoLevel() {
+    if (window.LipaBrain) {
+      if (LipaBrain.resolveBrainLevel) {
+        brainLevel = LipaBrain.resolveBrainLevel({ gameId: activityId, activityId: activityId });
+      } else {
+        brainLevel = LipaBrain.getActivityLevel(activityId);
+      }
+    }
+    var blEl = document.getElementById('dictado-brain-level');
+    if (blEl) {
+      var suf = (window.LipaGameOnboard && LipaGameOnboard.courseSuffix) ? LipaGameOnboard.courseSuffix() : '';
+      blEl.textContent = 'Nivel Brain ' + brainLevel + suf;
+    }
+    if (window.LipaGameOnboard && LipaGameOnboard.refreshBanner) LipaGameOnboard.refreshBanner();
+  }
+
   function startGame() {
-    running = true;
+    if (running) return;
+    if (window.LipaGameOnboard && LipaGameOnboard.ensureCourseBeforePlay) {
+      LipaGameOnboard.ensureCourseBeforePlay(startGameNow);
+      return;
+    }
+    startGameNow();
+  }
+
+  function startGameNow() {
+    if (running) return;
     if (window.LipaBrainPlay && LipaBrainPlay.syncRoundDuration) {
       DURATION = LipaBrainPlay.syncRoundDuration();
     }
@@ -218,9 +243,8 @@
     arenaEl = document.getElementById('dictado-arena');
     promptEl = document.getElementById('dictado-prompt');
     workEl = document.getElementById('dictado-work');
-    if (window.LipaBrain) brainLevel = LipaBrain.getActivityLevel(activityId);
-    var blEl = document.getElementById('dictado-brain-level');
-    if (blEl) blEl.textContent = 'Nivel Brain ' + brainLevel;
+    if (window.LipaBrain) refreshDictadoLevel();
     if (btnStart) btnStart.addEventListener('click', startGame);
+    window.addEventListener('lipa-profile-changed', refreshDictadoLevel);
   });
 })();

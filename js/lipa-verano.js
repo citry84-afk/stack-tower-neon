@@ -250,6 +250,22 @@
     return getWeekProgress().data.stamps.indexOf(today()) >= 0;
   }
 
+  function getKidName() {
+    if (!global.LipaBrain) return null;
+    var p = LipaBrain.getProfile();
+    if (p && p.displayName) {
+      var n = String(p.displayName).trim().split(/\s+/)[0];
+      if (n && n.length >= 2) return n;
+    }
+    return null;
+  }
+
+  function personalize(msg) {
+    var name = getKidName();
+    if (!name) return msg;
+    return '¡' + name + '! ' + msg;
+  }
+
   function celebrate(result, stampEl) {
     if (global.LipaGameFeedback) {
       LipaGameFeedback.confettiLite();
@@ -257,9 +273,9 @@
       if (stampEl) LipaGameFeedback.pop(stampEl);
     }
     if (global.LipaMascot) {
-      var msg = CHEERS[seedFromString(today() + 'cheer') % CHEERS.length];
-      if (result.weekJustWon) msg = '¡SEMANA COMPLETA! Ticket Recreo Neon desbloqueado 🎮';
-      else if (result.newBadges.length) msg = '¡Nueva insignia: ' + result.newBadges[0].emoji + ' ' + result.newBadges[0].name + '!';
+      var msg = personalize(CHEERS[seedFromString(today() + 'cheer') % CHEERS.length]);
+      if (result.weekJustWon) msg = personalize('¡SEMANA COMPLETA! Ticket Recreo Neon desbloqueado 🎮');
+      else if (result.newBadges.length) msg = personalize('Nueva insignia: ' + result.newBadges[0].emoji + ' ' + result.newBadges[0].name);
       LipaMascot.say('complete', msg);
     }
     if (result.newBadges.length) {
@@ -296,6 +312,8 @@
     var data = loadData();
     var lvl = getLevel(data.xp || 0);
     var tip = LIPI_TIPS[seedFromString(today() + 'tip') % LIPI_TIPS.length];
+    var name = getKidName();
+    if (name) tip = '¡Hola, ' + name + '! ' + tip;
     if (data.totalMissions > 0) {
       tip = lvl.current.emoji + ' Eres «' + lvl.current.title + '». ' + tip;
     }
@@ -438,5 +456,9 @@
     mountLipi();
     var mount = document.getElementById('verano-challenge-mount');
     if (mount) render(mount);
+  });
+
+  document.addEventListener('lipa-profile-changed', function () {
+    mountLipi();
   });
 })(typeof window !== 'undefined' ? window : this);

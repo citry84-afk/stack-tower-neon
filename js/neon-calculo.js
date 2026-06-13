@@ -29,6 +29,12 @@
       brainLevel = LipaBrain.getActivityLevel('neon-calculo');
       calcConfig = LipaBrain.getCalcConfig(brainLevel);
     }
+    var bl = document.getElementById('calc-brain-level');
+    if (bl) {
+      var suf = (window.LipaGameOnboard && LipaGameOnboard.courseSuffix) ? LipaGameOnboard.courseSuffix() : '';
+      bl.textContent = 'Nivel Brain ' + brainLevel + suf;
+    }
+    if (window.LipaGameOnboard && LipaGameOnboard.refreshBanner) LipaGameOnboard.refreshBanner();
   }
 
   function getBoard() {
@@ -142,11 +148,9 @@
     }
 
     refreshBrainLevel();
-    var bl = document.getElementById('calc-brain-level');
-    if (bl) bl.textContent = 'Nivel Brain ' + brainLevel;
-
     getBoard();
     renderBoard();
+    window.addEventListener('lipa-profile-changed', refreshBrainLevel);
   }
 
   function esc(s) {
@@ -275,6 +279,15 @@
   }
 
   function startGame() {
+    if (running) return;
+    if (window.LipaGameOnboard && LipaGameOnboard.ensureCourseBeforePlay) {
+      LipaGameOnboard.ensureCourseBeforePlay(startGameNow);
+      return;
+    }
+    startGameNow();
+  }
+
+  function startGameNow() {
     if (running) return;
     if (window.LipaAnalytics && LipaAnalytics.trackGameStart) {
       LipaAnalytics.trackGameStart('neon-calculo');

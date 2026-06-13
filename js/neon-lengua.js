@@ -54,8 +54,10 @@
     } catch (e) { /* ignore */ }
     var bl = document.getElementById('lengua-brain-level');
     if (bl) {
-      var courseTxt = '';
-      if (window.LipaBrain) {
+      var courseTxt = (window.LipaGameOnboard && LipaGameOnboard.courseSuffix)
+        ? LipaGameOnboard.courseSuffix()
+        : '';
+      if (!courseTxt && window.LipaBrain) {
         var p = LipaBrain.getProfile();
         if (p && p.courseId && window.LipaCurriculum) {
           LipaCurriculum.init();
@@ -71,20 +73,14 @@
   }
 
   function ensureCourseBeforePlay(thenStart) {
-    if (!window.LipaGameOnboard || !LipaGameOnboard.needsCourse()) {
-      thenStart();
+    if (window.LipaGameOnboard && LipaGameOnboard.ensureCourseBeforePlay) {
+      LipaGameOnboard.ensureCourseBeforePlay(function () {
+        refreshBrainLevel();
+        thenStart();
+      });
       return;
     }
-    if (window.LipaBrainOnboarding) {
-      LipaBrainOnboarding.openGameCourse({
-        onComplete: function () {
-          refreshBrainLevel();
-          thenStart();
-        }
-      });
-    } else {
-      window.location.href = '/cursos.html?empezar=1';
-    }
+    thenStart();
   }
 
   function updateHud() {

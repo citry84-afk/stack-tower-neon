@@ -1,5 +1,5 @@
 /**
- * Onboarding de curso en juegos sueltos (Neon Palabra, Sílabas…)
+ * Onboarding de curso en juegos sueltos (lengua, mates, inglés…)
  */
 (function (global) {
   'use strict';
@@ -14,6 +14,27 @@
     return !p || !p.courseId;
   }
 
+  function getLevelElId() {
+    return document.body.getAttribute('data-game-level-id') || 'lengua-brain-level';
+  }
+
+  function getCourseLabel() {
+    if (!global.LipaBrain || needsCourse()) return '';
+    var p = LipaBrain.getProfile();
+    if (p.courseLabel) return p.courseLabel;
+    if (p.courseId && global.LipaCurriculum) {
+      LipaCurriculum.init();
+      var c = LipaCurriculum.getCourse(p.courseId);
+      if (c) return c.label;
+    }
+    return p.courseId || '';
+  }
+
+  function courseSuffix() {
+    var label = getCourseLabel();
+    return label ? ' · ' + label : '';
+  }
+
   function openCoursePicker(onComplete) {
     if (global.LipaBrainOnboarding && LipaBrainOnboarding.openGameCourse) {
       LipaBrainOnboarding.openGameCourse({ onComplete: onComplete });
@@ -22,6 +43,17 @@
     } else {
       global.location.href = '/cursos.html?empezar=1';
     }
+  }
+
+  function ensureCourseBeforePlay(thenStart) {
+    if (!needsCourse()) {
+      thenStart();
+      return;
+    }
+    openCoursePicker(function () {
+      refreshBanner();
+      thenStart();
+    });
   }
 
   function injectStyles() {
@@ -38,9 +70,14 @@
     document.head.appendChild(s);
   }
 
+  function bannerHint() {
+    var hint = document.body.getAttribute('data-game-onboard-label') || 'actividades';
+    return hint;
+  }
+
   function mountBanner() {
-    if (!document.body.classList.contains('game-page--lengua')) return;
-    var levelEl = document.getElementById('lengua-brain-level');
+    if (document.body.getAttribute('data-brain-onboard-auto') !== '1') return;
+    var levelEl = document.getElementById(getLevelElId());
     if (!levelEl || document.getElementById('lipa-game-course-banner')) return;
     injectStyles();
     var banner = document.createElement('p');
@@ -54,21 +91,15 @@
   function refreshBanner() {
     var banner = document.getElementById('lipa-game-course-banner');
     if (!banner || !global.LipaBrain) return;
+    var hint = bannerHint();
     if (!needsCourse()) {
-      var p = LipaBrain.getProfile();
-      var label = p.courseLabel || '';
-      if (!label && p.courseId && global.LipaCurriculum) {
-        LipaCurriculum.init();
-        var c = LipaCurriculum.getCourse(p.courseId);
-        if (c) label = c.label;
-      }
-      banner.innerHTML = '📚 Curso: <strong>' + esc(label || p.courseId) + '</strong> · ' +
+      banner.innerHTML = '📚 Curso: <strong>' + esc(getCourseLabel()) + '</strong> · ' +
         '<button type="button" class="lipa-game-course-banner__change">Cambiar</button>';
       var ch = banner.querySelector('.lipa-game-course-banner__change');
       if (ch) ch.addEventListener('click', function () { openCoursePicker(refreshBanner); });
       return;
     }
-    banner.innerHTML = '👋 <strong>Primera vez:</strong> elige tu curso para palabras a tu medida. ' +
+    banner.innerHTML = '👋 <strong>Primera vez:</strong> elige tu curso para ajustar ' + esc(hint) + '. ' +
       '<button type="button" class="lipa-game-course-banner__pick">Elegir curso</button>';
     var pk = banner.querySelector('.lipa-game-course-banner__pick');
     if (pk) pk.addEventListener('click', function () { openCoursePicker(refreshBanner); });
@@ -85,7 +116,11 @@
   global.LipaGameOnboard = {
     needsCourse: needsCourse,
     openCoursePicker: openCoursePicker,
-    refreshBanner: refreshBanner
+    ensureCourseBeforePlay: ensureCourseBeforePlay,
+    refreshBanner: refreshBanner,
+    courseSuffix: courseSuffix,
+    getCourseLabel: getCourseLabel,
+    getLevelElId: getLevelElId
   };
 
   document.addEventListener('DOMContentLoaded', function () {
