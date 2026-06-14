@@ -3,7 +3,7 @@
  * PWA Optimization & Offline Functionality
  */
 
-const CACHE_NAME = 'lipa-brain-gym-v3.73.0-verano-a-b';
+const CACHE_NAME = 'lipa-brain-gym-v3.74.0-verano-4-course';
 const CACHE_VERSION = '2.0.0';
 
 // Essential files to cache for offline play

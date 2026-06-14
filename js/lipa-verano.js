@@ -62,6 +62,7 @@
     { id: 'silabas', emoji: '🧩', title: 'Sílabas ninja', tag: 'Lengua', href: '/neon-silabas.html', lipi: 'Para peques y 1º–2º: une sílabas como piezas de puzzle.' },
     { id: 'peques', emoji: '🐣', title: 'Misión Neon Peques', tag: 'Infantil', href: '/neon-peques.html', lipi: 'Colores, formas y contar. Lipi guía con pictogramas.' },
     { id: 'fracciones', emoji: '🍕', title: 'Pizza de fracciones', tag: 'Mates', href: '/neon-fracciones.html', lipi: 'Fracciones visuales. ¿Qué parte de la pizza queda?' },
+    { id: 'frase', emoji: '✍️', title: 'Frase completa', tag: 'Lengua', href: '/neon-frase.html', lipi: 'Ordena la frase como un puzzle. Ideal para comprensión lectora.' },
     { id: 'curso', emoji: '🎯', title: 'Misión del curso', tag: 'Mix', href: '/cursos.html?empezar=1', lipi: 'El Brain Gym elige la actividad de tu curso real. Pulsa Empezar.' },
     { id: 'reto', emoji: '🧠', title: 'Reto sorpresa', tag: 'Extra', href: '/retos-rapidos.html', lipi: 'Lógica u ortografía en 3 min. Opcional si ya hiciste mates o lengua.' }
   ];
@@ -153,12 +154,14 @@
 
   function getTodayMission() {
     var dow = new Date().getDay();
-    var pool = MISSIONS.slice();
+    var courseId = getCourseId();
+    var pool = getMissionPool(courseId);
     if (dow === 2) pool = pool.filter(function (m) { return m.tag === 'Mates' || m.id === 'curso'; });
     else if (dow === 4) pool = pool.filter(function (m) { return m.tag === 'Lengua' || m.id === 'curso'; });
     else if (dow === 6) pool = pool.filter(function (m) { return m.tag === 'Inglés' || m.tag === 'Mix' || m.id === 'curso'; });
+    if (!pool.length) pool = getMissionPool(courseId);
     if (!pool.length) pool = MISSIONS;
-    var idx = seedFromString('verano:' + today()) % pool.length;
+    var idx = seedFromString('verano:' + today() + ':' + (courseId || 'any')) % pool.length;
     return pool[idx];
   }
 
@@ -260,6 +263,67 @@
     return null;
   }
 
+  function getCourseId() {
+    if (global.LipaBrain && LipaBrain.getProfile) {
+      var p = LipaBrain.getProfile();
+      if (p && p.courseId) return p.courseId;
+    }
+    if (global.LipaBrainProfiles && LipaBrainProfiles.getActiveMeta) {
+      var meta = LipaBrainProfiles.getActiveMeta();
+      if (meta && meta.courseId) return meta.courseId;
+    }
+    return null;
+  }
+
+  function getCourseLabel() {
+    if (global.LipaBrain && LipaBrain.getProfile) {
+      var prof = LipaBrain.getProfile();
+      if (prof && prof.courseLabel) return prof.courseLabel;
+    }
+    return null;
+  }
+
+  function isInfantilCourse(courseId) {
+    return courseId && courseId.indexOf('infantil-') === 0;
+  }
+
+  function isPrimariaLow(courseId) {
+    return courseId === 'primaria-1' || courseId === 'primaria-2';
+  }
+
+  function missionForCourse(base, courseId) {
+    if (base.id !== 'curso') return base;
+    return {
+      id: 'curso',
+      emoji: base.emoji,
+      title: base.title,
+      tag: base.tag,
+      href: courseId
+        ? '/curso.html?c=' + encodeURIComponent(courseId) + '&empezar=1'
+        : base.href,
+      lipi: courseId
+        ? 'Misión de tu curso (' + (getCourseLabel() || courseId) + '). Lipi elige la actividad pendiente.'
+        : base.lipi
+    };
+  }
+
+  function getMissionPool(courseId) {
+    return MISSIONS.filter(function (m) {
+      if (isInfantilCourse(courseId)) {
+        return m.id === 'peques' || m.id === 'silabas' || m.id === 'curso';
+      }
+      if (isPrimariaLow(courseId)) {
+        return m.id !== 'fracciones' && m.id !== 'peques' && m.id !== 'frase';
+      }
+      if (courseId) {
+        return m.id !== 'peques' && m.id !== 'silabas';
+      }
+      return true;
+    }).map(function (m) {
+      return missionForCourse(m, courseId);
+    });
+  }
+
   function personalize(msg) {
     var name = getKidName();
     if (!name) return msg;
@@ -358,6 +422,7 @@
     var goalMet = count >= WEEK_GOAL || prog.data.won;
     var lvl = getLevel(data.xp || 0);
     var streak = computeStreak(data.allStamps || []);
+    var courseLabel = getCourseLabel();
 
     var stampHtml = '';
     for (var i = 0; i < WEEK_GOAL; i++) {
@@ -380,7 +445,8 @@
         '<div class="verano-stat"><span class="verano-stat__val">' + (data.badges ? data.badges.length : 0) + '/' + BADGES.length + '</span><span class="verano-stat__lbl">Insignias</span></div>' +
       '</div>' +
       '<div class="verano-card verano-card--mission">' +
-        '<p class="verano-card__eyebrow">Misión de hoy · ' + escapeHtml(mission.tag) + '</p>' +
+        '<p class="verano-card__eyebrow">Misión de hoy · ' + escapeHtml(mission.tag) +
+          (courseLabel ? ' · ' + escapeHtml(courseLabel) : '') + '</p>' +
         '<p class="verano-card__emoji" aria-hidden="true">' + mission.emoji + '</p>' +
         '<h2 class="verano-card__title">' + escapeHtml(mission.title) + '</h2>' +
         '<p class="verano-card__lipi">Lipi dice: «' + escapeHtml(mission.lipi) + '»</p>' +
@@ -460,5 +526,7 @@
 
   document.addEventListener('lipa-profile-changed', function () {
     mountLipi();
+    var mount = document.getElementById('verano-challenge-mount');
+    if (mount) render(mount);
   });
 })(typeof window !== 'undefined' ? window : this);
