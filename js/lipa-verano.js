@@ -30,8 +30,24 @@
     { id: 'xp300', emoji: '🎯', name: '300 XP verano', need: function (d) { return d.xp >= 300; } },
     { id: 'ten', emoji: '🎖️', name: '10 misiones', need: function (d) { return d.totalMissions >= 10; } },
     { id: 'weeks3', emoji: '🏅', name: '3 semanas', need: function (d) { return d.weeksWon >= 3; } },
-    { id: 'allgames', emoji: '🎮', name: '5 juegos distintos', need: function (d) { return (d.gamesPlayed || []).length >= 5; } }
+    { id: 'allgames', emoji: '🎮', name: '5 juegos distintos', need: function (d) { return (d.gamesPlayed || []).length >= 5; } },
+    { id: 'green', emoji: '🌿', name: 'Explorador verde', need: function (d) { return hasScienceMission(d); } }
   ];
+
+  var SCIENCE_MISSION_IDS = ['vida', 'entorno', 'cuerpo', 'mapa', 'planeta'];
+
+  function isScienceMission(id) {
+    return SCIENCE_MISSION_IDS.indexOf(id) >= 0;
+  }
+
+  function hasScienceMission(data) {
+    if (data && data.scienceDone) return true;
+    var played = (data && data.gamesPlayed) || [];
+    for (var i = 0; i < played.length; i++) {
+      if (isScienceMission(played[i])) return true;
+    }
+    return false;
+  }
 
   var CHEERS = [
     '¡BOOM! Otro sello en el pasaporte veraniego.',
@@ -226,6 +242,9 @@
 
     if (missionId && all.gamesPlayed.indexOf(missionId) < 0) {
       all.gamesPlayed.push(missionId);
+    }
+    if (missionId && isScienceMission(missionId)) {
+      all.scienceDone = true;
     }
 
     var xpGain = XP_MISSION;
