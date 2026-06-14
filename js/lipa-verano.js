@@ -63,6 +63,11 @@
     { id: 'peques', emoji: '🐣', title: 'Misión Neon Peques', tag: 'Infantil', href: '/neon-peques.html', lipi: 'Colores, formas y contar. Lipi guía con pictogramas.' },
     { id: 'fracciones', emoji: '🍕', title: 'Pizza de fracciones', tag: 'Mates', href: '/neon-fracciones.html', lipi: 'Fracciones visuales. ¿Qué parte de la pizza queda?' },
     { id: 'frase', emoji: '✍️', title: 'Frase completa', tag: 'Lengua', href: '/neon-frase.html', lipi: 'Ordena la frase como un puzzle. Ideal para comprensión lectora.' },
+    { id: 'vida', emoji: '🌿', title: 'Vida y naturaleza', tag: 'Naturales', href: '/neon-vida.html', lipi: 'Animales, plantas y cuerpo humano. Observa y acierta en 2 minutos.' },
+    { id: 'entorno', emoji: '🏡', title: 'Cuidamos el entorno', tag: 'Naturales', href: '/neon-entorno.html', lipi: 'Reciclaje, energía y hábitos verdes — ideal para salir a la calle después.' },
+    { id: 'cuerpo', emoji: '🫀', title: 'Cuerpo y sentidos', tag: 'Naturales', href: '/neon-cuerpo.html', lipi: 'Partes del cuerpo y los cinco sentidos. Perfecto para peques y 2º.' },
+    { id: 'mapa', emoji: '🗺️', title: 'Mapa y sociales', tag: 'Sociales', href: '/neon-mapa.html', lipi: 'España, relieve y lugares. Como un mini atlas interactivo.' },
+    { id: 'planeta', emoji: '🪐', title: 'Planeta express', tag: 'Naturales', href: '/neon-planeta.html', lipi: 'Sistema solar y fases lunares. Para exploradores de 4º en adelante.' },
     { id: 'curso', emoji: '🎯', title: 'Misión del curso', tag: 'Mix', href: '/cursos.html?empezar=1', lipi: 'El Brain Gym elige la actividad de tu curso real. Pulsa Empezar.' },
     { id: 'reto', emoji: '🧠', title: 'Reto sorpresa', tag: 'Extra', href: '/retos-rapidos.html', lipi: 'Lógica u ortografía en 3 min. Opcional si ya hiciste mates o lengua.' }
   ];
@@ -158,7 +163,12 @@
     var pool = getMissionPool(courseId);
     if (dow === 2) pool = pool.filter(function (m) { return m.tag === 'Mates' || m.id === 'curso'; });
     else if (dow === 4) pool = pool.filter(function (m) { return m.tag === 'Lengua' || m.id === 'curso'; });
-    else if (dow === 6) pool = pool.filter(function (m) { return m.tag === 'Inglés' || m.tag === 'Mix' || m.id === 'curso'; });
+    else if (dow === 6) {
+      if (isSciencesWeekend()) pool = getSciencesPool(courseId);
+      else pool = pool.filter(function (m) { return m.tag === 'Inglés' || m.tag === 'Mix' || m.id === 'curso'; });
+    } else if (dow === 0 && isSciencesWeekend()) {
+      pool = getSciencesPool(courseId);
+    }
     if (!pool.length) pool = getMissionPool(courseId);
     if (!pool.length) pool = MISSIONS;
     var idx = seedFromString('verano:' + today() + ':' + (courseId || 'any')) % pool.length;
@@ -291,6 +301,26 @@
     return courseId === 'primaria-1' || courseId === 'primaria-2';
   }
 
+  function isPrimariaHigh(courseId) {
+    return courseId === 'primaria-4' || courseId === 'primaria-5' ||
+      courseId === 'primaria-6' || (courseId && courseId.indexOf('eso-') === 0);
+  }
+
+  function isSciencesWeekend() {
+    return seedFromString('verano-sci:' + weekId()) % 2 === 0;
+  }
+
+  function getSciencesPool(courseId) {
+    if (isInfantilCourse(courseId)) {
+      return MISSIONS.filter(function (m) {
+        return m.id === 'peques' || m.id === 'cuerpo' || m.id === 'entorno' || m.id === 'curso';
+      }).map(function (m) { return missionForCourse(m, courseId); });
+    }
+    return getMissionPool(courseId).filter(function (m) {
+      return m.tag === 'Naturales' || m.tag === 'Sociales' || m.id === 'curso';
+    });
+  }
+
   function missionForCourse(base, courseId) {
     if (base.id !== 'curso') return base;
     return {
@@ -309,15 +339,20 @@
 
   function getMissionPool(courseId) {
     return MISSIONS.filter(function (m) {
+      if (m.tag === 'Extra') return !!courseId;
       if (isInfantilCourse(courseId)) {
         return m.id === 'peques' || m.id === 'silabas' || m.id === 'curso';
       }
       if (isPrimariaLow(courseId)) {
-        return m.id !== 'fracciones' && m.id !== 'peques' && m.id !== 'frase';
+        if (m.id === 'fracciones' || m.id === 'peques' || m.id === 'frase' || m.id === 'planeta') return false;
+        return true;
       }
       if (courseId) {
-        return m.id !== 'peques' && m.id !== 'silabas';
+        if (m.id === 'peques' || m.id === 'silabas') return false;
+        if (m.id === 'planeta' && !isPrimariaHigh(courseId)) return false;
+        return true;
       }
+      if (m.id === 'planeta') return false;
       return true;
     }).map(function (m) {
       return missionForCourse(m, courseId);
@@ -423,6 +458,8 @@
     var lvl = getLevel(data.xp || 0);
     var streak = computeStreak(data.allStamps || []);
     var courseLabel = getCourseLabel();
+    var dow = new Date().getDay();
+    var sciNote = (isSciencesWeekend() && (dow === 0 || dow === 6)) ? ' · Finde ciencias 🌿' : '';
 
     var stampHtml = '';
     for (var i = 0; i < WEEK_GOAL; i++) {
@@ -446,7 +483,7 @@
       '</div>' +
       '<div class="verano-card verano-card--mission">' +
         '<p class="verano-card__eyebrow">Misión de hoy · ' + escapeHtml(mission.tag) +
-          (courseLabel ? ' · ' + escapeHtml(courseLabel) : '') + '</p>' +
+          (courseLabel ? ' · ' + escapeHtml(courseLabel) : '') + sciNote + '</p>' +
         '<p class="verano-card__emoji" aria-hidden="true">' + mission.emoji + '</p>' +
         '<h2 class="verano-card__title">' + escapeHtml(mission.title) + '</h2>' +
         '<p class="verano-card__lipi">Lipi dice: «' + escapeHtml(mission.lipi) + '»</p>' +

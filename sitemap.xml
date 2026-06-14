@@ -342,6 +342,13 @@
     <mobile:mobile/>
   </url>
   <url>
+    <loc>https://lipastudios.com/blog/verano-repaso-2-primaria.html</loc>
+    <lastmod>2026-06-13</lastmod>
+    <priority>0.82</priority>
+    <changefreq>monthly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
     <loc>https://lipastudios.com/blog/verano-repaso-3-primaria.html</loc>
     <lastmod>2026-06-13</lastmod>
     <priority>0.82</priority>
@@ -350,6 +357,13 @@
   </url>
   <url>
     <loc>https://lipastudios.com/blog/verano-repaso-4-primaria.html</loc>
+    <lastmod>2026-06-13</lastmod>
+    <priority>0.82</priority>
+    <changefreq>monthly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://lipastudios.com/blog/verano-repaso-5-primaria.html</loc>
     <lastmod>2026-06-13</lastmod>
     <priority>0.82</priority>
     <changefreq>monthly</changefreq>
