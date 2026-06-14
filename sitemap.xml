@@ -328,6 +328,13 @@
     <mobile:mobile/>
   </url>
   <url>
+    <loc>https://lipastudios.com/refuerzo-verano-primaria.html</loc>
+    <lastmod>2026-06-13</lastmod>
+    <priority>0.86</priority>
+    <changefreq>weekly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
     <loc>https://lipastudios.com/desafio-verano-neon.html</loc>
     <lastmod>2026-06-13</lastmod>
     <priority>0.85</priority>
@@ -378,6 +385,20 @@
   </url>
   <url>
     <loc>https://lipastudios.com/blog/verano-repaso-6-primaria.html</loc>
+    <lastmod>2026-06-13</lastmod>
+    <priority>0.82</priority>
+    <changefreq>monthly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://lipastudios.com/blog/verano-repaso-1-eso.html</loc>
+    <lastmod>2026-06-13</lastmod>
+    <priority>0.82</priority>
+    <changefreq>monthly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://lipastudios.com/blog/verano-repaso-2-eso.html</loc>
     <lastmod>2026-06-13</lastmod>
     <priority>0.82</priority>
     <changefreq>monthly</changefreq>
