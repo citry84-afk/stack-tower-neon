@@ -335,6 +335,20 @@
     <mobile:mobile/>
   </url>
   <url>
+    <loc>https://lipastudios.com/refuerzo-verano-infantil.html</loc>
+    <lastmod>2026-06-13</lastmod>
+    <priority>0.86</priority>
+    <changefreq>weekly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://lipastudios.com/refuerzo-verano-eso.html</loc>
+    <lastmod>2026-06-13</lastmod>
+    <priority>0.86</priority>
+    <changefreq>weekly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
     <loc>https://lipastudios.com/desafio-verano-neon.html</loc>
     <lastmod>2026-06-13</lastmod>
     <priority>0.85</priority>
@@ -401,6 +415,27 @@
     <loc>https://lipastudios.com/blog/verano-repaso-2-eso.html</loc>
     <lastmod>2026-06-13</lastmod>
     <priority>0.82</priority>
+    <changefreq>monthly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://lipastudios.com/blog/verano-repaso-3-anos.html</loc>
+    <lastmod>2026-06-13</lastmod>
+    <priority>0.80</priority>
+    <changefreq>monthly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://lipastudios.com/blog/verano-repaso-4-anos.html</loc>
+    <lastmod>2026-06-13</lastmod>
+    <priority>0.80</priority>
+    <changefreq>monthly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://lipastudios.com/blog/verano-repaso-5-anos.html</loc>
+    <lastmod>2026-06-13</lastmod>
+    <priority>0.80</priority>
     <changefreq>monthly</changefreq>
     <mobile:mobile/>
   </url>
