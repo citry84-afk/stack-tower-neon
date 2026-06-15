@@ -5,6 +5,7 @@
   'use strict';
 
   var STEPS = ['welcome', 'course', 'time', 'subjects', 'goal', 'result'];
+  var FAST_STEPS = ['map', 'course'];
   var state = {
     step: 0,
     displayName: '',
@@ -18,6 +19,8 @@
 
   var root, panel, onComplete;
   var gameQuick = false;
+  var fastMode = false;
+  var autoStart = false;
 
   var GAME_QUICK_META = {
     kicker: 'Primera vez aquí',
@@ -25,7 +28,18 @@
     lead: 'Así ajustamos las palabras a tu edad. Un toque y a jugar — sin registro.'
   };
 
+  var FAST_COURSE_META = {
+    kicker: 'Paso 2 de 2',
+    title: '¿Qué curso vas?',
+    lead: 'Toca el tuyo del cole. Lipi ajusta los juegos y abrimos el primero.'
+  };
+
   var STEP_META = {
+    map: {
+      kicker: 'Primera vez',
+      title: 'Así funciona LIPA',
+      lead: 'Tres pasos. Sin cuenta. Sin perderte en menús.'
+    },
     welcome: {
       kicker: 'LIPA Brain Gym',
       title: 'Tu rutina cerebral a medida',
@@ -60,6 +74,17 @@
 
   function esc(s) {
     return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
+  }
+
+  function currentSteps() {
+    if (gameQuick) return ['course'];
+    if (fastMode) return FAST_STEPS;
+    return STEPS;
+  }
+
+  function stepKey() {
+    var steps = currentSteps();
+    return steps[state.step] || steps[steps.length - 1];
   }
 
   function saveProfileFromState() {
@@ -103,6 +128,26 @@
     if (onComplete) onComplete(profile);
   }
 
+  function finishFastStart() {
+    state.minutes = 7;
+    state.goal = state.goal || 'fun';
+    if (!state.displayName && window.LipaBrainProfiles) {
+      var meta = LipaBrainProfiles.getActiveMeta();
+      state.displayName = meta ? meta.name : 'Explorador';
+    }
+    var profile = saveProfileFromState();
+    if (!profile) return;
+    if (window.LipaBrainPlay && LipaBrainPlay.chimeCorrect) {
+      try { LipaBrainPlay.chimeCorrect(); } catch (e) { /* ignore */ }
+    }
+    close();
+    if (onComplete) {
+      onComplete(profile);
+    } else if (autoStart && window.LipaRoutineFlow && LipaRoutineFlow.beginFromProfile) {
+      LipaRoutineFlow.beginFromProfile({ restart: true });
+    }
+  }
+
   function ensureRoot() {
     if (root) return root;
     root = document.getElementById('lipa-brain-onboarding');
@@ -129,7 +174,10 @@
     opts = opts || {};
     ensureRoot();
     gameQuick = !!opts.gameQuick;
-    state.step = gameQuick ? STEPS.indexOf('course') : 0;
+    fastMode = !gameQuick && opts.full !== true;
+    if (opts.fast === false) fastMode = false;
+    autoStart = !!opts.autoStart;
+    state.step = 0;
     state.displayName = opts.displayName || state.displayName || '';
     state.courseId = opts.courseId || null;
     state.ageBand = null;
@@ -142,7 +190,9 @@
     document.body.style.overflow = 'hidden';
     render();
     if (window.LipaAnalytics && LipaAnalytics.trackGameStart) {
-      LipaAnalytics.trackGameStart(gameQuick ? 'brain-onboarding-game' : 'brain-onboarding');
+      LipaAnalytics.trackGameStart(
+        gameQuick ? 'brain-onboarding-game' : (fastMode ? 'brain-onboarding-fast' : 'brain-onboarding')
+      );
     }
   }
 
@@ -150,14 +200,38 @@
     if (root) root.hidden = true;
     document.body.style.overflow = '';
     gameQuick = false;
+    fastMode = false;
+    autoStart = false;
+  }
+
+  function renderMapStep() {
+    return (
+      '<div class="brain-onboard__map" role="list">' +
+      '<div class="brain-onboard__map-row" role="listitem"><span class="brain-onboard__map-n">1</span>' +
+      '<div><strong>Eliges curso</strong><span>El de verdad del cole — una sola vez.</span></div></div>' +
+      '<div class="brain-onboard__map-row" role="listitem"><span class="brain-onboard__map-n">2</span>' +
+      '<div><strong>Lipi te manda un juego</strong><span>Unos 7 min: mates, lengua o inglés.</span></div></div>' +
+      '<div class="brain-onboard__map-row" role="listitem"><span class="brain-onboard__map-n">3</span>' +
+      '<div><strong>Ganas XP</strong><span>Racha y nivel. Después, Recreo arcade si quieres 🎮</span></div></div>' +
+      '</div>' +
+      '<div class="brain-onboard__actions">' +
+      '<button type="button" class="brain-onboard__btn brain-onboard__btn--primary" data-next>¡Vamos!</button>' +
+      '<button type="button" class="brain-onboard__btn brain-onboard__btn--ghost" data-advanced>Personalizar (padres)</button>' +
+      '<button type="button" class="brain-onboard__btn brain-onboard__btn--ghost" data-skip>Ahora no</button>' +
+      '</div>'
+    );
   }
 
   function render() {
-    var key = STEPS[state.step];
-    var meta = gameQuick && key === 'course' ? GAME_QUICK_META : STEP_META[key];
+    var key = stepKey();
+    var meta = STEP_META[key];
+    if (gameQuick && key === 'course') meta = GAME_QUICK_META;
+    if (fastMode && key === 'course') meta = FAST_COURSE_META;
+    var steps = currentSteps();
     var dots = '';
     if (!gameQuick && key !== 'result') {
-      dots = STEPS.slice(0, -1).map(function (_, i) {
+      var dotSteps = fastMode ? FAST_STEPS : STEPS.slice(0, -1);
+      dots = dotSteps.map(function (_, i) {
         return '<span class="brain-onboard__dot' + (i === state.step ? ' brain-onboard__dot--on' : '') + '"></span>';
       }).join('');
     } else if (gameQuick && key === 'course') {
@@ -165,7 +239,9 @@
     }
 
     var body = '';
-    if (key === 'welcome') {
+    if (key === 'map') {
+      body = renderMapStep();
+    } else if (key === 'welcome') {
       body =
         '<label class="brain-onboard__name-label" for="brain-onboard-name">¿Cómo te llamas?</label>' +
         '<input type="text" id="brain-onboard-name" class="brain-onboard__name-input" maxlength="20" placeholder="Ej: Ana" value="' + esc(state.displayName || '') + '">' +
@@ -176,12 +252,17 @@
         '</div>';
     } else if (key === 'result') {
       body = renderResult();
-    } else if (key === 'course' && gameQuick) {
+    } else if (key === 'course' && (gameQuick || fastMode)) {
       body = renderCourseOptions() +
-        '<p class="brain-onboard__hint">Al elegir curso guardamos tu edad en este dispositivo. Cambia en <a href="/cursos.html">Cursos</a>.</p>' +
+        '<p class="brain-onboard__hint">' + (fastMode
+          ? 'Al tocar tu curso guardamos la edad y abrimos el primer juego. Cambia en <a href="/cursos.html">Cursos</a>.'
+          : 'Al elegir curso guardamos tu edad en este dispositivo. Cambia en <a href="/cursos.html">Cursos</a>.') +
+        '</p>' +
         '<div class="brain-onboard__actions">' +
-        '<button type="button" class="brain-onboard__btn brain-onboard__btn--ghost" data-skip>Nivel fácil sin elegir</button>' +
-        '</div>';
+        (fastMode ? '<button type="button" class="brain-onboard__btn brain-onboard__btn--ghost" data-back>Atrás</button>' : '') +
+        '<button type="button" class="brain-onboard__btn brain-onboard__btn--ghost" data-skip">' +
+        (fastMode ? 'Elegir después' : 'Nivel fácil sin elegir') +
+        '</button></div>';
     } else {
       body = renderOptions(key) +
         '<div class="brain-onboard__actions">' +
@@ -193,6 +274,7 @@
     if (root) {
       root.classList.toggle('brain-onboard--step-course', key === 'course');
       root.classList.toggle('brain-onboard--step-welcome', key === 'welcome');
+      root.classList.toggle('brain-onboard--step-map', key === 'map');
     }
 
     panel.innerHTML =
@@ -360,6 +442,10 @@
             finishGameQuick();
             return;
           }
+          if (fastMode) {
+            finishFastStart();
+            return;
+          }
         } else state[field] = val;
         panel.querySelectorAll('[data-field="' + field + '"]').forEach(function (b) {
           b.classList.toggle('brain-onboard__opt--picked', b === btn);
@@ -399,16 +485,27 @@
 
     if (nextBtn) {
       nextBtn.addEventListener('click', function () {
-        if (STEPS[state.step] === 'welcome') {
+        var key = stepKey();
+        if (key === 'welcome') {
           if (nameInput) state.displayName = nameInput.value.trim();
           if (!state.displayName && window.LipaBrainProfiles) {
             var meta = LipaBrainProfiles.getActiveMeta();
             state.displayName = meta ? meta.name : '';
           }
-        } else if (!canContinue()) return;
+        } else if (key !== 'map' && !canContinue()) return;
         state.step++;
-        if (STEPS[state.step] === 'result') finishAndShow();
+        var nextKey = stepKey();
+        if (nextKey === 'result') finishAndShow();
         else render();
+      });
+    }
+
+    var advanced = panel.querySelector('[data-advanced]');
+    if (advanced) {
+      advanced.addEventListener('click', function () {
+        fastMode = false;
+        state.step = 0;
+        render();
       });
     }
 
@@ -468,7 +565,7 @@
   }
 
   function canContinue() {
-    var key = STEPS[state.step];
+    var key = stepKey();
     if (key === 'course') return !!state.courseId;
     if (key === 'time') return !!state.minutes;
     if (key === 'subjects') {
@@ -490,11 +587,22 @@
     if (!p || !p.routine) {
       container.innerHTML =
         '<div class="brain-plan-teaser">' +
-        '<p><strong>¿Primera vez?</strong> Elige tu curso y cuánto tiempo tienes. Te creamos una rutina de mates, idiomas y reflejos.</p>' +
-        '<button type="button" class="lipa-btn lipa-btn--primary lipa-btn--brain" data-open-onboarding>Crear mi rutina</button>' +
+        '<p><strong>¿Primera vez?</strong> Dos pasos: ves cómo va y eliges curso. Lipi abre el primer juego.</p>' +
+        '<button type="button" class="lipa-btn lipa-btn--primary lipa-btn--brain" data-open-onboarding>Empezar ahora</button>' +
+        '<button type="button" class="lipa-btn lipa-btn--secondary" data-open-onboarding-full>Personalizar (padres)</button>' +
         '</div>';
       var btn = container.querySelector('[data-open-onboarding]');
-      if (btn) btn.addEventListener('click', function () { open({ onComplete: function () { renderPlanCard(container); } }); });
+      if (btn) {
+        btn.addEventListener('click', function () {
+          open({ fast: true, autoStart: true, onComplete: function () { renderPlanCard(container); } });
+        });
+      }
+      var btnFull = container.querySelector('[data-open-onboarding-full]');
+      if (btnFull) {
+        btnFull.addEventListener('click', function () {
+          open({ full: true, onComplete: function () { renderPlanCard(container); } });
+        });
+      }
       return;
     }
 
@@ -547,14 +655,14 @@
     var redo = container.querySelector('[data-redo-plan]');
     if (redo) {
       redo.addEventListener('click', function () {
-        open({ onComplete: function () { renderPlanCard(container); } });
+        open({ full: true, onComplete: function () { renderPlanCard(container); } });
       });
     }
   }
 
   function autoOpenIfNeeded() {
     if (!window.LipaBrainPlan || !LipaBrainPlan.shouldShowOnboarding()) return;
-    setTimeout(function () { open(); }, 600);
+    setTimeout(function () { open({ fast: true, autoStart: true }); }, 450);
   }
 
   window.LipaBrainOnboarding = {

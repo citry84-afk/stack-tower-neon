@@ -1610,6 +1610,26 @@ body.lipa-curriculum-active.game-page {
   padding-top: 0;
 }
 
+.lipa-curriculum-bar--compact {
+  padding: 4px 12px;
+}
+
+.lipa-curriculum-bar--compact .lipa-curriculum-bar__goal {
+  display: none;
+}
+
+.lipa-curriculum-bar--compact .lipa-curriculum-bar__inner {
+  gap: 6px 10px;
+  font-size: 12px;
+}
+
+.lipa-curriculum-bar--compact .lipa-curriculum-bar__back {
+  max-width: 42%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 /* Selector materias rutina */
 .brain-routine-subjects {
   background: #fff;
@@ -2004,4 +2024,28 @@ body.lipa-kid-vibes .lipi-mascot__avatar {
   .lipi-mascot__sticker {
     animation: none !important;
   }
+}
+
+/* Home simplificada — primera visita sin perfil */
+body.home--first-visit .home-section--after-onboard {
+  display: none !important;
+}
+
+body.home--first-visit .lipi-fun-chips {
+  display: none !important;
+}
+
+body.home--first-visit .hero-actions .btn-hero-secondary {
+  display: none !important;
+}
+
+body.home--first-visit .home-entreno-hoy__lead {
+  font-size: 15px;
+  max-width: 28rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+body.home--first-visit #lipa-routine-subjects-mount {
+  display: none !important;
 }

@@ -38,21 +38,21 @@
     <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" as="style">
     <link rel="preload" href="/css/lipa-ui.min.css?v=1" as="style">
-    <link rel="preload" href="/css/brain-design-system.min.css?v=2" as="style">
+    <link rel="preload" href="/css/brain-design-system.min.css?v=3" as="style">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap">
     <link rel="stylesheet" href="/css/lipa-ui.min.css?v=1">
     <link rel="stylesheet" href="/css/site-nav.min.css?v=1">
     <link rel="stylesheet" href="/css/arcade-hub.min.css?v=1">
     <link rel="stylesheet" href="/css/brain-gym.min.css?v=1">
-    <link rel="stylesheet" href="/css/brain-design-system.min.css?v=2">
+    <link rel="stylesheet" href="/css/brain-design-system.min.css?v=3">
     <link rel="stylesheet" href="/css/brain-profiles.min.css?v=1">
     <link rel="stylesheet" href="/css/curriculum.min.css?v=1" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="/css/curriculum.min.css?v=1"></noscript>
     <!-- CSS de UI inyectada por JS (modales/onboarding): no bloquea el primer render -->
-    <link rel="stylesheet" href="/css/brain-onboarding.css?v=4" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="/css/brain-onboarding.css?v=5" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="/css/lipa-guided-path.css?v=1" media="print" onload="this.media='all'">
     <noscript>
-      <link rel="stylesheet" href="/css/brain-onboarding.css?v=4">
+      <link rel="stylesheet" href="/css/brain-onboarding.css?v=5">
       <link rel="stylesheet" href="/css/lipa-guided-path.css?v=1">
     </noscript>
     <link rel="stylesheet" href="/css/home-brain-gym.min.css?v=1">
@@ -540,13 +540,13 @@
             <span class="lipi-fun-chip lipi-fun-chip--hype" role="listitem">6️⃣7️⃣ Six-seven</span>
         </div>
         <div class="hero-actions">
-            <button type="button" id="hero-start-routine" class="btn-hero-primary btn-hero-primary--brain">▶ Empezar entrenamiento de hoy</button>
+            <button type="button" id="hero-start-routine" class="btn-hero-primary btn-hero-primary--brain">▶ Empezar en 2 pasos</button>
             <a href="/cursos.html?empezar=1" class="btn-hero-secondary">Elegir mi curso</a>
             <a href="/refuerzo-primaria.html" class="btn-hero-secondary" style="border-color:#ea580c!important;color:#c2410c!important;background:rgba(234,88,12,.08)!important;">Refuerzo primaria →</a>
         </div>
     </section>
 
-    <section class="home-verano-banner" aria-labelledby="home-verano-title" style="max-width:var(--lipa-max-wide,1100px);margin:0 auto 1.75rem;padding:1.15rem 1.5rem;border-radius:20px;background:linear-gradient(135deg,#fff7ed,#fef3c7);border:2px solid #fdba74;text-align:center;">
+    <section class="home-verano-banner home-section--after-onboard" aria-labelledby="home-verano-title" style="max-width:var(--lipa-max-wide,1100px);margin:0 auto 1.75rem;padding:1.15rem 1.5rem;border-radius:20px;background:linear-gradient(135deg,#fff7ed,#fef3c7);border:2px solid #fdba74;text-align:center;">
         <p class="brain-eyebrow" style="color:#c2410c;">☀️ Vacaciones de verano</p>
         <h2 id="home-verano-title" style="font-family:var(--lipa-font-display,'Nunito',sans-serif);font-size:clamp(1.2rem,3vw,1.5rem);margin:0.25rem 0 0.5rem;color:#9a3412;">Desafío Verano Neon: XP, insignias y ticket arcade</h2>
         <p style="margin:0 auto 1rem;max-width:36rem;font-size:15px;line-height:1.55;color:#57534e;">Misión sorpresa diaria, <strong>niveles veraniegos</strong>, 11 insignias coleccionables y premio Recreo Neon. Repaso sin deberes — el niño aprende jugando.</p>
@@ -560,7 +560,7 @@
         <p style="margin:0.75rem 0 0;font-size:13px;"><a href="/refuerzo-verano.html" style="color:#c2410c;font-weight:600;">Índice verano</a> · <a href="/refuerzo-verano-primaria.html" style="color:#c2410c;font-weight:600;">Primaria</a> · <a href="/refuerzo-verano-infantil.html" style="color:#c2410c;font-weight:600;">Infantil</a> · <a href="/refuerzo-verano-eso.html" style="color:#c2410c;font-weight:600;">ESO</a> · <a href="/blog/verano-sin-cole-refuerzo.html" style="color:#c2410c;font-weight:600;">Guía padres</a></p>
     </section>
 
-    <section class="home-como-funciona" aria-labelledby="como-funciona-title">
+    <section class="home-como-funciona home-section--after-onboard" aria-labelledby="como-funciona-title">
         <h2 id="como-funciona-title" class="home-como-funciona__title">Cómo funciona</h2>
         <ol class="home-como-funciona__steps">
             <li class="home-como-funciona__step">
@@ -581,7 +581,7 @@
         </ol>
     </section>
 
-    <section class="home-padres-teaser home-padres-teaser--editorial" aria-labelledby="home-familias-title" style="margin-bottom:0;border-top:1px solid var(--brain-border-soft,#e8e0d4);">
+    <section class="home-padres-teaser home-padres-teaser--editorial home-section--after-onboard" aria-labelledby="home-familias-title" style="margin-bottom:0;border-top:1px solid var(--brain-border-soft,#e8e0d4);">
         <p class="brain-eyebrow">Para familias y educadores</p>
         <h2 id="home-familias-title">Guías y recursos antes del entreno</h2>
         <p>LIPA no es solo jugar: hay artículos, rutinas por situación real y política editorial clara. Si buscas contexto (dos casas, verano, examen, teletrabajo…), empieza por el contenido escrito; el Brain Gym va después.</p>
@@ -608,7 +608,7 @@
         <div id="lipa-brain-plan-mount"></div>
     </section>
 
-    <section class="home-quick-tests" aria-labelledby="home-quick-title">
+    <section class="home-quick-tests home-section--after-onboard" aria-labelledby="home-quick-title">
         <div class="home-quick-tests__head">
             <p class="brain-eyebrow">Retos rápidos</p>
             <h2 id="home-quick-title">Variedad en 3–5 minutos</h2>
@@ -618,7 +618,7 @@
         <p class="home-quick-tests__more"><a href="/retos-rapidos.html">Ver todos los retos</a></p>
     </section>
 
-    <section class="home-cursos-cta" aria-labelledby="home-cursos-title">
+    <section class="home-cursos-cta home-section--after-onboard" aria-labelledby="home-cursos-title">
         <h2 id="home-cursos-title">Elige tu curso escolar</h2>
         <p>Infantil, 1º a 6º de Primaria y 1º–2º ESO. Cada curso con misiones de mates, lenguaje, inglés y más.</p>
         <a href="/cursos.html" class="btn-hero-primary btn-hero-primary--brain">Ver todos los cursos</a>
@@ -634,7 +634,7 @@
         </p>
     </section>
 
-    <section class="home-materias" aria-labelledby="home-materias-title">
+    <section class="home-materias home-section--after-onboard" aria-labelledby="home-materias-title">
         <div class="home-materias__head">
             <p class="brain-eyebrow">Por materia</p>
             <h2 id="home-materias-title">Lo que entrenas en el cole</h2>
@@ -649,14 +649,14 @@
         </div>
     </section>
 
-    <section class="home-padres-teaser" aria-labelledby="home-padres-title">
+    <section class="home-padres-teaser home-section--after-onboard" aria-labelledby="home-padres-title">
         <p class="brain-eyebrow">Para familias</p>
         <h2 id="home-padres-title">Progreso que los padres entienden</h2>
         <p>Resumen semanal: días activos, materias practicadas, fortalezas y qué reforzar. Sin registro obligatorio.</p>
         <a href="/para-padres.html" class="btn-hero-primary btn-hero-primary--brain">Ver informe para padres</a>
     </section>
 
-    <section class="home-recreo-neon" aria-labelledby="home-recreo-title">
+    <section class="home-recreo-neon home-section--after-onboard" aria-labelledby="home-recreo-title">
         <p class="home-recreo-neon__eyebrow">Recompensa · después del entreno</p>
         <h2 id="home-recreo-title">Recreo Neon</h2>
         <p class="home-recreo-neon__lead">Primero el Brain Gym del cole. Después, arcade oscuro: reflejos, puntería y Stack Tower.</p>
@@ -673,7 +673,7 @@
     </section>
 
     <!-- Editorial Content Section (CRITICAL FOR ADSENSE) -->
-    <div id="guia-seo" class="lipa-container seo-fold-wrap">
+    <div id="guia-seo" class="lipa-container seo-fold-wrap home-section--after-onboard">
         <article class="seo-article">
             <h2>LIPA Brain Gym: tu rutina cerebral diaria</h2>
             <div class="seo-body seo-body--teaser">
@@ -834,7 +834,7 @@
   <script src="/js/lipa-routine-subjects.js"></script>
   <script src="/js/lipa-home-lipi.js"></script>
   <script src="/js/lipa-home-dashboard.js"></script>
-  <script src="/js/lipa-home-brain.js?v=3"></script>
+  <script src="/js/lipa-home-brain.js?v=4"></script>
   <script src="/js/lipa-pwa.js?v=2"></script>
   <script src="/js/lipa-analytics.js"></script>
     

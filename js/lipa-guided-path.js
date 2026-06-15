@@ -36,7 +36,7 @@
   function startOnboarding(e) {
     if (e) e.preventDefault();
     if (global.LipaBrainOnboarding) {
-      LipaBrainOnboarding.open();
+      LipaBrainOnboarding.open({ fast: true, autoStart: true });
     } else {
       global.location.href = '/cursos.html';
     }
@@ -84,12 +84,12 @@
     if (!hasProfile()) {
       return {
         mode: 'onboard',
-        eyebrow: 'Empieza en 30 segundos',
-        title: 'Te configuramos el curso y el trabajo de hoy',
-        lead: 'Sin menús: eliges curso una vez y Lipi te lleva misión a misión.',
-        primary: { label: 'Configurar mi curso', action: 'onboard' },
+        eyebrow: 'Primera vez — 2 pasos',
+        title: 'Curso y al primer juego',
+        lead: 'Ves el mapa, eliges curso y Lipi abre la misión. Sin menús.',
+        primary: { label: '▶ Empezar ahora', action: 'onboard' },
         secondary: { label: 'Ver cursos', href: '/cursos.html', action: 'link' },
-        steps: ['Curso', 'Trabajo', 'Progreso']
+        steps: ['Mapa', 'Curso', 'Jugar']
       };
     }
 

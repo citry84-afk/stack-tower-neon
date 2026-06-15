@@ -3,7 +3,7 @@
  * PWA Optimization & Offline Functionality
  */
 
-const CACHE_NAME = 'lipa-brain-gym-v3.82.0-kid-vibes-lipi';
+const CACHE_NAME = 'lipa-brain-gym-v3.84.0-routine-fixes';
 const CACHE_VERSION = '2.0.0';
 
 // Essential files to cache for offline play

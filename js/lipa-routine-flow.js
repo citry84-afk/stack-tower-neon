@@ -36,6 +36,11 @@
     }
   }
 
+  function curriculumMode() {
+    var p = getParams();
+    return !!(p && p.get('curriculum') === '1');
+  }
+
   function isActive() {
     var p = getParams();
     return p && p.get('rutina') === '1';
@@ -168,6 +173,31 @@
     var step = state.steps[idx];
     var total = state.steps.length;
     var done = (state.completedSteps || []).length;
+
+    if (!opts.justFinished) {
+      bar.className = 'lipa-routine-bar lipa-routine-bar--playing';
+      document.body.classList.remove('lipa-routine-active');
+      if (curriculumMode()) {
+        bar.hidden = true;
+        return;
+      }
+      var playPct = Math.round((idx / total) * 100);
+      var playLine = step.missionTag
+        ? step.missionTag + ' · ' + (step.missionSubject || step.subjectLabel || '')
+        : 'Paso ' + (idx + 1) + ' / ' + total;
+      bar.hidden = false;
+      bar.innerHTML =
+        '<div class="lipa-routine-bar__inner lipa-routine-bar__inner--mini">' +
+        '<span class="lipa-routine-bar__mini-label">' + esc(playLine) + '</span>' +
+        '<div class="lipa-routine-bar__track lipa-routine-bar__track--mini" aria-hidden="true">' +
+        '<span class="lipa-routine-bar__fill" style="width:' + playPct + '%"></span></div>' +
+        '<a href="/mi-rutina-cerebro.html" class="lipa-routine-bar__quit lipa-routine-bar__quit--mini">Salir</a>' +
+        '</div>';
+      return;
+    }
+
+    bar.hidden = false;
+    bar.className = 'lipa-routine-bar lipa-routine-bar--finished';
     var pct = Math.round(((idx + (opts.justFinished ? 1 : 0)) / total) * 100);
     if (opts.justFinished && idx >= total - 1) pct = 100;
 
@@ -432,6 +462,13 @@
   function beginFromProfile(opts) {
     opts = opts || {};
     if (opts.restart) clearState();
+    if (opts.restart && global.LipaBrain && LipaBrain.buildRoutine && LipaBrain.getProfile) {
+      var profile = LipaBrain.getProfile();
+      if (profile) {
+        profile.routine = LipaBrain.buildRoutine(profile);
+        LipaBrain.saveProfile(profile);
+      }
+    }
     var state = stateFromProfile();
     if (state) {
       if (opts.restart) {

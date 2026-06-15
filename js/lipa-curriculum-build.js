@@ -61,9 +61,9 @@
   }
 
   var ROT_MATES = ['neon-calculo', 'neon-ordenar', 'neon-mayor-menor', 'neon-clasifica', 'neon-fracciones'];
-  var ROT_INGLES = ['neon-palabras', 'flash-tap'];
-  var ROT_INFANTIL = ['neon-peques', 'neon-colores', 'neon-numeros', 'flash-tap'];
-  var ROT_INFANTIL_EN = ['neon-peques', 'neon-colores', 'flash-tap'];
+  var ROT_INGLES = ['neon-palabras', 'neon-dictado'];
+  var ROT_INFANTIL = ['neon-peques', 'neon-colores', 'neon-numeros'];
+  var ROT_INFANTIL_EN = ['neon-peques', 'neon-palabras', 'neon-colores'];
   var ROT_NATURALES = ['neon-vida', 'neon-cuerpo', 'neon-planeta'];
   var ROT_SOCIALES = ['neon-mapa', 'neon-entorno', 'neon-historia'];
   var ROT_LENGUA = ['neon-lectura', 'neon-silabas', 'neon-palabra', 'neon-frase', 'neon-dictado', 'neon-arrastra'];
@@ -1741,7 +1741,7 @@
     } else if (subjectId === 'lenguaje') {
       extras = ROT_LENGUA;
     } else if (subjectId === 'ingles') {
-      extras = ROT_INGLES.concat(['neon-ordenar']);
+      extras = ROT_INGLES.slice();
     } else if (subjectId === 'brain-gym-diario') {
       extras = ['flash-tap', 'reaction-test', 'grid-reflex'];
     }

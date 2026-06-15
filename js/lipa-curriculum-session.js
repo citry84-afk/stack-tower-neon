@@ -130,6 +130,7 @@
       '<span class="lipa-curriculum-bar__goal">Meta: ' + minAccuracyLabel(meta.ctx.courseId) + ' aciertos</span>' +
       '</div>';
 
+    bar.classList.toggle('lipa-curriculum-bar--compact', !!(global.LipaRoutineFlow && LipaRoutineFlow.isActive && LipaRoutineFlow.isActive()));
     document.body.classList.add('lipa-curriculum-active');
   }
 

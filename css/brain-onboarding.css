@@ -630,3 +630,58 @@ body.lipa-brain-soft .brain-onboard #brain-onboard-title,
   color: #0d281f !important;
   box-shadow: 0 4px 14px rgba(46, 211, 166, 0.2);
 }
+
+/* Onboarding rápido — mapa 3 pasos */
+.brain-onboard--step-map .brain-onboard__panel {
+  max-width: 26rem;
+}
+
+.brain-onboard__map {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin: 0 0 1.25rem;
+}
+
+.brain-onboard__map-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem 0.85rem;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #f5f3ff, #fff);
+  border: 1px solid #e9e5ff;
+  text-align: left;
+}
+
+.brain-onboard__map-n {
+  flex: 0 0 2rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: #5b21b6;
+  background: #ede9fe;
+}
+
+.brain-onboard__map-row strong {
+  display: block;
+  font-size: 0.95rem;
+  color: #1c1917;
+  margin-bottom: 0.15rem;
+}
+
+.brain-onboard__map-row span {
+  display: block;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: #57534e;
+}
+
+.brain-plan-teaser .lipa-btn--secondary {
+  margin-top: 0.5rem;
+}

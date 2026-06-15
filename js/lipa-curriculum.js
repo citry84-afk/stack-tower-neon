@@ -373,10 +373,29 @@
     return a;
   }
 
+  var REFLEX_GAME_IDS = {
+    'flash-tap': true,
+    'reaction-test': true,
+    'grid-reflex': true,
+    'aim-trainer': true,
+    'esquiva-neon': true,
+    'stack-tower': true
+  };
+
+  var SCHOOL_SUBJECT_IDS = ['matematicas', 'lenguaje', 'ingles', 'naturales', 'sociales'];
+
+  function filterSchoolSubjectGames(items, subjectId) {
+    if (SCHOOL_SUBJECT_IDS.indexOf(subjectId) < 0) return items;
+    return items.filter(function (p) {
+      return !REFLEX_GAME_IDS[p.activity.gameId];
+    });
+  }
+
   function pickOneFromSubject(pool, subjectId, gameIdHint, rng) {
     var items = pool.filter(function (p) {
       return p.subject.subjectId === subjectId;
     });
+    items = filterSchoolSubjectGames(items, subjectId);
     if (gameIdHint) {
       var hinted = items.filter(function (p) {
         return p.activity.gameId === gameIdHint;
@@ -487,7 +506,7 @@
       bySubject[sid].push(item);
     });
     Object.keys(bySubject).forEach(function (sid) {
-      bySubject[sid] = shuffle(bySubject[sid], rng);
+      bySubject[sid] = shuffle(filterSchoolSubjectGames(bySubject[sid], sid), rng);
     });
 
     var order = (META.SUBJECT_ORDER || []).filter(function (sid) {
