@@ -335,6 +335,13 @@
     <mobile:mobile/>
   </url>
   <url>
+    <loc>https://lipastudios.com/refuerzo-verano.html</loc>
+    <lastmod>2026-06-13</lastmod>
+    <priority>0.88</priority>
+    <changefreq>weekly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
     <loc>https://lipastudios.com/refuerzo-verano-infantil.html</loc>
     <lastmod>2026-06-13</lastmod>
     <priority>0.86</priority>
