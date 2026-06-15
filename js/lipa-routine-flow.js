@@ -175,24 +175,14 @@
     var done = (state.completedSteps || []).length;
 
     if (!opts.justFinished) {
-      bar.className = 'lipa-routine-bar lipa-routine-bar--playing';
+      bar.hidden = true;
       document.body.classList.remove('lipa-routine-active');
-      if (curriculumMode()) {
-        bar.hidden = true;
-        return;
-      }
-      var playPct = Math.round((idx / total) * 100);
-      var playLine = step.missionTag
-        ? step.missionTag + ' · ' + (step.missionSubject || step.subjectLabel || '')
-        : 'Paso ' + (idx + 1) + ' / ' + total;
-      bar.hidden = false;
-      bar.innerHTML =
-        '<div class="lipa-routine-bar__inner lipa-routine-bar__inner--mini">' +
-        '<span class="lipa-routine-bar__mini-label">' + esc(playLine) + '</span>' +
-        '<div class="lipa-routine-bar__track lipa-routine-bar__track--mini" aria-hidden="true">' +
-        '<span class="lipa-routine-bar__fill" style="width:' + playPct + '%"></span></div>' +
-        '<a href="/mi-rutina-cerebro.html" class="lipa-routine-bar__quit lipa-routine-bar__quit--mini">Salir</a>' +
-        '</div>';
+      return;
+    }
+
+    if (curriculumMode()) {
+      bar.hidden = true;
+      document.body.classList.remove('lipa-routine-active');
       return;
     }
 
@@ -320,6 +310,12 @@
     var state = loadState();
     if (!state) state = stateFromProfile();
     if (!state) return;
+    if (curriculumMode()) {
+      var bar = getBar();
+      if (bar) bar.hidden = true;
+      document.body.classList.remove('lipa-routine-active');
+      return;
+    }
     syncStateFromUrl(state);
     saveState(state);
     renderBar(state, { justFinished: true });
@@ -587,6 +583,9 @@
     }
 
     renderBar(state, { justFinished: false });
+    var playBar = getBar();
+    if (playBar) playBar.hidden = true;
+    document.body.classList.remove('lipa-routine-active');
     tryAutoStartGame();
   }
 

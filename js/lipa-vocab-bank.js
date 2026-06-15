@@ -114,20 +114,36 @@
 
   function pickWord(pool, exclude) {
     exclude = exclude || {};
-    var tries = 0;
-    while (tries < 40) {
-      var w = pool[Math.floor(Math.random() * pool.length)];
-      var key = w.es + '|' + w.en;
-      if (!exclude[key]) return w;
-      tries++;
+    if (!pool || !pool.length) return { es: 'hola', en: 'hello' };
+    var available = pool.filter(function (w) {
+      return !exclude[w.es + '|' + w.en];
+    });
+    if (!available.length) available = pool.slice();
+    return available[Math.floor(Math.random() * available.length)];
+  }
+
+  function buildDeck(pool, recentKeys) {
+    if (!pool || !pool.length) return [];
+    recentKeys = recentKeys || [];
+    var fresh = pool.filter(function (w) {
+      return recentKeys.indexOf(w.es + '|' + w.en) < 0;
+    });
+    var src = fresh.length >= 4 ? fresh : pool.slice();
+    var deck = src.slice();
+    for (var i = deck.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = deck[i];
+      deck[i] = deck[j];
+      deck[j] = t;
     }
-    return pool[0];
+    return deck;
   }
 
   global.LipaVocabBank = {
     TIERS: TIERS,
     tierForLevel: tierForLevel,
     getPool: getPool,
-    pickWord: pickWord
+    pickWord: pickWord,
+    buildDeck: buildDeck
   };
 })(typeof window !== 'undefined' ? window : global);

@@ -490,25 +490,71 @@ body.game-page {
 .frac-bar {
   display: flex;
   width: min(300px, 92vw);
-  height: 52px;
-  border: 2px solid var(--brain-accent, #2ed3a6);
+  height: 56px;
+  border: 3px solid #64748b;
   border-radius: 10px;
   overflow: hidden;
   margin: 0 auto var(--lipa-space-md, 16px);
+  background: #f8fafc;
+  box-shadow: inset 0 0 0 1px #cbd5e1;
+}
+
+.frac-bar-wrap {
+  margin-bottom: var(--lipa-space-md, 16px);
+}
+
+.frac-bar-hint {
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--brain-text-main, #172033);
+  margin: 0 0 8px;
 }
 
 .frac-part {
   flex: 1;
-  background: rgba(255, 255, 255, 0.06);
-  border-right: 1px solid rgba(255, 255, 255, 0.15);
+  position: relative;
+  background: #ffffff;
+  border-right: 2px solid #64748b;
+  min-width: 0;
 }
 
 .frac-part:last-child {
   border-right: 0;
 }
 
+.frac-part-n {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  font-weight: 700;
+  color: #64748b;
+  line-height: 1;
+  pointer-events: none;
+}
+
 .frac-part.is-filled {
-  background: linear-gradient(135deg, #2ed3a6, #1a9fd4);
+  background: linear-gradient(180deg, #5eead4, #2ed3a6);
+}
+
+.frac-part.is-filled .frac-part-n {
+  color: #0f766e;
+}
+
+.frac-prompt-main {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.frac-prompt-help {
+  display: block;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--brain-text-muted, #667085);
+  line-height: 1.45;
 }
 
 .frac-choices {

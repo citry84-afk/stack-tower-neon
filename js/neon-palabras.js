@@ -20,7 +20,9 @@
   var brainLevel = 1;
   var wordPool = [];
   var mode = 'es-en';
-  var lastKey = '';
+  var sessionDeck = [];
+  var deckIdx = 0;
+  var recentKeys = [];
 
   function getBoard() {
     if (board) return board;
@@ -69,12 +71,32 @@
     }
   }
 
+  function refillDeck() {
+    if ((!wordPool || !wordPool.length) && window.LipaVocabBank) {
+      wordPool = LipaVocabBank.getPool(brainLevel);
+    }
+    if (!wordPool.length) return;
+    var pool = wordPool.slice();
+    var fresh = pool.filter(function (w) {
+      return recentKeys.indexOf(w.es + '|' + w.en) < 0;
+    });
+    if (fresh.length >= 4) pool = fresh;
+    sessionDeck = shuffle(pool);
+    deckIdx = 0;
+  }
+
   function makeRound() {
     pickMode();
-    var ex = {};
-    if (lastKey) ex[lastKey] = true;
-    var w = LipaVocabBank.pickWord(wordPool, ex);
-    lastKey = w.es + '|' + w.en;
+    if (!wordPool.length) refreshBrainLevel();
+    if (!sessionDeck.length || deckIdx >= sessionDeck.length) refillDeck();
+    if (!sessionDeck.length) {
+      return { prompt: 'hola', answer: 'hello', hint: '¿Cómo se dice en inglés?', word: { es: 'hola', en: 'hello' } };
+    }
+    var w = sessionDeck[deckIdx++];
+    var key = w.es + '|' + w.en;
+    recentKeys.push(key);
+    var maxRecent = Math.min(12, Math.max(4, Math.floor(wordPool.length * 0.4)));
+    if (recentKeys.length > maxRecent) recentKeys = recentKeys.slice(-maxRecent);
     var askEs = mode === 'es-en';
     return {
       prompt: askEs ? w.es : w.en,
@@ -265,6 +287,10 @@
       LipaAnalytics.trackGameStart('neon-palabras');
     }
     refreshBrainLevel();
+    recentKeys = [];
+    sessionDeck = [];
+    deckIdx = 0;
+    refillDeck();
     score = 0;
     correct = 0;
     wrong = 0;

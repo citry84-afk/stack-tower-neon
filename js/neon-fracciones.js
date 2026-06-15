@@ -34,11 +34,16 @@
   }
 
   function renderBar(num, den) {
-    var html = '<div class="frac-bar" role="img" aria-label="' + num + ' de ' + den + ' partes">';
+    var html =
+      '<div class="frac-bar-wrap">' +
+      '<p class="frac-bar-hint"><strong>' + num + '</strong> de <strong>' + den + '</strong> partes coloreadas</p>' +
+      '<div class="frac-bar" role="img" aria-label="' + num + ' de ' + den + ' partes iguales coloreadas">';
     for (var i = 0; i < den; i++) {
-      html += '<div class="frac-part' + (i < num ? ' is-filled' : '') + '"></div>';
+      html +=
+        '<div class="frac-part' + (i < num ? ' is-filled' : '') + '">' +
+        '<span class="frac-part-n" aria-hidden="true">' + (i + 1) + '</span></div>';
     }
-    return html + '</div>';
+    return html + '</div></div>';
   }
 
   function shuffle(arr) {
@@ -85,7 +90,8 @@
     });
     while (wrong.length < 2) wrong.push(fracLabel(1, showDen + 1));
     return {
-      prompt: 'Esta barra es ' + fracLabel(showNum, showDen) + '. ¿Qué fracción es igual?',
+      prompt: 'Esta barra es ' + fracLabel(showNum, showDen) + '. ¿Qué otra fracción vale lo mismo?',
+      help: 'Mira cuántas partes están coloreadas arriba y abajo.',
       answer: correctLabel,
       choices: shuffle([correctLabel].concat(wrong.slice(0, 2))),
       visual: renderBar(showNum, showDen)
@@ -109,6 +115,7 @@
     var answer = v1 >= v2 ? 'A' : 'B';
     return {
       prompt: '¿Qué barra tiene MÁS partes coloreadas?',
+      help: 'Compara A y B: cuenta los trozos verdes.',
       answer: answer,
       choices: shuffle(['A', 'B']),
       visual:
@@ -137,7 +144,8 @@
 
     if (mode === 'parts') {
       return {
-        prompt: '¿Cuántas partes iguales tiene la barra?',
+        prompt: '¿En cuántas partes IGUALES está dividida la barra?',
+        help: 'Cuenta todos los trozos de la barra (coloreados y vacíos).',
         answer: String(den),
         choices: shuffle([String(den), String(Math.max(2, den - 1)), String(den + 1)]),
         visual: renderBar(num, den)
@@ -145,7 +153,8 @@
     }
 
     return {
-      prompt: '¿Qué fracción está coloreada?',
+      prompt: '¿Qué fracción muestra la barra?',
+      help: 'Fracción = partes coloreadas ÷ partes totales.',
       answer: correctLabel,
       choices: shuffle([correctLabel].concat(wrongFractions(num, den))),
       visual: renderBar(num, den)
@@ -180,7 +189,11 @@
 
   function showRound() {
     round = buildRound();
-    if (promptEl) promptEl.textContent = round.prompt;
+    if (promptEl) {
+      promptEl.innerHTML =
+        '<span class="frac-prompt-main">' + round.prompt + '</span>' +
+        (round.help ? '<span class="frac-prompt-help">' + round.help + '</span>' : '');
+    }
     if (!workEl) return;
     workEl.innerHTML =
       round.visual +

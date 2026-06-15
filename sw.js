@@ -3,7 +3,7 @@
  * PWA Optimization & Offline Functionality
  */
 
-const CACHE_NAME = 'lipa-brain-gym-v3.85.0-chiptune-sfx';
+const CACHE_NAME = 'lipa-brain-gym-v3.86.0-game-polish';
 const CACHE_VERSION = '2.0.0';
 
 // Essential files to cache for offline play
