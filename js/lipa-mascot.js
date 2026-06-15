@@ -39,6 +39,47 @@
     ]
   };
 
+  var KID_QUIPS = {
+    welcome: [
+      '¡Modo aventura! Misión de hoy: un ratito de mates.',
+      '¿Listo para un speedrun de 7 min? (sin prisa de verdad).',
+      'Tu cerebro pide un power-up. ¿Empezamos?',
+      'Patrulla de refuerzo en marcha. Lipi al mando.',
+      'Hoy toca craftear conocimiento cubito a cubito. ¡Vamos!',
+      '¡Entrenamiento estilo estadio! Tú eres la estrella.'
+    ],
+    correct: [
+      '¡GOL! De aciertos, no de fútbol… bueno, también vale.',
+      '¡+1 vida! Sigue el combo.',
+      '¡Six-seven de estilo! (6 de actitud, 7 de crack).',
+      '¡Más rápido que un erizo con chanclas nuevas!',
+      '¡Combo perfecto! Tu familia aplaude en la grada.',
+      '¡Power-up desbloqueado! Siguiente pregunta.'
+    ],
+    wrong: [
+      'Game over… mentira. Reintento gratis.',
+      'El bloque no encajó. Prueba otra pieza.',
+      'Casi. Hasta los cracks fallan el primer salto.',
+      'Pause menu: respira y otra vez.'
+    ],
+    complete: [
+      '¡Misión cleared! Bonus: orgullo.',
+      '¡Nivel superado! Progreso guardado.',
+      '¡Fan meeting con el éxito! Autógrafos después.',
+      '¡Victory royale del estudio! (sin eliminaciones).'
+    ],
+    routine: [
+      'Playlist del día: mates, lengua y a bailar datos.',
+      'Boss de la semana: la racha. Tú puedes.'
+    ]
+  };
+
+  var FLAIR_STICKERS = ['🍄', '⚽', '🧱', '🐾', '🎤', '⭐', '💨', '🎮', '🏆'];
+
+  Object.keys(KID_QUIPS).forEach(function (key) {
+    if (MESSAGES[key]) MESSAGES[key] = MESSAGES[key].concat(KID_QUIPS[key]);
+  });
+
   function pick(arr) {
     return arr[Math.floor(Math.random() * arr.length)];
   }
@@ -70,8 +111,16 @@
     var text = customText || pick(MESSAGES[type] || MESSAGES.welcome);
     var root = document.createElement('div');
     root.className = 'lipi-mascot';
+    if (Math.random() < 0.38) root.classList.add('lipi-mascot--fun');
     root.setAttribute('role', 'status');
     var avatar = lipiAvatarNode();
+    if (Math.random() < 0.42) {
+      var sticker = document.createElement('span');
+      sticker.className = 'lipi-mascot__sticker';
+      sticker.setAttribute('aria-hidden', 'true');
+      sticker.textContent = pick(FLAIR_STICKERS);
+      avatar.appendChild(sticker);
+    }
     var bubble = document.createElement('div');
     bubble.className = 'lipi-mascot__bubble';
     bubble.innerHTML = '<strong>Lipi</strong>' + esc(text);
@@ -90,7 +139,14 @@
     say: say,
     render: render,
     pick: pick,
-    MESSAGES: MESSAGES
+    MESSAGES: MESSAGES,
+    homeTips: [
+      '¿Fan del modo creativo? Aquí crafteas mates sin picos.',
+      'Mundial del saber: hoy juegas tú de titular.',
+      '¿K-pop de tablas? 1, 2, 3… ¡a multiplicar!',
+      'Los cachorros de la patrulla ya entrenaron. ¿Y tú?',
+      'Speedrun permitido: 7 min y pausa para helado.'
+    ]
   };
 
   document.addEventListener('DOMContentLoaded', function () {
@@ -103,6 +159,7 @@
     ) {
       body.classList.add('lipa-brain-soft');
     }
+    body.classList.add('lipa-kid-vibes');
     var mount = document.getElementById('lipi-mascot-mount');
     if (mount && !mount.innerHTML.trim() && !global.LipaHomeLipi) {
       render(mount, 'welcome');

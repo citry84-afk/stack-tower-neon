@@ -1930,3 +1930,78 @@ body.lipa-brain-soft #lipa-brain-onboarding .brain-onboard__btn--primary:not(:di
   font-weight: 800 !important;
   box-shadow: 0 6px 20px rgba(46, 211, 166, 0.35) !important;
 }
+
+/* Guiños kid-friendly (vibes gamer/pop — sin marcas ajenas) */
+body.lipa-kid-vibes .lipi-mascot__avatar {
+  position: relative;
+}
+
+.lipi-mascot__sticker {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  font-size: 1.15rem;
+  line-height: 1;
+  transform: rotate(12deg);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+  animation: lipiStickerPop 0.5s var(--brain-ease, ease) both;
+}
+
+@keyframes lipiStickerPop {
+  from { transform: rotate(12deg) scale(0); opacity: 0; }
+  to { transform: rotate(12deg) scale(1); opacity: 1; }
+}
+
+.lipi-mascot--fun .lipi-mascot__bubble {
+  border: 2px solid transparent;
+  background:
+    linear-gradient(#fff, #fff) padding-box,
+    linear-gradient(120deg, #fbbf24, #f472b6, #38bdf8, #2ed3a6) border-box;
+}
+
+.lipi-fun-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  justify-content: center;
+  margin: 0.65rem auto 0;
+  max-width: 36rem;
+}
+
+.lipi-fun-chip {
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 0.28rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px dashed #c4b5fd;
+  color: #6d28d9;
+  letter-spacing: 0.02em;
+}
+
+.lipi-fun-chip--hype {
+  border-style: solid;
+  border-color: #fb923c;
+  color: #c2410c;
+  background: linear-gradient(135deg, #fff7ed, #fef3c7);
+  animation: lipiHypeWiggle 2.5s ease-in-out infinite;
+}
+
+.verano-chip--hype {
+  border-color: #fb923c !important;
+  background: linear-gradient(135deg, #fff7ed, #fef3c7) !important;
+  color: #c2410c !important;
+}
+
+@keyframes lipiHypeWiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-2deg) scale(1.02); }
+  75% { transform: rotate(2deg) scale(1.02); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lipi-fun-chip--hype,
+  .lipi-mascot__sticker {
+    animation: none !important;
+  }
+}

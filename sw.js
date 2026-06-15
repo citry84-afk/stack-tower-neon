@@ -3,7 +3,7 @@
  * PWA Optimization & Offline Functionality
  */
 
-const CACHE_NAME = 'lipa-brain-gym-v3.81.0-verano-crosslinks';
+const CACHE_NAME = 'lipa-brain-gym-v3.82.0-kid-vibes-lipi';
 const CACHE_VERSION = '2.0.0';
 
 // Essential files to cache for offline play
@@ -87,7 +87,7 @@ const STATIC_CACHE_URLS = [
     '/entrenador-reflejos.html',
     '/css/lipa-ui.min.css?v=1',
     '/css/brain-gym.min.css?v=1',
-    '/css/brain-design-system.min.css?v=1',
+    '/css/brain-design-system.min.css?v=2',
     '/js/lipa-mascot.js',
     '/js/lipa-game-feedback.js',
     '/js/lipa-home-dashboard.js',

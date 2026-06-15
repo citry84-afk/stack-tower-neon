@@ -40,6 +40,10 @@
       }
     }
 
+    if (global.LipaMascot && global.LipaMascot.homeTips) {
+      tips = tips.concat(LipaMascot.homeTips);
+    }
+
     return tips;
   }
 

@@ -57,16 +57,21 @@
     '¡Lo petaste! +XP veraniega desbloqueada.',
     '¡Campeón! El cole no se olvida solo.',
     '¡Estrella! ¿Helado después del premio?',
-    '¡Brutal! Sigue así y subes de rango.'
+    '¡Brutal! Sigue así y subes de rango.',
+    '¡GOL de verano! El marcador de sellos sube.',
+    '¡Six-seven! Semana casi en el bolsillo.',
+    '¡MVP del sofá! (o de la sombra en la playa).'
   ];
 
   var LIPI_TIPS = [
     '¡Hola! Soy Lipi. Hoy hay misión sorpresa — ¿la aceptas?',
     'Tres sellos por semana y premio arcade. ¡Tú puedes!',
-    'No hace falma todos los días. Cuatro libres sin culpa.',
+    'No hace falta todos los días. Cuatro libres sin culpa.',
     'Cada misión suma XP veraniega. ¿A qué nivel llegarás?',
     'Desbloquea insignias coleccionando sellos.',
-    '¿Semana completa? Ticket para Recreo Neon 🎮'
+    '¿Semana completa? Ticket para Recreo Neon 🎮',
+    'Modo mundial: tú marcas los goles… de mates.',
+    'Patrulla de verano: misión diaria, cero aburrimiento.'
   ];
 
   var MISSIONS = [
