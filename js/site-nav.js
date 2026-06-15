@@ -79,4 +79,11 @@
     });
   }
   highlightCurrentNavLink();
+
+  if (!window.LipaBrainPlay) {
+    var sfx = document.createElement('script');
+    sfx.src = '/js/lipa-brain-play.js?v=2';
+    sfx.defer = true;
+    document.head.appendChild(sfx);
+  }
 })();

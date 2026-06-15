@@ -92,6 +92,9 @@
   function onActivityComplete(xp) {
     confettiLite();
     if (xp) floatXp(xp);
+    if (global.LipaBrainPlay && LipaBrainPlay.chimePowerUp) {
+      try { LipaBrainPlay.chimePowerUp(); } catch (e) { /* ignore */ }
+    }
     if (global.LipaMascot) LipaMascot.say('complete');
   }
 

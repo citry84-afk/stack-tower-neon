@@ -3,7 +3,7 @@
  * PWA Optimization & Offline Functionality
  */
 
-const CACHE_NAME = 'lipa-brain-gym-v3.84.0-routine-fixes';
+const CACHE_NAME = 'lipa-brain-gym-v3.85.0-chiptune-sfx';
 const CACHE_VERSION = '2.0.0';
 
 // Essential files to cache for offline play
@@ -89,6 +89,7 @@ const STATIC_CACHE_URLS = [
     '/css/brain-gym.min.css?v=1',
     '/css/brain-design-system.min.css?v=2',
     '/js/lipa-mascot.js',
+    '/js/lipa-brain-play.js',
     '/js/lipa-game-feedback.js',
     '/js/lipa-home-dashboard.js',
     '/js/lipa-game-hint.js',
@@ -125,6 +126,7 @@ const STATIC_CACHE_URLS = [
     '/css/verano-neon.css',
     '/desafio-verano-neon.html',
     '/js/lipa-mascot.js',
+    '/js/lipa-brain-play.js',
     '/js/lipa-game-feedback.js',
     '/js/lipa-brain-catalog.js',
     '/js/lipa-brain-core.js',
