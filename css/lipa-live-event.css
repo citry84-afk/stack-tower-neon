@@ -1,0 +1,230 @@
+/* Evento Lipi en vivo + Torre global */
+.lipa-live-banner {
+  max-width: var(--lipa-max-wide, 1100px);
+  margin: 0 auto 1.25rem;
+  padding: 0 1.25rem;
+}
+
+.lipa-live-banner__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 1rem 1.25rem;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #1a0a2e, #312e81);
+  border: 2px solid rgba(232, 121, 249, 0.45);
+  box-shadow: 0 8px 32px rgba(124, 58, 237, 0.25);
+  color: #e7ecff;
+}
+
+.lipa-live-banner--live .lipa-live-banner__inner {
+  animation: live-pulse-border 2s ease infinite;
+  border-color: #f59e0b;
+}
+
+@keyframes live-pulse-border {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(245, 158, 11, 0); }
+}
+
+.lipa-live-banner__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #fde68a;
+}
+
+.lipa-live-banner__badge--on {
+  color: #fca5a5;
+  animation: live-dot 1s ease infinite;
+}
+
+.lipa-live-banner__badge--on::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ef4444;
+}
+
+@keyframes live-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.lipa-live-banner__title {
+  font-weight: 900;
+  font-size: 1.05rem;
+  margin: 4px 0 2px;
+}
+
+.lipa-live-banner__sub {
+  font-size: 13px;
+  color: #b8c4e8;
+  margin: 0;
+}
+
+.lipa-live-banner__countdown {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(1.1rem, 4vw, 1.5rem);
+  font-weight: 900;
+  color: #2ed3a6;
+  letter-spacing: 0.05em;
+}
+
+.lipa-live-banner__cta {
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none !important;
+  background: linear-gradient(135deg, #ea580c, #f59e0b);
+  color: #fff !important;
+  white-space: nowrap;
+}
+
+/* Página evento */
+.evento-page {
+  min-height: 100vh;
+  background: radial-gradient(ellipse at 50% 0%, #1e1b4b, #0f172a 60%, #020617);
+  color: #e7ecff;
+}
+
+.evento-main {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 3rem;
+  text-align: center;
+}
+
+.evento-live-dot {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid #ef4444;
+  font-size: 12px;
+  font-weight: 800;
+  color: #fca5a5;
+  margin-bottom: 1rem;
+}
+
+.evento-arena {
+  background: rgba(15, 23, 42, 0.8);
+  border: 2px solid rgba(155, 126, 222, 0.35);
+  border-radius: 24px;
+  padding: 1.5rem;
+  margin-top: 1rem;
+  text-align: left;
+}
+
+.evento-timer {
+  font-family: 'Orbitron', monospace;
+  font-size: 2rem;
+  font-weight: 900;
+  color: #f59e0b;
+  text-align: center;
+  margin: 0.5rem 0 1rem;
+}
+
+.evento-progress {
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+.evento-progress__fill {
+  height: 100%;
+  background: linear-gradient(90deg, #2ed3a6, #9b7ede);
+  transition: width 300ms ease;
+}
+
+/* Torre global */
+.global-tower {
+  margin-top: 1.25rem;
+  padding: 1.15rem;
+  border-radius: 20px;
+  background: linear-gradient(180deg, #0f172a, #1e293b);
+  border: 2px solid rgba(46, 211, 166, 0.2);
+  color: #e7ecff;
+}
+
+.global-tower__head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 0.75rem;
+}
+
+.global-tower__head h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+.global-tower__stats {
+  font-size: 12px;
+  color: #9fb0d8;
+}
+
+.global-tower__stats strong {
+  color: #2ed3a6;
+  font-size: 1.1rem;
+}
+
+.global-tower__grid {
+  display: flex;
+  flex-wrap: wrap-reverse;
+  align-content: flex-end;
+  gap: 3px;
+  min-height: 80px;
+  max-height: 140px;
+  overflow: hidden;
+  padding: 8px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.global-tower__block {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.global-tower__block--mine {
+  background: #2ed3a6;
+  box-shadow: 0 0 6px rgba(46, 211, 166, 0.6);
+}
+
+.global-tower__block--community {
+  background: rgba(155, 126, 222, 0.5);
+}
+
+.global-tower__foot {
+  font-size: 12px;
+  color: #64748b;
+  margin: 0.5rem 0 0;
+  line-height: 1.45;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lipa-live-banner--live .lipa-live-banner__inner,
+  .lipa-live-banner__badge--on {
+    animation: none !important;
+  }
+}

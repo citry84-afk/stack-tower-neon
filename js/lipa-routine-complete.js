@@ -1,5 +1,5 @@
 /**
- * Pantalla de cierre del entreno diario (5 misiones) + Recreo Neon.
+ * Pantalla de cierre del entreno diario (5 misiones) + Recreo Neon + sobres + compartir.
  */
 (function (global) {
   'use strict';
@@ -25,7 +25,17 @@
     }
   }
 
+  function bossWonToday() {
+    try {
+      var day = new Date().toISOString().split('T')[0];
+      return localStorage.getItem('lipa_boss_done_' + day) === '1';
+    } catch (e) {
+      return false;
+    }
+  }
+
   function headline(summary, streak) {
+    if (bossWonToday()) return '¡Boss derrotado y entreno listo!';
     if (streak >= 7) return '¡Semana de campeón!';
     if (streak >= 3) return '¡Racha en marcha!';
     return '¡Entreno de hoy completado!';
@@ -36,6 +46,7 @@
     var base = course
       ? 'Has terminado las misiones de ' + course + '. Tu cerebro ha entrenado bien.'
       : 'Has terminado tus misiones del cole. Tu cerebro ha entrenado bien.';
+    if (bossWonToday()) base += ' Has vencido al Jefe del día.';
     if (steps >= 5) return base + ' Cinco misiones en el bolsillo.';
     if (steps >= 3) return base + ' Buen ritmo: sigue así mañana.';
     return base;
@@ -69,6 +80,21 @@
     }
   }
 
+  function maybeOpenPack() {
+    if (!global.LipaPackCeremony || !global.LipaCards) return;
+    var packs = LipaCards.pendingPacks();
+    if (!packs.length) return;
+    setTimeout(function () {
+      LipaPackCeremony.startNextPending({
+        onDone: function () {
+          if (LipaCards.pendingPacks().length) {
+            maybeOpenPack();
+          }
+        }
+      });
+    }, 1200);
+  }
+
   function render(root) {
     var summary = loadSummary();
     var stats = global.LipaBrain ? LipaBrain.getStats() : {};
@@ -80,6 +106,7 @@
     var steps = (summary && summary.steps) || 0;
     var unlocked = isRecreoUnlocked();
     var xpBonus = summary && summary.xpBonus ? summary.xpBonus : steps * 12;
+    var packCount = global.LipaCards ? LipaCards.pendingPacks().length : 0;
 
     root.innerHTML =
       '<div class="entreno-completo">' +
@@ -88,6 +115,9 @@
       '<p class="entreno-completo__lead">' + esc(leadCopy(summary, steps)) + '</p>' +
       (summary && summary.courseLabel
         ? '<p class="entreno-completo__course">Curso: <strong>' + esc(summary.courseLabel) + '</strong></p>'
+        : '') +
+      (packCount
+        ? '<p class="entreno-completo__xp-bonus">🎁 Tienes <strong>' + packCount + '</strong> sobre' + (packCount === 1 ? '' : 's') + ' por abrir — ¡prepárate!</p>'
         : '') +
       '<div class="entreno-completo__stats">' +
       '<div><strong>' +
@@ -107,6 +137,7 @@
         ? '<p class="entreno-completo__practiced">Hoy has practicado: <strong>' + esc(practiced) + '</strong></p>'
         : '') +
       renderMissions(summary && summary.missions) +
+      '<div id="entreno-share-mount"></div>' +
       (unlocked
         ? '<div class="entreno-completo__reward">' +
           '<p class="entreno-completo__reward-label">🎁 Recompensa desbloqueada</p>' +
@@ -116,6 +147,7 @@
           '</div>'
         : '') +
       '<div class="entreno-completo__actions">' +
+      '<a href="/coleccion.html" class="lipa-btn lipa-btn--secondary">🃏 Mi álbum</a>' +
       '<a href="/" class="lipa-btn lipa-btn--secondary">Inicio</a>' +
       '<a href="/mi-evolucion.html" class="lipa-btn lipa-btn--secondary">Mi evolución</a>' +
       '<a href="/para-padres.html" class="lipa-btn lipa-btn--ghost">Informe para padres</a>' +
@@ -123,7 +155,12 @@
       '<p class="entreno-completo__foot">Vuelve mañana: un poco cada día gana al estudio de última hora.</p>' +
       '</div>';
 
+    if (global.LipaShareProgress) {
+      LipaShareProgress.mountShareZone(document.getElementById('entreno-share-mount'));
+    }
+
     celebrate();
+    maybeOpenPack();
   }
 
   document.addEventListener('DOMContentLoaded', function () {
@@ -135,12 +172,10 @@
         '<h1>Entreno de hoy</h1>' +
         '<p>Aún no hay un entreno recién terminado. Empieza tu rutina desde el inicio.</p>' +
         '<a href="/" class="lipa-btn lipa-btn--primary lipa-btn--brain">▶ Empezar entrenamiento</a>' +
+        '<p style="margin-top:1rem;"><a href="/jefe-neon.html?practice=1">Probar boss del día</a></p>' +
         '</div>';
       return;
     }
     render(root);
-    try {
-      sessionStorage.removeItem('lipa-routine-summary');
-    } catch (e) { /* ignore */ }
   });
 })(typeof window !== 'undefined' ? window : global);

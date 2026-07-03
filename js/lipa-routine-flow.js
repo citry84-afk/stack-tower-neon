@@ -363,6 +363,13 @@
     if (global.LipaBrain && LipaBrain.addXp) {
       LipaBrain.addXp(15 + (state && state.steps ? state.steps.length * 3 : 0));
     }
+    if (global.LipaClassRoom && LipaClassRoom.recordTraining) {
+      LipaClassRoom.recordTraining();
+    }
+    if (global.LipaGlobalTower && LipaGlobalTower.addBlocks) {
+      var steps = state && state.steps ? state.steps.length : 3;
+      LipaGlobalTower.addBlocks(Math.min(6, Math.max(2, Math.round(steps / 2))));
+    }
   }
 
   function saveRoutineSummary(state) {
@@ -408,6 +415,9 @@
     document.body.classList.remove('lipa-routine-active');
     var bar = getBar();
     if (bar) bar.remove();
+    if (global.LipaCards && LipaCards.grantDailyPack) {
+      LipaCards.grantDailyPack();
+    }
     if (global.LipaAnalytics && global.LipaAnalytics.trackEvent) {
       global.LipaAnalytics.trackEvent('lipa_routine_complete', {
         steps: state && state.steps ? state.steps.length : 0,
@@ -419,6 +429,14 @@
         steps: state && state.steps ? state.steps.length : 0
       });
     }
+    try {
+      var day = today();
+      if (localStorage.getItem('lipa_boss_done_' + day) !== '1') {
+        sessionStorage.setItem('lipa_boss_pending', '1');
+        global.location.href = '/jefe-neon.html';
+        return;
+      }
+    } catch (e) { /* ignore */ }
     global.location.href = '/entreno-completo.html';
   }
 

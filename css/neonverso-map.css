@@ -1,0 +1,300 @@
+/* Neonverso — mapa 2D de islas + sala de clase */
+.neonverso-section {
+  max-width: var(--lipa-max-wide, 1100px);
+  margin: 0 auto 2rem;
+  padding: 0 1.25rem;
+}
+
+.neonverso-head {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.neonverso-head h2 {
+  font-family: var(--lipa-font-display, 'Nunito', sans-serif);
+  font-size: clamp(1.35rem, 3.5vw, 1.75rem);
+  margin: 0.25rem 0 0.5rem;
+  background: linear-gradient(90deg, #7c3aed, #2ed3a6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.neonverso-head p {
+  margin: 0 auto;
+  max-width: 32rem;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--brain-text-muted, #667085);
+}
+
+.neonverso-map {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  min-height: 280px;
+  max-height: 420px;
+  border-radius: 28px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #0f172a 0%, #1e1b4b 35%, #134e4a 70%, #0d9488 100%);
+  box-shadow: 0 16px 48px rgba(79, 70, 229, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(46, 211, 166, 0.25);
+}
+
+.neonverso-map__sky {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(155, 126, 222, 0.35), transparent),
+    radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.15) 0 2px, transparent 3px),
+    radial-gradient(circle at 85% 15%, rgba(255, 255, 255, 0.12) 0 1px, transparent 2px);
+  pointer-events: none;
+}
+
+.neonverso-map__cloud {
+  position: absolute;
+  font-size: 28px;
+  opacity: 0.35;
+  animation: neonverso-cloud 22s linear infinite;
+  pointer-events: none;
+}
+
+.neonverso-map__cloud--1 { top: 8%; left: -10%; animation-duration: 28s; }
+.neonverso-map__cloud--2 { top: 18%; left: -20%; animation-duration: 35s; animation-delay: -8s; }
+
+@keyframes neonverso-cloud {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(100vw + 80px)); }
+}
+
+.neonverso-tower {
+  position: absolute;
+  left: 50%;
+  bottom: 28%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 2px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.neonverso-tower__block {
+  width: 36px;
+  height: 10px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #2ed3a6, #9b7ede);
+  box-shadow: 0 0 8px rgba(46, 211, 166, 0.5);
+  animation: tower-pop 400ms ease backwards;
+}
+
+@keyframes tower-pop {
+  from { transform: scaleX(0); opacity: 0; }
+  to { transform: scaleX(1); opacity: 1; }
+}
+
+.neonverso-tower__label {
+  font-size: 11px;
+  font-weight: 800;
+  color: #e7ecff;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  margin-top: 4px;
+}
+
+.neonverso-island {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  text-decoration: none !important;
+  color: inherit;
+  z-index: 3;
+  transition: transform 200ms var(--brain-ease-playful, cubic-bezier(0.34, 1.56, 0.64, 1));
+}
+
+.neonverso-island:hover,
+.neonverso-island:focus-visible {
+  transform: translate(-50%, -50%) scale(1.08);
+  z-index: 4;
+}
+
+.neonverso-island__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 10px;
+  border-radius: 16px;
+  background: rgba(15, 23, 42, 0.75);
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(6px);
+  min-width: 72px;
+  transition: border-color 200ms, box-shadow 200ms;
+}
+
+.neonverso-island--lit .neonverso-island__body {
+  border-color: var(--island-glow, #2ed3a6);
+  box-shadow: 0 0 20px var(--island-glow-soft, rgba(46, 211, 166, 0.4));
+}
+
+.neonverso-island__emoji {
+  font-size: clamp(26px, 5vw, 34px);
+  line-height: 1;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
+}
+
+.neonverso-island--lit .neonverso-island__emoji {
+  animation: island-float 2.5s ease-in-out infinite;
+}
+
+@keyframes island-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.neonverso-island__name {
+  font-size: 10px;
+  font-weight: 800;
+  color: #e7ecff;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.neonverso-island__pct {
+  font-size: 9px;
+  font-weight: 700;
+  color: #9fb0d8;
+}
+
+.neonverso-island--locked .neonverso-island__body {
+  opacity: 0.55;
+  filter: grayscale(0.4);
+}
+
+/* Posiciones islas */
+.neonverso-island--math { top: 62%; left: 18%; --island-glow: #4f8cff; --island-glow-soft: rgba(79, 140, 255, 0.45); }
+.neonverso-island--lang { top: 38%; left: 28%; --island-glow: #ff8a5b; --island-glow-soft: rgba(255, 138, 91, 0.45); }
+.neonverso-island--en { top: 30%; left: 52%; --island-glow: #9b7ede; --island-glow-soft: rgba(155, 126, 222, 0.45); }
+.neonverso-island--sci { top: 55%; left: 72%; --island-glow: #2ed3a6; --island-glow-soft: rgba(46, 211, 166, 0.45); }
+.neonverso-island--soc { top: 72%; left: 55%; --island-glow: #ffd166; --island-glow-soft: rgba(255, 209, 102, 0.45); }
+.neonverso-island--boss { top: 22%; left: 78%; --island-glow: #f59e0b; --island-glow-soft: rgba(245, 158, 11, 0.5); }
+.neonverso-island--cards { top: 68%; left: 38%; --island-glow: #e879f9; --island-glow-soft: rgba(232, 121, 249, 0.45); }
+.neonverso-island--recreo { top: 48%; left: 88%; --island-glow: #22d3ee; --island-glow-soft: rgba(34, 211, 238, 0.45); }
+
+/* Sala de clase */
+.class-room {
+  margin-top: 1.25rem;
+  padding: 1.15rem 1.25rem;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(79, 70, 229, 0.08), rgba(46, 211, 166, 0.08));
+  border: 2px solid rgba(124, 58, 237, 0.2);
+  text-align: center;
+}
+
+.class-room__code {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  color: #7c3aed;
+  margin: 0.5rem 0;
+  padding: 0.35rem 1rem;
+  background: #fff;
+  border-radius: 12px;
+  border: 2px dashed #c4b5fd;
+}
+
+.class-room__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin: 0.75rem 0;
+}
+
+.class-room__stat {
+  padding: 0.5rem 0.85rem;
+  border-radius: 12px;
+  background: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  color: #4338ca;
+  border: 1px solid #ddd6fe;
+}
+
+.class-room__stat strong {
+  display: block;
+  font-size: 1.25rem;
+  color: #5b21b6;
+}
+
+.class-room__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 0.75rem;
+}
+
+.class-room__btn {
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  text-decoration: none !important;
+}
+
+.class-room__btn--primary {
+  background: linear-gradient(135deg, #7c3aed, #4f8cff);
+  color: #fff !important;
+}
+
+.class-room__btn--ghost {
+  background: #fff;
+  color: #5b21b6 !important;
+  border: 2px solid #c4b5fd;
+}
+
+.class-room__join {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.class-room__input {
+  width: 5.5rem;
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px solid #c4b5fd;
+  font-family: 'Orbitron', monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.class-room__hint {
+  font-size: 13px;
+  color: var(--brain-text-muted, #667085);
+  margin: 0.5rem 0 0;
+  line-height: 1.5;
+}
+
+@media (max-width: 520px) {
+  .neonverso-island__name { font-size: 9px; }
+  .neonverso-island__body { min-width: 58px; padding: 6px 8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .neonverso-map__cloud,
+  .neonverso-island--lit .neonverso-island__emoji {
+    animation: none !important;
+  }
+}

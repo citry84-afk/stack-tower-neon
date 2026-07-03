@@ -1,0 +1,512 @@
+/**
+ * Cartas Neon — álbum, sobres y ceremonia de apertura
+ */
+
+/* ——— Carta ——— */
+.neon-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 18px 12px 14px;
+  border-radius: 18px;
+  background: #fff;
+  border: 2px solid var(--brain-border-soft, #e6e8ec);
+  box-shadow: 0 6px 18px rgba(23, 32, 51, 0.08);
+  text-align: center;
+  overflow: hidden;
+  transition: transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 200ms ease;
+}
+
+.neon-card:hover {
+  transform: translateY(-4px) scale(1.02);
+}
+
+.neon-card__num {
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #98a2b3;
+}
+
+.neon-card__rarity {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #f2f4f7;
+  color: #667085;
+}
+
+.neon-card__emoji {
+  font-size: 44px;
+  line-height: 1.2;
+  filter: drop-shadow(0 4px 8px rgba(23, 32, 51, 0.15));
+}
+
+.neon-card__emoji--mystery {
+  opacity: 0.45;
+  filter: grayscale(1);
+}
+
+.neon-card__name {
+  font-family: 'Nunito', system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 15px;
+  color: var(--brain-text-main, #172033);
+}
+
+.neon-card__name--mystery {
+  color: #98a2b3;
+  letter-spacing: 0.2em;
+}
+
+.neon-card__desc {
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--brain-text-muted, #667085);
+  min-height: 2.6em;
+}
+
+.neon-card__count {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  font-size: 11px;
+  font-weight: 800;
+  background: #eef2f6;
+  color: #475467;
+  border-radius: 999px;
+  padding: 2px 7px;
+}
+
+.neon-card__new {
+  position: absolute;
+  top: -2px;
+  right: -30px;
+  transform: rotate(35deg);
+  background: #ff6b6b;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  padding: 4px 34px;
+  box-shadow: 0 2px 6px rgba(255, 107, 107, 0.5);
+}
+
+.neon-card__shine {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.55) 48%, transparent 62%);
+  transform: translateX(-120%);
+}
+
+.neon-card:hover .neon-card__shine {
+  animation: card-shine 900ms ease;
+}
+
+@keyframes card-shine {
+  to { transform: translateX(120%); }
+}
+
+/* Rareza: bordes y auras */
+.neon-card--comun { border-color: #b8ecd9; }
+.neon-card--rara {
+  border-color: #4f8cff;
+  box-shadow: 0 6px 20px rgba(79, 140, 255, 0.22);
+}
+.neon-card--epica {
+  border-color: #9b7ede;
+  box-shadow: 0 6px 24px rgba(155, 126, 222, 0.32);
+  background: linear-gradient(160deg, #fff 60%, #f6f1ff);
+}
+.neon-card--epica .neon-card__rarity { background: #f3edff; color: #6d4fc4; }
+.neon-card--rara .neon-card__rarity { background: #eaf2ff; color: #2f6bdb; }
+.neon-card--comun .neon-card__rarity { background: #e9fff7; color: #128163; }
+.neon-card--legendaria {
+  border-color: #ffd166;
+  background: linear-gradient(160deg, #fffdf4 55%, #fff3cf);
+  box-shadow: 0 8px 28px rgba(255, 187, 51, 0.4);
+}
+.neon-card--legendaria .neon-card__rarity { background: #fff2cc; color: #a16207; }
+.neon-card--legendaria .neon-card__emoji {
+  animation: legendary-pulse 2.2s ease-in-out infinite;
+}
+
+@keyframes legendary-pulse {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 6px rgba(255, 187, 51, 0.55)); }
+  50% { transform: scale(1.1); filter: drop-shadow(0 0 16px rgba(255, 187, 51, 0.9)); }
+}
+
+.neon-card--locked {
+  background: #f8f9fb;
+  border-style: dashed;
+  box-shadow: none;
+}
+
+.neon-card--locked:hover { transform: none; }
+
+/* ——— Álbum ——— */
+.album-hero {
+  text-align: center;
+  padding: 2.2rem 1rem 1rem;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.album-hero h1 {
+  font-size: clamp(1.7rem, 5vw, 2.4rem);
+  margin-bottom: 0.4rem;
+}
+
+.album-progress {
+  max-width: 420px;
+  margin: 1rem auto 0;
+}
+
+.album-progress__bar {
+  height: 14px;
+  border-radius: 999px;
+  background: #eef1f5;
+  overflow: hidden;
+  border: 1px solid var(--brain-border-soft, #e6e8ec);
+}
+
+.album-progress__bar span {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #2ed3a6, #4f8cff, #9b7ede, #ffd166);
+  transition: width 600ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.album-progress__label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--brain-text-muted, #667085);
+  margin-top: 6px;
+}
+
+.album-packs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin: 1.4rem auto;
+  max-width: 720px;
+  padding: 0 1rem;
+}
+
+.album-pack-btn {
+  position: relative;
+  border: none;
+  cursor: pointer;
+  border-radius: 20px;
+  padding: 16px 26px 14px;
+  font-family: 'Nunito', system-ui, sans-serif;
+  font-weight: 900;
+  font-size: 16px;
+  color: #10231d;
+  background: linear-gradient(140deg, #5eead4, #2ed3a6);
+  box-shadow: 0 8px 22px rgba(46, 211, 166, 0.45);
+  animation: pack-wiggle 2.6s ease-in-out infinite;
+}
+
+.album-pack-btn--epico {
+  color: #fff;
+  background: linear-gradient(140deg, #9b7ede, #6d4fc4);
+  box-shadow: 0 8px 22px rgba(155, 126, 222, 0.5);
+}
+
+.album-pack-btn:active { transform: scale(0.96); }
+
+@keyframes pack-wiggle {
+  0%, 82%, 100% { transform: rotate(0); }
+  86% { transform: rotate(-3deg) scale(1.04); }
+  90% { transform: rotate(3deg) scale(1.04); }
+  94% { transform: rotate(-2deg); }
+}
+
+.album-empty-packs {
+  font-size: 14px;
+  color: var(--brain-text-muted, #667085);
+  text-align: center;
+  max-width: 460px;
+  margin: 0 auto 1rem;
+  padding: 0 1rem;
+  line-height: 1.6;
+}
+
+.album-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 14px;
+  max-width: 1060px;
+  margin: 1rem auto 3rem;
+  padding: 0 1rem;
+}
+
+.album-section-title {
+  max-width: 1060px;
+  margin: 2rem auto 0.4rem;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Nunito', system-ui, sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+/* ——— Ceremonia de apertura ——— */
+.pack-ceremony {
+  position: fixed;
+  inset: 0;
+  z-index: 4000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 20px;
+  background: radial-gradient(circle at 50% 35%, #223052, #10162b 70%);
+  animation: ceremony-in 300ms ease;
+}
+
+@keyframes ceremony-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.pack-ceremony__title {
+  color: #e7ecff;
+  font-family: 'Nunito', system-ui, sans-serif;
+  font-size: clamp(1.2rem, 4vw, 1.7rem);
+  font-weight: 900;
+  text-align: center;
+}
+
+.pack-ceremony__hint {
+  color: #9fb0d8;
+  font-size: 14px;
+  text-align: center;
+}
+
+.pack-ceremony__pack {
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  font-size: 110px;
+  line-height: 1;
+  filter: drop-shadow(0 12px 30px rgba(46, 211, 166, 0.5));
+  animation: pack-float 1.8s ease-in-out infinite;
+  transition: transform 150ms ease;
+}
+
+.pack-ceremony__pack:active { transform: scale(0.9); }
+
+@keyframes pack-float {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-14px) rotate(2deg); }
+}
+
+.pack-ceremony__pack--shaking {
+  animation: pack-shake 420ms ease-in-out;
+}
+
+@keyframes pack-shake {
+  0%, 100% { transform: rotate(0) scale(1); }
+  20% { transform: rotate(-8deg) scale(1.05); }
+  40% { transform: rotate(8deg) scale(1.1); }
+  60% { transform: rotate(-6deg) scale(1.12); }
+  80% { transform: rotate(6deg) scale(1.15); }
+}
+
+.pack-ceremony__burst {
+  position: absolute;
+  font-size: 26px;
+  pointer-events: none;
+  animation: burst-fly 900ms ease-out forwards;
+}
+
+@keyframes burst-fly {
+  from { transform: translate(0, 0) scale(0.6); opacity: 1; }
+  to { transform: translate(var(--bx, 0), var(--by, -120px)) scale(1.3); opacity: 0; }
+}
+
+.pack-ceremony__cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  perspective: 900px;
+}
+
+.ceremony-card {
+  width: min(190px, 42vw);
+  min-height: 240px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 600ms cubic-bezier(0.34, 1.3, 0.5, 1);
+  cursor: pointer;
+}
+
+.ceremony-card.is-flipped { transform: rotateY(180deg); cursor: default; }
+
+.ceremony-card__back,
+.ceremony-card__front {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 18px;
+}
+
+.ceremony-card__back {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(150deg, #2a3b66, #1a2440);
+  border: 2px solid #3d5289;
+  color: #8fa3d4;
+  font-family: 'Nunito', system-ui, sans-serif;
+  font-weight: 900;
+  font-size: 15px;
+}
+
+.ceremony-card__back span { font-size: 42px; }
+
+.ceremony-card__front {
+  transform: rotateY(180deg);
+  display: flex;
+}
+
+.ceremony-card__front .neon-card {
+  flex: 1;
+  min-height: 100%;
+}
+
+.ceremony-card--legendary-reveal .ceremony-card__front .neon-card {
+  animation: legendary-reveal 800ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes legendary-reveal {
+  0% { transform: scale(0.6); box-shadow: 0 0 0 rgba(255, 187, 51, 0); }
+  60% { transform: scale(1.12); box-shadow: 0 0 60px rgba(255, 187, 51, 0.95); }
+  100% { transform: scale(1); }
+}
+
+.pack-ceremony__done {
+  margin-top: 4px;
+}
+
+/* ——— Teaser home ——— */
+.cards-teaser {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  background: #fff;
+  border: 2px solid var(--brain-border-soft, #e6e8ec);
+  border-radius: 22px;
+  padding: 16px 20px;
+  box-shadow: 0 10px 26px rgba(23, 32, 51, 0.07);
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.cards-teaser__fan {
+  position: relative;
+  width: 74px;
+  height: 62px;
+  flex: none;
+}
+
+.cards-teaser__mini {
+  position: absolute;
+  top: 6px;
+  width: 44px;
+  height: 56px;
+  border-radius: 10px;
+  background: #fff;
+  border: 2px solid #e6e8ec;
+  box-shadow: 0 4px 10px rgba(23, 32, 51, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.cards-teaser__mini--1 { left: 0; transform: rotate(-10deg); border-color: #9b7ede; }
+.cards-teaser__mini--2 { left: 16px; transform: rotate(2deg); border-color: #4f8cff; z-index: 1; }
+.cards-teaser__mini--3 { left: 32px; transform: rotate(12deg); border-color: #ffd166; }
+
+.cards-teaser__info { flex: 1; min-width: 180px; }
+.cards-teaser__title {
+  font-family: 'Nunito', system-ui, sans-serif;
+  font-weight: 900;
+  font-size: 16px;
+  margin: 0 0 2px;
+}
+.cards-teaser__sub {
+  font-size: 13px;
+  color: var(--brain-text-muted, #667085);
+  margin: 0 0 6px;
+}
+.cards-teaser__bar {
+  height: 8px;
+  border-radius: 999px;
+  background: #eef1f5;
+  overflow: hidden;
+}
+.cards-teaser__bar span {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #2ed3a6, #9b7ede, #ffd166);
+}
+.cards-teaser__cta { white-space: nowrap; }
+.cards-teaser__badge {
+  position: absolute;
+  top: -10px;
+  right: -6px;
+  min-width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  background: #ff6b6b;
+  color: #fff;
+  font-weight: 900;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(255, 107, 107, 0.5);
+  animation: badge-bounce 1.6s ease-in-out infinite;
+}
+
+@keyframes badge-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .neon-card,
+  .neon-card:hover,
+  .album-pack-btn,
+  .pack-ceremony__pack,
+  .cards-teaser__badge,
+  .neon-card--legendaria .neon-card__emoji {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}

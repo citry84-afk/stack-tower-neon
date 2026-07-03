@@ -56,8 +56,10 @@
       <link rel="stylesheet" href="/css/lipa-guided-path.css?v=1">
     </noscript>
     <link rel="stylesheet" href="/css/home-brain-gym.min.css?v=1">
-    
-    <!-- PWA and Mobile -->
+    <link rel="stylesheet" href="/css/neon-cards.css?v=1">
+    <link rel="stylesheet" href="/css/lipa-wow.css?v=1">
+    <link rel="stylesheet" href="/css/neonverso-map.css?v=1">
+    <link rel="stylesheet" href="/css/lipa-live-event.css?v=1">
     <meta name="theme-color" content="#2ed3a6">
     <link rel="manifest" href="/manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -523,7 +525,7 @@
             XP, rachas y progreso visible para familias.
         </p>
         <p class="landing-hero__steps">
-            1. Elige curso · 2. Misión diaria · 3. Gana XP y racha
+            1. Elige curso · 2. Misión diaria · 3. Boss del día · 4. Sobre de cartas
         </p>
         <div class="hero-chips" role="list">
             <span class="hero-chip hero-chip--accent" role="listitem">7 min recomendados</span>
@@ -544,6 +546,19 @@
             <a href="/cursos.html?empezar=1" class="btn-hero-secondary">Elegir mi curso</a>
             <a href="/refuerzo-primaria.html" class="btn-hero-secondary" style="border-color:#ea580c!important;color:#c2410c!important;background:rgba(234,88,12,.08)!important;">Refuerzo primaria →</a>
         </div>
+    </section>
+
+    <div id="lipa-live-banner" class="lipa-live-banner home-section--after-onboard" hidden aria-live="polite"></div>
+
+    <section class="neonverso-section home-section--after-onboard" aria-labelledby="neonverso-title">
+        <div class="neonverso-head">
+            <p class="brain-eyebrow">Explora tu mundo</p>
+            <h2 id="neonverso-title">Neonverso LIPA</h2>
+            <p>Tu torre crece con la racha. Cada isla brilla cuando entrenas esa materia. Toca una para ir directo.</p>
+        </div>
+        <div id="lipa-neonverso-mount"></div>
+        <div id="lipa-global-tower-mount"></div>
+        <div id="lipa-class-room-mount"></div>
     </section>
 
     <section class="home-verano-banner home-section--after-onboard" aria-labelledby="home-verano-title" style="max-width:var(--lipa-max-wide,1100px);margin:0 auto 1.75rem;padding:1.15rem 1.5rem;border-radius:20px;background:linear-gradient(135deg,#fff7ed,#fef3c7);border:2px solid #fdba74;text-align:center;">
@@ -599,6 +614,7 @@
 
     <section id="entreno-hoy" class="home-entreno-hoy" aria-labelledby="entreno-hoy-title">
         <h2 id="entreno-hoy-title" class="home-entreno-hoy__title">Tu entreno de hoy</h2>
+        <div id="lipa-cards-teaser" class="home-cards-teaser" aria-live="polite"></div>
         <p id="brain-home-greet" class="home-entreno-hoy__greet"></p>
         <div id="home-today-missions" class="home-today-missions" hidden></div>
         <div id="brain-home-dash"></div>
@@ -835,6 +851,14 @@
   <script src="/js/lipa-home-lipi.js"></script>
   <script src="/js/lipa-home-dashboard.js"></script>
   <script src="/js/lipa-home-brain.js?v=4"></script>
+  <script src="/js/lipa-game-feedback.js"></script>
+  <script src="/js/lipa-course-seo.js"></script>
+  <script src="/js/lipa-cards.js"></script>
+  <script src="/js/lipa-wow-intro.js"></script>
+  <script src="/js/lipa-neonverso-map.js"></script>
+  <script src="/js/lipa-global-tower.js"></script>
+  <script src="/js/lipa-class-room.js"></script>
+  <script src="/js/lipa-live-event.js"></script>
   <script src="/js/lipa-pwa.js?v=2"></script>
   <script src="/js/lipa-analytics.js"></script>
     

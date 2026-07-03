@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Colección de Cartas Neon — abre sobres y completa el álbum | LIPA Brain Gym</title>
+  <meta name="description" content="Álbum de 48 Cartas Neon de LIPA Brain Gym: gana sobres completando tu entreno diario, descubre cartas épicas y legendarias y completa la colección.">
+  <link rel="canonical" href="https://lipastudios.com/coleccion.html">
+  <link rel="stylesheet" href="/css/lipa-ui.min.css?v=1">
+  <link rel="stylesheet" href="/css/site-nav.min.css?v=1">
+  <link rel="stylesheet" href="/css/brain-design-system.min.css?v=3">
+  <link rel="stylesheet" href="/css/home-brain-gym.min.css?v=1">
+  <link rel="stylesheet" href="/css/neon-cards.css?v=1">
+  <meta name="theme-color" content="#2ed3a6">
+  <script src="/consent.js" defer></script>
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+</head>
+<body class="lipa-page lipa-brain-soft">
+  <nav class="site-nav" role="navigation" aria-label="Navegación principal">
+    <div class="site-nav__inner">
+      <div class="site-nav__top">
+        <a class="site-nav__brand" href="/">LIPA Studios</a>
+        <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="primary-nav">Menú</button>
+      </div>
+      <div id="primary-nav" class="nav-links">
+        <a href="/">Brain Gym</a>
+        <a href="/cursos.html">Cursos</a>
+        <a href="/juegos-educativos.html">Juegos</a>
+        <a href="/coleccion.html" aria-current="page">Cartas</a>
+        <a href="/mi-evolucion.html">Mi evolución</a>
+        <a href="/recreo-neon.html">Recreo Neon</a>
+      </div>
+    </div>
+    <div class="nav-backdrop" id="nav-backdrop"></div>
+  </nav>
+  <script src="/js/site-nav.js" defer></script>
+
+  <main class="lipa-main">
+    <header class="album-hero">
+      <p class="brain-eyebrow">🃏 Colección Neon</p>
+      <h1>Tu álbum de Cartas Neon</h1>
+      <div id="lipi-mascot-mount"></div>
+      <p style="color:var(--brain-text-muted,#667085);max-width:540px;margin:0.5rem auto 0;line-height:1.6;">
+        Completa tu <strong>entreno diario</strong> y gana un sobre con 3 cartas.
+        Hay <strong>48 cartas</strong>: comunes, raras, épicas… y 3 legendarias que casi nadie tiene.
+      </p>
+      <div id="album-progress" class="album-progress" aria-live="polite"></div>
+    </header>
+
+    <div id="album-packs" class="album-packs" aria-live="polite"></div>
+    <p id="album-packs-hint" class="album-empty-packs" hidden>
+      No tienes sobres ahora mismo. Consigue uno nuevo cada día al
+      <a href="/">completar tu entreno</a>, y sobres extra en rachas de 3, 7, 14 y 30 días
+      o venciendo al <a href="/jefe-neon.html">Jefe de la Semana</a>.
+    </p>
+
+    <div id="album-grid-root"></div>
+  </main>
+
+  <footer class="lipa-footer lipa-footer--compact">
+    <p>© 2024–2026 LIPA Studios</p>
+  </footer>
+
+  <script src="/js/lipa-brain-catalog.js"></script>
+  <script src="/js/lipa-brain-profiles.js"></script>
+  <script src="/js/lipa-brain-core.js"></script>
+  <script src="/js/lipa-mascot.js"></script>
+  <script src="/js/lipa-brain-play.js?v=2"></script>
+  <script src="/js/lipa-game-feedback.js"></script>
+  <script src="/js/lipa-cards.js?v=1"></script>
+  <script src="/js/lipa-pack-ceremony.js?v=1"></script>
+  <script src="/js/lipa-cards-album.js?v=1"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      if (window.LipaMascot) {
+        LipaMascot.say('welcome', '¡Bienvenido a tu álbum! Cada entreno diario = un sobre nuevo.');
+      }
+    });
+  </script>
+</body>
+</html>

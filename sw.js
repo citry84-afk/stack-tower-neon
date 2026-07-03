@@ -3,7 +3,7 @@
  * PWA Optimization & Offline Functionality
  */
 
-const CACHE_NAME = 'lipa-brain-gym-v3.86.0-game-polish';
+const CACHE_NAME = 'lipa-brain-gym-v3.87.0-wow-pack';
 const CACHE_VERSION = '2.0.0';
 
 // Essential files to cache for offline play
@@ -19,6 +19,24 @@ const STATIC_CACHE_URLS = [
     '/cursos.html',
     '/recreo-neon.html',
     '/entreno-completo.html',
+    '/jefe-neon.html',
+    '/evento-neon.html',
+    '/coleccion.html',
+    '/css/lipa-wow.css?v=1',
+    '/css/jefe-neon.css?v=1',
+    '/css/neonverso-map.css?v=1',
+    '/css/lipa-live-event.css?v=1',
+    '/css/neon-cards.css?v=1',
+    '/js/lipa-wow-intro.js',
+    '/js/lipa-pack-ceremony.js',
+    '/js/lipa-share-progress.js',
+    '/js/lipa-daily-boss.js',
+    '/js/lipa-cards.js',
+    '/js/lipa-cards-album.js',
+    '/js/lipa-neonverso-map.js',
+    '/js/lipa-global-tower.js',
+    '/js/lipa-class-room.js',
+    '/js/lipa-live-event.js',
     '/js/lipa-routine-complete.js',
     '/css/home-brain-gym.min.css?v=1',
     '/retos-rapidos.html',

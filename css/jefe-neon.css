@@ -1,0 +1,246 @@
+/* Jefe del día — batalla final del entreno */
+.jefe-page {
+  min-height: 100vh;
+  background: radial-gradient(ellipse at 50% 0%, #1a0a2e 0%, #0d0618 45%, #050308 100%);
+  color: #e7ecff;
+}
+
+.jefe-main {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 3rem;
+}
+
+.jefe-hero {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.jefe-hero__eyebrow {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #f59e0b;
+  margin: 0 0 0.5rem;
+}
+
+.jefe-hero h1 {
+  font-family: 'Nunito', system-ui, sans-serif;
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  margin: 0 0 0.5rem;
+  color: #fff;
+}
+
+.jefe-hero p {
+  color: #9fb0d8;
+  line-height: 1.55;
+  margin: 0;
+  font-size: 15px;
+}
+
+.jefe-arena {
+  background: linear-gradient(180deg, rgba(34, 48, 82, .6), rgba(16, 22, 43, .9));
+  border: 2px solid rgba(155, 126, 222, .35);
+  border-radius: 24px;
+  padding: 1.5rem 1.25rem;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, .4), inset 0 1px 0 rgba(255, 255, 255, .06);
+}
+
+.jefe-boss {
+  text-align: center;
+  margin-bottom: 1.25rem;
+}
+
+.jefe-boss__emoji {
+  font-size: clamp(64px, 16vw, 96px);
+  line-height: 1;
+  display: block;
+  filter: drop-shadow(0 0 24px rgba(245, 158, 11, .5));
+  transition: transform 200ms ease, filter 200ms ease;
+}
+
+.jefe-boss__emoji--hit {
+  animation: jefe-hit 400ms ease;
+}
+
+.jefe-boss__emoji--attack {
+  animation: jefe-attack 500ms ease;
+}
+
+@keyframes jefe-hit {
+  0%, 100% { transform: scale(1); filter: brightness(1); }
+  30% { transform: scale(0.85) rotate(-5deg); filter: brightness(2) hue-rotate(20deg); }
+  60% { transform: scale(1.05); }
+}
+
+@keyframes jefe-attack {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-12px) scale(1.1); }
+  75% { transform: translateX(12px) scale(1.1); }
+}
+
+.jefe-boss__name {
+  font-weight: 900;
+  font-size: 1.25rem;
+  margin: 0.5rem 0 0.75rem;
+  color: #ffd166;
+}
+
+.jefe-hp {
+  margin-bottom: 0.35rem;
+}
+
+.jefe-hp__label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 700;
+  color: #9fb0d8;
+  margin-bottom: 4px;
+}
+
+.jefe-hp__track {
+  height: 14px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, .4);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, .1);
+}
+
+.jefe-hp__fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #ef4444, #f59e0b);
+  transition: width 400ms cubic-bezier(0.34, 1.2, 0.5, 1);
+  box-shadow: 0 0 12px rgba(239, 68, 68, .5);
+}
+
+.jefe-question {
+  margin-top: 1.25rem;
+}
+
+.jefe-question__text {
+  font-size: 1.15rem;
+  font-weight: 800;
+  text-align: center;
+  margin: 0 0 1rem;
+  line-height: 1.4;
+}
+
+.jefe-choices {
+  display: grid;
+  gap: 10px;
+}
+
+.jefe-choice {
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 2px solid rgba(155, 126, 222, .4);
+  background: rgba(255, 255, 255, .06);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 120ms ease, background 120ms ease, border-color 120ms ease;
+}
+
+.jefe-choice:hover:not(:disabled) {
+  background: rgba(46, 211, 166, .15);
+  border-color: #2ed3a6;
+  transform: translateY(-2px);
+}
+
+.jefe-choice--correct {
+  background: rgba(46, 211, 166, .25) !important;
+  border-color: #2ed3a6 !important;
+}
+
+.jefe-choice--wrong {
+  background: rgba(239, 68, 68, .2) !important;
+  border-color: #ef4444 !important;
+}
+
+.jefe-choice:disabled {
+  cursor: default;
+  opacity: 0.85;
+}
+
+.jefe-feedback {
+  text-align: center;
+  font-weight: 700;
+  min-height: 1.5rem;
+  margin-top: 0.75rem;
+  font-size: 15px;
+}
+
+.jefe-feedback--ok { color: #2ed3a6; }
+.jefe-feedback--bad { color: #fca5a5; }
+
+.jefe-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 1.25rem;
+}
+
+.jefe-skip {
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: 1px dashed rgba(255, 255, 255, .25);
+  background: transparent;
+  color: #9fb0d8;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.jefe-victory {
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.jefe-victory__emoji {
+  font-size: 72px;
+  animation: jefe-victory-bounce 800ms ease infinite;
+}
+
+@keyframes jefe-victory-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.jefe-victory h2 {
+  color: #2ed3a6;
+  margin: 0.5rem 0;
+}
+
+.jefe-empty {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.jefe-empty a {
+  color: #2ed3a6;
+}
+
+.jefe-screen-shake {
+  animation: jefe-screen-shake 400ms ease;
+}
+
+@keyframes jefe-screen-shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(8px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jefe-boss__emoji--hit,
+  .jefe-boss__emoji--attack,
+  .jefe-victory__emoji,
+  .jefe-screen-shake {
+    animation: none !important;
+  }
+}

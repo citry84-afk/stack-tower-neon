@@ -639,6 +639,8 @@
       '</strong><span>racha</span></div>' +
       '</div></div>' +
 
+      '<div id="parent-share-mount"></div>' +
+
       '<section class="parent-dash-section"><h2>Esta semana</h2>' +
       '<div class="parent-dash-chart" role="img" aria-label="Días entrenados">' +
       weekBars +
@@ -669,6 +671,10 @@
 
       '<p class="parent-dash-foot">Datos guardados solo en este dispositivo · sin cuenta obligatoria. ' +
       '<a href="/mi-evolucion.html">Vista del niño/a</a> · <a href="/privacy.html">Privacidad</a></p>';
+
+    if (global.LipaShareProgress) {
+      LipaShareProgress.mountShareZone(root.querySelector('#parent-share-mount'));
+    }
   }
 
   global.LipaParentDashboard = {
