@@ -16,8 +16,23 @@
       : '▶ Empezar en 2 pasos';
   }
 
+  function applyReturning() {
+    if (!hasProfile()) {
+      document.body.classList.remove('home--returning');
+      return;
+    }
+    document.body.classList.add('home--returning');
+    document.body.classList.remove('home--first-visit');
+    var steps = document.querySelector('.landing-hero__steps');
+    if (steps) steps.textContent = 'Pulsa el botón morado en «Tu entreno de hoy» — 7 min y recompensa';
+    updateHeroCta();
+  }
+
   function applyFirstVisit() {
-    if (hasProfile()) return;
+    if (hasProfile()) {
+      applyReturning();
+      return;
+    }
     document.body.classList.add('home--first-visit');
     var lead = document.querySelector('.landing-hero__lead');
     if (lead) {
@@ -31,7 +46,7 @@
 
   function clearFirstVisit() {
     document.body.classList.remove('home--first-visit');
-    updateHeroCta();
+    applyReturning();
   }
 
   function startRoutine(e) {
@@ -69,6 +84,15 @@
 
   document.addEventListener('DOMContentLoaded', function () {
     applyFirstVisit();
+    applyReturning();
+
+    var fold = document.getElementById('home-neonverso-fold');
+    if (fold && hasProfile()) {
+      var open = false;
+      if (window.LipaCards && LipaCards.pendingPacks().length) open = true;
+      if (window.LipaBrain && (LipaBrain.getStats().streak || 0) >= 7) open = true;
+      if (open) fold.open = true;
+    }
 
     var btn = document.getElementById('hero-start-routine');
     if (btn) btn.addEventListener('click', startRoutine);

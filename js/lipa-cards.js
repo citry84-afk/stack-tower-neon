@@ -290,6 +290,11 @@
     var packs = st.packs.length;
     var pct = Math.round((got / total) * 100);
 
+    if (!packs && got === 0) {
+      el.innerHTML = '';
+      return;
+    }
+
     el.innerHTML =
       '<div class="cards-teaser">' +
       '<div class="cards-teaser__fan" aria-hidden="true">' +

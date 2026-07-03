@@ -246,3 +246,59 @@
     animation: none !important;
   }
 }
+
+.home-cards-teaser:empty {
+  display: none;
+}
+
+body.home--returning .lipi-fun-chips,
+body.home--returning .home-como-funciona,
+body.home--returning .home-padres-teaser--editorial {
+  display: none !important;
+}
+
+body.home--returning .hero-actions .btn-hero-secondary:not(.hero-actions__keep) {
+  display: none !important;
+}
+
+body.home--returning .home-verano-banner__detail {
+  display: none !important;
+}
+
+body.home--returning .home-verano-banner {
+  padding: 0.75rem 1.25rem !important;
+  margin-bottom: 1rem !important;
+}
+
+.home-neonverso-fold {
+  max-width: var(--lipa-max-wide, 1100px);
+  margin: 0 auto 1.25rem;
+  padding: 0 1.25rem;
+}
+
+.home-neonverso-fold__summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 0.85rem 1.1rem;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.08), rgba(46, 211, 166, 0.08));
+  border: 1px solid rgba(124, 58, 237, 0.2);
+  font-weight: 800;
+  font-size: 15px;
+  color: var(--brain-text-main, #172033);
+  text-align: center;
+}
+
+.home-neonverso-fold__summary::-webkit-details-marker {
+  display: none;
+}
+
+.home-neonverso-fold__summary::after {
+  content: ' ▾';
+  opacity: 0.5;
+  font-size: 12px;
+}
+
+.home-neonverso-fold[open] .home-neonverso-fold__summary::after {
+  content: ' ▴';
+}
