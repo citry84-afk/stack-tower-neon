@@ -211,9 +211,23 @@
     var meta = getMeta();
     if (!meta || !global.LipaBrain) return;
     var p = LipaBrain.getProfile();
+    if (!p && meta.courseId) {
+      var band = global.LipaCurriculum ? LipaCurriculum.courseToAgeBand(meta.courseId) : '10-12';
+      LipaBrain.saveProfile({
+        profileId: meta.id,
+        displayName: meta.name,
+        courseId: meta.courseId,
+        ageBand: band,
+        minutes: 7,
+        focus: 'all',
+        goal: 'fun'
+      });
+      return;
+    }
     if (!p) return;
     p.displayName = meta.name;
     p.profileId = meta.id;
+    if (meta.courseId && !p.courseId) p.courseId = meta.courseId;
     LipaBrain.saveProfile(p);
   }
 

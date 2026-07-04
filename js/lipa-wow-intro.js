@@ -125,9 +125,9 @@
     if (goBtn) {
       goBtn.addEventListener('click', function () {
         dismiss(overlay);
-        var target = document.getElementById('entreno-hoy') || document.getElementById('hero-start-routine');
+        var target = document.getElementById('home-start-work') || document.getElementById('entreno-hoy');
         if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        var start = document.getElementById('hero-start-routine');
+        var start = document.getElementById('home-start-work') || document.getElementById('hero-start-routine');
         if (start) setTimeout(function () { start.focus(); }, 600);
       });
     }

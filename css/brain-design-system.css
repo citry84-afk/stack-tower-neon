@@ -2083,6 +2083,100 @@ body.home--returning .home-neonverso-fold:not([open]) .neonverso-section {
   margin-bottom: 0.75rem;
 }
 
+/* Un solo CTA claro — entreno de hoy */
+.home-entreno-hoy__cta-hint {
+  margin: 0 0 0.75rem;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--brain-accent, #7c3aed);
+}
+
+body.home--first-visit .home-entreno-hoy__cta-hint {
+  display: none;
+}
+
+body.home--returning #hero-start-routine {
+  display: none !important;
+}
+
+body.home--returning .hero-actions::before {
+  content: '↓ Tu misión está justo debajo';
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--brain-accent, #7c3aed);
+  margin-bottom: 0.35rem;
+}
+
+.brain-home-continue--primary {
+  margin: 0 auto 1rem;
+  max-width: 28rem;
+}
+
+.brain-home-continue--primary .lipa-guided-strip {
+  border: 2px solid rgba(124, 58, 237, 0.35);
+  box-shadow: 0 8px 28px rgba(124, 58, 237, 0.18);
+}
+
+.brain-home-continue--primary .lipa-guided-strip__btn-primary,
+#home-start-work {
+  width: 100%;
+  min-height: 52px;
+  font-size: 17px !important;
+  letter-spacing: 0.01em;
+}
+
+.home-start-work--pulse {
+  animation: home-start-pulse 2s ease-in-out infinite;
+}
+
+@keyframes home-start-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.45); }
+  50% { box-shadow: 0 0 0 10px rgba(124, 58, 237, 0); }
+}
+
+body.home--returning #home-today-missions {
+  display: none !important;
+}
+
+body.home--returning #lipa-brain-plan-mount .brain-plan-card__actions {
+  display: none !important;
+}
+
+body.home--returning #lipa-brain-plan-mount .brain-plan-steps {
+  display: none;
+}
+
+.home-entreno-extra {
+  margin-top: 0.75rem;
+  text-align: left;
+}
+
+.home-entreno-extra summary {
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--brain-text-muted, #5b6478);
+  padding: 0.5rem 0;
+}
+
+body.home--first-visit #home-entreno-extra {
+  border: none;
+}
+
+body.home--first-visit #home-entreno-extra summary {
+  display: none;
+}
+
+body.home--first-visit #home-entreno-extra > .home-entreno-hoy__lead,
+body.home--first-visit #home-entreno-extra > #lipa-routine-subjects-mount,
+body.home--first-visit #home-entreno-extra > #lipa-brain-plan-mount {
+  display: block;
+}
+
 .home-neonverso-fold {
   max-width: var(--lipa-max-wide, 1100px);
   margin: 0 auto 1.25rem;

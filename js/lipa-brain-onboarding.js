@@ -647,7 +647,7 @@
       '</div>' +
       '<ol class="brain-plan-steps">' + steps + '</ol>' +
       '<div class="brain-plan-card__actions">' +
-      '<a href="#" class="lipa-btn lipa-btn--primary lipa-btn--brain" data-start-guided-routine>Empezar rutina guiada</a>' +
+      '<a href="#" id="home-start-work" class="lipa-btn lipa-btn--primary lipa-btn--brain" data-start-guided-routine>Empezar rutina guiada</a>' +
       '<a href="/mi-evolucion.html" class="lipa-btn lipa-btn--secondary">Mi evolución</a>' +
       '<button type="button" class="lipa-btn lipa-btn--secondary" data-redo-plan>Cambiar respuestas</button>' +
       '</div></div>';
@@ -657,6 +657,9 @@
       redo.addEventListener('click', function () {
         open({ full: true, onComplete: function () { renderPlanCard(container); } });
       });
+    }
+    if (window.LipaHomeBrain && LipaHomeBrain.refreshHomeMode) {
+      LipaHomeBrain.refreshHomeMode();
     }
   }
 

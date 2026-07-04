@@ -44,6 +44,10 @@
 
   function startRoutine(e) {
     if (e) e.preventDefault();
+    if (global.LipaHomeBrain && LipaHomeBrain.launchWork) {
+      LipaHomeBrain.launchWork(e);
+      return;
+    }
     if (!hasProfile()) {
       startOnboarding(e);
       return;
@@ -250,7 +254,7 @@
         esc(plan.primary.label) + '</button>';
     } else {
       primaryBtn =
-        '<button type="button" class="lipa-btn lipa-btn--primary lipa-btn--brain lipa-guided-strip__btn-primary" data-guided-routine">' +
+        '<button type="button" id="home-start-work" class="lipa-btn lipa-btn--primary lipa-btn--brain lipa-guided-strip__btn-primary" data-guided-routine">' +
         esc(plan.primary.label) + '</button>';
     }
 

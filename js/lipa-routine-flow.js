@@ -548,7 +548,11 @@
       var guided = e.target.closest('[data-start-guided-routine]');
       if (guided) {
         e.preventDefault();
-        beginFromProfile({ restart: true });
+        if (global.LipaHomeBrain && LipaHomeBrain.launchWork) {
+          LipaHomeBrain.launchWork(e);
+        } else {
+          beginFromProfile({ restart: true });
+        }
         return;
       }
       var fixed = e.target.closest('[data-start-fixed-routine]');

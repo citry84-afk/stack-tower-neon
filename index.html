@@ -552,14 +552,18 @@
 
     <section id="entreno-hoy" class="home-entreno-hoy" aria-labelledby="entreno-hoy-title">
         <h2 id="entreno-hoy-title" class="home-entreno-hoy__title">Tu entreno de hoy</h2>
-        <div id="lipa-cards-teaser" class="home-cards-teaser" aria-live="polite"></div>
         <p id="brain-home-greet" class="home-entreno-hoy__greet"></p>
-        <div id="home-today-missions" class="home-today-missions" hidden></div>
+        <p class="home-entreno-hoy__cta-hint" id="home-cta-hint">👇 Pulsa el botón morado grande — Lipi abre el juego (~7 min)</p>
+        <div id="brain-home-continue" class="brain-home-continue brain-home-continue--primary" hidden></div>
+        <div id="lipa-cards-teaser" class="home-cards-teaser" aria-live="polite"></div>
         <div id="brain-home-dash"></div>
-        <div id="brain-home-continue" class="brain-home-continue" hidden></div>
-        <p class="home-entreno-hoy__lead">Pulsa el botón morado: Lipi te lleva al siguiente juego. ¿Una materia concreta? Elígela abajo. <a href="/para-padres.html">Informe para padres →</a></p>
-        <div id="lipa-routine-subjects-mount" data-lipa-routine-subjects="compact"></div>
-        <div id="lipa-brain-plan-mount"></div>
+        <div id="home-today-missions" class="home-today-missions" hidden></div>
+        <details class="home-entreno-extra" id="home-entreno-extra">
+            <summary>Más opciones (materias y plan del día)</summary>
+            <p class="home-entreno-hoy__lead">¿Solo una materia? Elígela abajo. <a href="/para-padres.html">Informe para padres →</a></p>
+            <div id="lipa-routine-subjects-mount" data-lipa-routine-subjects="compact"></div>
+            <div id="lipa-brain-plan-mount"></div>
+        </details>
     </section>
 
     <details class="home-neonverso-fold home-section--after-onboard" id="home-neonverso-fold">
@@ -855,7 +859,7 @@
   <script src="/js/lipa-routine-subjects.js"></script>
   <script src="/js/lipa-home-lipi.js"></script>
   <script src="/js/lipa-home-dashboard.js"></script>
-  <script src="/js/lipa-home-brain.js?v=4"></script>
+  <script src="/js/lipa-home-brain.js?v=5"></script>
   <script src="/js/lipa-game-feedback.js"></script>
   <script src="/js/lipa-course-seo.js"></script>
   <script src="/js/lipa-cards.js"></script>
