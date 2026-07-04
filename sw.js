@@ -3,7 +3,7 @@
  * PWA Optimization & Offline Functionality
  */
 
-const CACHE_NAME = 'lipa-brain-gym-v3.88.0-home-cta';
+const CACHE_NAME = 'lipa-brain-gym-v3.89.0-start-fix';
 const CACHE_VERSION = '2.0.0';
 
 // Essential files to cache for offline play
@@ -273,13 +273,15 @@ function handleAdRequest(request) {
         });
 }
 
-// Static resources — HTML: network first; assets: cache first
+// Static resources — HTML: network first; JS: network first; otros assets: cache first
 function handleStaticResource(request) {
+    var reqUrl = new URL(request.url);
     var isHtml = request.destination === 'document' ||
-        request.url.endsWith('.html') ||
+        reqUrl.pathname.endsWith('.html') ||
         request.url.endsWith('/');
+    var isJs = reqUrl.pathname.indexOf('/js/') === 0 && reqUrl.pathname.endsWith('.js');
 
-    if (isHtml) {
+    if (isHtml || isJs) {
         return fetch(request)
             .then(function (networkResponse) {
                 if (networkResponse.ok) {

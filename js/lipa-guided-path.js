@@ -35,6 +35,10 @@
 
   function startOnboarding(e) {
     if (e) e.preventDefault();
+    if (global.LipaRoutineFlow && LipaRoutineFlow.openOnboarding) {
+      LipaRoutineFlow.openOnboarding();
+      return;
+    }
     if (global.LipaBrainOnboarding) {
       LipaBrainOnboarding.open({ fast: true, autoStart: true });
     } else {
@@ -44,8 +48,8 @@
 
   function startRoutine(e) {
     if (e) e.preventDefault();
-    if (global.LipaHomeBrain && LipaHomeBrain.launchWork) {
-      LipaHomeBrain.launchWork(e);
+    if (global.LipaRoutineFlow && LipaRoutineFlow.startWork) {
+      LipaRoutineFlow.startWork(e);
       return;
     }
     if (!hasProfile()) {
@@ -282,11 +286,7 @@
   }
 
   function wireStrip(root) {
-    if (!root) return;
-    var onboard = root.querySelector('[data-guided-onboard]');
-    if (onboard) onboard.addEventListener('click', startOnboarding);
-    var routine = root.querySelector('[data-guided-routine]');
-    if (routine) routine.addEventListener('click', startRoutine);
+    /* Clicks: LipaRoutineFlow.bindDelegatedStarts (document) */
   }
 
   function courseWorkUrl(courseId) {

@@ -5,9 +5,21 @@
   'use strict';
 
   function canStartWork() {
+    if (window.LipaRoutineFlow && LipaRoutineFlow.canStartWork) {
+      return LipaRoutineFlow.canStartWork();
+    }
     if (!window.LipaBrain || !LipaBrain.getProfile) return false;
     var p = LipaBrain.getProfile();
     return !!(p && p.courseId);
+  }
+
+  function launchWork(e) {
+    if (window.LipaRoutineFlow && LipaRoutineFlow.startWork) {
+      LipaRoutineFlow.startWork(e);
+      return;
+    }
+    if (e && e.preventDefault) e.preventDefault();
+    window.location.href = '/cursos.html?empezar=1';
   }
 
   function updateHeroCta() {
@@ -45,8 +57,6 @@
     if (heroBtn) heroBtn.hidden = true;
     var missions = document.getElementById('home-today-missions');
     if (missions) missions.hidden = true;
-    var extra = document.getElementById('home-entreno-extra');
-    if (extra && !extra.open) extra.open = false;
   }
 
   function applyFirstVisit() {
@@ -75,8 +85,8 @@
 
   function getWorkButton() {
     return (
-      document.getElementById('home-start-work') ||
       document.querySelector('#brain-home-continue [data-guided-routine]') ||
+      document.getElementById('home-start-work') ||
       document.querySelector('#lipa-brain-plan-mount [data-start-guided-routine]')
     );
   }
@@ -85,94 +95,20 @@
     var btn = getWorkButton();
     if (!btn) return;
     btn.classList.add('home-start-work--pulse');
-    btn.setAttribute('id', 'home-start-work');
-  }
-
-  function scrollToWork(focus) {
-    var section = document.getElementById('entreno-hoy');
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-    if (!focus) return;
-    setTimeout(function () {
-      var btn = getWorkButton();
-      if (btn) {
-        btn.focus({ preventScroll: true });
-        highlightWorkButton();
-      }
-    }, 450);
-  }
-
-  function launchWork(e) {
-    if (e) e.preventDefault();
-
-    if (!canStartWork()) {
-      if (window.LipaBrainOnboarding) {
-        LipaBrainOnboarding.open({ fast: true, autoStart: true });
-      } else {
-        window.location.href = '/cursos.html?empezar=1';
-      }
-      return;
-    }
-
-    if (window.LipaBrain && LipaBrain.refreshProfileRoutine) {
-      LipaBrain.refreshProfileRoutine();
-    }
-
-    var profile = window.LipaBrain ? LipaBrain.getProfile() : null;
-    var routine = profile && profile.routine;
-    if (!routine || !routine.steps || !routine.steps.length) {
-      window.alert('Falta elegir el curso. Te llevamos al mapa de cursos.');
-      window.location.href = '/cursos.html?empezar=1';
-      return;
-    }
-
-    var btn = e && e.target ? e.target.closest('button, a') : null;
-    if (btn) {
-      btn.setAttribute('aria-busy', 'true');
-      if (btn.tagName === 'BUTTON') btn.disabled = true;
-      var prev = btn.textContent;
-      if (prev && prev.indexOf('…') < 0) {
-        btn.textContent = 'Abriendo primera misión…';
-        setTimeout(function () {
-          if (!btn.isConnected) return;
-          btn.removeAttribute('aria-busy');
-          if (btn.tagName === 'BUTTON') btn.disabled = false;
-          btn.textContent = prev;
-        }, 8000);
-      }
-    }
-
-    if (window.LipaRoutineFlow && LipaRoutineFlow.beginFromProfile) {
-      LipaRoutineFlow.beginFromProfile({ restart: true });
-      return;
-    }
-
-    if (routine.firstUrl) {
-      window.location.href = routine.firstUrl;
-      return;
-    }
-
-    window.location.href = '/cursos.html?empezar=1';
+    if (!btn.id) btn.id = 'home-start-work';
   }
 
   function startRoutine(e) {
+    if (window.LipaRoutineFlow && LipaRoutineFlow.startWork) {
+      LipaRoutineFlow.startWork(e);
+      return;
+    }
     if (e) e.preventDefault();
-
-    if (canStartWork()) {
-      launchWork(e);
-      return;
-    }
-
-    if (window.LipaGuidedPath && LipaGuidedPath.startOnboarding) {
-      LipaGuidedPath.startOnboarding(e);
-      return;
-    }
     if (window.LipaBrainOnboarding) {
       LipaBrainOnboarding.open({ fast: true, autoStart: true });
-      return;
+    } else {
+      window.location.href = '/cursos.html?empezar=1';
     }
-    window.location.href = '/cursos.html?empezar=1';
   }
 
   document.addEventListener('DOMContentLoaded', function () {
@@ -186,21 +122,18 @@
       if (open) fold.open = true;
     }
 
-    var heroBtn = document.getElementById('hero-start-routine');
-    if (heroBtn) heroBtn.addEventListener('click', startRoutine);
-
-    if (
-      document.body.getAttribute('data-brain-onboard-auto') === '1' &&
-      window.LipaBrainOnboarding
-    ) {
-      LipaBrainOnboarding.autoOpenIfNeeded();
-    }
-
     setTimeout(refreshHomeMode, 0);
+    setTimeout(highlightWorkButton, 100);
   });
 
-  window.addEventListener('load', refreshHomeMode);
-  window.addEventListener('lipa-profile-changed', refreshHomeMode);
+  window.addEventListener('load', function () {
+    refreshHomeMode();
+    highlightWorkButton();
+  });
+  window.addEventListener('lipa-profile-changed', function () {
+    refreshHomeMode();
+    setTimeout(highlightWorkButton, 50);
+  });
   window.addEventListener('lipa-routine-subjects-changed', function () {
     setTimeout(highlightWorkButton, 50);
   });

@@ -468,9 +468,46 @@
 
   function begin(routine) {
     var state = createState(routine || DEFAULT_ROUTINE);
-    if (!state) return;
+    if (!state) return false;
     saveState(state);
-    global.location.href = state.steps[0].guidedUrl;
+    var url = state.steps[0] && (state.steps[0].guidedUrl || guidedUrl(state.steps[0].url, 1, state.steps.length));
+    if (!url) return false;
+    global.location.assign(url);
+    return true;
+  }
+
+  function canStartWork() {
+    if (!global.LipaBrain || !LipaBrain.getProfile) return false;
+    var p = LipaBrain.getProfile();
+    return !!(p && p.courseId);
+  }
+
+  function openOnboarding() {
+    if (global.LipaBrainOnboarding) {
+      LipaBrainOnboarding.open({ fast: true, autoStart: true });
+      return;
+    }
+    global.location.assign('/cursos.html?empezar=1');
+  }
+
+  var workLock = false;
+
+  function startWork(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    if (workLock) return false;
+    workLock = true;
+    setTimeout(function () { workLock = false; }, 2500);
+
+    if (!canStartWork()) {
+      openOnboarding();
+      return false;
+    }
+
+    var ok = beginFromProfile({ restart: true });
+    if (!ok) {
+      global.location.assign('/cursos.html?empezar=1');
+    }
+    return ok;
   }
 
   function beginFromProfile(opts) {
@@ -484,17 +521,25 @@
       }
     }
     var state = stateFromProfile();
-    if (state) {
-      if (opts.restart) {
-        state.currentStep = 0;
-        state.completedSteps = [];
-        state.startedAt = new Date().toISOString();
-      }
-      saveState(state);
-      global.location.href = state.steps[state.currentStep].guidedUrl;
-      return;
+    if (!state) {
+      return begin(DEFAULT_ROUTINE);
     }
-    begin(DEFAULT_ROUTINE);
+    if (opts.restart) {
+      state.currentStep = 0;
+      state.completedSteps = [];
+      state.startedAt = new Date().toISOString();
+    }
+    saveState(state);
+    var step = state.steps[state.currentStep];
+    if (!step) {
+      return begin(DEFAULT_ROUTINE);
+    }
+    var url = step.guidedUrl || guidedUrl(step.url, state.currentStep + 1, state.steps.length);
+    if (!url) {
+      return begin(DEFAULT_ROUTINE);
+    }
+    global.location.assign(url);
+    return true;
   }
 
   function beginSubjectRoutine(courseId, subjectId, minutes, opts) {
@@ -545,16 +590,22 @@
 
   function bindDelegatedStarts() {
     document.addEventListener('click', function (e) {
-      var guided = e.target.closest('[data-start-guided-routine]');
-      if (guided) {
+      var onboard = e.target.closest('[data-guided-onboard], [data-open-onboarding]');
+      if (onboard) {
         e.preventDefault();
-        if (global.LipaHomeBrain && LipaHomeBrain.launchWork) {
-          LipaHomeBrain.launchWork(e);
-        } else {
-          beginFromProfile({ restart: true });
-        }
+        openOnboarding();
         return;
       }
+
+      var work = e.target.closest(
+        '#hero-start-routine, #home-start-work, [data-guided-routine], [data-start-guided-routine]'
+      );
+      if (work) {
+        e.preventDefault();
+        startWork(e);
+        return;
+      }
+
       var fixed = e.target.closest('[data-start-fixed-routine]');
       if (fixed) {
         e.preventDefault();
@@ -652,6 +703,9 @@
     beginFromProfile: beginFromProfile,
     beginSubjectRoutine: beginSubjectRoutine,
     beginDefault: function () { begin(DEFAULT_ROUTINE); },
+    canStartWork: canStartWork,
+    startWork: startWork,
+    openOnboarding: openOnboarding,
     goNext: goNext,
     onStepRecorded: onStepRecorded,
     guidedUrl: guidedUrl,
