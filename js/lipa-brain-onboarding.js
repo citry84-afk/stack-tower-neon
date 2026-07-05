@@ -188,7 +188,21 @@
     onComplete = opts.onComplete;
     root.hidden = false;
     document.body.style.overflow = 'hidden';
+    try {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (scrollErr) {
+      window.scrollTo(0, 0);
+    }
     render();
+    requestAnimationFrame(function () {
+      if (panel) {
+        try {
+          panel.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        } catch (panelErr) {
+          panel.scrollIntoView(false);
+        }
+      }
+    });
     if (window.LipaAnalytics && LipaAnalytics.trackGameStart) {
       LipaAnalytics.trackGameStart(
         gameQuick ? 'brain-onboarding-game' : (fastMode ? 'brain-onboarding-fast' : 'brain-onboarding')

@@ -65,6 +65,19 @@
     continueEl.hidden = false;
   }
 
+  function resolveProfileFirstName(profile) {
+    var name = '';
+    if (profile) {
+      name = String(profile.displayName || profile.name || '').trim();
+    }
+    if (!name && global.LipaBrainProfiles) {
+      var meta = LipaBrainProfiles.getActiveMeta();
+      if (meta && meta.name) name = String(meta.name).trim();
+    }
+    if (!name) return 'Explorador';
+    return name.split(/\s+/)[0];
+  }
+
   function mount() {
     var root = document.getElementById('brain-home-dash');
     if (!root || !global.LipaBrain) return;
@@ -74,7 +87,7 @@
     var streak = stats.streak || 0;
     var xp = stats.xp || 0;
     var rank = stats.rank || {};
-    var name = (profile && profile.displayName) ? profile.displayName.split(' ')[0] : 'Explorador';
+    var name = resolveProfileFirstName(profile);
 
     var greet = document.getElementById('brain-home-greet');
     if (greet) {

@@ -2133,6 +2133,11 @@ body.home--returning .hero-actions::before {
   animation: home-start-pulse 2s ease-in-out infinite;
 }
 
+.lipa-btn--loading {
+  opacity: 0.88;
+  cursor: wait;
+}
+
 @keyframes home-start-pulse {
   0%, 100% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.45); }
   50% { box-shadow: 0 0 0 10px rgba(124, 58, 237, 0); }

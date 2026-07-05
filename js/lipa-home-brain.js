@@ -91,11 +91,31 @@
     );
   }
 
+  var scrolledToWork = false;
+
+  function scrollToWorkButton() {
+    if (!canStartWork() || scrolledToWork) return;
+    var entreno = document.getElementById('entreno-hoy');
+    var btn = getWorkButton();
+    if (!entreno && !btn) return;
+    scrolledToWork = true;
+    try {
+      sessionStorage.setItem('lipa_home_scrolled_work_v1', '1');
+    } catch (e) { /* ignore */ }
+    var target = entreno || btn;
+    try {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } catch (err) {
+      target.scrollIntoView(true);
+    }
+  }
+
   function highlightWorkButton() {
     var btn = getWorkButton();
     if (!btn) return;
     btn.classList.add('home-start-work--pulse');
     if (!btn.id) btn.id = 'home-start-work';
+    scrollToWorkButton();
   }
 
   function startRoutine(e) {
@@ -110,6 +130,12 @@
       window.location.href = '/cursos.html?empezar=1';
     }
   }
+
+  try {
+    if (sessionStorage.getItem('lipa_home_scrolled_work_v1') === '1') {
+      scrolledToWork = true;
+    }
+  } catch (e) { /* ignore */ }
 
   document.addEventListener('DOMContentLoaded', function () {
     refreshHomeMode();

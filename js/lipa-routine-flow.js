@@ -492,13 +492,48 @@
 
   var workLock = false;
 
+  function findWorkButton(e) {
+    var sel = '#hero-start-routine, #home-start-work, [data-guided-routine], [data-start-guided-routine]';
+    if (e && e.target && e.target.closest) {
+      var hit = e.target.closest(sel);
+      if (hit) return hit;
+    }
+    return global.document.querySelector('#home-start-work, [data-guided-routine], #hero-start-routine');
+  }
+
+  function setWorkButtonLoading(btn, loading) {
+    if (!btn || btn.tagName === 'A') return;
+    if (loading) {
+      if (!btn.dataset.lipaWorkLabel) btn.dataset.lipaWorkLabel = btn.textContent;
+      btn.textContent = 'Abriendo…';
+      btn.setAttribute('aria-busy', 'true');
+      btn.disabled = true;
+      btn.classList.add('lipa-btn--loading');
+    } else {
+      if (btn.dataset.lipaWorkLabel) {
+        btn.textContent = btn.dataset.lipaWorkLabel;
+        delete btn.dataset.lipaWorkLabel;
+      }
+      btn.removeAttribute('aria-busy');
+      btn.disabled = false;
+      btn.classList.remove('lipa-btn--loading');
+    }
+  }
+
   function startWork(e) {
     if (e && e.preventDefault) e.preventDefault();
     if (workLock) return false;
     workLock = true;
-    setTimeout(function () { workLock = false; }, 2500);
+
+    var btn = findWorkButton(e);
+    setWorkButtonLoading(btn, true);
+    setTimeout(function () {
+      workLock = false;
+      setWorkButtonLoading(btn, false);
+    }, 2500);
 
     if (!canStartWork()) {
+      setWorkButtonLoading(btn, false);
       openOnboarding();
       return false;
     }
