@@ -1,22 +1,20 @@
 User-agent: *
 Allow: /
 
-# Sitemap
+# Sitemap (núcleo de calidad — páginas finas con noindex)
 Sitemap: https://lipastudios.com/sitemap.xml
 
-# Important pages for Google - SEO optimized
 Allow: /privacy.html
 Allow: /terms.html
 Allow: /about.html
 Allow: /help.html
-Allow: /news.html
 Allow: /contact.html
 Allow: /blog.html
-Allow: /guia-reflejos.html
-Allow: /top-juegos-reflejos.html
-Allow: /juegos-de-reflejos.html
-Allow: /moviles-gaming-baratos.html
-Allow: /entrenador-reflejos.html
+Allow: /editorial.html
+Allow: /disclaimer.html
+Allow: /ads.txt
+Allow: /app-ads.txt
+
 Disallow: /jugar.html
 Disallow: /jugar
 Disallow: /reto-rapido.html
@@ -26,15 +24,6 @@ Disallow: /*/lengua.html
 Disallow: /*/ingles.html
 Disallow: /*/naturales.html
 Disallow: /*/sociales.html
-Allow: /test-reflejos.html
-Allow: /aim-trainer-neon.html
-Allow: /grid-reflejos-neon.html
-Allow: /toque-flash-neon.html
-Allow: /esquiva-neon.html
-Allow: /editorial.html
-Allow: /disclaimer.html
-Allow: /ads.txt
-Allow: /app-ads.txt
 
 # Block unnecessary files and test pages
 Disallow: /consent.js
@@ -48,10 +37,8 @@ Disallow: /stack-tower-fixed.html
 Disallow: /dashboard/
 Disallow: /moviles-gamers-baratos.html
 
-# Allow Googlebot full access
 User-agent: Googlebot
 Allow: /
 
-# Allow Bingbot
 User-agent: Bingbot
 Allow: /
