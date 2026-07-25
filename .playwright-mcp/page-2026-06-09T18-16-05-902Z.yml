@@ -1,0 +1,73 @@
+- generic [ref=e1]:
+  - navigation [ref=e2]:
+    - link "LIPA Studios" [ref=e3] [cursor=pointer]:
+      - /url: /
+  - region "Perfiles de jugador" [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]: ¿Quién juega?
+      - button "Jugador 1" [pressed] [ref=e7] [cursor=pointer]:
+        - generic [ref=e8]: 🧠
+        - text: Jugador 1
+      - button "+ Hermano/a" [ref=e9] [cursor=pointer]
+  - main [ref=e10]:
+    - paragraph [ref=e11]: LIPA Brain Gym · emparejar
+    - heading "Neon Empareja" [level=1] [ref=e12]
+    - paragraph [ref=e13]: Toca un dibujo y después su palabra.
+    - status [ref=e15]:
+      - generic [ref=e17]:
+        - strong [ref=e18]: Lipi
+        - text: Lee la consigna con calma. Si fallas, prueba otra vez — ¡tú puedes!
+    - paragraph [ref=e19]: Nivel Brain 1
+    - generic [ref=e20]:
+      - generic [ref=e21]:
+        - generic [ref=e22]: Tiempo
+        - strong [ref=e23]: 15 s
+      - generic [ref=e24]:
+        - generic [ref=e25]: Puntos
+        - strong [ref=e26]: "0"
+      - generic [ref=e27]:
+        - generic [ref=e28]: Precisión
+        - strong [ref=e29]: 100%
+      - generic [ref=e30]:
+        - generic [ref=e31]: Combo
+        - strong [ref=e32]: "0"
+    - generic [ref=e33]:
+      - generic [ref=e34]:
+        - paragraph [ref=e35]: Toca un dibujo y luego su palabra
+        - generic [ref=e57]:
+          - generic [ref=e58]:
+            - button "🐶" [active] [ref=e59] [cursor=pointer]
+            - button "🌳" [ref=e60] [cursor=pointer]
+            - button "🚗" [ref=e61] [cursor=pointer]
+          - generic [ref=e62]:
+            - button "Árbol" [ref=e63] [cursor=pointer]
+            - button "Perro" [ref=e64] [cursor=pointer]
+            - button "Coche" [ref=e65] [cursor=pointer]
+      - text: 7 3 9 4 12 8
+    - button "Empezar" [ref=e36] [cursor=pointer]
+    - generic [ref=e37]:
+      - heading "Más juegos para peques" [level=2] [ref=e38]
+      - generic [ref=e39]:
+        - link "Neon Dictado" [ref=e40] [cursor=pointer]:
+          - /url: /neon-dictado.html
+        - link "Neon Arrastra" [ref=e41] [cursor=pointer]:
+          - /url: /neon-arrastra.html
+        - link "Neon Peques" [ref=e42] [cursor=pointer]:
+          - /url: /neon-peques.html
+        - link "Todos los juegos" [ref=e43] [cursor=pointer]:
+          - /url: /gym-cerebro.html
+  - generic [ref=e46]:
+    - generic [ref=e47]:
+      - paragraph [ref=e48]: 🍪 Cookies y privacidad
+      - paragraph [ref=e49]: Usamos cookies propias y de Google (Analytics, AdSense) para mejorar tu experiencia. Puedes aceptar todas, solo las esenciales o ver más información.
+      - link "Más información en Política de Privacidad" [ref=e50] [cursor=pointer]:
+        - /url: /privacy.html
+    - generic [ref=e51]:
+      - button "✓ Aceptar todas" [ref=e52] [cursor=pointer]
+      - button "Solo esenciales" [ref=e53] [cursor=pointer]
+      - link "Más información" [ref=e54] [cursor=pointer]:
+        - /url: /privacy.html#cookies
+  - generic [ref=e55]:
+    - text: "Contacto:"
+    - link "lipastudios4@gmail.com" [ref=e56] [cursor=pointer]:
+      - /url: mailto:lipastudios4@gmail.com

@@ -1,0 +1,64 @@
+- generic [active] [ref=e1]:
+  - navigation "Navegación principal" [ref=e2]:
+    - generic [ref=e3]:
+      - link "🎮 LIPA Studios" [ref=e5] [cursor=pointer]:
+        - /url: /
+      - generic [ref=e6]:
+        - link "Inicio" [ref=e7] [cursor=pointer]:
+          - /url: /
+        - link "Test reflejos" [ref=e8] [cursor=pointer]:
+          - /url: /test-reflejos
+        - link "Aim trainer" [ref=e9] [cursor=pointer]:
+          - /url: /aim-trainer-neon
+        - link "Juegos" [ref=e10] [cursor=pointer]:
+          - /url: /juegos-de-reflejos
+        - link "Entrenador" [ref=e11] [cursor=pointer]:
+          - /url: /entrenador-reflejos
+  - main [ref=e12]:
+    - heading "🎯 Neon Aim Trainer" [level=1] [ref=e13]
+    - paragraph [ref=e14]:
+      - text: 30 segundos de
+      - strong [ref=e15]: dianas aleatorias
+      - text: . Toca cada objetivo antes de que desaparezca. Suma combo y sube en el ranking de hoy.
+    - generic [ref=e16]:
+      - generic [ref=e17]:
+        - generic [ref=e18]: Tiempo
+        - strong [ref=e19]: 30 s
+      - generic [ref=e20]:
+        - generic [ref=e21]: Puntos
+        - strong [ref=e22]: "0"
+      - generic [ref=e23]:
+        - generic [ref=e24]: Precisión
+        - strong [ref=e25]: 100%
+      - generic [ref=e26]:
+        - generic [ref=e27]: Combo
+        - strong [ref=e28]: "0"
+    - generic "Zona de juego aim trainer" [ref=e29]
+    - button "▶ Empezar 30 s" [ref=e30] [cursor=pointer]
+    - generic [ref=e31]:
+      - heading "🏆 Ranking de hoy" [level=2] [ref=e32]
+      - paragraph [ref=e34]: Sé el primero en el ranking de hoy.
+    - generic [ref=e35]:
+      - heading "Siguiente en tu rutina" [level=2] [ref=e36]
+      - generic [ref=e37]:
+        - link "⚡ Test de reflejos (ms)" [ref=e38] [cursor=pointer]:
+          - /url: /test-reflejos
+        - link "🔲 Grid 4×4" [ref=e39] [cursor=pointer]:
+          - /url: /grid-reflejos-neon
+        - link "🎮 Stack Tower Neon" [ref=e40] [cursor=pointer]:
+          - /url: /
+        - link "📖 Guía aim FPS" [ref=e41] [cursor=pointer]:
+          - /url: /blog/reflejos-fps-aim
+  - generic [ref=e42]:
+    - generic [ref=e43]:
+      - text: Usamos Google Analytics y Google AdSense. Puedes aceptar o rechazar. Más info en
+      - link "Privacidad" [ref=e44] [cursor=pointer]:
+        - /url: /privacy.html
+      - text: .
+    - generic [ref=e45]:
+      - button "ACEPTAR" [ref=e46] [cursor=pointer]
+      - button "RECHAZAR" [ref=e47] [cursor=pointer]
+  - generic [ref=e48]:
+    - text: "Contacto:"
+    - link "lipastudios4@gmail.com" [ref=e49] [cursor=pointer]:
+      - /url: mailto:lipastudios4@gmail.com
