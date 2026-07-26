@@ -51,6 +51,27 @@
     <mobile:mobile/>
   </url>
   <url>
+    <loc>https://lipastudios.com/infantil/3-anos</loc>
+    <lastmod>2026-07-26</lastmod>
+    <priority>0.88</priority>
+    <changefreq>weekly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://lipastudios.com/infantil/4-anos</loc>
+    <lastmod>2026-07-26</lastmod>
+    <priority>0.88</priority>
+    <changefreq>weekly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://lipastudios.com/infantil/5-anos</loc>
+    <lastmod>2026-07-26</lastmod>
+    <priority>0.88</priority>
+    <changefreq>weekly</changefreq>
+    <mobile:mobile/>
+  </url>
+  <url>
     <loc>https://lipastudios.com/primaria/1-primaria</loc>
     <lastmod>2026-07-25</lastmod>
     <priority>0.90</priority>
@@ -94,14 +115,14 @@
   </url>
   <url>
     <loc>https://lipastudios.com/eso/1-eso</loc>
-    <lastmod>2026-07-25</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <priority>0.88</priority>
     <changefreq>weekly</changefreq>
     <mobile:mobile/>
   </url>
   <url>
     <loc>https://lipastudios.com/eso/2-eso</loc>
-    <lastmod>2026-07-25</lastmod>
+    <lastmod>2026-07-26</lastmod>
     <priority>0.88</priority>
     <changefreq>weekly</changefreq>
     <mobile:mobile/>
